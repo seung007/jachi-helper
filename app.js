@@ -26,14 +26,9 @@ const timelineRules = [
 ];
 
 const plannerForm = document.querySelector("#plannerForm");
-const monthlyForm = document.querySelector("#monthlyForm");
 
 function formatWon(value) {
   return `${Math.round(value).toLocaleString("ko-KR")}원`;
-}
-
-function getNumber(form, name) {
-  return Number(new FormData(form).get(name) || 0);
 }
 
 function renderList(target, list) {
@@ -55,7 +50,8 @@ function calculatePlanner(form) {
   const budget = Number(data.get("budget"));
   const room = data.get("room");
   const lifestyle = data.get("lifestyle");
-  const days = Number(data.get("days"));
+  const requestedDays = Number(data.get("days"));
+  const days = Number.isFinite(requestedDays) ? Math.min(Math.max(requestedDays, 0), 60) : 0;
   const matched = items.filter((item) => item.rooms.includes(room) && item.lifestyles.includes(lifestyle));
   const must = matched.filter((item) => item.group === "must");
   const later = matched.filter((item) => item.group === "later" && days > 3);
@@ -78,7 +74,7 @@ function renderPlanner() {
   if (totalPrice) totalPrice.textContent = formatWon(result.total);
   if (heroTotal) heroTotal.textContent = formatWon(result.total);
   if (heroSummary) {
-    heroSummary.textContent = `필수 ${result.must.length}개 · 보류 ${result.later.length}개 · 제외 ${result.skip.length || 0}개`;
+    heroSummary.textContent = `먼저 확인 ${result.must.length}개 · 나중에 ${result.later.length}개 · 후순위 ${result.skip.length || 0}개`;
   }
   if (budgetState) {
     budgetState.textContent = result.diff >= 0 ? `${formatWon(result.diff)} 여유` : `${formatWon(Math.abs(result.diff))} 초과`;
@@ -92,43 +88,40 @@ function renderPlanner() {
   renderList(document.querySelector("#timelineList"), result.timeline.tasks.map((name) => ({ name, price: 0 })));
 }
 
-function calculateMonthly(form) {
-  const income = getNumber(form, "income");
-  const total = ["rent", "maintenance", "utilities", "living"].reduce((sum, name) => sum + getNumber(form, name), 0);
-  const left = income - total;
-  const ratio = income > 0 ? Math.min(total / income, 1.25) : 1.25;
-  const label = left < 0 ? "위험" : ratio >= 0.85 ? "빡빡함" : ratio >= 0.7 ? "주의" : "가능";
+async function copyPlan() {
+  const copyStatus = document.querySelector("#copyStatus");
+  if (!plannerForm || !copyStatus) return;
 
-  return { income, total, left, ratio, label };
-}
-
-function renderMonthly() {
-  if (!monthlyForm) return;
-
-  const result = calculateMonthly(monthlyForm);
-  const monthlyTotal = document.querySelector("#monthlyTotal");
-  const monthlyLeft = document.querySelector("#monthlyLeft");
-  const monthlyState = document.querySelector("#monthlyState");
-  const monthlyBar = document.querySelector("#monthlyBar");
-  const monthlyNote = document.querySelector("#monthlyNote");
-  const percent = result.income > 0 ? Math.round((result.total / result.income) * 100) : 0;
-
-  if (monthlyTotal) monthlyTotal.textContent = formatWon(result.total);
-  if (monthlyLeft) monthlyLeft.textContent = result.left >= 0 ? formatWon(result.left) : `${formatWon(Math.abs(result.left))} 부족`;
-  if (monthlyState) {
-    monthlyState.textContent = result.label;
-    monthlyState.style.color = result.left < 0 || result.ratio >= 0.85 ? "#c83d2d" : "#1d6f51";
+  if (!navigator.clipboard) {
+    copyStatus.textContent = "이 브라우저에서는 복사를 지원하지 않습니다.";
+    return;
   }
-  if (monthlyBar) monthlyBar.style.width = `${Math.min(result.ratio * 100, 100)}%`;
-  if (monthlyNote) {
-    monthlyNote.textContent =
-      result.left < 0
-        ? `월 지출이 수입보다 ${formatWon(Math.abs(result.left))} 많습니다. 월세나 식비 기준을 다시 낮춰야 합니다.`
-        : `월 지출이 수입의 ${percent}%입니다. 첫 달에는 예상 밖 구매가 생기니 남는 돈을 조금 더 남겨두는 편이 좋습니다.`;
+
+  const result = calculatePlanner(plannerForm);
+  const formatList = (title, list) => `${title}\n${list.map((item) => `- ${item.name}${item.price ? ` (${formatWon(item.price)})` : ""}`).join("\n")}`;
+  const text = [
+    "[자취도우미 입주 준비표]",
+    `예상 장바구니: ${formatWon(result.total)}`,
+    `예산과의 차이: ${result.diff >= 0 ? `${formatWon(result.diff)} 여유` : `${formatWon(Math.abs(result.diff))} 초과`}`,
+    "",
+    formatList("먼저 확인", result.must),
+    "",
+    formatList("나중에 준비", result.later),
+    "",
+    `입주 타임라인 - ${result.timeline.title}`,
+    ...result.timeline.tasks.map((task) => `- ${task}`),
+    "",
+    "참고: 예시 가격 기반의 기본 구성입니다. 실제 판매가와 보유 물품은 별도로 확인하세요."
+  ].join("\n");
+
+  try {
+    await navigator.clipboard.writeText(text);
+    copyStatus.textContent = "준비표를 복사했습니다.";
+  } catch {
+    copyStatus.textContent = "복사에 실패했습니다. 다시 시도해 주세요.";
   }
 }
 
 plannerForm?.addEventListener("input", renderPlanner);
-monthlyForm?.addEventListener("input", renderMonthly);
+document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 renderPlanner();
-renderMonthly();

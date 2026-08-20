@@ -82,8 +82,8 @@ nav a[aria-current="page"] {
   display: grid;
   gap: clamp(28px, 5vw, 72px);
   grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
-  min-height: calc(100vh - 96px);
-  padding: clamp(44px, 7vw, 88px) clamp(20px, 7vw, 96px) 48px;
+  min-height: 0;
+  padding: clamp(44px, 6vw, 72px) clamp(20px, 7vw, 96px) 40px;
 }
 
 .eyebrow {
@@ -102,7 +102,7 @@ p {
 }
 
 h1 {
-  font-size: clamp(42px, 6vw, 72px);
+  font-size: clamp(40px, 5vw, 64px);
   letter-spacing: 0;
   line-height: 1.05;
   margin-bottom: 22px;
@@ -185,7 +185,6 @@ h2 {
 
 .planner,
 .feature-map,
-.monthly,
 .seo-band,
 .subpage {
   padding: 52px clamp(20px, 7vw, 96px);
@@ -276,15 +275,21 @@ input {
   padding: 20px;
 }
 
+.planner-note {
+  background: #fff7e2;
+  border-left: 3px solid var(--gold);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+}
+
 .score-row {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-bottom: 18px;
-}
-
-.score-row.three {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .score-row div {
@@ -354,24 +359,23 @@ input {
   padding: 11px 12px;
 }
 
-.compact-tool {
-  grid-template-columns: minmax(260px, 420px) minmax(0, 1fr);
+.result-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-.meter {
-  background: #edf2ef;
-  border-radius: 999px;
-  height: 14px;
-  margin-bottom: 14px;
-  overflow: hidden;
+.result-actions .button {
+  cursor: pointer;
+  font: inherit;
 }
 
-.meter span {
-  background: linear-gradient(90deg, var(--green), var(--coral));
-  display: block;
-  height: 100%;
-  transition: width 180ms ease;
-  width: 0;
+#copyStatus {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .list-grid h3,
@@ -483,7 +487,6 @@ footer strong {
 @media (max-width: 900px) {
   .hero,
   .tool,
-  .compact-tool,
   .seo-band {
     grid-template-columns: 1fr;
   }
@@ -520,10 +523,6 @@ footer strong {
   }
 
   .score-row {
-    grid-template-columns: 1fr;
-  }
-
-  .score-row.three {
     grid-template-columns: 1fr;
   }
 

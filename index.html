@@ -56,11 +56,11 @@
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">첫 자취 입주 D-7 준비맵</p>
-          <h1>예산 안에서 자취 준비물을 실수 없이 고르자</h1>
+          <p class="eyebrow">첫 자취 입주 준비표</p>
+          <h1>내 조건에 맞는 첫 자취 준비를 가볍게 정리하자</h1>
           <p class="lede">
-            방 옵션, 입주일, 생활 패턴을 넣으면 오늘 살 것, 나중에 살 것, 안 사도 될 것을
-            나눠서 예상 장바구니 금액까지 계산합니다.
+            방 옵션, 입주일, 생활 패턴을 고르면 지금 먼저 확인할 물건과 나중에 준비할 물건,
+            예시 장바구니 금액을 한눈에 정리합니다.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#planner">준비표 만들기</a>
@@ -71,8 +71,8 @@
           <img src="/assets/starter-kit.svg" alt="자취 준비물 장바구니 미리보기" />
           <div class="preview-card">
             <span>예상 총액</span>
-            <strong id="heroTotal">482,000원</strong>
-            <small id="heroSummary">필수 6개 · 보류 2개 · 제외 3개</small>
+            <strong id="heroTotal">395,000원</strong>
+            <small id="heroSummary">먼저 확인 7개 · 나중에 2개 · 후순위 3개</small>
           </div>
         </aside>
       </section>
@@ -85,8 +85,8 @@
         <div class="feature-grid">
           <article>
             <span>01</span>
-            <h3>구매 우선순위</h3>
-            <p>방 옵션과 생활 타입에 따라 오늘 살 것, 나중에 살 것, 사지 말 것을 나눕니다.</p>
+            <h3>준비 우선순위</h3>
+            <p>방 옵션과 생활 타입에 따라 먼저 확인할 것과 나중에 준비할 것을 나눕니다.</p>
           </article>
           <article>
             <span>02</span>
@@ -95,15 +95,15 @@
           </article>
           <article>
             <span>03</span>
-            <h3>월 생활비</h3>
-            <p>월세, 관리비, 공과금, 식비를 합쳐 매달 버틸 수 있는 금액인지 계산합니다.</p>
+            <h3>초기 예산</h3>
+            <p>선택한 기본 구성의 예시 금액과 내 입주 예산의 차이를 바로 확인합니다.</p>
           </article>
         </div>
       </section>
 
       <section class="planner" id="planner" aria-labelledby="planner-title">
         <div class="section-head">
-          <p class="eyebrow">1분 계산</p>
+          <p class="eyebrow">조건 선택</p>
           <h2 id="planner-title">내 자취 준비표</h2>
         </div>
 
@@ -143,25 +143,28 @@
           <div class="result" aria-live="polite">
             <div class="score-row">
               <div>
-                <span>추천 장바구니</span>
+                <span>예상 장바구니</span>
                 <strong id="totalPrice">482,000원</strong>
               </div>
               <div>
-                <span>예산 상태</span>
+                <span>예산과의 차이</span>
                 <strong id="budgetState">18,000원 여유</strong>
               </div>
             </div>
+            <p class="planner-note">
+              이 결과는 선택한 조건에 맞춘 기본 구성과 예시 금액입니다. 실제 판매가, 배송비, 이미 보유한 물건은 반영하지 않습니다.
+            </p>
             <div class="list-grid">
               <article>
-                <h3>오늘 사야 함</h3>
+                <h3>먼저 확인</h3>
                 <ul id="mustList"></ul>
               </article>
               <article>
-                <h3>나중에 사도 됨</h3>
+                <h3>나중에 준비</h3>
                 <ul id="laterList"></ul>
               </article>
               <article>
-                <h3>사지 마</h3>
+                <h3>현재 조건에서는 후순위</h3>
                 <ul id="skipList"></ul>
               </article>
             </div>
@@ -172,59 +175,10 @@
               </div>
               <ol id="timelineList"></ol>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="monthly" id="monthly" aria-labelledby="monthly-title">
-        <div class="section-head">
-          <p class="eyebrow">월 생활비</p>
-          <h2 id="monthly-title">월세까지 넣고 버틸 수 있는지 계산</h2>
-        </div>
-        <div class="tool compact-tool">
-          <form class="controls" id="monthlyForm">
-            <label>
-              월 수입
-              <input name="income" type="number" min="0" step="10000" value="1800000" />
-            </label>
-            <label>
-              월세
-              <input name="rent" type="number" min="0" step="10000" value="500000" />
-            </label>
-            <label>
-              관리비
-              <input name="maintenance" type="number" min="0" step="10000" value="80000" />
-            </label>
-            <label>
-              공과금
-              <input name="utilities" type="number" min="0" step="10000" value="90000" />
-            </label>
-            <label>
-              식비·생활비
-              <input name="living" type="number" min="0" step="10000" value="520000" />
-            </label>
-          </form>
-          <div class="result">
-            <div class="score-row three">
-              <div>
-                <span>월 고정 지출</span>
-                <strong id="monthlyTotal">1,190,000원</strong>
-              </div>
-              <div>
-                <span>남는 돈</span>
-                <strong id="monthlyLeft">610,000원</strong>
-              </div>
-              <div>
-                <span>판정</span>
-                <strong id="monthlyState">가능</strong>
-              </div>
+            <div class="result-actions">
+              <button class="button primary" id="copyPlan" type="button">준비표 복사</button>
+              <span id="copyStatus" aria-live="polite"></span>
             </div>
-            <div class="meter" aria-label="월수입 대비 지출 비율">
-              <span id="monthlyBar"></span>
-            </div>
-            <p class="result-note" id="monthlyNote">
-              월 지출이 수입의 66%입니다. 첫 달에는 예상 밖 구매가 생기니 남는 돈을 조금 더 남겨두는 편이 좋습니다.
-            </p>
           </div>
         </div>
       </section>
@@ -235,8 +189,8 @@
           <h2 id="seo-title">자취 준비물, 원룸 입주 준비, 첫 자취 예산을 한 번에</h2>
         </div>
         <p>
-          자취도우미는 첫 자취생과 사회초년생을 위한 자취 준비물 체크리스트입니다. 풀옵션,
-          반옵션, 무옵션 원룸에 따라 꼭 필요한 물건과 나중에 사도 되는 물건을 나눠 보여줍니다.
+          자취도우미는 첫 자취생을 위한 입주 준비 도구입니다. 풀옵션, 반옵션, 무옵션 원룸에 따라
+          먼저 확인할 물건과 나중에 준비할 물건을 나눠 보여줍니다.
         </p>
       </section>
     </main>
