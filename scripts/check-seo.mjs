@@ -18,6 +18,7 @@ for (const page of pages) {
     ["description", /<meta\s+name="description"\s+content="[^"]+"/],
     ["canonical", /<link\s+rel="canonical"\s+href="https:\/\/[^"]+"/],
     ["naver verification", /<meta\s+name="naver-site-verification"\s+content="[^"]+"/],
+    ["google verification", /<meta\s+name="google-site-verification"\s+content="[^"]+"/],
     ["og title", /<meta\s+property="og:title"\s+content="[^"]+"/],
     ["og image", /<meta\s+property="og:image"\s+content="https:\/\/[^"]+"/]
   ];
