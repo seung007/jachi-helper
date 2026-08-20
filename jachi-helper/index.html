@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>자취도우미 | 첫 자취 준비 체크리스트와 예산 장바구니</title>
+    <meta
+      name="description"
+      content="첫 자취 입주일, 예산, 방 옵션을 입력하면 필수 준비물, 구매 우선순위, 예상 비용, 입주 D-day 체크리스트를 한 번에 정리해주는 자취 준비 도우미."
+    />
+    <meta name="naver-site-verification" content="REPLACE_WITH_NAVER_VERIFICATION_CODE" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://jachi-helper.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="자취도우미" />
+    <meta property="og:title" content="자취도우미 | 첫 자취 준비 체크리스트" />
+    <meta
+      property="og:description"
+      content="예산과 방 옵션만 고르면 첫 자취 준비물, 우선순위, 예상 비용을 바로 계산합니다."
+    />
+    <meta property="og:url" content="https://jachi-helper.vercel.app/" />
+    <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "자취도우미",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "url": "https://jachi-helper.vercel.app/",
+        "description": "첫 자취 준비물 체크리스트와 예산 장바구니를 자동으로 정리하는 웹 도구",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "KRW"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="자취도우미 홈">
+        <span class="brand-mark">ㅈ</span>
+        <span>자취도우미</span>
+      </a>
+      <nav aria-label="주요 메뉴">
+        <a href="/checklist">체크리스트</a>
+        <a href="/budget">예산표</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">첫 자취 입주 D-7 준비맵</p>
+          <h1>예산 안에서 자취 준비물을 실수 없이 고르자</h1>
+          <p class="lede">
+            방 옵션, 입주일, 생활 패턴을 넣으면 오늘 살 것, 나중에 살 것, 안 사도 될 것을
+            나눠서 예상 장바구니 금액까지 계산합니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#planner">준비표 만들기</a>
+            <a class="button secondary" href="/checklist">전체 목록 보기</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="자취 준비표 미리보기">
+          <img src="/assets/starter-kit.svg" alt="자취 준비물 장바구니 미리보기" />
+          <div class="preview-card">
+            <span>예상 총액</span>
+            <strong id="heroTotal">482,000원</strong>
+            <small>필수 12개 · 보류 7개 · 제외 4개</small>
+          </div>
+        </aside>
+      </section>
+
+      <section class="planner" id="planner" aria-labelledby="planner-title">
+        <div class="section-head">
+          <p class="eyebrow">1분 계산</p>
+          <h2 id="planner-title">내 자취 준비표</h2>
+        </div>
+
+        <div class="tool">
+          <form class="controls" id="plannerForm">
+            <label>
+              입주 예산
+              <select name="budget">
+                <option value="300000">30만 원</option>
+                <option value="500000" selected>50만 원</option>
+                <option value="800000">80만 원</option>
+                <option value="1200000">120만 원</option>
+              </select>
+            </label>
+            <label>
+              방 옵션
+              <select name="room">
+                <option value="full">풀옵션</option>
+                <option value="semi" selected>반옵션</option>
+                <option value="empty">무옵션</option>
+              </select>
+            </label>
+            <label>
+              생활 타입
+              <select name="lifestyle">
+                <option value="cook">요리 자주 함</option>
+                <option value="delivery" selected>배달/간편식 위주</option>
+                <option value="remote">재택 시간이 김</option>
+              </select>
+            </label>
+            <label>
+              입주까지 남은 날
+              <input name="days" type="number" min="0" max="60" value="7" />
+            </label>
+          </form>
+
+          <div class="result" aria-live="polite">
+            <div class="score-row">
+              <div>
+                <span>추천 장바구니</span>
+                <strong id="totalPrice">482,000원</strong>
+              </div>
+              <div>
+                <span>예산 상태</span>
+                <strong id="budgetState">18,000원 여유</strong>
+              </div>
+            </div>
+            <div class="list-grid">
+              <article>
+                <h3>오늘 사야 함</h3>
+                <ul id="mustList"></ul>
+              </article>
+              <article>
+                <h3>나중에 사도 됨</h3>
+                <ul id="laterList"></ul>
+              </article>
+              <article>
+                <h3>사지 마</h3>
+                <ul id="skipList"></ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seo-band" aria-labelledby="seo-title">
+        <div>
+          <p class="eyebrow">검색용 핵심 주제</p>
+          <h2 id="seo-title">자취 준비물, 원룸 입주 준비, 첫 자취 예산을 한 번에</h2>
+        </div>
+        <p>
+          자취도우미는 첫 자취생과 사회초년생을 위한 자취 준비물 체크리스트입니다. 풀옵션,
+          반옵션, 무옵션 원룸에 따라 꼭 필요한 물건과 나중에 사도 되는 물건을 나눠 보여줍니다.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <strong>자취도우미</strong>
+      <span>첫 자취 준비 체크리스트 · 예산 장바구니 · 입주 D-day</span>
+    </footer>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

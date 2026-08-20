@@ -1,0 +1,11 @@
+{
+  "name": "jachi-helper",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/check-seo.mjs",
+    "set-naver-code": "node scripts/set-naver-code.mjs",
+    "set-site-url": "node scripts/set-site-url.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

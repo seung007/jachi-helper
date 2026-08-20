@@ -1,0 +1,14 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#FBF9F3"/>
+  <rect x="70" y="72" width="1060" height="486" rx="34" fill="#FFFFFF" stroke="#DCE7E0" stroke-width="4"/>
+  <circle cx="990" cy="164" r="74" fill="#DFF4EA"/>
+  <rect x="92" y="94" width="86" height="86" rx="18" fill="#1D6F51"/>
+  <text x="135" y="153" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#FFFFFF">ㅈ</text>
+  <text x="220" y="145" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#17211D">자취도우미</text>
+  <text x="92" y="292" font-family="Arial, sans-serif" font-size="74" font-weight="900" fill="#17211D">첫 자취 준비표를</text>
+  <text x="92" y="380" font-family="Arial, sans-serif" font-size="74" font-weight="900" fill="#17211D">1분 만에 계산</text>
+  <text x="96" y="456" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#5F6F67">준비물 체크리스트 · 예산 장바구니 · 입주 D-day</text>
+  <rect x="742" y="288" width="282" height="154" rx="22" fill="#FFD36F"/>
+  <rect x="784" y="248" width="282" height="154" rx="22" fill="#F26D5B"/>
+  <rect x="830" y="208" width="282" height="154" rx="22" fill="#D9ECFF"/>
+</svg>

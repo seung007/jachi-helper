@@ -1,0 +1,19 @@
+<svg width="720" height="520" viewBox="0 0 720 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="첫 자취 준비물 장바구니">
+  <rect width="720" height="520" rx="24" fill="#FBF9F3"/>
+  <rect x="48" y="52" width="624" height="416" rx="20" fill="#FFFFFF" stroke="#DCE7E0" stroke-width="3"/>
+  <rect x="90" y="94" width="260" height="64" rx="12" fill="#DFF4EA"/>
+  <rect x="380" y="94" width="210" height="64" rx="12" fill="#D9ECFF"/>
+  <rect x="90" y="192" width="170" height="170" rx="18" fill="#FFD36F"/>
+  <rect x="292" y="192" width="140" height="170" rx="18" fill="#F26D5B"/>
+  <rect x="464" y="192" width="126" height="170" rx="18" fill="#DFF4EA"/>
+  <path d="M125 315h100l-10 33h-80l-10-33Z" fill="#17211D"/>
+  <path d="M132 235h86l17 80H115l17-80Z" fill="#FFFFFF"/>
+  <path d="M322 242h80v96h-80z" fill="#FFFFFF"/>
+  <path d="M330 252h64v22h-64zM330 284h64v12h-64zM330 308h46v12h-46z" fill="#17211D"/>
+  <circle cx="527" cy="259" r="36" fill="#FFFFFF"/>
+  <path d="M499 322h56v22h-56z" fill="#FFFFFF"/>
+  <path d="M104 126h198" stroke="#1D6F51" stroke-width="14" stroke-linecap="round"/>
+  <path d="M398 126h146" stroke="#17211D" stroke-width="14" stroke-linecap="round"/>
+  <path d="M98 410h494" stroke="#DCE7E0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M98 436h310" stroke="#DCE7E0" stroke-width="8" stroke-linecap="round"/>
+</svg>
