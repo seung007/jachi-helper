@@ -72,6 +72,78 @@ const purchaseCategories = [
   { title: "청소·세탁", prefixes: ["clean-", "laundry-"], query: "자취 청소 세탁용품", image: "clean" }
 ];
 
+const recommendationGroups = [
+  {
+    prefix: "bedding",
+    category: "침구·수면",
+    stores: ["ohouse", "coupang", "naver"],
+    items: [
+      ["cover", "매트리스 커버", 8, true, false], ["duvet", "이불", 10, true, false], ["pillow", "베개", 10, true, false],
+      ["pad", "방수패드", 6, false, false], ["hanger", "옷걸이", 8, false, true], ["curtain", "커튼 또는 블라인드", 5, false, true]
+    ]
+  },
+  {
+    prefix: "bath",
+    category: "욕실",
+    stores: ["daiso", "coupang", "naver"],
+    items: [
+      ["towel", "수건", 10, true, false], ["toiletries", "샴푸·바디워시", 10, true, false], ["toothbrush", "칫솔·치약", 10, true, false],
+      ["mat", "발매트", 5, false, false], ["toilet-paper", "화장지", 9, true, false], ["basket", "빨래 바구니", 7, false, true]
+    ]
+  },
+  {
+    prefix: "kitchen",
+    category: "주방",
+    stores: ["daiso", "coupang", "naver"],
+    items: [
+      ["pot", "냄비", 8, false, false], ["pan", "프라이팬", 8, false, false], ["cutlery", "수저·젓가락", 8, true, false],
+      ["dishes", "접시·컵", 7, true, false], ["container", "밀폐용기", 5, false, true], ["bag", "음식물·종량제 봉투", 9, true, false]
+    ]
+  },
+  {
+    prefix: "clean",
+    category: "청소",
+    stores: ["daiso", "coupang", "naver"],
+    items: [
+      ["wipes", "청소포·물티슈", 8, true, false], ["detergent", "주방·욕실 세제", 9, true, false], ["broom", "빗자루 또는 밀대", 7, false, true],
+      ["gloves", "고무장갑", 7, false, false], ["trash", "쓰레기통", 8, true, true], ["recycle", "분리수거 봉투", 8, true, false]
+    ]
+  },
+  {
+    prefix: "laundry",
+    category: "세탁",
+    stores: ["daiso", "coupang", "naver"],
+    items: [
+      ["detergent", "세탁세제", 9, true, false], ["dryer", "건조대", 8, false, true], ["clips", "빨래집게", 5, false, false],
+      ["net", "세탁망", 5, false, false], ["softener", "섬유유연제", 4, false, false], ["bag", "세탁물 보관 봉투", 4, false, true]
+    ]
+  },
+  {
+    prefix: "life",
+    category: "생활·수납",
+    stores: ["daiso", "coupang", "naver"],
+    items: [
+      ["powerstrip", "멀티탭", 10, true, false], ["storage", "수납 박스", 7, false, true], ["scissors", "가위·커터칼", 7, true, false],
+      ["tape", "테이프", 6, false, false], ["light", "스탠드 또는 조명", 5, false, true], ["umbrella", "우산", 5, false, false]
+    ]
+  },
+  {
+    prefix: "safe",
+    category: "안전·건강",
+    stores: ["coupang", "naver", "daiso"],
+    items: [["door", "도어스토퍼", 7, true, false], ["medicine", "상비약", 8, true, false], ["flashlight", "손전등", 6, false, false]]
+  }
+];
+
+const recommendationCatalog = Object.fromEntries(
+  recommendationGroups.flatMap((group) =>
+    group.items.map(([key, title, weight, firstDay, compact]) => [
+      `${group.prefix}-${key}`,
+      { title, category: group.category, weight, firstDay, compact, stores: group.stores }
+    ])
+  )
+);
+
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
@@ -125,6 +197,8 @@ function setupNaverShoppingLinks() {
   }
 
   links.forEach((link) => {
+    if (link.dataset.naverShoppingBound === "true") return;
+    link.dataset.naverShoppingBound = "true";
     link.addEventListener("click", () => {
       const query = link.dataset.naverShoppingQuery;
       if (!query || !navigator.clipboard?.writeText) return;
@@ -346,6 +420,126 @@ function setupChecklist() {
   updateProgress();
 }
 
+function setupRecommendation() {
+  const form = document.querySelector("#recommendationForm");
+  const summary = document.querySelector("#recommendationSummary");
+  const results = document.querySelector("#recommendationResults");
+  const note = document.querySelector("#recommendationNote");
+  if (!form || !summary || !results || !note) return;
+
+  const savedPreferences = readStoredState().recommendation;
+  if (savedPreferences && typeof savedPreferences === "object") {
+    ["purchaseBudget", "timing", "room", "focus", "showCount"].forEach((name) => {
+      const input = form.elements[name];
+      if (!input || savedPreferences[name] === undefined) return;
+      if (input instanceof RadioNodeList) input.value = savedPreferences[name];
+      else input.value = savedPreferences[name];
+    });
+  }
+
+  function getPreferences() {
+    const data = new FormData(form);
+    const budget = Number(data.get("purchaseBudget"));
+    return {
+      purchaseBudget: Number.isFinite(budget) && budget > 0 ? budget : 0,
+      timing: data.get("timing") || "movein",
+      room: data.get("room") || "small",
+      focus: data.get("focus") || "value",
+      showCount: data.get("showCount") || "12"
+    };
+  }
+
+  function rankItem([id, item], preferences) {
+    let score = item.weight * 10;
+    if (preferences.timing === "movein" && item.firstDay) score += 32;
+    if (preferences.room === "small" && item.compact) score += 14;
+    if (preferences.focus === "value" && item.weight >= 8) score += 8;
+    if (preferences.focus === "comfort" && ["침구·수면", "욕실"].includes(item.category)) score += 12;
+    if (preferences.focus === "balanced" && item.firstDay) score += 8;
+
+    let reason = "체크리스트에서 아직 완료되지 않은 항목";
+    if (preferences.timing === "movein" && item.firstDay) reason = "입주 첫날 바로 쓰는 항목";
+    else if (preferences.room === "small" && item.compact) reason = "작은 방의 수납과 동선을 고려한 항목";
+    else if (preferences.focus === "value" && item.weight >= 8) reason = "예산을 먼저 배정해 확인할 항목";
+    else if (preferences.focus === "comfort" && ["침구·수면", "욕실"].includes(item.category)) reason = "생활 만족도를 먼저 높이는 항목";
+
+    const searchTerms = ["자취", item.title];
+    if (preferences.room === "small" && item.compact) searchTerms.push("소형");
+    if (preferences.focus === "value") searchTerms.push("가성비");
+    if (preferences.timing === "movein" && item.firstDay) searchTerms.push("당일배송");
+
+    return { id, ...item, score, reason, searchQuery: searchTerms.join(" ") };
+  }
+
+  function storeLinks(item) {
+    return item.stores.map((store) => {
+      if (store === "coupang") {
+        return `<a href="https://www.coupang.com/np/search?q=${encodeURIComponent(item.searchQuery)}" target="_blank" rel="noreferrer">쿠팡 검색</a>`;
+      }
+      if (store === "naver") {
+        return `<a href="https://shopping.naver.com/home" data-naver-shopping-query="${item.searchQuery}" target="_blank" rel="noreferrer">네이버쇼핑</a>`;
+      }
+      if (store === "daiso") {
+        return '<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰</a>';
+      }
+      return '<a href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집</a>';
+    }).join("");
+  }
+
+  function renderRecommendations() {
+    const preferences = getPreferences();
+    const savedChecks = readStoredState().checklist || {};
+    const ranked = Object.entries(recommendationCatalog)
+      .filter(([id]) => !savedChecks[id])
+      .map((entry) => rankItem(entry, preferences))
+      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "ko"));
+    const totalScore = ranked.reduce((sum, item) => sum + item.score, 0);
+    const limit = preferences.showCount === "all" ? ranked.length : Number(preferences.showCount);
+    const visible = ranked.slice(0, limit);
+
+    summary.textContent = ranked.length ? `${ranked.length}개 구매 항목 중 우선순위 ${visible.length}개` : "추천할 구매 항목이 없습니다";
+    results.innerHTML = "";
+
+    if (!ranked.length) {
+      results.innerHTML = '<p class="purchase-empty">체크리스트의 구매 항목을 모두 완료했습니다. 새로 필요해진 물건이 있다면 체크리스트에서 완료를 해제하세요.</p>';
+      note.textContent = "";
+      return;
+    }
+
+    visible.forEach((item, index) => {
+      const allocation = preferences.purchaseBudget && totalScore ? Math.round((preferences.purchaseBudget * item.score) / totalScore) : 0;
+      const card = document.createElement("article");
+      card.className = "match-card";
+      card.innerHTML = `
+        <div class="match-rank"><span>${String(index + 1).padStart(2, "0")}</span><strong>${item.category}</strong></div>
+        <div class="match-copy"><h3>${item.title}</h3><p>${item.reason}</p><small>검색어: ${item.searchQuery}</small></div>
+        <div class="match-budget"><span>예산 배정</span><strong>${allocation ? formatWon(allocation) : "미입력"}</strong></div>
+        <div class="match-actions">${storeLinks(item)}</div>
+      `;
+      results.appendChild(card);
+    });
+
+    note.textContent = preferences.purchaseBudget
+      ? `입력한 ${formatWon(preferences.purchaseBudget)}을 우선순위 점수 비율로 나눈 예산 배정입니다. 실제 판매 가격·재고·배송비는 판매처에서 확인하세요.`
+      : "예산을 입력하면 우선순위 점수 비율로 항목별 예산 배정을 보여줍니다.";
+    setupNaverShoppingLinks();
+  }
+
+  function saveAndRender() {
+    const preferences = getPreferences();
+    writeStoredState({ ...readStoredState(), recommendation: preferences });
+    renderRecommendations();
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    saveAndRender();
+  });
+  form.addEventListener("input", saveAndRender);
+  form.addEventListener("change", saveAndRender);
+  renderRecommendations();
+}
+
 function setupBudget() {
   const budgetForm = document.querySelector("#budgetForm");
   const monthlyTotal = document.querySelector("#budgetMonthlyTotal");
@@ -476,6 +670,7 @@ document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 setupPlannerStage();
 renderPlanner();
 setupChecklist();
+setupRecommendation();
 setupBudget();
 setupQuickCost();
 setupResultTabs();
