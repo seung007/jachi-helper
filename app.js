@@ -183,6 +183,28 @@ function formatWon(value) {
   return `${Math.round(value).toLocaleString("ko-KR")}원`;
 }
 
+function parseCurrency(value) {
+  const digits = String(value ?? "").replace(/[^\d]/g, "");
+  const amount = Number(digits);
+  return Number.isFinite(amount) && amount > 0 ? amount : 0;
+}
+
+function formatCurrencyInput(input) {
+  const digits = input.value.replace(/[^\d]/g, "");
+  input.value = digits ? Number(digits).toLocaleString("ko-KR") : "";
+}
+
+function setupCurrencyInputs() {
+  document.querySelectorAll("[data-currency]").forEach((input) => {
+    input.addEventListener("input", () => formatCurrencyInput(input));
+    input.addEventListener("blur", () => formatCurrencyInput(input));
+  });
+}
+
+function formatAllCurrencyInputs() {
+  document.querySelectorAll("[data-currency]").forEach(formatCurrencyInput);
+}
+
 function setupNaverShoppingLinks() {
   const links = document.querySelectorAll("[data-naver-shopping-query]");
   if (!links.length) return;
@@ -439,9 +461,9 @@ function setupRecommendation() {
 
   function getPreferences() {
     const data = new FormData(form);
-    const budget = Number(data.get("purchaseBudget"));
+    const budget = parseCurrency(data.get("purchaseBudget"));
     return {
-      purchaseBudget: Number.isFinite(budget) && budget > 0 ? budget : 0,
+      purchaseBudget: budget,
       timing: data.get("timing") || "movein",
       room: data.get("room") || "small",
       focus: data.get("focus") || "value",
@@ -651,8 +673,7 @@ function setupBudget() {
   } else if (savedBudget && typeof savedBudget === "object") {
     const hasNewBudget = ["deposit", "contract", "setup"].some((name) => savedBudget[name] !== undefined);
     const savedNumber = (name) => {
-      const value = Number(savedBudget[name]);
-      return Number.isFinite(value) && value > 0 ? value : 0;
+      return parseCurrency(savedBudget[name]);
     };
 
     budgetForm.elements.income.value = savedBudget.income || "";
@@ -666,8 +687,7 @@ function setupBudget() {
   }
 
   function getBudgetValue(name) {
-    const value = Number(budgetForm.elements[name]?.value);
-    return Number.isFinite(value) && value > 0 ? value : 0;
+    return parseCurrency(budgetForm.elements[name]?.value);
   }
 
   function renderBudget() {
@@ -684,7 +704,10 @@ function setupBudget() {
   }
 
   function saveBudget() {
-    const budget = Object.fromEntries(budgetFieldNames.map((name) => [name, budgetForm.elements[name]?.value || ""]));
+    const budget = Object.fromEntries(budgetFieldNames.map((name) => {
+      const input = budgetForm.elements[name];
+      return [name, input?.value ? String(parseCurrency(input.value)) : ""];
+    }));
     const nextState = { ...readStoredState(), budget };
     storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   }
@@ -712,8 +735,7 @@ function setupQuickCost() {
 
   const renderQuickTotal = () => {
     const total = ["deposit", "contract", "setup"].reduce((sum, name) => {
-      const value = Number(quickForm.elements[name]?.value);
-      return sum + (Number.isFinite(value) && value > 0 ? value : 0);
+      return sum + parseCurrency(quickForm.elements[name]?.value);
     }, 0);
     quickTotal.textContent = formatWon(total);
   };
@@ -759,8 +781,10 @@ document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 setupPlannerStage();
 renderPlanner();
 setupChecklist();
+setupCurrencyInputs();
 setupRecommendation();
 setupBudget();
 setupQuickCost();
+formatAllCurrencyInputs();
 setupResultTabs();
 setupNaverShoppingLinks();

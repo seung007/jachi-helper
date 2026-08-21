@@ -37,14 +37,14 @@
       <section class="budget-tool" aria-label="자취 예산 입력과 결과">
         <form class="budget-form budget-simple" id="budgetForm">
           <section class="budget-input-group"><h2>입주 전 자금</h2><div class="budget-input-grid">
-            <label class="budget-input-card"><span>보증금</span><small>계약에 필요한 보증금</small><span class="amount-input"><input name="deposit" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>계약·이사 비용</span><small>중개·이사·청소 등을 합쳐서</small><span class="amount-input"><input name="contract" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>준비물 비용</span><small>입주 전 구매 예정 금액</small><span class="amount-input"><input name="setup" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>보증금</span><small>계약에 필요한 보증금</small><span class="amount-input"><input name="deposit" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>계약·이사 비용</span><small>중개·이사·청소 등을 합쳐서</small><span class="amount-input"><input name="contract" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>준비물 비용</span><small>입주 전 구매 예정 금액</small><span class="amount-input"><input name="setup" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
           </div></section>
           <section class="budget-input-group"><h2>매달 비용</h2><div class="budget-input-grid">
-            <label class="budget-input-card"><span>월 수입</span><small>월에 들어오는 총 금액</small><span class="amount-input"><input name="income" type="number" min="0" inputmode="numeric" placeholder="예: 1800000" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>월 주거비</span><small>월세와 관리비를 합쳐서</small><span class="amount-input"><input name="housing" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>월 생활비</span><small>식비·교통·통신·공과금 등을 합쳐서</small><span class="amount-input"><input name="living" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>월 수입</span><small>월에 들어오는 총 금액</small><span class="amount-input"><input name="income" type="text" inputmode="numeric" data-currency placeholder="예: 1,800,000" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>월 주거비</span><small>월세와 관리비를 합쳐서</small><span class="amount-input"><input name="housing" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>월 생활비</span><small>식비·교통·통신·공과금 등을 합쳐서</small><span class="amount-input"><input name="living" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
           </div></section>
         </form>
         <aside class="budget-summary" aria-live="polite">
