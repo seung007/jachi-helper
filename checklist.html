@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>자취 준비물 체크리스트 | 자취도우미</title>
+    <title>저장되는 자취 준비물 체크리스트 | 자취도우미</title>
     <meta
       name="description"
-      content="첫 자취 준비물 체크리스트를 주방, 욕실, 침구, 청소, 생활용품, 안전용품 카테고리로 정리했습니다."
+      content="첫 자취 준비물을 침구, 욕실, 주방, 청소, 세탁, 수납, 안전, 입주 당일 카테고리로 체크하고 이 기기에 저장하세요."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
@@ -48,25 +48,32 @@
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
         <a href="/checklist" aria-current="page">체크리스트</a>
-        <a href="/budget">예산표</a>
+        <a href="/budget">예산 관리</a>
       </nav>
     </header>
     <main class="subpage">
       <section class="page-title">
-        <p class="eyebrow">첫 자취 준비물</p>
-        <h1>입주 첫날 기준 체크리스트</h1>
-        <p>당장 없으면 불편한 물건부터 사고, 취향이 필요한 물건은 며칠 살아본 뒤 고르는 방식입니다.</p>
+        <p class="eyebrow">저장되는 입주 준비</p>
+        <h1>입주 전 자취 체크리스트</h1>
+        <p>체크한 내용은 이 기기에 자동 저장됩니다. 실제 방 옵션과 이미 가진 물건을 보며 필요한 항목만 완료 처리하세요.</p>
       </section>
-      <section class="checklist-grid" aria-label="자취 준비물 카테고리">
-        <article><h2>침구</h2><ul><li>매트리스 커버</li><li>이불</li><li>베개</li><li>방수패드</li></ul></article>
-        <article><h2>욕실</h2><ul><li>수건</li><li>샴푸·바디워시</li><li>칫솔·치약</li><li>발매트</li></ul></article>
-        <article><h2>주방</h2><ul><li>냄비 1개</li><li>프라이팬 1개</li><li>수저 세트</li><li>밀폐용기</li></ul></article>
-        <article><h2>청소</h2><ul><li>물티슈</li><li>청소포</li><li>세탁세제</li><li>분리수거 봉투</li></ul></article>
-        <article><h2>생활</h2><ul><li>멀티탭</li><li>건조대</li><li>옷걸이</li><li>암막 커튼</li></ul></article>
-        <article><h2>안전</h2><ul><li>도어스토퍼</li><li>소화기 위치 확인</li><li>비상약</li><li>창문 잠금장치</li></ul></article>
+      <section class="checklist-toolbar" aria-label="체크리스트 진행 상태">
+        <div><span>준비 진행률</span><strong id="checklistProgress">0 / 48 완료</strong></div>
+        <div class="checklist-actions"><span id="checklistStorageNote" aria-live="polite">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetChecklist" type="button">체크 초기화</button></div>
+      </section>
+      <section class="checklist-grid detailed-checklist" id="moveInChecklist" aria-label="자취 준비물 카테고리">
+        <article><h2>침구·수면</h2><label class="check-item"><input type="checkbox" data-check-id="bedding-cover" />매트리스 커버</label><label class="check-item"><input type="checkbox" data-check-id="bedding-duvet" />이불</label><label class="check-item"><input type="checkbox" data-check-id="bedding-pillow" />베개</label><label class="check-item"><input type="checkbox" data-check-id="bedding-pad" />방수패드</label><label class="check-item"><input type="checkbox" data-check-id="bedding-hanger" />옷걸이</label><label class="check-item"><input type="checkbox" data-check-id="bedding-curtain" />커튼 또는 블라인드</label></article>
+        <article><h2>욕실</h2><label class="check-item"><input type="checkbox" data-check-id="bath-towel" />수건</label><label class="check-item"><input type="checkbox" data-check-id="bath-toiletries" />샴푸·바디워시</label><label class="check-item"><input type="checkbox" data-check-id="bath-toothbrush" />칫솔·치약</label><label class="check-item"><input type="checkbox" data-check-id="bath-mat" />발매트</label><label class="check-item"><input type="checkbox" data-check-id="bath-toilet-paper" />화장지</label><label class="check-item"><input type="checkbox" data-check-id="bath-basket" />빨래 바구니</label></article>
+        <article><h2>주방</h2><label class="check-item"><input type="checkbox" data-check-id="kitchen-pot" />냄비</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-pan" />프라이팬</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-cutlery" />수저·젓가락</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-dishes" />접시·컵</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-container" />밀폐용기</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-bag" />음식물·종량제 봉투</label></article>
+        <article><h2>청소</h2><label class="check-item"><input type="checkbox" data-check-id="clean-wipes" />청소포·물티슈</label><label class="check-item"><input type="checkbox" data-check-id="clean-detergent" />주방·욕실 세제</label><label class="check-item"><input type="checkbox" data-check-id="clean-broom" />빗자루 또는 밀대</label><label class="check-item"><input type="checkbox" data-check-id="clean-gloves" />고무장갑</label><label class="check-item"><input type="checkbox" data-check-id="clean-trash" />쓰레기통</label><label class="check-item"><input type="checkbox" data-check-id="clean-recycle" />분리수거 봉투</label></article>
+        <article><h2>세탁</h2><label class="check-item"><input type="checkbox" data-check-id="laundry-detergent" />세탁세제</label><label class="check-item"><input type="checkbox" data-check-id="laundry-dryer" />건조대</label><label class="check-item"><input type="checkbox" data-check-id="laundry-clips" />빨래집게</label><label class="check-item"><input type="checkbox" data-check-id="laundry-net" />세탁망</label><label class="check-item"><input type="checkbox" data-check-id="laundry-softener" />섬유유연제</label><label class="check-item"><input type="checkbox" data-check-id="laundry-bag" />세탁물 보관 봉투</label></article>
+        <article><h2>생활·수납</h2><label class="check-item"><input type="checkbox" data-check-id="life-powerstrip" />멀티탭</label><label class="check-item"><input type="checkbox" data-check-id="life-storage" />수납 박스</label><label class="check-item"><input type="checkbox" data-check-id="life-scissors" />가위·커터칼</label><label class="check-item"><input type="checkbox" data-check-id="life-tape" />테이프</label><label class="check-item"><input type="checkbox" data-check-id="life-light" />스탠드 또는 조명</label><label class="check-item"><input type="checkbox" data-check-id="life-umbrella" />우산</label></article>
+        <article><h2>안전·건강</h2><label class="check-item"><input type="checkbox" data-check-id="safe-door" />도어스토퍼</label><label class="check-item"><input type="checkbox" data-check-id="safe-window" />창문 잠금 상태</label><label class="check-item"><input type="checkbox" data-check-id="safe-extinguisher" />소화기 위치</label><label class="check-item"><input type="checkbox" data-check-id="safe-medicine" />상비약</label><label class="check-item"><input type="checkbox" data-check-id="safe-flashlight" />손전등</label><label class="check-item"><input type="checkbox" data-check-id="safe-emergency" />비상 연락처</label></article>
+        <article><h2>입주 당일</h2><label class="check-item"><input type="checkbox" data-check-id="move-photo" />하자 사진 촬영</label><label class="check-item"><input type="checkbox" data-check-id="move-meter" />전기·가스 계량기 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-key" />도어락·현관키 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-water" />수압·배수 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-wifi" />인터넷 설치 일정</label><label class="check-item"><input type="checkbox" data-check-id="move-trash-day" />분리수거 요일 확인</label></article>
       </section>
       <p class="page-cta"><a class="button primary" href="/#planner">내 조건으로 준비표 만들기</a></p>
     </main>
     <footer><strong>자취도우미</strong><span>처음 사는 자취 준비를 덜 헤매게.</span></footer>
+    <script src="/app.js" defer></script>
   </body>
 </html>

@@ -26,6 +26,40 @@ const timelineRules = [
 ];
 
 const plannerForm = document.querySelector("#plannerForm");
+const storageKey = "jachi-helper:v1";
+const budgetFieldNames = [
+  "income",
+  "rent",
+  "maintenance",
+  "communication",
+  "insuranceDebt",
+  "utilities",
+  "food",
+  "transport",
+  "daily",
+  "savings",
+  "moving",
+  "supplies",
+  "oneTimeOther"
+];
+
+function readStoredState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    return saved && typeof saved === "object" ? saved : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeStoredState(state) {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 function formatWon(value) {
   return `${Math.round(value).toLocaleString("ko-KR")}원`;
@@ -122,6 +156,112 @@ async function copyPlan() {
   }
 }
 
+function setupChecklist() {
+  const checklist = document.querySelector("#moveInChecklist");
+  const progress = document.querySelector("#checklistProgress");
+  const storageNote = document.querySelector("#checklistStorageNote");
+  const resetButton = document.querySelector("#resetChecklist");
+  if (!checklist || !progress || !storageNote) return;
+
+  const checkboxes = [...checklist.querySelectorAll("[data-check-id]")];
+  const state = readStoredState();
+  const savedChecks = state.checklist && typeof state.checklist === "object" ? state.checklist : {};
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = Boolean(savedChecks[checkbox.dataset.checkId]);
+  });
+
+  function updateProgress() {
+    const completed = checkboxes.filter((checkbox) => checkbox.checked).length;
+    progress.textContent = `${completed} / ${checkboxes.length} 완료`;
+  }
+
+  function saveChecklist() {
+    const checks = Object.fromEntries(checkboxes.map((checkbox) => [checkbox.dataset.checkId, checkbox.checked]));
+    const nextState = { ...readStoredState(), checklist: checks };
+    storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
+  }
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      updateProgress();
+      saveChecklist();
+    });
+  });
+
+  resetButton?.addEventListener("click", () => {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+    updateProgress();
+    saveChecklist();
+  });
+
+  updateProgress();
+}
+
+function setupBudget() {
+  const budgetForm = document.querySelector("#budgetForm");
+  const monthlyTotal = document.querySelector("#budgetMonthlyTotal");
+  const remaining = document.querySelector("#budgetRemaining");
+  const firstMonth = document.querySelector("#budgetFirstMonth");
+  const storageNote = document.querySelector("#budgetStorageNote");
+  const resetButton = document.querySelector("#resetBudget");
+  if (!budgetForm || !monthlyTotal || !remaining || !firstMonth || !storageNote) return;
+
+  const savedBudget = readStoredState().budget;
+  if (savedBudget && typeof savedBudget === "object") {
+    budgetFieldNames.forEach((name) => {
+      if (typeof savedBudget[name] === "string" && budgetForm.elements[name]) {
+        budgetForm.elements[name].value = savedBudget[name];
+      }
+    });
+  }
+
+  function getBudgetValue(name) {
+    const value = Number(budgetForm.elements[name]?.value);
+    return Number.isFinite(value) && value > 0 ? value : 0;
+  }
+
+  function renderBudget() {
+    const income = getBudgetValue("income");
+    const monthlyExpenses = ["rent", "maintenance", "communication", "insuranceDebt", "utilities", "food", "transport", "daily", "savings"].reduce(
+      (sum, name) => sum + getBudgetValue(name),
+      0
+    );
+    const oneTimeCosts = ["moving", "supplies", "oneTimeOther"].reduce((sum, name) => sum + getBudgetValue(name), 0);
+    const balance = income - monthlyExpenses;
+
+    monthlyTotal.textContent = formatWon(monthlyExpenses);
+    remaining.textContent = balance >= 0 ? formatWon(balance) : `${formatWon(Math.abs(balance))} 부족`;
+    remaining.style.color = balance < 0 ? "#c83d2d" : "#1d6f51";
+    firstMonth.textContent = formatWon(monthlyExpenses + oneTimeCosts);
+  }
+
+  function saveBudget() {
+    const budget = Object.fromEntries(budgetFieldNames.map((name) => [name, budgetForm.elements[name]?.value || ""]));
+    const nextState = { ...readStoredState(), budget };
+    storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
+  }
+
+  budgetForm.addEventListener("input", () => {
+    renderBudget();
+    saveBudget();
+  });
+
+  resetButton?.addEventListener("click", () => {
+    budgetForm.reset();
+    const nextState = readStoredState();
+    delete nextState.budget;
+    storageNote.textContent = writeStoredState(nextState) ? "입력한 예산을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
+    renderBudget();
+  });
+
+  renderBudget();
+}
+
 plannerForm?.addEventListener("input", renderPlanner);
 document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 renderPlanner();
+setupChecklist();
+setupBudget();

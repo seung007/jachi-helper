@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>자취 초기비용 예산표 | 자취도우미</title>
+    <title>자취 월 예산 관리 도우미 | 자취도우미</title>
     <meta
       name="description"
-      content="30만 원, 50만 원, 80만 원 예산별 자취 초기비용과 우선 구매 카테고리를 비교합니다."
+      content="월 수입, 월세, 관리비, 식비, 교통비, 입주 일회성 비용을 직접 입력해 자취 예산을 정리하는 도구입니다."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://jachi-helper.vercel.app/budget" />
-    <meta property="og:title" content="자취 초기비용 예산표" />
-    <meta property="og:description" content="예산별 자취 준비물 구매 우선순위를 비교하세요." />
+    <meta property="og:title" content="자취 월 예산 관리 도우미" />
+    <meta property="og:description" content="자취 월 지출과 입주 첫 달 비용을 직접 입력해 정리하세요." />
     <meta property="og:url" content="https://jachi-helper.vercel.app/budget" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <link rel="stylesheet" href="/styles.css" />
@@ -24,37 +24,57 @@
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
         <a href="/checklist">체크리스트</a>
-        <a href="/budget" aria-current="page">예산표</a>
+        <a href="/budget" aria-current="page">예산 관리</a>
       </nav>
     </header>
     <main class="subpage">
       <section class="page-title">
-        <p class="eyebrow">초기비용 가이드</p>
-        <h1>예산별 자취 준비 기본 구성</h1>
-        <p>아래 구성은 입주 준비를 시작할 때 보는 예시입니다. 실제 판매가, 배송비, 이미 가진 물건은 별도로 확인하세요.</p>
+        <p class="eyebrow">내 입력 기준</p>
+        <h1>자취 예산 관리 도우미</h1>
+        <p>월 수입과 실제로 예정된 지출을 직접 넣어 보세요. 이 도구는 입력한 값을 합산할 뿐, 생활 가능 여부를 판정하지 않습니다.</p>
       </section>
-      <section class="budget-table" aria-label="예산별 자취 준비표">
-        <div class="budget-row head"><span>예산</span><span>우선순위</span><span>추천 전략</span></div>
-        <div class="budget-row"><strong>30만 원</strong><span>침구·욕실·청소</span><p>풀옵션 기준. 조리도구와 수납은 입주 후 실제 동선을 보고 삽니다.</p></div>
-        <div class="budget-row"><strong>50만 원</strong><span>필수 생활 + 기본 주방</span><p>반옵션 원룸 기준. 냄비, 프라이팬, 건조대까지 최소 구성으로 맞춥니다.</p></div>
-        <div class="budget-row"><strong>80만 원</strong><span>생활 안정 + 수납</span><p>재택, 요리, 장기거주라면 책상 조명과 수납을 포함해 생활 피로를 줄입니다.</p></div>
-      </section>
-      <section class="advice-grid" aria-label="월 고정비 예산 기준">
-        <article>
-          <h2>월세·관리비</h2>
-          <p>월세와 관리비는 매달 빠지는 고정비입니다. 수입이 일정하지 않다면 처음부터 높게 잡지 않는 편이 안전합니다.</p>
-        </article>
-        <article>
-          <h2>공과금</h2>
-          <p>전기, 가스, 수도, 인터넷은 계절과 사용량에 따라 달라집니다. 첫 달에는 넉넉하게 잡아두는 편이 덜 불안합니다.</p>
-        </article>
-        <article>
-          <h2>첫 달 여유금</h2>
-          <p>청소용품, 멀티탭, 건조대처럼 살다 보면 바로 필요한 물건이 생깁니다. 초기 장바구니를 예산 끝까지 채우지 마세요.</p>
-        </article>
+      <section class="budget-tool" aria-label="자취 예산 입력과 결과">
+        <form class="budget-form" id="budgetForm">
+          <div class="budget-group">
+            <h2>월 수입</h2>
+            <label>월 수입<input name="income" type="number" min="0" inputmode="numeric" placeholder="예: 1800000" /></label>
+          </div>
+          <div class="budget-group">
+            <h2>고정 지출</h2>
+            <label>월세<input name="rent" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>관리비<input name="maintenance" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>통신·인터넷<input name="communication" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>보험·대출 상환<input name="insuranceDebt" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+          </div>
+          <div class="budget-group">
+            <h2>생활 지출</h2>
+            <label>전기·가스·수도<input name="utilities" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>식비<input name="food" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>교통비<input name="transport" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>생활·여가비<input name="daily" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>저축·비상금<input name="savings" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+          </div>
+          <div class="budget-group">
+            <h2>입주 첫 달 일회성 비용</h2>
+            <label>이사·청소<input name="moving" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>준비물 구매<input name="supplies" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label>기타 일회성 비용<input name="oneTimeOther" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+          </div>
+        </form>
+        <aside class="budget-summary" aria-live="polite">
+          <p class="eyebrow">계산 결과</p>
+          <div class="budget-summary-grid">
+            <div><span>월 지출 합계</span><strong id="budgetMonthlyTotal">0원</strong></div>
+            <div><span>수입에서 남는 금액</span><strong id="budgetRemaining">0원</strong></div>
+            <div><span>입주 첫 달 합계</span><strong id="budgetFirstMonth">0원</strong></div>
+          </div>
+          <p class="planner-note">입력하지 않은 항목은 0원으로 계산합니다. 실제 공과금, 계약 비용, 판매가와 배송비는 직접 확인하세요.</p>
+          <div class="result-actions"><span id="budgetStorageNote">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetBudget" type="button">예산 초기화</button></div>
+        </aside>
       </section>
       <p class="page-cta"><a class="button primary" href="/#planner">내 조건으로 준비표 만들기</a></p>
     </main>
-    <footer><strong>자취도우미</strong><span>예산 안에서 덜 사고, 더 잘 살기.</span></footer>
+    <footer><strong>자취도우미</strong><span>입력한 기준으로 내 자취 예산을 정리하기.</span></footer>
+    <script src="/app.js" defer></script>
   </body>
 </html>
