@@ -1,0 +1,9 @@
+{
+  "keywordGroups": [
+    { "groupName": "자취 준비", "keywords": ["자취 준비물", "자취 필수품"] },
+    { "groupName": "침구", "keywords": ["자취 침구", "이불", "베개"] },
+    { "groupName": "욕실", "keywords": ["자취 욕실용품", "수건", "화장지"] },
+    { "groupName": "주방", "keywords": ["자취 주방용품", "프라이팬", "냄비"] },
+    { "groupName": "생활·청소", "keywords": ["자취 청소용품", "멀티탭", "수납박스"] }
+  ]
+}

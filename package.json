@@ -6,6 +6,7 @@
     "check": "node scripts/check-seo.mjs",
     "set-naver-code": "node scripts/set-naver-code.mjs",
     "set-site-url": "node scripts/set-site-url.mjs",
-    "serve": "node scripts/serve.mjs"
+    "serve": "node scripts/serve.mjs",
+    "fetch:naver-trends": "node scripts/fetch-naver-trends.mjs"
   }
 }
