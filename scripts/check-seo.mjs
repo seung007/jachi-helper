@@ -20,7 +20,8 @@ for (const page of pages) {
     ["naver verification", /<meta\s+name="naver-site-verification"\s+content="[^"]+"/],
     ["google verification", /<meta\s+name="google-site-verification"\s+content="[^"]+"/],
     ["og title", /<meta\s+property="og:title"\s+content="[^"]+"/],
-    ["og image", /<meta\s+property="og:image"\s+content="https:\/\/[^"]+"/]
+    ["og image", /<meta\s+property="og:image"\s+content="https:\/\/[^"]+"/],
+    ["Vercel Analytics", /<script\s+defer\s+src="\/_vercel\/insights\/script\.js"><\/script>/]
   ];
 
   for (const [label, pattern] of checks) {
