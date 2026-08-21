@@ -36,14 +36,14 @@
       <section class="budget-tool" aria-label="자취 예산 입력과 결과">
         <form class="budget-form budget-simple" id="budgetForm">
           <section class="budget-input-group"><h2>입주 전 자금</h2><div class="budget-input-grid">
-            <label class="budget-input-card"><span>보증금</span><small>계약에 필요한 보증금</small><input name="deposit" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label class="budget-input-card"><span>계약·이사 비용</span><small>중개·이사·청소 등을 합쳐서</small><input name="contract" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label class="budget-input-card"><span>준비물 비용</span><small>입주 전 구매 예정 금액</small><input name="setup" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label class="budget-input-card"><span>보증금</span><small>계약에 필요한 보증금</small><span class="amount-input"><input name="deposit" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>계약·이사 비용</span><small>중개·이사·청소 등을 합쳐서</small><span class="amount-input"><input name="contract" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>준비물 비용</span><small>입주 전 구매 예정 금액</small><span class="amount-input"><input name="setup" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
           </div></section>
           <section class="budget-input-group"><h2>매달 비용</h2><div class="budget-input-grid">
-            <label class="budget-input-card"><span>월 수입</span><small>월에 들어오는 총 금액</small><input name="income" type="number" min="0" inputmode="numeric" placeholder="예: 1800000" /></label>
-            <label class="budget-input-card"><span>월 주거비</span><small>월세와 관리비를 합쳐서</small><input name="housing" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label class="budget-input-card"><span>월 생활비</span><small>식비·교통·통신·공과금 등을 합쳐서</small><input name="living" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+            <label class="budget-input-card"><span>월 수입</span><small>월에 들어오는 총 금액</small><span class="amount-input"><input name="income" type="number" min="0" inputmode="numeric" placeholder="예: 1800000" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>월 주거비</span><small>월세와 관리비를 합쳐서</small><span class="amount-input"><input name="housing" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+            <label class="budget-input-card"><span>월 생활비</span><small>식비·교통·통신·공과금 등을 합쳐서</small><span class="amount-input"><input name="living" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
           </div></section>
         </form>
         <aside class="budget-summary" aria-live="polite">
@@ -57,6 +57,18 @@
           <p class="planner-note">입주 전 확보 금액에는 보증금이 포함됩니다. 비어 있는 칸은 0원으로 계산하며, 실제 계약 비용과 청구 금액은 별도로 확인하세요.</p>
           <div class="result-actions"><span id="budgetStorageNote">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetBudget" type="button">예산 초기화</button></div>
         </aside>
+      </section>
+      <section class="shop-links" aria-labelledby="shop-links-title">
+        <div class="shop-links-head">
+          <div><p class="eyebrow">준비물 구매</p><h2 id="shop-links-title">예산을 정했다면 비교해 보기</h2></div>
+          <p>각 판매처의 가격, 배송 조건, 재고는 이동한 뒤 직접 확인하세요.</p>
+        </div>
+        <div class="shop-grid">
+          <a class="shop-card" href="https://search.shopping.naver.com/search/all?query=%EC%9E%90%EC%B7%A8%20%EC%A4%80%EB%B9%84%EB%AC%BC" target="_blank" rel="noreferrer"><span><strong>네이버쇼핑</strong><small>자취 준비물 검색</small></span><b>열기</b></a>
+          <a class="shop-card" href="https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8%20%EC%A4%80%EB%B9%84%EB%AC%BC" target="_blank" rel="noreferrer"><span><strong>쿠팡</strong><small>자취 준비물 검색</small></span><b>열기</b></a>
+          <a class="shop-card" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer"><span><strong>다이소몰</strong><small>생활 소모품 둘러보기</small></span><b>열기</b></a>
+          <a class="shop-card" href="https://ohou.se/store" target="_blank" rel="noreferrer"><span><strong>오늘의집</strong><small>생활·가구 둘러보기</small></span><b>열기</b></a>
+        </div>
       </section>
       <p class="page-cta"><a class="button primary" href="/checklist">준비물 체크리스트 보기</a></p>
     </main>

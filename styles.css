@@ -655,7 +655,7 @@ input {
 .shop-grid {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .shop-card {
@@ -1083,6 +1083,24 @@ li {
   font-weight: 700;
 }
 
+.amount-input {
+  display: block;
+  position: relative;
+}
+
+.amount-input input {
+  padding-right: 42px;
+}
+
+.amount-input b {
+  color: var(--muted);
+  font-size: 14px;
+  pointer-events: none;
+  position: absolute;
+  right: 14px;
+  top: 13px;
+}
+
 .budget-group,
 .budget-summary {
   background: var(--white);
@@ -1232,6 +1250,10 @@ footer strong {
 
   .budget-input-grid {
     grid-template-columns: 1fr;
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .budget-summary {
