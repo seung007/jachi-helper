@@ -18,30 +18,6 @@
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "첫 자취 준비물은 무엇부터 사야 하나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "침구, 세면도구, 청소용품, 멀티탭, 쓰레기봉투처럼 입주 첫날 바로 필요한 물건부터 준비하는 것이 좋습니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "풀옵션 원룸도 준비물이 필요한가요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "풀옵션이어도 침구, 욕실용품, 조리 소모품, 청소도구, 안전용품은 개인이 따로 준비해야 하는 경우가 많습니다."
-            }
-          }
-        ]
-      }
-    </script>
   </head>
   <body>
     <header class="topbar">
@@ -70,6 +46,18 @@
         <article><h2>생활·수납</h2><label class="check-item"><input type="checkbox" data-check-id="life-powerstrip" />멀티탭</label><label class="check-item"><input type="checkbox" data-check-id="life-storage" />수납 박스</label><label class="check-item"><input type="checkbox" data-check-id="life-scissors" />가위·커터칼</label><label class="check-item"><input type="checkbox" data-check-id="life-tape" />테이프</label><label class="check-item"><input type="checkbox" data-check-id="life-light" />스탠드 또는 조명</label><label class="check-item"><input type="checkbox" data-check-id="life-umbrella" />우산</label></article>
         <article><h2>안전·건강</h2><label class="check-item"><input type="checkbox" data-check-id="safe-door" />도어스토퍼</label><label class="check-item"><input type="checkbox" data-check-id="safe-window" />창문 잠금 상태</label><label class="check-item"><input type="checkbox" data-check-id="safe-extinguisher" />소화기 위치</label><label class="check-item"><input type="checkbox" data-check-id="safe-medicine" />상비약</label><label class="check-item"><input type="checkbox" data-check-id="safe-flashlight" />손전등</label><label class="check-item"><input type="checkbox" data-check-id="safe-emergency" />비상 연락처</label></article>
         <article><h2>입주 당일</h2><label class="check-item"><input type="checkbox" data-check-id="move-photo" />하자 사진 촬영</label><label class="check-item"><input type="checkbox" data-check-id="move-meter" />전기·가스 계량기 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-key" />도어락·현관키 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-water" />수압·배수 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-wifi" />인터넷 설치 일정</label><label class="check-item"><input type="checkbox" data-check-id="move-trash-day" />분리수거 요일 확인</label></article>
+      </section>
+      <section class="purchase-candidates" aria-labelledby="purchase-candidates-title">
+        <div class="purchase-candidates-head">
+          <div><p class="eyebrow">남은 준비</p><h2 id="purchase-candidates-title">아직 필요한 카테고리</h2></div>
+          <p id="purchaseSummary" aria-live="polite"></p>
+        </div>
+        <div class="recommendation-grid" id="purchaseCandidates"></div>
+        <div class="purchase-actions">
+          <a class="button secondary" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰 보기</a>
+          <a class="button secondary" href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집 보기</a>
+          <a class="button primary" href="/budget">준비물 비용 다시 정리</a>
+        </div>
       </section>
       <p class="page-cta"><a class="button primary" href="/budget">초기 비용 계산하기</a></p>
     </main>

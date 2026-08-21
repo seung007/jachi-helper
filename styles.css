@@ -1030,6 +1030,107 @@ li {
   text-decoration: line-through;
 }
 
+.purchase-candidates {
+  border-top: 1px solid var(--line);
+  margin-top: 34px;
+  padding-top: 32px;
+}
+
+.purchase-candidates-head {
+  align-items: end;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.purchase-candidates-head h2 {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.purchase-candidates-head .eyebrow {
+  margin-bottom: 5px;
+}
+
+.purchase-candidates-head > p {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.recommendation-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.recommendation-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recommendation-image {
+  aspect-ratio: 1.5;
+  background-image: url("/assets/checklist-categories.png");
+  background-size: 200% 200%;
+}
+
+.recommendation-image.bedding { background-position: left top; }
+.recommendation-image.bath { background-position: right top; }
+.recommendation-image.kitchen { background-position: left bottom; }
+.recommendation-image.clean { background-position: right bottom; }
+
+.recommendation-copy {
+  padding: 14px 14px 8px;
+}
+
+.recommendation-copy p {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.recommendation-copy h3 {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.recommendation-actions {
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px 14px;
+}
+
+.recommendation-actions a {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--green);
+  flex: 1;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 9px 7px;
+  text-align: center;
+}
+
+.purchase-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.purchase-empty {
+  background: var(--mint);
+  border-radius: 8px;
+  margin: 0;
+  padding: 16px;
+}
+
 .budget-tool {
   align-items: start;
   display: grid;
@@ -1256,6 +1357,10 @@ footer strong {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .recommendation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .budget-summary {
     position: static;
   }
@@ -1328,7 +1433,8 @@ footer strong {
   .stage-options,
   .stage-links,
   .owned-options,
-  .planner-next-grid {
+  .planner-next-grid,
+  .recommendation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1337,7 +1443,8 @@ footer strong {
   }
 
   .shop-links-head,
-  .checklist-toolbar {
+  .checklist-toolbar,
+  .purchase-candidates-head {
     align-items: flex-start;
     flex-direction: column;
   }

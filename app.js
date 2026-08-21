@@ -65,6 +65,13 @@ const propertyLabels = {
   interior: { later: "인테리어: 입주 뒤 참고", interested: "인테리어: 참고할 예정" }
 };
 
+const purchaseCategories = [
+  { title: "침구·수면", prefixes: ["bedding-"], query: "자취 침구 준비물", image: "bedding" },
+  { title: "욕실", prefixes: ["bath-"], query: "자취 욕실 준비물", image: "bath" },
+  { title: "주방", prefixes: ["kitchen-"], query: "자취 주방용품", image: "kitchen" },
+  { title: "청소·세탁", prefixes: ["clean-", "laundry-"], query: "자취 청소 세탁용품", image: "clean" }
+];
+
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
@@ -231,6 +238,8 @@ function setupChecklist() {
   const progress = document.querySelector("#checklistProgress");
   const storageNote = document.querySelector("#checklistStorageNote");
   const resetButton = document.querySelector("#resetChecklist");
+  const purchaseSummary = document.querySelector("#purchaseSummary");
+  const purchaseCandidates = document.querySelector("#purchaseCandidates");
   if (!checklist || !progress || !storageNote) return;
 
   const checkboxes = [...checklist.querySelectorAll("[data-check-id]")];
@@ -244,6 +253,41 @@ function setupChecklist() {
   function updateProgress() {
     const completed = checkboxes.filter((checkbox) => checkbox.checked).length;
     progress.textContent = `${completed} / ${checkboxes.length} 완료`;
+    renderPurchaseCandidates();
+  }
+
+  function renderPurchaseCandidates() {
+    if (!purchaseSummary || !purchaseCandidates) return;
+
+    const categories = purchaseCategories
+      .map((category) => ({
+        ...category,
+        remaining: checkboxes.filter(
+          (checkbox) => !checkbox.checked && category.prefixes.some((prefix) => checkbox.dataset.checkId.startsWith(prefix))
+        ).length
+      }))
+      .filter((category) => category.remaining > 0);
+
+    purchaseSummary.textContent = categories.length ? `${categories.length}개 카테고리 확인 필요` : "핵심 구매 카테고리 확인 완료";
+    purchaseCandidates.innerHTML = "";
+
+    if (!categories.length) {
+      purchaseCandidates.innerHTML = '<p class="purchase-empty">체크한 카테고리는 구매 후보에서 제외됐습니다.</p>';
+      return;
+    }
+
+    categories.forEach((category) => {
+      const card = document.createElement("article");
+      card.className = "recommendation-card";
+      const naverUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(category.query)}`;
+      const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(category.query)}`;
+      card.innerHTML = `
+        <div class="recommendation-image ${category.image}" role="img" aria-label="${category.title} 준비물 예시"></div>
+        <div class="recommendation-copy"><p>${category.remaining}개 미완료</p><h3>${category.title}</h3></div>
+        <div class="recommendation-actions"><a href="${naverUrl}" target="_blank" rel="noreferrer">네이버쇼핑</a><a href="${coupangUrl}" target="_blank" rel="noreferrer">쿠팡</a></div>
+      `;
+      purchaseCandidates.appendChild(card);
+    });
   }
 
   function saveChecklist() {
