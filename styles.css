@@ -163,6 +163,87 @@ h2 {
   width: 100%;
 }
 
+.home-hero {
+  padding-bottom: 38px;
+}
+
+.stage-picker {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(23, 33, 29, 0.08);
+  padding: 22px;
+}
+
+.stage-picker fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.stage-picker legend {
+  font-size: 18px;
+  font-weight: 900;
+  padding: 0;
+}
+
+.stage-picker p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 8px 0 14px;
+}
+
+.stage-options {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stage-option {
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+
+.stage-option input {
+  height: 1px;
+  min-height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.stage-option span {
+  align-content: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  font-size: 15px;
+  font-weight: 900;
+  min-height: 76px;
+  padding: 12px;
+}
+
+.stage-option input:checked + span {
+  background: var(--mint);
+  border-color: var(--green);
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+
+.stage-option input:focus-visible + span {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+
+.stage-picker .button {
+  cursor: pointer;
+  justify-content: center;
+  margin-top: 14px;
+  width: 100%;
+}
+
 .preview-card {
   align-items: center;
   background: var(--mint);
@@ -588,6 +669,133 @@ li {
   line-height: 1.7;
 }
 
+.planner-intro {
+  max-width: 900px;
+}
+
+.back-link {
+  color: var(--green);
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.planner-result-head {
+  align-items: start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.planner-result-head h2 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.stage-badge {
+  background: var(--sky);
+  border-radius: 8px;
+  color: var(--ink);
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 8px 10px;
+}
+
+.owned-options {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.owned-option {
+  align-items: center;
+  background: #f5f8f6;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 10px;
+}
+
+.owned-option input {
+  accent-color: var(--green);
+  flex: 0 0 auto;
+  height: 16px;
+  min-height: 0;
+  padding: 0;
+  width: 16px;
+}
+
+.owned-option:has(input:checked) {
+  background: var(--mint);
+  border-color: var(--green);
+}
+
+.taste-match {
+  background: var(--mint);
+  border-radius: 8px;
+  margin-top: 18px;
+  padding: 16px;
+}
+
+.taste-match .eyebrow {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.taste-match h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.taste-match li {
+  font-size: 14px;
+}
+
+.planner-next-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.planner-next {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 5px;
+  min-height: 92px;
+  padding: 15px;
+}
+
+.planner-next:hover {
+  border-color: var(--green);
+}
+
+.planner-next strong {
+  font-size: 15px;
+}
+
+.planner-next span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.source-note a {
+  color: var(--green);
+  font-weight: 900;
+  text-decoration: underline;
+}
+
 .checklist-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -829,6 +1037,10 @@ footer strong {
   .budget-summary {
     position: static;
   }
+
+  .stage-picker {
+    max-width: 620px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -889,7 +1101,10 @@ footer strong {
   }
 
   .shop-grid,
-  .budget-form {
+  .budget-form,
+  .stage-options,
+  .owned-options,
+  .planner-next-grid {
     grid-template-columns: 1fr;
   }
 
@@ -904,6 +1119,11 @@ footer strong {
   }
 
   footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .planner-result-head {
     align-items: flex-start;
     flex-direction: column;
   }

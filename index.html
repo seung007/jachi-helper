@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>자취도우미 | 첫 자취 준비 체크리스트와 예산 관리</title>
+    <title>자취도우미 | 내 입주 단계부터 시작하는 자취 준비</title>
     <meta
       name="description"
-      content="첫 자취의 방 옵션과 생활 방식을 바탕으로 준비물을 정리하고, 입주 전후 확인 사항과 예산을 직접 관리하는 도구입니다."
+      content="첫 자취의 현재 준비 단계를 고르고, 상세 준비표에서 방 옵션·생활 방식·보유 물품을 정리하는 도구입니다."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
@@ -17,7 +17,7 @@
     <meta property="og:title" content="자취도우미 | 첫 자취 준비 체크리스트" />
     <meta
       property="og:description"
-      content="방 옵션과 생활 방식을 바탕으로 첫 자취 준비물과 입주 전후 확인 사항을 정리합니다."
+      content="현재 입주 준비 단계를 고르고, 내 방에 맞는 상세 준비표를 만듭니다."
     />
     <meta property="og:url" content="https://jachi-helper.vercel.app/" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
@@ -32,7 +32,7 @@
         "applicationCategory": "LifestyleApplication",
         "operatingSystem": "Web",
         "url": "https://jachi-helper.vercel.app/",
-        "description": "첫 자취 준비물 체크리스트와 직접 입력 예산 관리를 돕는 웹 도구",
+        "description": "첫 자취의 준비 단계와 상세 준비표, 직접 입력 예산 관리를 돕는 웹 도구",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -48,162 +48,55 @@
         <span>자취도우미</span>
       </a>
       <nav aria-label="주요 메뉴">
+        <a href="/planner">준비표</a>
         <a href="/checklist">체크리스트</a>
         <a href="/budget">예산 관리</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero home-hero">
         <div class="hero-copy">
-          <p class="eyebrow">첫 자취 입주 준비표</p>
-          <h1>내 방 조건부터 빠르게 정리하자</h1>
+          <p class="eyebrow">첫 자취, 어디까지 왔나요?</p>
+          <h1>지금 단계부터 가볍게 시작하자</h1>
           <p class="lede">
-            두 가지 조건만 고르면 확인할 준비물을 바로 정리합니다. 일정은 임의 날짜가 아니라 계약·입주·행정 절차를 기준으로 봅니다.
+            메인에서는 현재 준비 단계만 고르세요. 다음 화면에서 내 방과 생활 방식, 이미 가진 물건을 반영해 준비표를 만듭니다.
           </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#planner">준비표 만들기</a>
-            <a class="button secondary" href="/checklist">전체 목록 보기</a>
-          </div>
         </div>
-        <aside class="hero-panel" aria-label="자취 준비표 미리보기">
-          <img src="/assets/starter-kit.svg" alt="자취 준비물 장바구니 미리보기" />
-          <div class="preview-card">
-            <span>준비 순서</span>
-            <strong>입주 전 · 입주 당일 · 입주 후</strong>
-            <small>가격과 배송 가능일은 판매처와 계약 조건에서 직접 확인</small>
-          </div>
-        </aside>
-      </section>
-
-      <section class="planner" id="planner" aria-labelledby="planner-title">
-        <div class="section-head">
-          <p class="eyebrow">조건 선택</p>
-          <h2 id="planner-title">내 방에 맞춰 확인하기</h2>
-        </div>
-
-        <div class="tool">
-          <form class="controls" id="plannerForm">
-            <fieldset class="choice-group">
-              <legend>방 옵션</legend>
-              <p>집에 이미 있는 가전과 가구 기준으로 고르세요.</p>
-              <div class="segmented-control">
-                <label class="choice-option"><input name="room" type="radio" value="full" /><span>풀옵션<small>가전·가구가 대부분 있음</small></span></label>
-                <label class="choice-option"><input name="room" type="radio" value="semi" checked /><span>반옵션<small>일부만 갖춰져 있음</small></span></label>
-                <label class="choice-option"><input name="room" type="radio" value="empty" /><span>무옵션<small>직접 준비할 것이 많음</small></span></label>
-              </div>
-            </fieldset>
-            <fieldset class="choice-group">
-              <legend>평소 생활 방식</legend>
-              <p>가장 자주 하는 생활을 하나만 고르세요.</p>
-              <div class="segmented-control">
-                <label class="choice-option"><input name="lifestyle" type="radio" value="cook" /><span>요리 자주 함<small>조리와 식사를 집에서</small></span></label>
-                <label class="choice-option"><input name="lifestyle" type="radio" value="delivery" checked /><span>간편식 위주<small>배달·외식 비중이 큼</small></span></label>
-                <label class="choice-option"><input name="lifestyle" type="radio" value="remote" /><span>재택 시간이 김<small>집에서 오래 머무름</small></span></label>
-              </div>
-            </fieldset>
-          </form>
-
-          <div class="result" aria-live="polite">
-            <div class="score-row">
-              <div>
-                <span>현재 조건의 확인 대상</span>
-                <strong id="mustCount">0개</strong>
-              </div>
-              <div>
-                <span>구매 전 확인할 품목</span>
-                <strong id="laterCount">0개</strong>
-              </div>
+        <form class="stage-picker" action="/planner" method="get">
+          <fieldset>
+            <legend>현재 준비 단계</legend>
+            <div class="stage-options">
+              <label class="stage-option"><input name="stage" type="radio" value="search" /><span><b>방을 찾는 중</b><small>계약 전에 확인할 것을 정리</small></span></label>
+              <label class="stage-option"><input name="stage" type="radio" value="contract" /><span><b>계약을 마침</b><small>입주 전 확인과 예약을 정리</small></span></label>
+              <label class="stage-option"><input name="stage" type="radio" value="move" checked /><span><b>입주를 준비 중</b><small>내 방에 맞는 준비물을 정리</small></span></label>
+              <label class="stage-option"><input name="stage" type="radio" value="settle" /><span><b>입주한 뒤</b><small>남은 생활 정리를 이어가기</small></span></label>
             </div>
-            <p class="planner-note">
-              이 목록은 방 옵션과 생활 방식으로 나눈 임시 확인 항목입니다. 사용자 조사 전에는 구매 권고나 필수 판단으로 사용하지 않으며, 이미 보유한 물건과 계약 조건은 직접 확인해야 합니다.
-            </p>
-            <div class="result-tabs" role="tablist" aria-label="준비물 분류">
-              <button class="result-tab is-active" id="must-tab" type="button" role="tab" aria-selected="true" aria-controls="must-panel" data-result-tab="must">현재 확인</button>
-              <button class="result-tab" id="later-tab" type="button" role="tab" aria-selected="false" aria-controls="later-panel" data-result-tab="later">구매 전 판단</button>
-              <button class="result-tab" id="skip-tab" type="button" role="tab" aria-selected="false" aria-controls="skip-panel" data-result-tab="skip">보류</button>
-            </div>
-            <div class="list-grid" id="resultPanels">
-              <article class="result-panel is-active" id="must-panel" role="tabpanel" aria-labelledby="must-tab" data-result-panel="must">
-                <h3>현재 조건에서 확인</h3>
-                <ul id="mustList"></ul>
-              </article>
-              <article class="result-panel" id="later-panel" role="tabpanel" aria-labelledby="later-tab" data-result-panel="later">
-                <h3>구매 전 판단</h3>
-                <ul id="laterList"></ul>
-              </article>
-              <article class="result-panel" id="skip-panel" role="tabpanel" aria-labelledby="skip-tab" data-result-panel="skip">
-                <h3>현재는 보류</h3>
-                <ul id="skipList"></ul>
-              </article>
-            </div>
-            <div class="timeline" aria-label="입주 전후 확인 순서">
-              <div class="timeline-head">
-                <span>입주 전후 확인 순서</span>
-                <strong id="timelineTitle">입주 전후 확인</strong>
-              </div>
-              <ol id="timelineList"></ol>
-            </div>
-            <p class="planner-note source-note">
-              전입신고는 실제 전입한 날부터 14일 이내에 해야 합니다.
-              <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1033008615" target="_blank" rel="noopener noreferrer">국가법령정보센터 근거 보기</a>
-            </p>
-            <div class="result-actions">
-              <button class="button primary" id="copyPlan" type="button">준비표 복사</button>
-              <a class="button secondary" href="/checklist">체크리스트 열기</a>
-              <a class="button secondary" href="/budget">예산 입력</a>
-              <span id="copyStatus" aria-live="polite"></span>
-            </div>
-            <div class="shop-links" aria-labelledby="shop-links-title">
-              <div class="shop-links-head">
-                <div>
-                  <span class="eyebrow">구매처 바로가기</span>
-                  <h3 id="shop-links-title">물품은 판매처에서 직접 확인</h3>
-                </div>
-                <p>광고·제휴·가격 비교 링크가 아닙니다.</p>
-              </div>
-              <div class="shop-grid">
-                <a class="shop-card" href="https://shopping.naver.com/home" target="_blank" rel="noopener noreferrer">
-                  <img src="https://www.google.com/s2/favicons?domain=shopping.naver.com&sz=64" alt="" />
-                  <span><strong>네이버 쇼핑</strong><small>자취용품 검색</small></span>
-                  <b aria-hidden="true">↗</b>
-                </a>
-                <a class="shop-card" href="https://www.daisomall.co.kr/" target="_blank" rel="noopener noreferrer">
-                  <img src="https://www.google.com/s2/favicons?domain=daisomall.co.kr&sz=64" alt="" />
-                  <span><strong>다이소몰</strong><small>생활·청소 용품</small></span>
-                  <b aria-hidden="true">↗</b>
-                </a>
-                <a class="shop-card" href="https://www.coupang.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="" />
-                  <span><strong>쿠팡</strong><small>배송 상품 검색</small></span>
-                  <b aria-hidden="true">↗</b>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+          </fieldset>
+          <button class="button primary" type="submit">상세 준비표 만들기</button>
+        </form>
       </section>
 
       <section class="feature-map" aria-labelledby="feature-map-title">
         <div class="section-head">
-          <p class="eyebrow">준비 순서</p>
-          <h2 id="feature-map-title">준비표 다음에 할 일</h2>
+          <p class="eyebrow">상세 준비표에서</p>
+          <h2 id="feature-map-title">내 조건을 더해 목록을 좁혀요</h2>
         </div>
         <div class="feature-grid">
           <article>
             <span>01</span>
-            <h3>방 안을 다시 확인</h3>
-            <p>옵션과 보유 물건을 보며 내 목록에서 필요한 것만 남깁니다.</p>
+            <h3>방 옵션과 보유 물품</h3>
+            <p>이미 가진 물건은 빼고, 비어 있는 항목만 확인합니다.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>입주 전후를 점검</h3>
-            <p>계약·입주·행정 절차는 고정 날짜가 아닌 실제 일정으로 확인합니다.</p>
+            <h3>생활 방식과 취향</h3>
+            <p>요리, 재택, 공간 활용처럼 내 생활에 맞춰 봅니다.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>실제 비용을 입력</h3>
-            <p>구매 전에는 예산 관리에 직접 금액을 넣어 첫 달 지출을 따로 봅니다.</p>
+            <h3>예산과 체크리스트</h3>
+            <p>준비표에서 예산 입력과 실제 체크로 바로 이어집니다.</p>
           </article>
         </div>
       </section>

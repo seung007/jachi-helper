@@ -1,27 +1,51 @@
+const allRooms = ["full", "semi", "empty"];
+const allLifestyles = ["cook", "delivery", "remote"];
+
 const items = [
-  { name: "침구와 수건", group: "must", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "욕실 소모품", group: "must", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "청소·세탁 소모품", group: "must", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "멀티탭", group: "must", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "건조대", group: "must", rooms: ["semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "기본 조리·식기", group: "must", rooms: ["semi", "empty"], lifestyles: ["cook"] },
-  { name: "작업 조명", group: "must", rooms: ["full", "semi", "empty"], lifestyles: ["remote"] },
-  { name: "수납 박스", group: "later", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "커튼", group: "later", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "러그", group: "later", rooms: ["full", "semi", "empty"], lifestyles: ["remote"] },
-  { name: "에어프라이어", group: "later", rooms: ["semi", "empty"], lifestyles: ["cook"] },
-  { name: "큰 식기 세트", group: "skip", rooms: ["full", "semi", "empty"], lifestyles: ["delivery"] },
-  { name: "대형 가구", group: "skip", rooms: ["full", "semi"], lifestyles: ["cook", "delivery", "remote"] },
-  { name: "인테리어 소품", group: "skip", rooms: ["full", "semi", "empty"], lifestyles: ["cook", "delivery", "remote"] }
+  { name: "침구와 수건", group: "must", category: "sleep", rooms: allRooms, lifestyles: allLifestyles },
+  { name: "욕실 소모품", group: "must", category: "bath", rooms: allRooms, lifestyles: allLifestyles },
+  { name: "청소·세탁 소모품", group: "must", category: "clean", rooms: allRooms, lifestyles: allLifestyles },
+  { name: "멀티탭", group: "must", category: "utility", rooms: allRooms, lifestyles: allLifestyles },
+  { name: "건조대", group: "must", category: "clean", rooms: ["semi", "empty"], lifestyles: allLifestyles },
+  { name: "기본 조리·식기", group: "must", category: "kitchen", rooms: ["semi", "empty"], lifestyles: ["cook"] },
+  { name: "작업 조명", group: "must", category: "utility", rooms: allRooms, lifestyles: ["remote"] },
+  { name: "수납 공간 점검", group: "later", category: "utility", rooms: allRooms, lifestyles: allLifestyles },
+  { name: "창문 가림과 빛 조절", group: "later", category: "sleep", rooms: allRooms, lifestyles: allLifestyles },
+  { name: "바닥 생활 물품", group: "later", category: "utility", rooms: allRooms, lifestyles: ["remote"] },
+  { name: "간편 조리 도구", group: "later", category: "kitchen", rooms: ["semi", "empty"], lifestyles: ["cook"] },
+  { name: "큰 식기 세트", group: "skip", category: "kitchen", rooms: allRooms, lifestyles: ["delivery"] },
+  { name: "대형 가구", group: "skip", category: "utility", rooms: ["full", "semi"], lifestyles: allLifestyles },
+  { name: "인테리어 소품", group: "skip", category: "utility", rooms: allRooms, lifestyles: allLifestyles }
 ];
 
-const moveInStages = [
-  { stage: "입주 전", task: "계약서의 입주 가능일과 관리 규정을 확인" },
-  { stage: "입주 전", task: "방 옵션, 수납 공간, 창문 크기와 가전 설치 공간을 실측" },
-  { stage: "입주 전", task: "이사·배송·인터넷 설치는 각 업체의 가능일을 확인해 예약" },
-  { stage: "입주 당일", task: "하자, 계량기, 수압·배수, 도어락 상태를 사진과 함께 확인" },
-  { stage: "입주 후", task: "전입신고: 실제 전입일 기준 14일 이내 신고" }
-];
+const stageConfig = {
+  search: {
+    label: "방을 찾는 중",
+    title: "계약 전 확인부터 정리해요",
+    tasks: ["방 옵션과 관리 규정을 계약 전 확인", "수납 공간과 설치 공간을 직접 실측", "필요한 물품은 계약 확정 뒤에 다시 정리"]
+  },
+  contract: {
+    label: "계약을 마침",
+    title: "입주 준비 순서를 정리해요",
+    tasks: ["계약서의 입주 가능일을 다시 확인", "이사·배송·설치 일정은 업체별 가능일을 확인", "입주 전 방 옵션과 하자 상태를 기록"]
+  },
+  move: {
+    label: "입주를 준비 중",
+    title: "내 방에 맞춰 준비표 만들기",
+    tasks: ["방 옵션과 이미 가진 물건을 먼저 확인", "입주 전 필요한 일정은 업체별 가능일을 확인", "입주 당일 하자와 계량기 상태를 사진으로 기록", "전입신고: 실제 전입일 기준 14일 이내 신고"]
+  },
+  settle: {
+    label: "입주한 뒤",
+    title: "살면서 필요한 것만 남겨요",
+    tasks: ["며칠 생활한 뒤 불편한 지점을 메모", "수납과 동선은 실제 사용 뒤에 다시 조정", "부족한 물품은 예산을 보고 하나씩 추가"]
+  }
+};
+
+const preferenceMatches = {
+  practical: ["소모품 수량과 보관 위치", "이사·배송·설치 일정", "입주 첫 달 예산 입력"],
+  space: ["수납 공간과 자주 쓰는 동선", "창문·문 열림 범위", "접이식 또는 다용도 여부"],
+  mood: ["낮과 밤의 빛", "창문 가림과 사생활", "생활 공간에서 오래 보는 요소"]
+};
 
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
@@ -75,14 +99,34 @@ function renderList(target, list) {
 
 function calculatePlanner(form) {
   const data = new FormData(form);
-  const room = data.get("room");
-  const lifestyle = data.get("lifestyle");
-  const matched = items.filter((item) => item.rooms.includes(room) && item.lifestyles.includes(lifestyle));
+  const stage = stageConfig[data.get("stage")] ? data.get("stage") : "move";
+  const room = data.get("room") || "semi";
+  const lifestyle = data.get("lifestyle") || "cook";
+  const preference = data.get("preference") || "practical";
+  const owned = new Set(data.getAll("owned"));
+  const matched = items.filter(
+    (item) => item.rooms.includes(room) && item.lifestyles.includes(lifestyle) && !owned.has(item.category)
+  );
   const must = matched.filter((item) => item.group === "must");
   const later = matched.filter((item) => item.group === "later");
   const skip = matched.filter((item) => item.group === "skip");
 
-  return { must, later, skip, stages: moveInStages };
+  return {
+    must,
+    later,
+    skip,
+    stage: stageConfig[stage],
+    stages: stageConfig[stage].tasks.map((task) => ({ stage: stageConfig[stage].label, task })),
+    taste: preferenceMatches[preference]
+  };
+}
+
+function setupPlannerStage() {
+  const stageInput = document.querySelector("#selectedStageInput");
+  if (!stageInput) return;
+
+  const requestedStage = new URLSearchParams(window.location.search).get("stage");
+  stageInput.value = stageConfig[requestedStage] ? requestedStage : "move";
 }
 
 function renderPlanner() {
@@ -92,15 +136,22 @@ function renderPlanner() {
   const mustCount = document.querySelector("#mustCount");
   const laterCount = document.querySelector("#laterCount");
   const timelineTitle = document.querySelector("#timelineTitle");
+  const stageBadge = document.querySelector("#stageBadge");
+  const stageLabel = document.querySelector("#plannerStageLabel");
+  const pageTitle = document.querySelector("#plannerPageTitle");
 
   if (mustCount) mustCount.textContent = `${result.must.length}개`;
   if (laterCount) laterCount.textContent = `${result.later.length}개`;
-  if (timelineTitle) timelineTitle.textContent = "입주 전후 확인";
+  if (timelineTitle) timelineTitle.textContent = `${result.stage.label} 일정 확인`;
+  if (stageBadge) stageBadge.textContent = result.stage.label;
+  if (stageLabel) stageLabel.textContent = result.stage.label;
+  if (pageTitle) pageTitle.textContent = result.stage.title;
 
   renderList(document.querySelector("#mustList"), result.must);
   renderList(document.querySelector("#laterList"), result.later);
   renderList(document.querySelector("#skipList"), result.skip.length ? result.skip : [{ name: "현재 조건에서는 없음" }]);
   renderList(document.querySelector("#timelineList"), result.stages);
+  renderList(document.querySelector("#tasteList"), result.taste.map((name) => ({ name })));
 }
 
 async function copyPlan() {
@@ -116,9 +167,12 @@ async function copyPlan() {
   const formatList = (title, list) => `${title}\n${list.map((item) => `- ${item.name}`).join("\n")}`;
   const text = [
     "[자취도우미 입주 준비표]",
+    `준비 단계: ${result.stage.label}`,
     formatList("현재 조건에서 확인", result.must),
     "",
     formatList("구매 전 판단", result.later),
+    "",
+    formatList("추가로 확인해 볼 것", result.taste.map((name) => ({ name }))),
     "",
     "입주 전후 확인",
     ...result.stages.map((item) => `- ${item.stage} | ${item.task}`),
@@ -273,6 +327,7 @@ function setupResultTabs() {
 
 plannerForm?.addEventListener("input", renderPlanner);
 document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
+setupPlannerStage();
 renderPlanner();
 setupChecklist();
 setupBudget();
