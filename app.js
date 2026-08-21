@@ -239,8 +239,41 @@ function setupBudget() {
   renderBudget();
 }
 
+function setupResultTabs() {
+  const tabs = [...document.querySelectorAll("[data-result-tab]")];
+  const panels = [...document.querySelectorAll("[data-result-panel]")];
+  const mobileQuery = window.matchMedia("(max-width: 900px)");
+  let activePanel = "must";
+
+  if (!tabs.length || !panels.length) return;
+
+  const renderTabs = () => {
+    const useTabs = mobileQuery.matches;
+    tabs.forEach((tab) => {
+      const active = tab.dataset.resultTab === activePanel;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = useTabs && panel.dataset.resultPanel !== activePanel;
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activePanel = tab.dataset.resultTab;
+      renderTabs();
+    });
+  });
+
+  mobileQuery.addEventListener("change", renderTabs);
+  renderTabs();
+}
+
 plannerForm?.addEventListener("input", renderPlanner);
 document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 renderPlanner();
 setupChecklist();
 setupBudget();
+setupResultTabs();

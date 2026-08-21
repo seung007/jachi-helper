@@ -80,10 +80,10 @@ nav a[aria-current="page"] {
 .hero {
   align-items: center;
   display: grid;
-  gap: clamp(28px, 5vw, 72px);
+  gap: clamp(28px, 5vw, 64px);
   grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
   min-height: 0;
-  padding: clamp(44px, 6vw, 72px) clamp(20px, 7vw, 96px) 40px;
+  padding: clamp(38px, 5vw, 64px) clamp(20px, 7vw, 96px) 28px;
 }
 
 .eyebrow {
@@ -102,7 +102,7 @@ p {
 }
 
 h1 {
-  font-size: clamp(40px, 5vw, 64px);
+  font-size: clamp(40px, 4.5vw, 60px);
   letter-spacing: 0;
   line-height: 1.05;
   margin-bottom: 22px;
@@ -187,7 +187,7 @@ h2 {
 .feature-map,
 .seo-band,
 .subpage {
-  padding: 52px clamp(20px, 7vw, 96px);
+  padding: 40px clamp(20px, 7vw, 96px) 56px;
 }
 
 .section-head {
@@ -197,7 +197,7 @@ h2 {
 .tool {
   display: grid;
   gap: 18px;
-  grid-template-columns: 340px minmax(0, 1fr);
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
 }
 
 .feature-grid,
@@ -248,8 +248,78 @@ h2 {
 
 .controls {
   display: grid;
-  gap: 16px;
-  padding: 20px;
+  align-content: start;
+  gap: 24px;
+  padding: 24px;
+}
+
+.choice-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.choice-group legend {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+  padding: 0;
+}
+
+.choice-group p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 7px 0 12px;
+}
+
+.segmented-control {
+  display: grid;
+  gap: 8px;
+}
+
+.choice-option {
+  color: var(--ink);
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  position: relative;
+}
+
+.choice-option input {
+  height: 1px;
+  min-height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.choice-option span {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  font-weight: 900;
+  gap: 4px;
+  min-height: 68px;
+  padding: 12px 14px;
+}
+
+.choice-option small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.choice-option input:checked + span {
+  background: var(--mint);
+  border-color: var(--green);
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+
+.choice-option input:focus-visible + span {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
 }
 
 label {
@@ -316,6 +386,28 @@ input {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 16px;
+}
+
+.result-tabs {
+  display: none;
+}
+
+.result-tab {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  min-height: 42px;
+  padding: 0 10px;
+}
+
+.result-tab.is-active {
+  border-color: var(--green);
+  color: var(--green);
 }
 
 .timeline {
@@ -705,12 +797,24 @@ footer strong {
     min-height: auto;
   }
 
+  .hero-panel {
+    max-width: 560px;
+  }
+
   .list-grid,
   .checklist-grid,
   .detailed-checklist,
   .feature-grid,
   .advice-grid {
     grid-template-columns: 1fr;
+  }
+
+  .result-tabs {
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 4px;
+    margin-bottom: 14px;
+    overflow-x: auto;
   }
 
   .budget-row {
@@ -738,7 +842,46 @@ footer strong {
   }
 
   h1 {
-    font-size: 38px;
+    font-size: 36px;
+  }
+
+  .hero,
+  .planner,
+  .feature-map,
+  .seo-band,
+  .subpage {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero {
+    padding-bottom: 20px;
+    padding-top: 30px;
+  }
+
+  .lede {
+    font-size: 17px;
+  }
+
+  .hero-actions,
+  .result-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-actions .button,
+  .result-actions .button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .controls,
+  .result {
+    padding: 16px;
+  }
+
+  .choice-option span {
+    min-height: 64px;
   }
 
   .score-row {
