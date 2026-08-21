@@ -753,6 +753,14 @@ li {
   margin-top: 12px;
 }
 
+.planner-owned + .planner-owned {
+  margin-top: -4px;
+}
+
+.planner-owned .property-selects {
+  margin-top: 12px;
+}
+
 .back-link {
   color: var(--green);
   display: inline-block;
@@ -823,6 +831,28 @@ li {
   border-radius: 8px;
   margin-top: 18px;
   padding: 16px;
+}
+
+.property-notes {
+  background: #fff7e2;
+  border-radius: 8px;
+  margin-top: 18px;
+  padding: 16px;
+}
+
+.property-notes .eyebrow {
+  color: #8b5b00;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.property-notes h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.property-notes li {
+  font-size: 14px;
 }
 
 .taste-match .eyebrow {

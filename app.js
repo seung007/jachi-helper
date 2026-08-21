@@ -47,6 +47,12 @@ const preferenceMatches = {
   mood: ["낮과 밤의 빛", "창문 가림과 사생활", "생활 공간에서 오래 보는 요소"]
 };
 
+const propertyLabels = {
+  parking: { unknown: "주차: 아직 확인 안 함", available: "주차: 가능", none: "주차: 불가" },
+  restaurant: { unknown: "1층 음식점: 아직 확인 안 함", yes: "1층 음식점: 있음", no: "1층 음식점: 없음" },
+  interior: { later: "인테리어: 입주 뒤 참고", interested: "인테리어: 참고할 예정" }
+};
+
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
@@ -104,6 +110,11 @@ function calculatePlanner(form) {
   const lifestyle = data.get("lifestyle") || "cook";
   const preference = data.get("preference") || "practical";
   const owned = new Set(data.getAll("owned"));
+  const propertyNotes = [
+    propertyLabels.parking[data.get("parking") || "unknown"],
+    propertyLabels.restaurant[data.get("restaurant") || "unknown"],
+    propertyLabels.interior[data.get("interior") || "later"]
+  ];
   const matched = items.filter(
     (item) => item.rooms.includes(room) && item.lifestyles.includes(lifestyle) && !owned.has(item.category)
   );
@@ -117,7 +128,8 @@ function calculatePlanner(form) {
     skip,
     stage: stageConfig[stage],
     stages: stageConfig[stage].tasks.map((task) => ({ stage: stageConfig[stage].label, task })),
-    taste: preferenceMatches[preference]
+    taste: preferenceMatches[preference],
+    propertyNotes
   };
 }
 
@@ -152,6 +164,7 @@ function renderPlanner() {
   renderList(document.querySelector("#skipList"), result.skip.length ? result.skip : [{ name: "현재 조건에서는 없음" }]);
   renderList(document.querySelector("#timelineList"), result.stages);
   renderList(document.querySelector("#tasteList"), result.taste.map((name) => ({ name })));
+  renderList(document.querySelector("#propertyList"), result.propertyNotes.map((name) => ({ name })));
 }
 
 async function copyPlan() {
@@ -173,6 +186,8 @@ async function copyPlan() {
     formatList("구매 전 판단", result.later),
     "",
     formatList("추가로 확인해 볼 것", result.taste.map((name) => ({ name }))),
+    "",
+    formatList("방 상태 메모", result.propertyNotes.map((name) => ({ name }))),
     "",
     "입주 전후 확인",
     ...result.stages.map((item) => `- ${item.stage} | ${item.task}`),

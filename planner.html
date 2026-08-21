@@ -57,6 +57,20 @@
               <label class="owned-option"><input name="owned" type="checkbox" value="utility" />생활·수납</label>
             </div>
           </details>
+          <details class="planner-owned">
+            <summary>방 상태 더 기록하기</summary>
+            <div class="planner-selects property-selects">
+              <label>주차
+                <select name="parking"><option value="unknown" selected>아직 확인 안 함</option><option value="available">주차 가능</option><option value="none">주차 불가</option></select>
+              </label>
+              <label>1층 음식점
+                <select name="restaurant"><option value="unknown" selected>아직 확인 안 함</option><option value="yes">있음</option><option value="no">없음</option></select>
+              </label>
+              <label>인테리어 참고
+                <select name="interior"><option value="later" selected>입주 뒤 참고</option><option value="interested">참고할 예정</option></select>
+              </label>
+            </div>
+          </details>
         </form>
 
         <section class="result" aria-live="polite">
@@ -79,6 +93,11 @@
             <article data-result-panel="later"><h3>구매 전 판단</h3><ul id="laterList"></ul></article>
             <article data-result-panel="skip"><h3>현재는 보류</h3><ul id="skipList"></ul></article>
           </div>
+          <section class="property-notes">
+            <p class="eyebrow">방 상태 메모</p>
+            <h3>계약·입주 전에 다시 확인</h3>
+            <ul id="propertyList"></ul>
+          </section>
           <section class="taste-match">
             <p class="eyebrow">우선순위 반영</p>
             <h3>추가로 확인해 볼 것</h3>
