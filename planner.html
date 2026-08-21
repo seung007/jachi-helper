@@ -33,39 +33,22 @@
         <p>선택한 조건으로 확인 항목을 정리합니다. 실제 방 옵션, 보유 물품, 판매 조건을 확인한 뒤 필요한 것만 남겨 두세요.</p>
       </section>
 
-      <section class="tool detailed-tool" aria-label="자취 준비표 만들기">
-        <form class="controls" id="plannerForm">
+      <section class="planner-workspace" aria-label="자취 준비표 만들기">
+        <form class="planner-controls" id="plannerForm">
           <input id="selectedStageInput" name="stage" type="hidden" value="move" />
-          <fieldset class="choice-group">
-            <legend>방 옵션은 어떤가요?</legend>
-            <p>계약서와 현장 상태를 기준으로 골라 주세요.</p>
-            <div class="segmented-control">
-              <label class="choice-option"><input name="room" type="radio" value="full" /><span>풀옵션<small>가전·가구가 일부 갖춰진 방</small></span></label>
-              <label class="choice-option"><input name="room" type="radio" value="semi" checked /><span>반옵션<small>일부만 갖춰진 방</small></span></label>
-              <label class="choice-option"><input name="room" type="radio" value="empty" /><span>무옵션<small>직접 준비할 항목이 많은 방</small></span></label>
-            </div>
-          </fieldset>
-          <fieldset class="choice-group">
-            <legend>생활 방식은 어떤가요?</legend>
-            <p>자주 하는 생활을 한 가지 고르면 됩니다.</p>
-            <div class="segmented-control">
-              <label class="choice-option"><input name="lifestyle" type="radio" value="cook" checked /><span>집밥 중심<small>직접 조리하는 날이 많은 편</small></span></label>
-              <label class="choice-option"><input name="lifestyle" type="radio" value="delivery" /><span>간편식 중심<small>배달·간편식 비중이 큰 편</small></span></label>
-              <label class="choice-option"><input name="lifestyle" type="radio" value="remote" /><span>집에서 일·공부<small>작업 공간을 자주 쓰는 편</small></span></label>
-            </div>
-          </fieldset>
-          <fieldset class="choice-group">
-            <legend>무엇을 우선할까요?</legend>
-            <p>결과 아래의 추가 확인 항목에 반영합니다.</p>
-            <div class="segmented-control">
-              <label class="choice-option"><input name="preference" type="radio" value="practical" checked /><span>실용성<small>소모품과 일정부터 정리</small></span></label>
-              <label class="choice-option"><input name="preference" type="radio" value="space" /><span>공간 활용<small>수납과 동선을 먼저 확인</small></span></label>
-              <label class="choice-option"><input name="preference" type="radio" value="mood" /><span>분위기<small>빛과 생활 감각을 함께 확인</small></span></label>
-            </div>
-          </fieldset>
-          <fieldset class="choice-group">
-            <legend>이미 갖고 있는 것이 있나요?</legend>
-            <p>체크한 범주는 결과 목록에서 제외합니다.</p>
+          <div class="planner-selects">
+            <label>방 옵션
+              <select name="room"><option value="full">풀옵션</option><option value="semi" selected>반옵션</option><option value="empty">무옵션</option></select>
+            </label>
+            <label>생활 방식
+              <select name="lifestyle"><option value="cook" selected>집밥 중심</option><option value="delivery">간편식 중심</option><option value="remote">집에서 일·공부</option></select>
+            </label>
+            <label>우선순위
+              <select name="preference"><option value="practical" selected>실용성</option><option value="space">공간 활용</option><option value="mood">분위기</option></select>
+            </label>
+          </div>
+          <details class="planner-owned">
+            <summary>이미 가진 물건 제외하기</summary>
             <div class="owned-options">
               <label class="owned-option"><input name="owned" type="checkbox" value="sleep" />침구·수건</label>
               <label class="owned-option"><input name="owned" type="checkbox" value="bath" />욕실 용품</label>
@@ -73,7 +56,7 @@
               <label class="owned-option"><input name="owned" type="checkbox" value="kitchen" />주방 용품</label>
               <label class="owned-option"><input name="owned" type="checkbox" value="utility" />생활·수납</label>
             </div>
-          </fieldset>
+          </details>
         </form>
 
         <section class="result" aria-live="polite">

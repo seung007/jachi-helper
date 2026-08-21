@@ -167,7 +167,8 @@ h2 {
   padding-bottom: 38px;
 }
 
-.stage-picker {
+.stage-picker,
+.stage-quick {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -198,6 +199,45 @@ h2 {
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stage-quick p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+
+.stage-links {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stage-links a {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  min-height: 72px;
+  padding: 12px;
+}
+
+.stage-links a:hover,
+.stage-links a.is-recommended {
+  background: var(--mint);
+  border-color: var(--green);
+}
+
+.stage-links strong {
+  font-size: 15px;
+}
+
+.stage-links span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .stage-option {
@@ -673,6 +713,46 @@ li {
   max-width: 900px;
 }
 
+.planner-workspace {
+  display: grid;
+  gap: 18px;
+}
+
+.planner-controls {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.planner-selects {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.planner-selects label {
+  color: var(--ink);
+}
+
+.planner-owned {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.planner-owned summary {
+  color: var(--green);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.planner-owned .owned-options {
+  margin-top: 12px;
+}
+
 .back-link {
   color: var(--green);
   display: inline-block;
@@ -1038,7 +1118,8 @@ footer strong {
     position: static;
   }
 
-  .stage-picker {
+  .stage-picker,
+  .stage-quick {
     max-width: 620px;
   }
 }
@@ -1103,8 +1184,13 @@ footer strong {
   .shop-grid,
   .budget-form,
   .stage-options,
+  .stage-links,
   .owned-options,
   .planner-next-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-selects {
     grid-template-columns: 1fr;
   }
 
