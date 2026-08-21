@@ -459,6 +459,9 @@ function setupRecommendation() {
     });
   }
 
+  const passedBudget = parseCurrency(new URLSearchParams(window.location.search).get("purchaseBudget"));
+  if (passedBudget) form.elements.purchaseBudget.value = String(passedBudget);
+
   function getPreferences() {
     const data = new FormData(form);
     const budget = parseCurrency(data.get("purchaseBudget"));
@@ -659,7 +662,11 @@ function setupBudget() {
   const moveInCash = document.querySelector("#budgetMoveInCash");
   const storageNote = document.querySelector("#budgetStorageNote");
   const resetButton = document.querySelector("#resetBudget");
-  if (!budgetForm || !monthlyTotal || !remaining || !firstMonth || !moveInCash || !storageNote) return;
+  const verdict = document.querySelector("#budgetVerdict");
+  const nextStep = document.querySelector("#budgetNextStep");
+  const recommendLink = document.querySelector("#budgetRecommendLink");
+  const printButton = document.querySelector("#printBudget");
+  if (!budgetForm || !monthlyTotal || !remaining || !firstMonth || !moveInCash || !storageNote || !verdict || !nextStep || !recommendLink) return;
 
   const savedBudget = readStoredState().budget;
   const query = new URLSearchParams(window.location.search);
@@ -701,6 +708,28 @@ function setupBudget() {
     remaining.textContent = balance >= 0 ? formatWon(balance) : `${formatWon(Math.abs(balance))} 부족`;
     remaining.style.color = balance < 0 ? "#c83d2d" : "#1d6f51";
     firstMonth.textContent = formatWon(initialCosts + monthlyExpenses);
+
+    if (!initialCosts && !income && !monthlyExpenses) {
+      verdict.textContent = "보증금, 계약·이사, 준비물 비용을 적으면 계약 전에 필요한 현금을 한 번에 볼 수 있습니다.";
+    } else if (income || monthlyExpenses) {
+      const monthlyMessage = balance >= 0
+        ? `월 수입에서 ${formatWon(balance)}이 남는 것으로 계산됩니다.`
+        : `월 수입보다 ${formatWon(Math.abs(balance))}이 더 필요한 것으로 계산됩니다.`;
+      verdict.textContent = `입주 첫 달에는 ${formatWon(initialCosts + monthlyExpenses)}을 준비해야 합니다. ${monthlyMessage}`;
+    } else {
+      verdict.textContent = `계약 전에 ${formatWon(initialCosts)}을 확보해야 합니다. 월 수입과 지출을 더하면 첫 달 부담도 함께 확인할 수 있습니다.`;
+    }
+
+    if (getBudgetValue("setup")) {
+      const setupBudget = getBudgetValue("setup");
+      nextStep.textContent = `준비물 비용 ${formatWon(setupBudget)}을 구매 후보별 예산 배정으로 이어 보세요.`;
+      recommendLink.href = `/recommend?purchaseBudget=${setupBudget}`;
+      recommendLink.textContent = "준비물 예산으로 추천받기";
+    } else {
+      nextStep.textContent = "준비물 비용을 아직 모른다면 체크리스트에서 필요한 물품부터 고르세요.";
+      recommendLink.href = "/checklist";
+      recommendLink.textContent = "준비물 먼저 정하기";
+    }
   }
 
   function saveBudget() {
@@ -723,6 +752,11 @@ function setupBudget() {
     delete nextState.budget;
     storageNote.textContent = writeStoredState(nextState) ? "입력한 예산을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
     renderBudget();
+  });
+
+  printButton?.addEventListener("click", () => {
+    storageNote.textContent = "인쇄 창에서 'PDF로 저장'을 선택하면 계산표를 파일로 남길 수 있습니다.";
+    window.print();
   });
 
   renderBudget();
