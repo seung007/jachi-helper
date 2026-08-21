@@ -167,6 +167,70 @@ h2 {
   padding-bottom: 38px;
 }
 
+.home-hero h1 {
+  font-size: 52px;
+  max-width: 720px;
+}
+
+.home-quick-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(23, 33, 29, 0.08);
+  overflow: hidden;
+}
+
+.quick-photo {
+  background-image: url("/assets/checklist-categories.png");
+  background-position: center;
+  background-size: cover;
+  height: 132px;
+}
+
+.quick-card-body {
+  padding: 18px;
+}
+
+.quick-card-head {
+  align-items: start;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.quick-card-head .eyebrow {
+  margin-bottom: 4px;
+}
+
+.quick-card-head h2 {
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.quick-card-head > strong {
+  color: var(--green);
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.quick-cost-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quick-cost-form label {
+  color: var(--ink);
+}
+
+.quick-cost-form .button {
+  cursor: pointer;
+  grid-column: 1 / -1;
+  justify-content: center;
+  margin-top: 2px;
+}
+
 .cost-preview {
   background: var(--white);
   border: 1px solid var(--line);
@@ -358,6 +422,55 @@ h2 {
   display: grid;
   gap: 14px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-flow {
+  padding: 24px clamp(20px, 7vw, 96px) 56px;
+}
+
+.home-flow .section-head {
+  margin-bottom: 18px;
+}
+
+.home-flow h2 {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.home-flow-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-flow-grid a {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 7px;
+  min-height: 128px;
+  padding: 18px;
+}
+
+.home-flow-grid a:hover {
+  border-color: var(--green);
+}
+
+.home-flow-grid span {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.home-flow-grid strong {
+  font-size: 19px;
+}
+
+.home-flow-grid small {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .feature-grid article,
@@ -1328,7 +1441,8 @@ footer strong {
   .checklist-grid,
   .detailed-checklist,
   .feature-grid,
-  .advice-grid {
+  .advice-grid,
+  .home-flow-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1385,9 +1499,14 @@ footer strong {
     font-size: 36px;
   }
 
+  .home-hero h1 {
+    font-size: 36px;
+  }
+
   .hero,
   .planner,
   .feature-map,
+  .home-flow,
   .seo-band,
   .subpage {
     padding-left: 18px;
@@ -1413,6 +1532,10 @@ footer strong {
   .result-actions .button {
     justify-content: center;
     width: 100%;
+  }
+
+  .quick-cost-form {
+    grid-template-columns: 1fr;
   }
 
   .controls,

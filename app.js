@@ -325,7 +325,15 @@ function setupBudget() {
   if (!budgetForm || !monthlyTotal || !remaining || !firstMonth || !moveInCash || !storageNote) return;
 
   const savedBudget = readStoredState().budget;
-  if (savedBudget && typeof savedBudget === "object") {
+  const query = new URLSearchParams(window.location.search);
+  const queryValues = Object.fromEntries(budgetFieldNames.map((name) => [name, query.get(name)]));
+  const hasQueryValues = Object.values(queryValues).some((value) => value !== null && value !== "");
+
+  if (hasQueryValues) {
+    budgetFieldNames.forEach((name) => {
+      if (queryValues[name] !== null && budgetForm.elements[name]) budgetForm.elements[name].value = queryValues[name];
+    });
+  } else if (savedBudget && typeof savedBudget === "object") {
     const hasNewBudget = ["deposit", "contract", "setup"].some((name) => savedBudget[name] !== undefined);
     const savedNumber = (name) => {
       const value = Number(savedBudget[name]);
@@ -382,6 +390,23 @@ function setupBudget() {
   renderBudget();
 }
 
+function setupQuickCost() {
+  const quickForm = document.querySelector("#quickCostForm");
+  const quickTotal = document.querySelector("#quickMoveInTotal");
+  if (!quickForm || !quickTotal) return;
+
+  const renderQuickTotal = () => {
+    const total = ["deposit", "contract", "setup"].reduce((sum, name) => {
+      const value = Number(quickForm.elements[name]?.value);
+      return sum + (Number.isFinite(value) && value > 0 ? value : 0);
+    }, 0);
+    quickTotal.textContent = formatWon(total);
+  };
+
+  quickForm.addEventListener("input", renderQuickTotal);
+  renderQuickTotal();
+}
+
 function setupResultTabs() {
   const tabs = [...document.querySelectorAll("[data-result-tab]")];
   const panels = [...document.querySelectorAll("[data-result-panel]")];
@@ -420,4 +445,5 @@ setupPlannerStage();
 renderPlanner();
 setupChecklist();
 setupBudget();
+setupQuickCost();
 setupResultTabs();

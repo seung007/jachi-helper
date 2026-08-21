@@ -56,54 +56,38 @@
     <main>
       <section class="hero home-hero">
         <div class="hero-copy">
-          <p class="eyebrow">첫 자취 시작 비용</p>
-          <h1>얼마를 준비해야 할지부터 정리하자</h1>
+          <p class="eyebrow">첫 자취 비용 계산</p>
+          <h1>자취 시작에 필요한 돈부터 계산해봐.</h1>
           <p class="lede">
-            보증금과 입주비, 매달 주거비와 생활비를 나눠 적으면 시작에 필요한 자금과 매달 예산을 한 번에 봅니다.
+            보증금, 계약·이사비, 준비물비를 먼저 적으세요. 입주 전 자금과 월 예산, 필요한 물품 구매까지 한 흐름으로 이어집니다.
           </p>
-          <div class="hero-actions"><a class="button primary" href="/budget">초기 비용 계산하기</a><a class="button secondary" href="/checklist">준비물 체크하기</a></div>
+          <div class="hero-actions"><a class="button secondary" href="/checklist">준비물 체크리스트</a></div>
         </div>
-        <section class="cost-preview" aria-label="초기 비용 계산 범위">
-          <p class="eyebrow">먼저 보는 세 가지</p>
-          <div><span>입주 전 자금</span><strong>보증금 · 계약 · 준비</strong></div>
-          <div><span>매달 드는 돈</span><strong>주거비 · 생활비</strong></div>
-          <div><span>첫 달 합계</span><strong>초기 비용과 월 비용</strong></div>
+        <section class="home-quick-card" aria-labelledby="quick-cost-title">
+          <div class="quick-photo" role="img" aria-label="침구, 욕실, 주방, 청소 준비물"></div>
+          <div class="quick-card-body">
+            <div class="quick-card-head"><div><p class="eyebrow">입주 전 자금</p><h2 id="quick-cost-title">내 시작 비용</h2></div><strong id="quickMoveInTotal">0원</strong></div>
+            <form class="quick-cost-form" id="quickCostForm" action="/budget" method="get">
+              <label>보증금<span class="amount-input"><input name="deposit" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+              <label>계약·이사 비용<span class="amount-input"><input name="contract" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+              <label>준비물 비용<span class="amount-input"><input name="setup" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+              <label>월 주거비<span class="amount-input"><input name="housing" type="number" min="0" inputmode="numeric" placeholder="0" /><b>원</b></span></label>
+              <button class="button primary" type="submit">월 예산까지 계산하기</button>
+            </form>
+          </div>
         </section>
       </section>
 
-      <section class="feature-map" aria-labelledby="feature-map-title">
+      <section class="home-flow" aria-labelledby="feature-map-title">
         <div class="section-head">
-          <p class="eyebrow">초기 비용 계산에서</p>
-          <h2 id="feature-map-title">시작 자금과 월 예산을 분리해 봐요</h2>
+          <p class="eyebrow">자취 시작 흐름</p>
+          <h2 id="feature-map-title">계산하고, 필요한 것만 챙기세요.</h2>
         </div>
-        <div class="feature-grid">
-          <article>
-            <span>01</span>
-            <h3>입주 전 자금</h3>
-            <p>보증금, 계약·이사 비용, 준비물 비용을 따로 합산합니다.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>매달 드는 돈</h3>
-            <p>월 주거비와 생활비를 나눠 수입과 비교합니다.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>첫 달 전체 금액</h3>
-            <p>초기 비용과 한 달 비용을 함께 보며 준비합니다.</p>
-          </article>
+        <div class="home-flow-grid">
+          <a href="/budget"><span>01</span><strong>초기 자금 계산</strong><small>입주 전 필요한 금액부터 보기</small></a>
+          <a href="/checklist"><span>02</span><strong>준비물 체크</strong><small>이미 있는 것은 완료 처리</small></a>
+          <a href="/checklist#purchase-candidates"><span>03</span><strong>구매 후보 비교</strong><small>남은 카테고리만 찾아보기</small></a>
         </div>
-      </section>
-
-      <section class="seo-band" aria-labelledby="seo-title">
-        <div>
-          <p class="eyebrow">검색용 핵심 주제</p>
-          <h2 id="seo-title">첫 자취 초기 비용과 월 예산을 한 번에</h2>
-        </div>
-        <p>
-          자취도우미는 첫 자취생을 위한 초기 비용 정리 도구입니다. 입주 전 자금과 매달 비용을
-          직접 입력해 준비할 금액을 구분해 봅니다.
-        </p>
       </section>
     </main>
 
