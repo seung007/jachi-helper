@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>자취도우미 | 첫 자취 준비 체크리스트와 예산 장바구니</title>
+    <title>자취도우미 | 첫 자취 준비 체크리스트와 예산 관리</title>
     <meta
       name="description"
-      content="첫 자취 입주일, 예산, 방 옵션을 입력하면 필수 준비물, 구매 우선순위, 예상 비용, 입주 D-day 체크리스트를 한 번에 정리해주는 자취 준비 도우미."
+      content="첫 자취의 방 옵션과 생활 방식을 바탕으로 준비물을 정리하고, 입주 전후 확인 사항과 예산을 직접 관리하는 도구입니다."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
@@ -17,7 +17,7 @@
     <meta property="og:title" content="자취도우미 | 첫 자취 준비 체크리스트" />
     <meta
       property="og:description"
-      content="예산과 방 옵션만 고르면 첫 자취 준비물, 우선순위, 예상 비용을 바로 계산합니다."
+      content="방 옵션과 생활 방식을 바탕으로 첫 자취 준비물과 입주 전후 확인 사항을 정리합니다."
     />
     <meta property="og:url" content="https://jachi-helper.vercel.app/" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
@@ -32,7 +32,7 @@
         "applicationCategory": "LifestyleApplication",
         "operatingSystem": "Web",
         "url": "https://jachi-helper.vercel.app/",
-        "description": "첫 자취 준비물 체크리스트와 예산 장바구니를 자동으로 정리하는 웹 도구",
+        "description": "첫 자취 준비물 체크리스트와 직접 입력 예산 관리를 돕는 웹 도구",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -59,8 +59,8 @@
           <p class="eyebrow">첫 자취 입주 준비표</p>
           <h1>내 조건에 맞는 첫 자취 준비를 가볍게 정리하자</h1>
           <p class="lede">
-            방 옵션, 입주일, 생활 패턴을 고르면 지금 먼저 확인할 물건과 나중에 준비할 물건,
-            예시 장바구니 금액을 한눈에 정리합니다.
+            방 옵션과 생활 패턴을 고르면 먼저 확인할 물건과 나중에 준비할 물건을 정리합니다.
+            일정은 임의 날짜 분기가 아닌 계약·입주·행정 절차를 기준으로 확인합니다.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#planner">준비표 만들기</a>
@@ -70,9 +70,9 @@
         <aside class="hero-panel" aria-label="자취 준비표 미리보기">
           <img src="/assets/starter-kit.svg" alt="자취 준비물 장바구니 미리보기" />
           <div class="preview-card">
-            <span>예상 총액</span>
-            <strong id="heroTotal">395,000원</strong>
-            <small id="heroSummary">먼저 확인 7개 · 나중에 2개 · 후순위 3개</small>
+            <span>준비 순서</span>
+            <strong>입주 전 · 입주 당일 · 입주 후</strong>
+            <small>가격과 배송 가능일은 판매처와 계약 조건에서 직접 확인</small>
           </div>
         </aside>
       </section>
@@ -90,13 +90,13 @@
           </article>
           <article>
             <span>02</span>
-            <h3>입주 D-day</h3>
-            <p>입주까지 남은 날짜에 맞춰 청소, 배송, 생활 필수품 준비 순서를 보여줍니다.</p>
+            <h3>입주 전후 점검</h3>
+            <p>임의 날짜 대신 계약·입주·행정 절차를 기준으로 확인할 일을 보여줍니다.</p>
           </article>
           <article>
             <span>03</span>
             <h3>초기 예산</h3>
-            <p>선택한 기본 구성의 예시 금액과 내 입주 예산의 차이를 바로 확인합니다.</p>
+            <p>실제 지출은 예산 관리에서 직접 입력해 관리합니다.</p>
           </article>
         </div>
       </section>
@@ -109,15 +109,6 @@
 
         <div class="tool">
           <form class="controls" id="plannerForm">
-            <label>
-              입주 예산
-              <select name="budget">
-                <option value="300000">30만 원</option>
-                <option value="500000" selected>50만 원</option>
-                <option value="800000">80만 원</option>
-                <option value="1200000">120만 원</option>
-              </select>
-            </label>
             <label>
               방 옵션
               <select name="room">
@@ -134,25 +125,21 @@
                 <option value="remote">재택 시간이 김</option>
               </select>
             </label>
-            <label>
-              입주까지 남은 날
-              <input name="days" type="number" min="0" max="60" value="7" />
-            </label>
           </form>
 
           <div class="result" aria-live="polite">
             <div class="score-row">
               <div>
-                <span>예상 장바구니</span>
-                <strong id="totalPrice">482,000원</strong>
+                <span>현재 조건의 기본 품목</span>
+                <strong id="mustCount">0개</strong>
               </div>
               <div>
-                <span>예산과의 차이</span>
-                <strong id="budgetState">18,000원 여유</strong>
+                <span>구매 전 확인할 품목</span>
+                <strong id="laterCount">0개</strong>
               </div>
             </div>
             <p class="planner-note">
-              이 결과는 선택한 조건에 맞춘 기본 구성과 예시 금액입니다. 실제 판매가, 배송비, 이미 보유한 물건은 반영하지 않습니다.
+              이 결과는 방 옵션과 생활 방식에 따른 확인 목록입니다. 이미 보유한 물건, 계약 조건, 실제 판매가와 배송 가능일은 직접 확인해야 합니다.
             </p>
             <div class="list-grid">
               <article>
@@ -168,13 +155,17 @@
                 <ul id="skipList"></ul>
               </article>
             </div>
-            <div class="timeline" aria-label="입주 D-day 체크리스트">
+            <div class="timeline" aria-label="입주 전후 확인 순서">
               <div class="timeline-head">
-                <span>입주 타임라인</span>
-                <strong id="timelineTitle">D-7 준비</strong>
+                <span>입주 전후 확인 순서</span>
+                <strong id="timelineTitle">입주 전후 확인</strong>
               </div>
               <ol id="timelineList"></ol>
             </div>
+            <p class="planner-note source-note">
+              전입신고는 실제 전입한 날부터 14일 이내에 해야 합니다.
+              <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1033008615" target="_blank" rel="noopener noreferrer">국가법령정보센터 근거 보기</a>
+            </p>
             <div class="result-actions">
               <button class="button primary" id="copyPlan" type="button">준비표 복사</button>
               <span id="copyStatus" aria-live="polite"></span>
@@ -223,7 +214,7 @@
 
     <footer>
       <strong>자취도우미</strong>
-      <span>첫 자취 준비 체크리스트 · 예산 장바구니 · 입주 D-day</span>
+      <span>첫 자취 준비 체크리스트 · 예산 관리 · 입주 전후 점검</span>
     </footer>
 
     <script src="/app.js" defer></script>
