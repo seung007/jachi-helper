@@ -116,14 +116,14 @@ async function copyPlan() {
   const formatList = (title, list) => `${title}\n${list.map((item) => `- ${item.name}`).join("\n")}`;
   const text = [
     "[자취도우미 입주 준비표]",
-    formatList("먼저 확인", result.must),
+    formatList("현재 조건에서 확인", result.must),
     "",
-    formatList("나중에 준비", result.later),
+    formatList("구매 전 판단", result.later),
     "",
     "입주 전후 확인",
     ...result.stages.map((item) => `- ${item.stage} | ${item.task}`),
     "",
-    "참고: 물품 목록은 방 옵션과 생활 방식에 따른 확인 항목입니다. 가격은 판매처와 예산 관리에서 직접 확인하세요.",
+    "참고: 물품 목록은 방 옵션과 생활 방식에 따른 임시 확인 항목입니다. 사용자 조사 전에는 구매 권고나 필수 판단으로 사용하지 않습니다.",
     "전입신고는 실제 전입일 기준 14일 이내 신고해야 합니다."
   ].join("\n");
 
