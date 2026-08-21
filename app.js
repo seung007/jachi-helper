@@ -111,6 +111,38 @@ function formatWon(value) {
   return `${Math.round(value).toLocaleString("ko-KR")}원`;
 }
 
+function setupNaverShoppingLinks() {
+  const links = document.querySelectorAll("[data-naver-shopping-query]");
+  if (!links.length) return;
+
+  let notice = document.querySelector("#naverShoppingNotice");
+  if (!notice) {
+    notice = document.createElement("p");
+    notice.id = "naverShoppingNotice";
+    notice.className = "shopping-notice";
+    notice.setAttribute("aria-live", "polite");
+    document.body.appendChild(notice);
+  }
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      const query = link.dataset.naverShoppingQuery;
+      if (!query || !navigator.clipboard?.writeText) return;
+
+      navigator.clipboard.writeText(query).then(
+        () => {
+          notice.textContent = `네이버쇼핑 검색어 '${query}'를 복사했습니다.`;
+          notice.classList.add("is-visible");
+        },
+        () => {
+          notice.textContent = "네이버쇼핑이 새 창에서 열렸습니다.";
+          notice.classList.add("is-visible");
+        }
+      );
+    });
+  });
+}
+
 function renderList(target, list) {
   if (!target) return;
   target.innerHTML = "";
@@ -279,12 +311,12 @@ function setupChecklist() {
     categories.forEach((category) => {
       const card = document.createElement("article");
       card.className = "recommendation-card";
-      const naverUrl = `https://search.naver.com/search.naver?where=shopping&query=${encodeURIComponent(category.query)}`;
+      const naverUrl = "https://shopping.naver.com/home";
       const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(category.query)}`;
       card.innerHTML = `
         <div class="recommendation-image ${category.image}" role="img" aria-label="${category.title} 준비물 예시"></div>
         <div class="recommendation-copy"><p>${category.remaining}개 미완료</p><h3>${category.title}</h3></div>
-        <div class="recommendation-actions"><a href="${naverUrl}" target="_blank" rel="noreferrer">네이버쇼핑</a><a href="${coupangUrl}" target="_blank" rel="noreferrer">쿠팡</a></div>
+        <div class="recommendation-actions"><a href="${naverUrl}" data-naver-shopping-query="${category.query}" target="_blank" rel="noreferrer">네이버쇼핑 열기</a><a href="${coupangUrl}" target="_blank" rel="noreferrer">쿠팡</a></div>
       `;
       purchaseCandidates.appendChild(card);
     });
@@ -447,3 +479,4 @@ setupChecklist();
 setupBudget();
 setupQuickCost();
 setupResultTabs();
+setupNaverShoppingLinks();
