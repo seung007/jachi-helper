@@ -6,14 +6,14 @@
     <title>자취 월 예산 관리 도우미 | 자취도우미</title>
     <meta
       name="description"
-      content="월 수입, 월세, 관리비, 식비, 교통비, 입주 일회성 비용을 직접 입력해 자취 예산을 정리하는 도구입니다."
+      content="월 수입, 월 주거비, 월 생활비, 입주 1회 비용 네 가지를 직접 입력해 자취 예산을 정리하는 도구입니다."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://jachi-helper.vercel.app/budget" />
     <meta property="og:title" content="자취 월 예산 관리 도우미" />
-    <meta property="og:description" content="자취 월 지출과 입주 첫 달 비용을 직접 입력해 정리하세요." />
+    <meta property="og:description" content="네 가지 금액으로 자취 월 지출과 입주 첫 달 비용을 정리하세요." />
     <meta property="og:url" content="https://jachi-helper.vercel.app/budget" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <link rel="stylesheet" href="/styles.css" />
@@ -30,46 +30,25 @@
     </header>
     <main class="subpage">
       <section class="page-title">
-        <p class="eyebrow">내 입력 기준</p>
-        <h1>자취 예산 관리 도우미</h1>
-        <p>월 수입과 실제로 예정된 지출을 직접 넣어 보세요. 이 도구는 입력한 값을 합산할 뿐, 생활 가능 여부를 판정하지 않습니다.</p>
+        <p class="eyebrow">네 금액만 입력</p>
+        <h1>자취 예산 빠르게 정리</h1>
+        <p>월 수입, 주거비, 생활비, 입주비만 적으면 매달 지출과 첫 달 예상 금액을 바로 봅니다.</p>
       </section>
       <section class="budget-tool" aria-label="자취 예산 입력과 결과">
-        <form class="budget-form" id="budgetForm">
-          <div class="budget-group">
-            <h2>월 수입</h2>
-            <label>월 수입<input name="income" type="number" min="0" inputmode="numeric" placeholder="예: 1800000" /></label>
-          </div>
-          <div class="budget-group">
-            <h2>고정 지출</h2>
-            <label>월세<input name="rent" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>관리비<input name="maintenance" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>통신·인터넷<input name="communication" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>보험·대출 상환<input name="insuranceDebt" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-          </div>
-          <div class="budget-group">
-            <h2>생활 지출</h2>
-            <label>전기·가스·수도<input name="utilities" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>식비<input name="food" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>교통비<input name="transport" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>생활·여가비<input name="daily" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>저축·비상금<input name="savings" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-          </div>
-          <div class="budget-group">
-            <h2>입주 첫 달 일회성 비용</h2>
-            <label>이사·청소<input name="moving" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>준비물 구매<input name="supplies" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-            <label>기타 일회성 비용<input name="oneTimeOther" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
-          </div>
+        <form class="budget-form budget-simple" id="budgetForm">
+          <label class="budget-input-card"><span>월 수입</span><small>월에 들어오는 총 금액</small><input name="income" type="number" min="0" inputmode="numeric" placeholder="예: 1800000" /></label>
+          <label class="budget-input-card"><span>월 주거비</span><small>월세와 관리비를 합쳐서</small><input name="housing" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+          <label class="budget-input-card"><span>월 생활비</span><small>식비·교통·통신·공과금 등을 합쳐서</small><input name="living" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
+          <label class="budget-input-card"><span>입주 1회 비용</span><small>이사·청소·준비물을 합쳐서</small><input name="initial" type="number" min="0" inputmode="numeric" placeholder="0" /></label>
         </form>
         <aside class="budget-summary" aria-live="polite">
           <p class="eyebrow">계산 결과</p>
           <div class="budget-summary-grid">
-            <div><span>월 지출 합계</span><strong id="budgetMonthlyTotal">0원</strong></div>
+            <div><span>매달 지출</span><strong id="budgetMonthlyTotal">0원</strong></div>
             <div><span>수입에서 남는 금액</span><strong id="budgetRemaining">0원</strong></div>
-            <div><span>입주 첫 달 합계</span><strong id="budgetFirstMonth">0원</strong></div>
+            <div><span>입주 첫 달 예상</span><strong id="budgetFirstMonth">0원</strong></div>
           </div>
-          <p class="planner-note">입력하지 않은 항목은 0원으로 계산합니다. 실제 공과금, 계약 비용, 판매가와 배송비는 직접 확인하세요.</p>
+          <p class="planner-note">비어 있는 칸은 0원으로 계산합니다. 실제 계약 비용과 청구 금액은 별도로 확인하세요.</p>
           <div class="result-actions"><span id="budgetStorageNote">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetBudget" type="button">예산 초기화</button></div>
         </aside>
       </section>

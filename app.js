@@ -69,19 +69,16 @@ const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
   "income",
-  "rent",
-  "maintenance",
-  "communication",
-  "insuranceDebt",
-  "utilities",
-  "food",
-  "transport",
-  "daily",
-  "savings",
-  "moving",
-  "supplies",
-  "oneTimeOther"
+  "housing",
+  "living",
+  "initial"
 ];
+
+const legacyBudgetGroups = {
+  housing: ["rent", "maintenance"],
+  living: ["communication", "insuranceDebt", "utilities", "food", "transport", "daily", "savings"],
+  initial: ["moving", "supplies", "oneTimeOther"]
+};
 
 function readStoredState() {
   try {
@@ -282,10 +279,16 @@ function setupBudget() {
 
   const savedBudget = readStoredState().budget;
   if (savedBudget && typeof savedBudget === "object") {
-    budgetFieldNames.forEach((name) => {
-      if (typeof savedBudget[name] === "string" && budgetForm.elements[name]) {
-        budgetForm.elements[name].value = savedBudget[name];
-      }
+    const hasSimpleBudget = ["housing", "living", "initial"].some((name) => savedBudget[name] !== undefined);
+    const savedNumber = (name) => {
+      const value = Number(savedBudget[name]);
+      return Number.isFinite(value) && value > 0 ? value : 0;
+    };
+
+    budgetForm.elements.income.value = savedBudget.income || "";
+    ["housing", "living", "initial"].forEach((name) => {
+      const value = hasSimpleBudget ? savedBudget[name] : legacyBudgetGroups[name].reduce((sum, field) => sum + savedNumber(field), 0);
+      budgetForm.elements[name].value = value || "";
     });
   }
 
@@ -296,11 +299,8 @@ function setupBudget() {
 
   function renderBudget() {
     const income = getBudgetValue("income");
-    const monthlyExpenses = ["rent", "maintenance", "communication", "insuranceDebt", "utilities", "food", "transport", "daily", "savings"].reduce(
-      (sum, name) => sum + getBudgetValue(name),
-      0
-    );
-    const oneTimeCosts = ["moving", "supplies", "oneTimeOther"].reduce((sum, name) => sum + getBudgetValue(name), 0);
+    const monthlyExpenses = getBudgetValue("housing") + getBudgetValue("living");
+    const oneTimeCosts = getBudgetValue("initial");
     const balance = income - monthlyExpenses;
 
     monthlyTotal.textContent = formatWon(monthlyExpenses);

@@ -1011,6 +1011,25 @@ li {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.budget-input-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 18px;
+}
+
+.budget-input-card span {
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.budget-input-card small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .budget-group,
 .budget-summary {
   background: var(--white);
