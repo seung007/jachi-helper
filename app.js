@@ -69,15 +69,17 @@ const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
   "income",
+  "deposit",
+  "contract",
+  "setup",
   "housing",
-  "living",
-  "initial"
+  "living"
 ];
 
 const legacyBudgetGroups = {
   housing: ["rent", "maintenance"],
   living: ["communication", "insuranceDebt", "utilities", "food", "transport", "daily", "savings"],
-  initial: ["moving", "supplies", "oneTimeOther"]
+  setup: ["moving", "supplies", "oneTimeOther"]
 };
 
 function readStoredState() {
@@ -273,21 +275,25 @@ function setupBudget() {
   const monthlyTotal = document.querySelector("#budgetMonthlyTotal");
   const remaining = document.querySelector("#budgetRemaining");
   const firstMonth = document.querySelector("#budgetFirstMonth");
+  const moveInCash = document.querySelector("#budgetMoveInCash");
   const storageNote = document.querySelector("#budgetStorageNote");
   const resetButton = document.querySelector("#resetBudget");
-  if (!budgetForm || !monthlyTotal || !remaining || !firstMonth || !storageNote) return;
+  if (!budgetForm || !monthlyTotal || !remaining || !firstMonth || !moveInCash || !storageNote) return;
 
   const savedBudget = readStoredState().budget;
   if (savedBudget && typeof savedBudget === "object") {
-    const hasSimpleBudget = ["housing", "living", "initial"].some((name) => savedBudget[name] !== undefined);
+    const hasNewBudget = ["deposit", "contract", "setup"].some((name) => savedBudget[name] !== undefined);
     const savedNumber = (name) => {
       const value = Number(savedBudget[name]);
       return Number.isFinite(value) && value > 0 ? value : 0;
     };
 
     budgetForm.elements.income.value = savedBudget.income || "";
-    ["housing", "living", "initial"].forEach((name) => {
-      const value = hasSimpleBudget ? savedBudget[name] : legacyBudgetGroups[name].reduce((sum, field) => sum + savedNumber(field), 0);
+    ["deposit", "contract", "setup", "housing", "living"].forEach((name) => {
+      let value = savedBudget[name];
+      if (value === undefined && name === "setup") value = savedBudget.initial;
+      if (value === undefined && legacyBudgetGroups[name]) value = legacyBudgetGroups[name].reduce((sum, field) => sum + savedNumber(field), 0);
+      if (hasNewBudget && ["housing", "living"].includes(name)) value = savedBudget[name];
       budgetForm.elements[name].value = value || "";
     });
   }
@@ -300,13 +306,14 @@ function setupBudget() {
   function renderBudget() {
     const income = getBudgetValue("income");
     const monthlyExpenses = getBudgetValue("housing") + getBudgetValue("living");
-    const oneTimeCosts = getBudgetValue("initial");
+    const initialCosts = getBudgetValue("deposit") + getBudgetValue("contract") + getBudgetValue("setup");
     const balance = income - monthlyExpenses;
 
+    moveInCash.textContent = formatWon(initialCosts);
     monthlyTotal.textContent = formatWon(monthlyExpenses);
     remaining.textContent = balance >= 0 ? formatWon(balance) : `${formatWon(Math.abs(balance))} 부족`;
     remaining.style.color = balance < 0 ? "#c83d2d" : "#1d6f51";
-    firstMonth.textContent = formatWon(monthlyExpenses + oneTimeCosts);
+    firstMonth.textContent = formatWon(initialCosts + monthlyExpenses);
   }
 
   function saveBudget() {

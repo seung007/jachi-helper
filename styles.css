@@ -167,6 +167,38 @@ h2 {
   padding-bottom: 38px;
 }
 
+.cost-preview {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(23, 33, 29, 0.08);
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+}
+
+.cost-preview .eyebrow {
+  margin-bottom: 2px;
+}
+
+.cost-preview div {
+  background: #f5f8f6;
+  border-radius: 8px;
+  display: grid;
+  gap: 3px;
+  padding: 13px;
+}
+
+.cost-preview span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cost-preview strong {
+  font-size: 16px;
+}
+
 .stage-picker,
 .stage-quick {
   background: var(--white);
@@ -1011,6 +1043,27 @@ li {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.budget-simple {
+  grid-template-columns: 1fr;
+}
+
+.budget-input-group {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.budget-input-group h2 {
+  font-size: 19px;
+  margin: 0 0 10px;
+}
+
+.budget-input-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .budget-input-card {
   background: var(--white);
   border: 1px solid var(--line);
@@ -1073,6 +1126,10 @@ li {
 
 .budget-summary-grid strong {
   font-size: 24px;
+}
+
+.budget-summary-grid div:first-child {
+  background: var(--mint);
 }
 
 .budget-summary .planner-note {
@@ -1170,6 +1227,10 @@ footer strong {
   }
 
   .budget-tool {
+    grid-template-columns: 1fr;
+  }
+
+  .budget-input-grid {
     grid-template-columns: 1fr;
   }
 

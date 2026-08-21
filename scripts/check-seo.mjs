@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 
-const requiredFiles = ["index.html", "planner.html", "checklist.html", "budget.html", "robots.txt", "sitemap.xml", "vercel.json"];
-const pages = ["index.html", "planner.html", "checklist.html", "budget.html"];
+const requiredFiles = ["index.html", "checklist.html", "budget.html", "robots.txt", "sitemap.xml", "vercel.json"];
+const pages = ["index.html", "checklist.html", "budget.html"];
 let failed = false;
 
 for (const file of requiredFiles) {
