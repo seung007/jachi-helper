@@ -1,9 +1,12 @@
 {
   "keywordGroups": [
     { "groupName": "자취 준비", "keywords": ["자취 준비물", "자취 필수품"] },
-    { "groupName": "침구", "keywords": ["자취 침구", "이불", "베개"] },
-    { "groupName": "욕실", "keywords": ["자취 욕실용품", "수건", "화장지"] },
+    { "groupName": "침구·욕실", "keywords": ["자취 침구", "이불", "수건"] },
     { "groupName": "주방", "keywords": ["자취 주방용품", "프라이팬", "냄비"] },
-    { "groupName": "생활·청소", "keywords": ["자취 청소용품", "멀티탭", "수납박스"] }
+    { "groupName": "청소·세탁", "keywords": ["자취 청소용품", "세탁세제", "빨래 건조대"] },
+    { "groupName": "운동·세탁", "keywords": ["운동복 세제", "땀냄새 세제", "세탁 탈취"] },
+    { "groupName": "저자극·무향", "keywords": ["무향 세제", "저자극 세제", "무향 섬유유연제"] },
+    { "groupName": "수납·생활", "keywords": ["자취 수납", "수납박스", "멀티탭"] },
+    { "groupName": "안전", "keywords": ["도어스토퍼", "창문 잠금장치", "자취 안전용품"] }
   ]
 }

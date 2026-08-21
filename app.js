@@ -451,7 +451,7 @@ function setupRecommendation() {
 
   const savedPreferences = readStoredState().recommendation;
   if (savedPreferences && typeof savedPreferences === "object") {
-    ["purchaseBudget", "timing", "room", "focus", "showCount"].forEach((name) => {
+    ["purchaseBudget", "timing", "room", "focus", "search", "sort", "showCount"].forEach((name) => {
       const input = form.elements[name];
       if (!input || savedPreferences[name] === undefined) return;
       if (input instanceof RadioNodeList) input.value = savedPreferences[name];
@@ -470,7 +470,9 @@ function setupRecommendation() {
       timing: data.get("timing") || "movein",
       room: data.get("room") || "small",
       focus: data.get("focus") || "value",
-      showCount: data.get("showCount") || "12"
+      search: String(data.get("search") || "").trim(),
+      sort: data.get("sort") || "priority",
+      showCount: data.get("showCount") || "24"
     };
   }
 
@@ -562,17 +564,20 @@ function setupRecommendation() {
     const storedState = readStoredState();
     const savedChecks = storedState.checklist || {};
     const decisions = storedState.recommendationDecisions || {};
+    const searchTerm = preferences.search.toLocaleLowerCase("ko-KR");
     const ranked = Object.entries(recommendationCatalog)
       .filter(([id]) => !savedChecks[id])
+      .filter(([, item]) => !searchTerm || `${item.title} ${item.category}`.toLocaleLowerCase("ko-KR").includes(searchTerm))
       .map((entry) => ({ ...rankItem(entry, preferences), decision: decisions[entry[0]] || "review" }))
       .map((item) => ({ ...item, phase: getPhase(item, preferences) }))
       .sort((a, b) => {
         const phaseOrder = { now: 0, week: 1, later: 2, skip: 3 };
         const decisionOrder = { candidate: 0, review: 1, later: 2, skip: 3 };
-        return phaseOrder[a.phase] - phaseOrder[b.phase]
-          || decisionOrder[a.decision] - decisionOrder[b.decision]
-          || b.score - a.score
-          || a.title.localeCompare(b.title, "ko");
+        const phaseDifference = phaseOrder[a.phase] - phaseOrder[b.phase];
+        if (phaseDifference) return phaseDifference;
+        if (preferences.sort === "alphabetical") return a.title.localeCompare(b.title, "ko");
+        if (preferences.sort === "category") return a.category.localeCompare(b.category, "ko") || a.title.localeCompare(b.title, "ko");
+        return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
     const active = ranked.filter((item) => item.phase === "now" || item.phase === "week");
     const deferred = ranked.filter((item) => item.phase === "later" || item.phase === "skip");
@@ -580,13 +585,16 @@ function setupRecommendation() {
     const visible = [...active.slice(0, limit), ...deferred];
     const totalScore = active.reduce((sum, item) => sum + item.score, 0);
 
+    const searchSummary = preferences.search ? `검색 '${preferences.search}' · ` : "";
     summary.textContent = ranked.length
-      ? `전체 ${ranked.length}개 · 지금 ${active.length}개 · 입주 후 ${ranked.filter((item) => item.phase === "later").length}개`
+      ? `${searchSummary}전체 ${ranked.length}개 · 지금 ${active.length}개 · 입주 후 ${ranked.filter((item) => item.phase === "later").length}개`
       : "추천할 구매 항목이 없습니다";
     results.innerHTML = "";
 
     if (!ranked.length) {
-      results.innerHTML = '<p class="purchase-empty">체크리스트의 구매 항목을 모두 완료했습니다. 새로 필요해진 물건이 있다면 체크리스트에서 완료를 해제하세요.</p>';
+      results.innerHTML = preferences.search
+        ? '<p class="purchase-empty">검색어와 일치하는 준비물이 없습니다. 다른 단어로 다시 찾아보세요.</p>'
+        : '<p class="purchase-empty">체크리스트의 구매 항목을 모두 완료했습니다. 새로 필요해진 물건이 있다면 체크리스트에서 완료를 해제하세요.</p>';
       note.textContent = "";
       return;
     }

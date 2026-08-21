@@ -85,7 +85,7 @@ async function fetchChunk(keywordGroups, request) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
-    console.log("사용법: NAVER_CLIENT_ID=... NAVER_CLIENT_SECRET=... npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21");
+    console.log("사용법: NAVER_CLIENT_ID=... NAVER_CLIENT_SECRET=... npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21 [--gender=m|f]");
     return;
   }
   if (!process.env.NAVER_CLIENT_ID || !process.env.NAVER_CLIENT_SECRET) {
@@ -95,27 +95,30 @@ async function main() {
   const startDate = String(args.start || defaultStartDate());
   const endDate = String(args.end || isoDate(new Date()));
   const timeUnit = String(args.unit || "week");
+  const gender = args.gender ? String(args.gender) : null;
   assertDate(startDate, "start");
   assertDate(endDate, "end");
   if (startDate > endDate) throw new Error("start는 end보다 빠르거나 같아야 합니다.");
   if (!["date", "week", "month"].includes(timeUnit)) throw new Error("unit은 date, week, month 중 하나여야 합니다.");
+  if (gender && !["m", "f"].includes(gender)) throw new Error("gender는 m 또는 f만 사용할 수 있습니다.");
 
   const config = JSON.parse(await readFile(configPath, "utf8"));
   validateGroups(config.keywordGroups);
-  const request = { startDate, endDate, timeUnit };
+  const request = { startDate, endDate, timeUnit, ...(gender ? { gender } : {}) };
   const responses = await Promise.all(chunk(config.keywordGroups, 5).map((groups) => fetchChunk(groups, request)));
   const results = responses.flatMap((response) => response.results || []);
   const output = {
     source: "Naver DataLab Search Trend API",
     fetchedAt: new Date().toISOString(),
     request,
-    note: "ratio는 각 검색어 그룹 안에서의 상대 추이입니다. 그룹 간 절대 검색량·상품 판매량·가격 비교에 사용하면 안 됩니다.",
+    note: "ratio는 각 검색어 그룹 안에서의 상대 추이입니다. 그룹 간 절대 검색량·상품 판매량·가격 비교에 사용하면 안 됩니다. gender는 검색 성향의 세그먼트일 뿐 개인의 필요나 상품 적합성을 뜻하지 않습니다.",
     summaries: results.map(summarizeSeries),
     rawResults: results
   };
 
   await mkdir(outputDir, { recursive: true });
-  const outputPath = resolve(outputDir, `naver-search-trends-${endDate}.json`);
+  const segment = gender ? `-${gender}` : "";
+  const outputPath = resolve(outputDir, `naver-search-trends-${endDate}${segment}.json`);
   await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
   console.log(`저장 완료: ${outputPath}`);
   console.table(output.summaries);

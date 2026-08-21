@@ -1438,6 +1438,14 @@ li {
   width: 100%;
 }
 
+.recommend-data-note {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: -6px 0 0;
+}
+
 .text-link {
   color: var(--green);
   font-size: 14px;

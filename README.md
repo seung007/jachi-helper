@@ -45,7 +45,14 @@ $env:NAVER_CLIENT_SECRET="발급받은_클라이언트_시크릿"
 npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21
 ```
 
-3. 결과는 Git에서 제외되는 `data/exports/`에 날짜별 JSON으로 저장됩니다. 비교할 검색어는 `data/search-groups.json`에서 바꿉니다.
+3. 성별별 검색 추이를 비교하려면 같은 기간에 각각 실행합니다. 이는 검색 성향을 보는 용도이며, 개인의 필요나 상품 적합성을 뜻하지 않습니다.
+
+```powershell
+npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21 --gender=m
+npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21 --gender=f
+```
+
+4. 결과는 Git에서 제외되는 `data/exports/`에 날짜별 JSON으로 저장됩니다. 비교할 검색어는 `data/search-groups.json`에서 바꿉니다. 이 결과는 상대 추이이므로 인기순·상품 판매량·가격 비교의 근거로 바로 쓰지 않습니다.
 
 ## 향후: AI 맞춤 상품 추천
 
