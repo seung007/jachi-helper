@@ -279,7 +279,7 @@ function setupChecklist() {
     categories.forEach((category) => {
       const card = document.createElement("article");
       card.className = "recommendation-card";
-      const naverUrl = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(category.query)}`;
+      const naverUrl = `https://search.naver.com/search.naver?where=shopping&query=${encodeURIComponent(category.query)}`;
       const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(category.query)}`;
       card.innerHTML = `
         <div class="recommendation-image ${category.image}" role="img" aria-label="${category.title} 준비물 예시"></div>
