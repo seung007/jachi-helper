@@ -36,27 +36,29 @@
       <section class="planner-workspace" aria-label="자취 준비표 만들기">
         <form class="planner-controls" id="plannerForm">
           <input id="selectedStageInput" name="stage" type="hidden" value="move" />
-          <div class="planner-selects">
-            <label>방 옵션
-              <select name="room"><option value="full">풀옵션</option><option value="semi" selected>반옵션</option><option value="empty">무옵션</option></select>
-            </label>
-            <label>생활 방식
-              <select name="lifestyle"><option value="cook" selected>집밥 중심</option><option value="delivery">간편식 중심</option><option value="remote">집에서 일·공부</option></select>
-            </label>
-            <label>우선순위
-              <select name="preference"><option value="practical" selected>실용성</option><option value="space">공간 활용</option><option value="mood">분위기</option></select>
-            </label>
-          </div>
-          <details class="planner-owned">
-            <summary>이미 가진 물건 제외하기</summary>
-            <div class="owned-options">
-              <label class="owned-option"><input name="owned" type="checkbox" value="sleep" />침구·수건</label>
-              <label class="owned-option"><input name="owned" type="checkbox" value="bath" />욕실 용품</label>
-              <label class="owned-option"><input name="owned" type="checkbox" value="clean" />청소·세탁</label>
-              <label class="owned-option"><input name="owned" type="checkbox" value="kitchen" />주방 용품</label>
-              <label class="owned-option"><input name="owned" type="checkbox" value="utility" />생활·수납</label>
+          <div id="purchaseControls">
+            <div class="planner-selects">
+              <label>방 옵션
+                <select name="room"><option value="full">풀옵션</option><option value="semi" selected>반옵션</option><option value="empty">무옵션</option></select>
+              </label>
+              <label>생활 방식
+                <select name="lifestyle"><option value="cook" selected>집밥 중심</option><option value="delivery">간편식 중심</option><option value="remote">집에서 일·공부</option></select>
+              </label>
+              <label>우선순위
+                <select name="preference"><option value="practical" selected>실용성</option><option value="space">공간 활용</option><option value="mood">분위기</option></select>
+              </label>
             </div>
-          </details>
+            <details class="planner-owned">
+              <summary>이미 가진 물건 제외하기</summary>
+              <div class="owned-options">
+                <label class="owned-option"><input name="owned" type="checkbox" value="sleep" />침구·수건</label>
+                <label class="owned-option"><input name="owned" type="checkbox" value="bath" />욕실 용품</label>
+                <label class="owned-option"><input name="owned" type="checkbox" value="clean" />청소·세탁</label>
+                <label class="owned-option"><input name="owned" type="checkbox" value="kitchen" />주방 용품</label>
+                <label class="owned-option"><input name="owned" type="checkbox" value="utility" />생활·수납</label>
+              </div>
+            </details>
+          </div>
           <details class="planner-owned">
             <summary>방 상태 더 기록하기</summary>
             <div class="planner-selects property-selects">
@@ -75,35 +77,38 @@
 
         <section class="result" aria-live="polite">
           <div class="planner-result-head">
-            <div><p class="eyebrow">내 준비표</p><h2>먼저 확인할 항목</h2></div>
+            <div><p class="eyebrow">내 준비표</p><h2 id="plannerResultTitle">먼저 확인할 항목</h2></div>
             <span class="stage-badge" id="stageBadge">입주를 준비 중</span>
           </div>
-          <p class="planner-note">이 목록은 선택값으로 거른 임시 확인 항목입니다. 구매 권고나 필수 판단이 아니며, 방 옵션과 이미 가진 물건을 먼저 확인하세요.</p>
-          <div class="score-row">
-            <div><span>현재 조건에서 확인</span><strong id="mustCount">0개</strong></div>
-            <div><span>구매 전 판단</span><strong id="laterCount">0개</strong></div>
-          </div>
-          <div class="result-tabs" aria-label="준비표 분류">
-            <button class="result-tab is-active" data-result-tab="must" type="button" aria-selected="true">현재 확인</button>
-            <button class="result-tab" data-result-tab="later" type="button" aria-selected="false">구매 전 판단</button>
-            <button class="result-tab" data-result-tab="skip" type="button" aria-selected="false">현재 보류</button>
-          </div>
-          <div class="list-grid" id="resultPanels">
-            <article data-result-panel="must"><h3>현재 조건에서 확인</h3><ul id="mustList"></ul></article>
-            <article data-result-panel="later"><h3>구매 전 판단</h3><ul id="laterList"></ul></article>
-            <article data-result-panel="skip"><h3>현재는 보류</h3><ul id="skipList"></ul></article>
+          <p class="stage-guidance" id="stageGuide"></p>
+          <div id="purchaseResult">
+            <p class="planner-note">이 목록은 선택값으로 거른 임시 확인 항목입니다. 구매 권고나 필수 판단이 아니며, 방 옵션과 이미 가진 물건을 먼저 확인하세요.</p>
+            <div class="score-row">
+              <div><span>현재 조건에서 확인</span><strong id="mustCount">0개</strong></div>
+              <div><span>구매 전 판단</span><strong id="laterCount">0개</strong></div>
+            </div>
+            <div class="result-tabs" aria-label="준비표 분류">
+              <button class="result-tab is-active" data-result-tab="must" type="button" aria-selected="true">현재 확인</button>
+              <button class="result-tab" data-result-tab="later" type="button" aria-selected="false">구매 전 판단</button>
+              <button class="result-tab" data-result-tab="skip" type="button" aria-selected="false">현재 보류</button>
+            </div>
+            <div class="list-grid" id="resultPanels">
+              <article data-result-panel="must"><h3>현재 조건에서 확인</h3><ul id="mustList"></ul></article>
+              <article data-result-panel="later"><h3>구매 전 판단</h3><ul id="laterList"></ul></article>
+              <article data-result-panel="skip"><h3>현재는 보류</h3><ul id="skipList"></ul></article>
+            </div>
+            <section class="taste-match">
+              <p class="eyebrow">우선순위 반영</p>
+              <h3>추가로 확인해 볼 것</h3>
+              <ul id="tasteList"></ul>
+            </section>
           </div>
           <section class="property-notes">
             <p class="eyebrow">방 상태 메모</p>
             <h3>계약·입주 전에 다시 확인</h3>
             <ul id="propertyList"></ul>
           </section>
-          <section class="taste-match">
-            <p class="eyebrow">우선순위 반영</p>
-            <h3>추가로 확인해 볼 것</h3>
-            <ul id="tasteList"></ul>
-          </section>
-          <div class="planner-next-grid">
+          <div class="planner-next-grid" id="plannerNext">
             <a class="planner-next" href="/checklist"><strong>체크리스트로 이어가기</strong><span>세부 항목을 직접 완료 처리</span></a>
             <a class="planner-next" href="/budget"><strong>예산에 직접 입력하기</strong><span>예정 비용을 합산해 보기</span></a>
           </div>
@@ -111,7 +116,7 @@
             <div class="timeline-head"><span id="timelineTitle">입주 전후 확인</span><strong>일정</strong></div>
             <ol id="timelineList"></ol>
           </section>
-          <p class="planner-note source-note">전입신고는 실제 전입일 기준 14일 이내 신고해야 합니다. <a href="https://www.law.go.kr/법령/주민등록법" target="_blank" rel="noreferrer">주민등록법 확인</a></p>
+          <p class="planner-note source-note" id="lawNote">전입신고는 실제 전입일 기준 14일 이내 신고해야 합니다. <a href="https://www.law.go.kr/법령/주민등록법" target="_blank" rel="noreferrer">주민등록법 확인</a></p>
           <div class="result-actions"><button class="button secondary" id="copyPlan" type="button">준비표 복사</button><span id="copyStatus" aria-live="polite"></span></div>
         </section>
       </section>

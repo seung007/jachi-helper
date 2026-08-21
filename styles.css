@@ -761,6 +761,16 @@ li {
   margin-top: 12px;
 }
 
+.stage-guidance {
+  background: var(--sky);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+}
+
 .back-link {
   color: var(--green);
   display: inline-block;

@@ -22,21 +22,33 @@ const stageConfig = {
   search: {
     label: "방을 찾는 중",
     title: "계약 전 확인부터 정리해요",
+    resultTitle: "방 비교 체크",
+    guide: "이 단계에서는 물건을 고르기보다 집 조건을 비교하세요. 주차, 1층 음식점, 수납과 설치 공간을 후보별로 확인하는 화면입니다.",
+    showPurchase: false,
     tasks: ["방 옵션과 관리 규정을 계약 전 확인", "수납 공간과 설치 공간을 직접 실측", "필요한 물품은 계약 확정 뒤에 다시 정리"]
   },
   contract: {
     label: "계약을 마침",
     title: "입주 준비 순서를 정리해요",
+    resultTitle: "계약·입주 일정 점검",
+    guide: "계약 직후에는 구매 목록보다 입주 가능일, 이사·배송 가능일, 방 상태를 먼저 맞춰 보세요.",
+    showPurchase: false,
     tasks: ["계약서의 입주 가능일을 다시 확인", "이사·배송·설치 일정은 업체별 가능일을 확인", "입주 전 방 옵션과 하자 상태를 기록"]
   },
   move: {
     label: "입주를 준비 중",
     title: "내 방에 맞춰 준비표 만들기",
+    resultTitle: "내 조건에 맞는 준비 항목",
+    guide: "이 단계에서만 방 옵션과 생활 방식을 반영해 준비물·예산 입력으로 이어집니다.",
+    showPurchase: true,
     tasks: ["방 옵션과 이미 가진 물건을 먼저 확인", "입주 전 필요한 일정은 업체별 가능일을 확인", "입주 당일 하자와 계량기 상태를 사진으로 기록", "전입신고: 실제 전입일 기준 14일 이내 신고"]
   },
   settle: {
     label: "입주한 뒤",
     title: "살면서 필요한 것만 남겨요",
+    resultTitle: "생활 조정 메모",
+    guide: "며칠 살아 본 뒤에 불편한 지점만 남기세요. 구매 목록을 처음부터 다시 만들지 않고 실제 동선과 수납을 기준으로 정리합니다.",
+    showPurchase: false,
     tasks: ["며칠 생활한 뒤 불편한 지점을 메모", "수납과 동선은 실제 사용 뒤에 다시 조정", "부족한 물품은 예산을 보고 하나씩 추가"]
   }
 };
@@ -151,6 +163,12 @@ function renderPlanner() {
   const stageBadge = document.querySelector("#stageBadge");
   const stageLabel = document.querySelector("#plannerStageLabel");
   const pageTitle = document.querySelector("#plannerPageTitle");
+  const resultTitle = document.querySelector("#plannerResultTitle");
+  const stageGuide = document.querySelector("#stageGuide");
+  const purchaseControls = document.querySelector("#purchaseControls");
+  const purchaseResult = document.querySelector("#purchaseResult");
+  const plannerNext = document.querySelector("#plannerNext");
+  const lawNote = document.querySelector("#lawNote");
 
   if (mustCount) mustCount.textContent = `${result.must.length}개`;
   if (laterCount) laterCount.textContent = `${result.later.length}개`;
@@ -158,6 +176,12 @@ function renderPlanner() {
   if (stageBadge) stageBadge.textContent = result.stage.label;
   if (stageLabel) stageLabel.textContent = result.stage.label;
   if (pageTitle) pageTitle.textContent = result.stage.title;
+  if (resultTitle) resultTitle.textContent = result.stage.resultTitle;
+  if (stageGuide) stageGuide.textContent = result.stage.guide;
+  if (purchaseControls) purchaseControls.hidden = !result.stage.showPurchase;
+  if (purchaseResult) purchaseResult.hidden = !result.stage.showPurchase;
+  if (plannerNext) plannerNext.hidden = !result.stage.showPurchase;
+  if (lawNote) lawNote.hidden = !result.stage.showPurchase;
 
   renderList(document.querySelector("#mustList"), result.must);
   renderList(document.querySelector("#laterList"), result.later);
@@ -178,23 +202,22 @@ async function copyPlan() {
 
   const result = calculatePlanner(plannerForm);
   const formatList = (title, list) => `${title}\n${list.map((item) => `- ${item.name}`).join("\n")}`;
-  const text = [
-    "[자취도우미 입주 준비표]",
-    `준비 단계: ${result.stage.label}`,
-    formatList("현재 조건에서 확인", result.must),
-    "",
-    formatList("구매 전 판단", result.later),
-    "",
-    formatList("추가로 확인해 볼 것", result.taste.map((name) => ({ name }))),
-    "",
-    formatList("방 상태 메모", result.propertyNotes.map((name) => ({ name }))),
-    "",
-    "입주 전후 확인",
-    ...result.stages.map((item) => `- ${item.stage} | ${item.task}`),
-    "",
-    "참고: 물품 목록은 방 옵션과 생활 방식에 따른 임시 확인 항목입니다. 사용자 조사 전에는 구매 권고나 필수 판단으로 사용하지 않습니다.",
-    "전입신고는 실제 전입일 기준 14일 이내 신고해야 합니다."
-  ].join("\n");
+  const sections = ["[자취도우미 준비표]", `준비 단계: ${result.stage.label}`, result.stage.guide];
+  if (result.stage.showPurchase) {
+    sections.push(
+      "",
+      formatList("현재 조건에서 확인", result.must),
+      "",
+      formatList("구매 전 판단", result.later),
+      "",
+      formatList("추가로 확인해 볼 것", result.taste.map((name) => ({ name }))),
+      "",
+      "참고: 물품 목록은 선택값에 따른 임시 확인 항목입니다. 구매 권고나 필수 판단으로 사용하지 않습니다."
+    );
+  }
+  sections.push("", formatList("방 상태 메모", result.propertyNotes.map((name) => ({ name }))), "", "일정 확인", ...result.stages.map((item) => `- ${item.stage} | ${item.task}`));
+  if (result.stage.showPurchase) sections.push("", "전입신고는 실제 전입일 기준 14일 이내 신고해야 합니다.");
+  const text = sections.join("\n");
 
   try {
     await navigator.clipboard.writeText(text);
