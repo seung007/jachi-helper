@@ -8,5 +8,8 @@
     "set-site-url": "node scripts/set-site-url.mjs",
     "serve": "node scripts/serve.mjs",
     "fetch:naver-trends": "node scripts/fetch-naver-trends.mjs"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
