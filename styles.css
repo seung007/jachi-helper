@@ -1462,6 +1462,42 @@ li {
   text-align: right;
 }
 
+.recommendation-caution {
+  background: #fff8e8;
+  border-left: 3px solid #dfaa44;
+  color: #624a19;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.55;
+  margin: 0 0 18px;
+  padding: 11px 13px;
+}
+
+.recommendation-group + .recommendation-group {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 24px;
+}
+
+.recommendation-group-head {
+  align-items: baseline;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.recommendation-group-head h3 {
+  font-size: 17px;
+}
+
+.recommendation-group-head p {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
 .match-list {
   display: grid;
   gap: 10px;
@@ -1524,6 +1560,30 @@ li {
 
 .match-budget strong {
   font-size: 17px;
+}
+
+.match-side {
+  display: grid;
+  gap: 10px;
+}
+
+.match-decision {
+  color: var(--muted);
+  display: grid;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 4px;
+  text-align: right;
+}
+
+.match-decision select {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 34px;
+  padding: 4px 7px;
 }
 
 .match-actions {
@@ -1885,13 +1945,27 @@ footer strong {
     text-align: left;
   }
 
+  .recommendation-group-head {
+    align-items: start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .recommendation-group-head p {
+    text-align: left;
+  }
+
   .match-card {
     align-items: start;
     grid-template-columns: 58px minmax(0, 1fr);
   }
 
-  .match-budget {
+  .match-side {
     grid-column: 2;
+  }
+
+  .match-budget,
+  .match-decision {
     text-align: left;
   }
 

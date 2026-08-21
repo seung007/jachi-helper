@@ -486,18 +486,78 @@ function setupRecommendation() {
     }).join("");
   }
 
+  const decisionOptions = [
+    ["review", "검토 중"],
+    ["candidate", "구매 후보"],
+    ["later", "입주 후 결정"],
+    ["skip", "지금은 필요 없음"],
+    ["prepared", "이미 준비함"]
+  ];
+
+  const recommendationPhases = {
+    now: { title: "지금 구매할 것", description: "입주 전 또는 첫날에 먼저 챙길 항목" },
+    week: { title: "입주 첫 주에 확인", description: "생활하면서 필요를 확인할 항목" },
+    later: { title: "입주 후 결정", description: "공간과 생활 패턴을 본 뒤 정할 항목" },
+    skip: { title: "현재는 보류", description: "지금 예산에서는 제외한 항목" }
+  };
+
+  function getPhase(item, preferences) {
+    if (item.decision === "later") return "later";
+    if (item.decision === "skip") return "skip";
+    if (item.decision === "candidate" || (preferences.timing === "movein" && item.firstDay)) return "now";
+    return "week";
+  }
+
+  function decisionSelect(item) {
+    const options = decisionOptions.map(([value, label]) => {
+      const selected = item.decision === value ? " selected" : "";
+      return `<option value="${value}"${selected}>${label}</option>`;
+    }).join("");
+    return `<label class="match-decision">결정 <select data-recommendation-decision data-item-id="${item.id}" aria-label="${item.title} 구매 결정">${options}</select></label>`;
+  }
+
+  function createMatchCard(item, index, allocation) {
+    const card = document.createElement("article");
+    card.className = "match-card";
+    const allocationText = item.phase === "later" ? "입주 후" : item.phase === "skip" ? "제외" : allocation ? formatWon(allocation) : "미입력";
+    card.innerHTML = `
+      <div class="match-rank"><span>${String(index + 1).padStart(2, "0")}</span><strong>${item.category}</strong></div>
+      <div class="match-copy"><h3>${item.title}</h3><p>${item.reason}</p><small>검색어: ${item.searchQuery}</small></div>
+      <div class="match-side">
+        <div class="match-budget"><span>예산 배정</span><strong>${allocationText}</strong></div>
+        ${decisionSelect(item)}
+      </div>
+      <div class="match-actions">${storeLinks(item)}</div>
+    `;
+    return card;
+  }
+
   function renderRecommendations() {
     const preferences = getPreferences();
-    const savedChecks = readStoredState().checklist || {};
+    const storedState = readStoredState();
+    const savedChecks = storedState.checklist || {};
+    const decisions = storedState.recommendationDecisions || {};
     const ranked = Object.entries(recommendationCatalog)
       .filter(([id]) => !savedChecks[id])
-      .map((entry) => rankItem(entry, preferences))
-      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "ko"));
-    const totalScore = ranked.reduce((sum, item) => sum + item.score, 0);
-    const limit = preferences.showCount === "all" ? ranked.length : Number(preferences.showCount);
-    const visible = ranked.slice(0, limit);
+      .map((entry) => ({ ...rankItem(entry, preferences), decision: decisions[entry[0]] || "review" }))
+      .map((item) => ({ ...item, phase: getPhase(item, preferences) }))
+      .sort((a, b) => {
+        const phaseOrder = { now: 0, week: 1, later: 2, skip: 3 };
+        const decisionOrder = { candidate: 0, review: 1, later: 2, skip: 3 };
+        return phaseOrder[a.phase] - phaseOrder[b.phase]
+          || decisionOrder[a.decision] - decisionOrder[b.decision]
+          || b.score - a.score
+          || a.title.localeCompare(b.title, "ko");
+      });
+    const active = ranked.filter((item) => item.phase === "now" || item.phase === "week");
+    const deferred = ranked.filter((item) => item.phase === "later" || item.phase === "skip");
+    const limit = preferences.showCount === "all" ? active.length : Number(preferences.showCount);
+    const visible = [...active.slice(0, limit), ...deferred];
+    const totalScore = active.reduce((sum, item) => sum + item.score, 0);
 
-    summary.textContent = ranked.length ? `${ranked.length}개 구매 항목 중 우선순위 ${visible.length}개` : "추천할 구매 항목이 없습니다";
+    summary.textContent = ranked.length
+      ? `전체 ${ranked.length}개 · 지금 ${active.length}개 · 입주 후 ${ranked.filter((item) => item.phase === "later").length}개`
+      : "추천할 구매 항목이 없습니다";
     results.innerHTML = "";
 
     if (!ranked.length) {
@@ -506,22 +566,29 @@ function setupRecommendation() {
       return;
     }
 
-    visible.forEach((item, index) => {
-      const allocation = preferences.purchaseBudget && totalScore ? Math.round((preferences.purchaseBudget * item.score) / totalScore) : 0;
-      const card = document.createElement("article");
-      card.className = "match-card";
-      card.innerHTML = `
-        <div class="match-rank"><span>${String(index + 1).padStart(2, "0")}</span><strong>${item.category}</strong></div>
-        <div class="match-copy"><h3>${item.title}</h3><p>${item.reason}</p><small>검색어: ${item.searchQuery}</small></div>
-        <div class="match-budget"><span>예산 배정</span><strong>${allocation ? formatWon(allocation) : "미입력"}</strong></div>
-        <div class="match-actions">${storeLinks(item)}</div>
-      `;
-      results.appendChild(card);
+    Object.keys(recommendationPhases).forEach((phase) => {
+      const groupItems = visible.filter((item) => item.phase === phase);
+      if (!groupItems.length) return;
+
+      const group = document.createElement("section");
+      group.className = "recommendation-group";
+      const phaseInfo = recommendationPhases[phase];
+      group.innerHTML = `<div class="recommendation-group-head"><h3>${phaseInfo.title}</h3><p>${phaseInfo.description}</p></div>`;
+      const list = document.createElement("div");
+      list.className = "match-list";
+      groupItems.forEach((item, index) => {
+        const allocation = preferences.purchaseBudget && totalScore && (item.phase === "now" || item.phase === "week")
+          ? Math.round((preferences.purchaseBudget * item.score) / totalScore)
+          : 0;
+        list.appendChild(createMatchCard(item, index, allocation));
+      });
+      group.appendChild(list);
+      results.appendChild(group);
     });
 
     note.textContent = preferences.purchaseBudget
-      ? `입력한 ${formatWon(preferences.purchaseBudget)}을 우선순위 점수 비율로 나눈 예산 배정입니다. 실제 판매 가격·재고·배송비는 판매처에서 확인하세요.`
-      : "예산을 입력하면 우선순위 점수 비율로 항목별 예산 배정을 보여줍니다.";
+      ? `입력한 ${formatWon(preferences.purchaseBudget)}은 지금 구매할 항목의 우선순위 점수 비율로만 나눴습니다. 입주 후 결정·보류 항목은 배정에서 제외됩니다.`
+      : "예산을 입력하면 지금 구매할 항목에만 우선순위 점수 비율로 예산을 나눕니다.";
     setupNaverShoppingLinks();
   }
 
@@ -537,6 +604,28 @@ function setupRecommendation() {
   });
   form.addEventListener("input", saveAndRender);
   form.addEventListener("change", saveAndRender);
+  results.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-recommendation-decision]");
+    if (!select) return;
+
+    const itemId = select.dataset.itemId;
+    const nextDecision = select.value;
+    const state = readStoredState();
+    const nextChecks = { ...(state.checklist || {}) };
+    const nextDecisions = { ...(state.recommendationDecisions || {}) };
+
+    if (nextDecision === "prepared") {
+      nextChecks[itemId] = true;
+      delete nextDecisions[itemId];
+    } else if (nextDecision === "review") {
+      delete nextDecisions[itemId];
+    } else {
+      nextDecisions[itemId] = nextDecision;
+    }
+
+    writeStoredState({ ...state, checklist: nextChecks, recommendationDecisions: nextDecisions });
+    renderRecommendations();
+  });
   renderRecommendations();
 }
 
