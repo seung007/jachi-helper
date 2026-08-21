@@ -508,6 +508,67 @@ h2 {
   line-height: 1.45;
 }
 
+@keyframes home-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-hero .hero-copy > *,
+.home-quick-card,
+.home-flow .section-head,
+.home-flow-grid a {
+  animation: home-enter 520ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.home-hero .hero-copy > *:nth-child(1) {
+  animation-delay: 60ms;
+}
+
+.home-hero .hero-copy > *:nth-child(2) {
+  animation-delay: 130ms;
+}
+
+.home-hero .hero-copy > *:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.home-hero .hero-copy > *:nth-child(4),
+.home-quick-card {
+  animation-delay: 280ms;
+}
+
+.home-flow .section-head {
+  animation-delay: 380ms;
+}
+
+.home-flow-grid a:nth-child(1) {
+  animation-delay: 440ms;
+}
+
+.home-flow-grid a:nth-child(2) {
+  animation-delay: 500ms;
+}
+
+.home-flow-grid a:nth-child(3) {
+  animation-delay: 560ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero .hero-copy > *,
+  .home-quick-card,
+  .home-flow .section-head,
+  .home-flow-grid a {
+    animation: none;
+  }
+}
+
 .feature-grid article,
 .advice-grid article {
   background: var(--white);
