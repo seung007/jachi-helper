@@ -36,23 +36,28 @@ npm run set-naver-code -- your-verification-code
 
 추천 순위를 추측으로 고정하지 않기 위해, 네이버 데이터랩의 통합검색어 추이를 원본 JSON으로 저장할 수 있습니다. 이 데이터는 검색어 그룹 내부의 상대 추이이며 상품 판매량, 실제 가격, 재고, 최저가가 아닙니다.
 
-1. 네이버 개발자센터에서 데이터랩 API를 사용할 애플리케이션을 등록하고 클라이언트 ID와 시크릿을 발급받습니다.
-2. PowerShell에서 현재 터미널에만 키를 설정합니다.
+1. NAVER Cloud Platform 콘솔의 `NAVER API HUB`에서 `검색어트렌드(Data Lab Search Trend API)`를 선택해 애플리케이션을 등록하고 Client ID와 Client Secret을 발급받습니다.
+2. 프로젝트 루트의 `.env.example`을 참고해 `.env` 파일에 키를 저장합니다. `.env`는 Git에서 제외되며, Client Secret을 Git이나 배포용 브라우저 코드에 넣지 않습니다.
+
+```dotenv
+NAVER_CLIENT_ID="NAVER_API_HUB_Client_ID"
+NAVER_CLIENT_SECRET="NAVER_API_HUB_Client_Secret"
+```
+
+3. 수집 명령은 `.env`를 자동으로 읽습니다.
 
 ```powershell
-$env:NAVER_CLIENT_ID="발급받은_클라이언트_ID"
-$env:NAVER_CLIENT_SECRET="발급받은_클라이언트_시크릿"
 npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21
 ```
 
-3. 성별별 검색 추이를 비교하려면 같은 기간에 각각 실행합니다. 이는 검색 성향을 보는 용도이며, 개인의 필요나 상품 적합성을 뜻하지 않습니다.
+4. 성별별 검색 추이를 비교하려면 같은 기간에 각각 실행합니다. 이는 검색 성향을 보는 용도이며, 개인의 필요나 상품 적합성을 뜻하지 않습니다.
 
 ```powershell
 npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21 --gender=m
 npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21 --gender=f
 ```
 
-4. 결과는 Git에서 제외되는 `data/exports/`에 날짜별 JSON으로 저장됩니다. 비교할 검색어는 `data/search-groups.json`에서 바꿉니다. 이 결과는 상대 추이이므로 인기순·상품 판매량·가격 비교의 근거로 바로 쓰지 않습니다.
+5. 결과는 Git에서 제외되는 `data/exports/`에 날짜별 JSON으로 저장됩니다. 비교할 검색어는 `data/search-groups.json`에서 바꿉니다. 이 결과는 상대 추이이므로 인기순·상품 판매량·가격 비교의 근거로 바로 쓰지 않습니다.
 
 ## 향후: AI 맞춤 상품 추천
 

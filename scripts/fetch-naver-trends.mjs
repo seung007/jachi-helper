@@ -1,9 +1,30 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const endpoint = "https://openapi.naver.com/v1/datalab/search";
+const endpoint = "https://naverapihub.apigw.ntruss.com/search-trend/v1/search";
 const configPath = resolve("data/search-groups.json");
 const outputDir = resolve("data/exports");
+const envPath = resolve(".env");
+
+async function loadLocalEnv() {
+  let contents;
+
+  try {
+    contents = await readFile(envPath, "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") return;
+    throw error;
+  }
+
+  for (const line of contents.split(/\r?\n/)) {
+    const match = line.match(/^\s*(NAVER_CLIENT_ID|NAVER_CLIENT_SECRET)\s*=\s*(.*?)\s*$/);
+    if (!match || process.env[match[1]]) continue;
+
+    const [, key, rawValue] = match;
+    const value = rawValue.replace(/^("|')(.*)\1$/, "$2");
+    if (value) process.env[key] = value;
+  }
+}
 
 function parseArgs(argv) {
   return Object.fromEntries(
@@ -68,8 +89,8 @@ async function fetchChunk(keywordGroups, request) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Naver-Client-Id": process.env.NAVER_CLIENT_ID,
-      "X-Naver-Client-Secret": process.env.NAVER_CLIENT_SECRET
+      "X-NCP-APIGW-API-KEY-ID": process.env.NAVER_CLIENT_ID,
+      "X-NCP-APIGW-API-KEY": process.env.NAVER_CLIENT_SECRET
     },
     body: JSON.stringify({ ...request, keywordGroups })
   });
@@ -83,6 +104,7 @@ async function fetchChunk(keywordGroups, request) {
 }
 
 async function main() {
+  await loadLocalEnv();
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
     console.log("사용법: NAVER_CLIENT_ID=... NAVER_CLIENT_SECRET=... npm run fetch:naver-trends -- --start=2025-08-01 --end=2026-08-21 [--gender=m|f]");
@@ -108,7 +130,7 @@ async function main() {
   const responses = await Promise.all(chunk(config.keywordGroups, 5).map((groups) => fetchChunk(groups, request)));
   const results = responses.flatMap((response) => response.results || []);
   const output = {
-    source: "Naver DataLab Search Trend API",
+    source: "NAVER API HUB Data Lab Search Trend API",
     fetchedAt: new Date().toISOString(),
     request,
     note: "ratio는 각 검색어 그룹 안에서의 상대 추이입니다. 그룹 간 절대 검색량·상품 판매량·가격 비교에 사용하면 안 됩니다. gender는 검색 성향의 세그먼트일 뿐 개인의 필요나 상품 적합성을 뜻하지 않습니다.",
