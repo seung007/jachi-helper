@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>자취 준비물 맞춤 추천 | 자취도우미</title>
-    <meta name="description" content="체크리스트에서 완료하지 않은 자취 준비물을 예산, 입주 시점, 방 크기, 구매 기준에 따라 우선순위로 정리하세요." />
+    <title>첫 자취 구매 계획 | 자취도우미</title>
+    <meta name="description" content="이미 가진 물건과 생활 조건을 반영해 첫 자취에서 지금 필요한 물건, 조건을 확인할 물건, 나중에 살 물건을 나눠 보세요." />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://jachi-helper.vercel.app/recommend" />
-    <meta property="og:title" content="자취 준비물 맞춤 추천" />
-    <meta property="og:description" content="내 체크리스트와 예산으로 자취 준비물 구매 순서를 정리하세요." />
+    <meta property="og:title" content="첫 자취 구매 계획" />
+    <meta property="og:description" content="내 조건으로 자취 준비물 구매 순서를 정리하세요." />
     <meta property="og:url" content="https://jachi-helper.vercel.app/recommend" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <link rel="stylesheet" href="/styles.css" />
@@ -21,84 +21,39 @@
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
         <a href="/budget">초기 비용</a>
-        <a href="/checklist">체크리스트</a>
-        <a href="/recommend" aria-current="page">맞춤 추천</a>
+        <a href="/checklist">구매 계획</a>
+        <a href="/recommend" aria-current="page">결과 보기</a>
       </nav>
     </header>
     <main class="subpage recommend-page">
       <section class="page-title">
-        <p class="eyebrow">체크리스트 기반 구매 추천</p>
-        <h1>내게 남은 준비물부터 순서대로.</h1>
-        <p>완료하지 않은 구매 항목만 읽어 예산과 입주 조건에 맞는 구매 우선순위를 만듭니다.</p>
+        <p class="eyebrow">첫 자취 구매 계획 · 2/2</p>
+        <h1>지금 필요한 것부터 정리했어요.</h1>
+        <p>결과는 구매 권고나 가격 비교가 아닙니다. 내 조건을 기준으로 무엇을 먼저 보고, 무엇을 미룰지 정리한 계획입니다.</p>
       </section>
 
-      <section class="recommend-layout" aria-label="구매 추천 조건과 결과">
-        <form class="recommend-form" id="recommendationForm">
-          <div class="recommend-form-head">
-            <p class="eyebrow">내 조건</p>
-            <h2>추천 기준 설정</h2>
-          </div>
-          <label>준비물 총 예산<span class="amount-input"><input name="purchaseBudget" type="text" inputmode="numeric" data-currency value="200000" /><b>원</b></span></label>
-          <label>필요한 물품 검색<input name="search" type="search" autocomplete="off" placeholder="예: 세제, 수건, 멀티탭" /></label>
-          <label>정렬 기준
-            <select name="sort">
-              <option value="priority" selected>내 조건 우선순위</option>
-              <option value="alphabetical">가나다순</option>
-              <option value="category">카테고리순</option>
-            </select>
-          </label>
-          <fieldset>
-            <legend>언제 필요한가요?</legend>
-            <div class="segmented-options">
-              <label><input name="timing" type="radio" value="movein" checked /><span>입주 첫날</span></label>
-              <label><input name="timing" type="radio" value="soon" /><span>첫 주 안에</span></label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>방 크기는 어떤가요?</legend>
-            <div class="segmented-options">
-              <label><input name="room" type="radio" value="small" checked /><span>작은 원룸</span></label>
-              <label><input name="room" type="radio" value="normal" /><span>보통 이상</span></label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>구매할 때 가장 중요한 것</legend>
-            <div class="segmented-options triple-options">
-              <label><input name="focus" type="radio" value="value" checked /><span>예산</span></label>
-              <label><input name="focus" type="radio" value="balanced" /><span>균형</span></label>
-              <label><input name="focus" type="radio" value="comfort" /><span>생활 편의</span></label>
-            </div>
-          </fieldset>
-          <label>결과 개수
-            <select name="showCount">
-              <option value="8">우선 8개</option>
-              <option value="12">우선 12개</option>
-              <option value="24" selected>우선 24개</option>
-              <option value="all">전체 보기</option>
-            </select>
-          </label>
-          <p class="recommend-data-note">인기순·최신순은 클릭·등록 데이터를 수집한 뒤에만 제공합니다.</p>
-          <button class="button primary" type="submit">추천 다시 계산하기</button>
-          <a class="text-link" href="/checklist">체크리스트 수정하기</a>
-        </form>
+      <section class="plan-result-intro" aria-label="반영한 조건">
+        <div><p class="eyebrow">반영한 내 조건</p><h2>이 조건으로 준비물을 나눴어요.</h2></div>
+        <div class="condition-summary" id="recommendationConditions"></div>
+        <a class="button secondary" href="/checklist">조건 수정</a>
+      </section>
 
-        <section class="recommend-results" aria-labelledby="recommendation-results-title">
-          <div class="recommend-results-head">
-            <div><p class="eyebrow">추천 결과</p><h2 id="recommendation-results-title">지금 먼저 볼 준비물</h2></div>
-            <p id="recommendationSummary" aria-live="polite"></p>
-          </div>
-          <p class="recommendation-caution">우선순위와 예산 배정은 입력한 조건을 정리한 결과입니다. 가격, 규격, 배송, 반품 조건은 판매처에서 확인하세요.</p>
-          <div class="match-list" id="recommendationResults"></div>
-          <p class="recommendation-note" id="recommendationNote"></p>
-        </section>
+      <section class="recommend-results plan-results" aria-labelledby="recommendation-results-title">
+        <div class="recommend-results-head">
+          <div><p class="eyebrow">내 구매 계획</p><h2 id="recommendation-results-title">무엇을 먼저 살지 결정하세요.</h2></div>
+          <p id="recommendationSummary" aria-live="polite"></p>
+        </div>
+        <p class="recommendation-caution">각 항목에서 <strong>필요함</strong>, <strong>이미 있음</strong>, <strong>나중에</strong>를 누르면 이 기기에 저장됩니다. 가격·재고·배송·반품 조건은 판매처에서 확인하세요.</p>
+        <div id="recommendationResults"></div>
+        <p class="recommendation-note" id="recommendationNote"></p>
       </section>
 
       <section class="recommend-method" aria-labelledby="recommend-method-title">
-        <p class="eyebrow">추천 기준</p>
-        <h2 id="recommend-method-title">완료하지 않은 항목과 내 조건만 반영합니다.</h2>
+        <p class="eyebrow">이 결과의 범위</p>
+        <h2 id="recommend-method-title">검색하기 전, 불필요한 구매를 먼저 뺍니다.</h2>
         <div>
-          <p>입주 첫날 필요한지, 작은 방에 맞는지, 선택한 구매 기준에 따라 우선순위를 계산합니다.</p>
-          <p>결과의 예산 배정은 입력한 총예산을 점수 비율로 나눈 값입니다. 판매처 버튼에서 실제 가격, 재고, 배송비를 확인하세요.</p>
+          <p>보유품으로 고른 항목은 결과에서 제외했고, 요리·건조·운동복·향·수납 조건은 관련 항목의 순서와 구매 기준에만 반영했습니다.</p>
+          <p>실시간 상품 순위나 가격은 사용하지 않습니다. 판매처 검색은 최종 확인을 위한 다음 행동입니다.</p>
         </div>
       </section>
     </main>

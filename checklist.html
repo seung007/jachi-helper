@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>저장되는 자취 준비물 체크리스트 | 자취도우미</title>
+    <title>첫 자취 구매 계획 만들기 | 자취도우미</title>
     <meta
       name="description"
-      content="첫 자취 준비물을 침구, 욕실, 주방, 청소, 세탁, 수납, 안전, 입주 당일 카테고리로 체크하고 이 기기에 저장하세요."
+      content="첫 자취에서 이미 가진 물건을 빼고 생활 조건을 선택해 필요한 준비물 구매 계획을 만드세요."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://jachi-helper.vercel.app/checklist" />
-    <meta property="og:title" content="자취 준비물 체크리스트" />
-    <meta property="og:description" content="첫 자취 입주 전에 꼭 확인해야 할 준비물 목록." />
+    <meta property="og:title" content="첫 자취 구매 계획" />
+    <meta property="og:description" content="이미 가진 물건을 빼고 필요한 준비물부터 정리하세요." />
     <meta property="og:url" content="https://jachi-helper.vercel.app/checklist" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <link rel="stylesheet" href="/styles.css" />
@@ -24,44 +24,48 @@
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
         <a href="/budget">초기 비용</a>
-        <a href="/checklist" aria-current="page">체크리스트</a>
-        <a href="/recommend">맞춤 추천</a>
+        <a href="/checklist" aria-current="page">구매 계획</a>
+        <a href="/recommend">결과 보기</a>
       </nav>
     </header>
-    <main class="subpage">
+    <main class="subpage plan-page">
       <section class="page-title">
-        <p class="eyebrow">저장되는 입주 준비</p>
-        <h1>입주 전 자취 체크리스트</h1>
-        <p>체크한 내용은 이 기기에 자동 저장됩니다. 실제 방 옵션과 이미 가진 물건을 보며 필요한 항목만 완료 처리하세요.</p>
+        <p class="eyebrow">첫 자취 구매 계획 · 1/2</p>
+        <h1>입주 전에 꼭 살 것만 골라볼게요.</h1>
+        <p>이미 가진 물건을 먼저 빼고, 생활 조건만 선택하세요. 긴 입력 없이 구매 우선순위를 정리합니다.</p>
       </section>
-      <section class="checklist-toolbar" aria-label="체크리스트 진행 상태">
-        <div><span>준비 진행률</span><strong id="checklistProgress">0 / 48 완료</strong></div>
-        <div class="checklist-actions"><span id="checklistStorageNote" aria-live="polite">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetChecklist" type="button">체크 초기화</button></div>
+      <section class="checklist-toolbar" aria-label="구매 계획 저장 상태">
+        <div><span>현재 선택</span><strong id="checklistProgress">보유품을 먼저 빼세요</strong></div>
+        <div class="checklist-actions"><span id="checklistStorageNote" aria-live="polite">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetChecklist" type="button">선택 초기화</button></div>
       </section>
-      <section class="checklist-grid detailed-checklist" id="moveInChecklist" aria-label="자취 준비물 카테고리">
-        <article><h2>침구·수면</h2><label class="check-item"><input type="checkbox" data-check-id="bedding-cover" />매트리스 커버</label><label class="check-item"><input type="checkbox" data-check-id="bedding-duvet" />이불</label><label class="check-item"><input type="checkbox" data-check-id="bedding-pillow" />베개</label><label class="check-item"><input type="checkbox" data-check-id="bedding-pad" />방수패드</label><label class="check-item"><input type="checkbox" data-check-id="bedding-hanger" />옷걸이</label><label class="check-item"><input type="checkbox" data-check-id="bedding-curtain" />커튼 또는 블라인드</label></article>
-        <article><h2>욕실</h2><label class="check-item"><input type="checkbox" data-check-id="bath-towel" />수건</label><label class="check-item"><input type="checkbox" data-check-id="bath-toiletries" />샴푸·바디워시</label><label class="check-item"><input type="checkbox" data-check-id="bath-toothbrush" />칫솔·치약</label><label class="check-item"><input type="checkbox" data-check-id="bath-mat" />발매트</label><label class="check-item"><input type="checkbox" data-check-id="bath-toilet-paper" />화장지</label><label class="check-item"><input type="checkbox" data-check-id="bath-basket" />빨래 바구니</label></article>
-        <article><h2>주방</h2><label class="check-item"><input type="checkbox" data-check-id="kitchen-pot" />냄비</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-pan" />프라이팬</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-cutlery" />수저·젓가락</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-dishes" />접시·컵</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-container" />밀폐용기</label><label class="check-item"><input type="checkbox" data-check-id="kitchen-bag" />음식물·종량제 봉투</label></article>
-        <article><h2>청소</h2><label class="check-item"><input type="checkbox" data-check-id="clean-wipes" />청소포·물티슈</label><label class="check-item"><input type="checkbox" data-check-id="clean-detergent" />주방·욕실 세제</label><label class="check-item"><input type="checkbox" data-check-id="clean-broom" />빗자루 또는 밀대</label><label class="check-item"><input type="checkbox" data-check-id="clean-gloves" />고무장갑</label><label class="check-item"><input type="checkbox" data-check-id="clean-trash" />쓰레기통</label><label class="check-item"><input type="checkbox" data-check-id="clean-recycle" />분리수거 봉투</label></article>
-        <article><h2>세탁</h2><label class="check-item"><input type="checkbox" data-check-id="laundry-detergent" />세탁세제</label><label class="check-item"><input type="checkbox" data-check-id="laundry-dryer" />건조대</label><label class="check-item"><input type="checkbox" data-check-id="laundry-clips" />빨래집게</label><label class="check-item"><input type="checkbox" data-check-id="laundry-net" />세탁망</label><label class="check-item"><input type="checkbox" data-check-id="laundry-softener" />섬유유연제</label><label class="check-item"><input type="checkbox" data-check-id="laundry-bag" />세탁물 보관 봉투</label></article>
-        <article><h2>생활·수납</h2><label class="check-item"><input type="checkbox" data-check-id="life-powerstrip" />멀티탭</label><label class="check-item"><input type="checkbox" data-check-id="life-storage" />수납 박스</label><label class="check-item"><input type="checkbox" data-check-id="life-scissors" />가위·커터칼</label><label class="check-item"><input type="checkbox" data-check-id="life-tape" />테이프</label><label class="check-item"><input type="checkbox" data-check-id="life-light" />스탠드 또는 조명</label><label class="check-item"><input type="checkbox" data-check-id="life-umbrella" />우산</label></article>
-        <article><h2>안전·건강</h2><label class="check-item"><input type="checkbox" data-check-id="safe-door" />도어스토퍼</label><label class="check-item"><input type="checkbox" data-check-id="safe-window" />창문 잠금 상태</label><label class="check-item"><input type="checkbox" data-check-id="safe-extinguisher" />소화기 위치</label><label class="check-item"><input type="checkbox" data-check-id="safe-medicine" />상비약</label><label class="check-item"><input type="checkbox" data-check-id="safe-flashlight" />손전등</label><label class="check-item"><input type="checkbox" data-check-id="safe-emergency" />비상 연락처</label></article>
-        <article><h2>입주 당일</h2><label class="check-item"><input type="checkbox" data-check-id="move-photo" />하자 사진 촬영</label><label class="check-item"><input type="checkbox" data-check-id="move-meter" />전기·가스 계량기 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-key" />도어락·현관키 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-water" />수압·배수 확인</label><label class="check-item"><input type="checkbox" data-check-id="move-wifi" />인터넷 설치 일정</label><label class="check-item"><input type="checkbox" data-check-id="move-trash-day" />분리수거 요일 확인</label></article>
-      </section>
-      <section class="purchase-candidates" aria-labelledby="purchase-candidates-title">
-        <div class="purchase-candidates-head">
-          <div><p class="eyebrow">남은 준비</p><h2 id="purchase-candidates-title">아직 필요한 카테고리</h2></div>
-          <p id="purchaseSummary" aria-live="polite"></p>
-        </div>
-        <div class="recommendation-grid" id="purchaseCandidates"></div>
-        <div class="purchase-actions">
-          <a class="button primary" href="/recommend">내 조건으로 추천받기</a>
-          <a class="button secondary" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰 보기</a>
-          <a class="button secondary" href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집 보기</a>
-          <a class="button primary" href="/budget">준비물 비용 다시 정리</a>
-        </div>
-      </section>
-      <p class="page-cta"><a class="button primary" href="/budget">초기 비용 계산하기</a></p>
+      <form class="plan-setup" id="planSetupForm" action="/recommend" method="get">
+        <section class="plan-step" aria-labelledby="owned-title">
+          <div class="plan-step-head"><span>01</span><div><p class="eyebrow">이미 가진 물건</p><h2 id="owned-title">보유품만 먼저 빼세요.</h2></div></div>
+          <p class="plan-step-copy">새로 살 필요 없는 물건은 결과에서 제외됩니다. 항목을 눌러 선택하고, 위의 태그에서 바로 지울 수 있어요.</p>
+          <div class="selected-items" id="ownedSelected" aria-live="polite"></div>
+          <details class="owned-picker">
+            <summary><span>보유품 선택하기</span><strong id="ownedCount">0개 선택</strong></summary>
+            <div class="owned-picker-body" id="moveInChecklist" aria-label="보유품 목록"></div>
+          </details>
+        </section>
+
+        <section class="plan-step" aria-labelledby="conditions-title">
+          <div class="plan-step-head"><span>02</span><div><p class="eyebrow">내 생활 조건</p><h2 id="conditions-title">딱 다섯 가지만 고르세요.</h2></div></div>
+          <div class="plan-conditions">
+            <fieldset><legend>집에서 요리하나요?</legend><div class="segmented-options"><label><input name="cooking" type="radio" value="often" checked /><span>자주 해요</span></label><label><input name="cooking" type="radio" value="rarely" /><span>가끔 해요</span></label></div></fieldset>
+            <fieldset><legend>빨래는 주로 어떻게 말리나요?</legend><div class="segmented-options"><label><input name="drying" type="radio" value="indoor" checked /><span>실내 건조</span></label><label><input name="drying" type="radio" value="dryer" /><span>건조기 사용</span></label></div></fieldset>
+            <fieldset><legend>운동복을 자주 세탁하나요?</legend><div class="segmented-options"><label><input name="workout" type="radio" value="yes" /><span>자주 해요</span></label><label><input name="workout" type="radio" value="no" checked /><span>아니요</span></label></div></fieldset>
+            <fieldset><legend>향에 민감한가요?</legend><div class="segmented-options"><label><input name="fragrance" type="radio" value="sensitive" /><span>민감해요</span></label><label><input name="fragrance" type="radio" value="normal" checked /><span>상관없어요</span></label></div></fieldset>
+            <fieldset><legend>수납 공간은 어떤가요?</legend><div class="segmented-options"><label><input name="storage" type="radio" value="limited" checked /><span>넉넉하지 않아요</span></label><label><input name="storage" type="radio" value="normal" /><span>여유 있어요</span></label></div></fieldset>
+          </div>
+        </section>
+
+        <section class="plan-step plan-budget-step" aria-labelledby="plan-budget-title">
+          <div><p class="eyebrow">선택 입력</p><h2 id="plan-budget-title">준비물 예산이 있나요?</h2><p>지금 정하지 않아도 됩니다. 입력하면 ‘지금 필요’ 항목에만 임시로 나눠 볼 수 있어요.</p></div>
+          <label class="plan-budget-input">준비물 총 예산<span class="amount-input"><input name="purchaseBudget" type="text" inputmode="numeric" data-currency placeholder="예: 200,000" /><b>원</b></span></label>
+        </section>
+        <div class="plan-submit"><button class="button primary" type="submit">내 구매 계획 만들기</button><a class="text-link" href="/budget">전체 초기 비용도 함께 계산하기</a></div>
+      </form>
     </main>
     <footer><strong>자취도우미</strong><span>처음 사는 자취 준비를 덜 헤매게.</span></footer>
     <script>

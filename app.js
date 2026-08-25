@@ -144,6 +144,60 @@ const recommendationCatalog = Object.fromEntries(
   )
 );
 
+const planDefaults = {
+  cooking: "often",
+  drying: "indoor",
+  workout: "no",
+  fragrance: "normal",
+  storage: "limited",
+  purchaseBudget: 0
+};
+
+const planConditionLabels = {
+  cooking: { often: "요리를 자주 해요", rarely: "조리는 가끔 해요" },
+  drying: { indoor: "실내 건조가 많아요", dryer: "건조기를 써요" },
+  workout: { yes: "운동복 세탁이 있어요", no: "일반 세탁 위주예요" },
+  fragrance: { sensitive: "향에 민감해요", normal: "향은 상관없어요" },
+  storage: { limited: "수납이 넉넉하지 않아요", normal: "수납 여유가 있어요" }
+};
+
+const categoryCriteria = {
+  "침구·수면": "침대·창문 규격과 세탁 가능 여부를 확인하세요.",
+  "욕실": "욕실 수납과 기본 제공 품목을 먼저 확인하세요.",
+  "주방": "가스·인덕션 종류와 실제 조리 빈도를 확인하세요.",
+  "청소": "바닥 재질과 관리사무소 분리수거 기준을 확인하세요.",
+  "세탁": "세탁기 유무와 건조 공간을 먼저 확인하세요.",
+  "생활·수납": "콘센트 위치와 수납할 공간을 재보세요.",
+  "안전·건강": "집에 이미 비치된 안전 설비와 보관 위치를 확인하세요."
+};
+
+const itemSignals = {
+  "kitchen-pot": { condition: "cooking", match: "often", reason: "직접 조리할 때 기본으로 쓰는 조리 도구", criteria: "가스·인덕션 호환과 필요한 크기를 확인하세요." },
+  "kitchen-pan": { condition: "cooking", match: "often", reason: "직접 조리할 때 기본으로 쓰는 조리 도구", criteria: "가스·인덕션 호환과 필요한 크기를 확인하세요." },
+  "kitchen-container": { condition: "cooking", match: "often", reason: "조리한 음식 보관에 필요한 항목", criteria: "냉장고 공간과 전자레인지 사용 여부를 확인하세요." },
+  "laundry-dryer": { condition: "drying", match: "indoor", reason: "실내에서 빨래를 말릴 때 먼저 필요한 항목", criteria: "창문 위치와 펼칠 수 있는 폭을 재보세요." },
+  "laundry-detergent": { condition: "fragrance", match: "sensitive", reason: "향 민감도를 반영해 세탁 기준을 먼저 정할 항목", criteria: "무향·저자극 표기와 의류 세탁 표시를 확인하세요.", search: "무향 저자극" },
+  "laundry-softener": { condition: "fragrance", match: "sensitive", reason: "향 민감도가 있으면 성분과 향을 먼저 확인할 항목", criteria: "향료 유무와 사용량을 확인한 뒤 결정하세요.", search: "무향" },
+  "laundry-net": { condition: "workout", match: "yes", reason: "운동복을 자주 세탁할 때 마찰을 줄이기 위한 항목", criteria: "운동복 소재와 세탁망 크기를 확인하세요." },
+  "life-storage": { condition: "storage", match: "limited", reason: "수납 여유가 적을 때 동선을 먼저 정리할 항목", criteria: "빈 공간의 가로·세로·높이를 재고 고르세요." },
+  "bedding-hanger": { condition: "storage", match: "limited", reason: "옷장 수납이 부족할 때 먼저 필요한 항목", criteria: "옷장 봉 길이와 옷걸이 두께를 확인하세요." },
+  "bath-basket": { condition: "storage", match: "limited", reason: "세탁물 동선을 정리할 때 필요한 항목", criteria: "욕실·세탁기 주변에 둘 공간을 확인하세요." }
+};
+
+const immediateItemIds = new Set([
+  "bedding-duvet",
+  "bedding-pillow",
+  "bath-towel",
+  "bath-toiletries",
+  "bath-toothbrush",
+  "bath-toilet-paper",
+  "kitchen-bag",
+  "clean-wipes",
+  "clean-detergent",
+  "clean-trash",
+  "life-powerstrip"
+]);
+
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
@@ -366,61 +420,76 @@ function setupChecklist() {
   const progress = document.querySelector("#checklistProgress");
   const storageNote = document.querySelector("#checklistStorageNote");
   const resetButton = document.querySelector("#resetChecklist");
-  const purchaseSummary = document.querySelector("#purchaseSummary");
-  const purchaseCandidates = document.querySelector("#purchaseCandidates");
+  const selected = document.querySelector("#ownedSelected");
+  const selectedCount = document.querySelector("#ownedCount");
+  const form = document.querySelector("#planSetupForm");
   if (!checklist || !progress || !storageNote) return;
 
-  const checkboxes = [...checklist.querySelectorAll("[data-check-id]")];
   const state = readStoredState();
   const savedChecks = state.checklist && typeof state.checklist === "object" ? state.checklist : {};
+  const savedPlan = state.planPreferences && typeof state.planPreferences === "object"
+    ? state.planPreferences
+    : planDefaults;
+  const groups = recommendationGroups.map((group) => ({
+    title: group.category,
+    items: group.items.map(([key, title]) => ({ id: `${group.prefix}-${key}`, title }))
+  }));
+
+  checklist.innerHTML = groups.map((group) => `
+    <fieldset class="owned-group">
+      <legend>${group.title}</legend>
+      <div class="owned-options">
+        ${group.items.map((item) => `<label><input type="checkbox" data-check-id="${item.id}" /><span>${item.title}</span></label>`).join("")}
+      </div>
+    </fieldset>
+  `).join("");
+
+  const checkboxes = [...checklist.querySelectorAll("[data-check-id]")];
 
   checkboxes.forEach((checkbox) => {
     checkbox.checked = Boolean(savedChecks[checkbox.dataset.checkId]);
   });
 
-  function updateProgress() {
-    const completed = checkboxes.filter((checkbox) => checkbox.checked).length;
-    progress.textContent = `${completed} / ${checkboxes.length} 완료`;
-    renderPurchaseCandidates();
+  if (form) {
+    Object.entries(planDefaults).forEach(([name, fallback]) => {
+      const input = form.elements[name];
+      const value = savedPlan[name] ?? fallback;
+      if (input instanceof RadioNodeList) input.value = String(value);
+      else if (input) input.value = value ? String(value) : "";
+    });
   }
 
-  function renderPurchaseCandidates() {
-    if (!purchaseSummary || !purchaseCandidates) return;
+  function updateProgress() {
+    const completed = checkboxes.filter((checkbox) => checkbox.checked).length;
+    progress.textContent = completed ? `보유품 ${completed}개 제외됨` : "보유품을 먼저 빼세요";
+    if (!selected || !selectedCount) return;
 
-    const categories = purchaseCategories
-      .map((category) => ({
-        ...category,
-        remaining: checkboxes.filter(
-          (checkbox) => !checkbox.checked && category.prefixes.some((prefix) => checkbox.dataset.checkId.startsWith(prefix))
-        ).length
-      }))
-      .filter((category) => category.remaining > 0);
+    const checked = checkboxes.filter((checkbox) => checkbox.checked);
+    selectedCount.textContent = `${checked.length}개 선택`;
+    selected.innerHTML = checked.length
+      ? checked.map((checkbox) => {
+        const label = checkbox.closest("label")?.querySelector("span")?.textContent || checkbox.dataset.checkId;
+        return `<button type="button" class="selected-chip" data-remove-owned="${checkbox.dataset.checkId}">${label}<span aria-hidden="true">×</span><span class="sr-only"> 보유품에서 제거</span></button>`;
+      }).join("")
+      : '<p class="selected-empty">이미 가진 물건이 있다면 위 목록에서 골라 주세요.</p>';
+  }
 
-    purchaseSummary.textContent = categories.length ? `${categories.length}개 카테고리 확인 필요` : "핵심 구매 카테고리 확인 완료";
-    purchaseCandidates.innerHTML = "";
-
-    if (!categories.length) {
-      purchaseCandidates.innerHTML = '<p class="purchase-empty">체크한 카테고리는 구매 후보에서 제외됐습니다.</p>';
-      return;
-    }
-
-    categories.forEach((category) => {
-      const card = document.createElement("article");
-      card.className = "recommendation-card";
-      const naverUrl = "https://shopping.naver.com/home";
-      const coupangUrl = `https://www.coupang.com/np/search?q=${encodeURIComponent(category.query)}`;
-      card.innerHTML = `
-        <div class="recommendation-image ${category.image}" role="img" aria-label="${category.title} 준비물 예시"></div>
-        <div class="recommendation-copy"><p>${category.remaining}개 미완료</p><h3>${category.title}</h3></div>
-        <div class="recommendation-actions"><a href="${naverUrl}" data-naver-shopping-query="${category.query}" target="_blank" rel="noreferrer">네이버쇼핑 열기</a><a href="${coupangUrl}" target="_blank" rel="noreferrer">쿠팡</a></div>
-      `;
-      purchaseCandidates.appendChild(card);
-    });
+  function getPlanPreferences() {
+    if (!form) return planDefaults;
+    const data = new FormData(form);
+    return {
+      cooking: data.get("cooking") || planDefaults.cooking,
+      drying: data.get("drying") || planDefaults.drying,
+      workout: data.get("workout") || planDefaults.workout,
+      fragrance: data.get("fragrance") || planDefaults.fragrance,
+      storage: data.get("storage") || planDefaults.storage,
+      purchaseBudget: parseCurrency(data.get("purchaseBudget"))
+    };
   }
 
   function saveChecklist() {
     const checks = Object.fromEntries(checkboxes.map((checkbox) => [checkbox.dataset.checkId, checkbox.checked]));
-    const nextState = { ...readStoredState(), checklist: checks };
+    const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
     storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   }
 
@@ -431,71 +500,79 @@ function setupChecklist() {
     });
   });
 
+  selected?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-remove-owned]");
+    if (!button) return;
+    const checkbox = checkboxes.find((item) => item.dataset.checkId === button.dataset.removeOwned);
+    if (!checkbox) return;
+    checkbox.checked = false;
+    updateProgress();
+    saveChecklist();
+  });
+
+  form?.addEventListener("input", saveChecklist);
+  form?.addEventListener("change", saveChecklist);
+  form?.addEventListener("submit", saveChecklist);
+
   resetButton?.addEventListener("click", () => {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = false;
     });
+    form?.reset();
     updateProgress();
-    saveChecklist();
+    const checks = Object.fromEntries(checkboxes.map((checkbox) => [checkbox.dataset.checkId, checkbox.checked]));
+    const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
+    delete nextState.recommendationDecisions;
+    storageNote.textContent = writeStoredState(nextState) ? "선택과 구매 결정을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   });
 
   updateProgress();
 }
 
 function setupRecommendation() {
-  const form = document.querySelector("#recommendationForm");
   const summary = document.querySelector("#recommendationSummary");
   const results = document.querySelector("#recommendationResults");
   const note = document.querySelector("#recommendationNote");
-  if (!form || !summary || !results || !note) return;
-
-  const savedPreferences = readStoredState().recommendation;
-  if (savedPreferences && typeof savedPreferences === "object") {
-    ["purchaseBudget", "timing", "room", "focus", "search", "sort", "showCount"].forEach((name) => {
-      const input = form.elements[name];
-      if (!input || savedPreferences[name] === undefined) return;
-      if (input instanceof RadioNodeList) input.value = savedPreferences[name];
-      else input.value = savedPreferences[name];
-    });
-  }
+  const conditionSummary = document.querySelector("#recommendationConditions");
+  if (!summary || !results || !note) return;
 
   const passedBudget = parseCurrency(new URLSearchParams(window.location.search).get("purchaseBudget"));
-  if (passedBudget) form.elements.purchaseBudget.value = String(passedBudget);
 
   function getPreferences() {
-    const data = new FormData(form);
-    const budget = parseCurrency(data.get("purchaseBudget"));
+    const savedPlan = readStoredState().planPreferences;
+    const plan = savedPlan && typeof savedPlan === "object" ? savedPlan : planDefaults;
     return {
-      purchaseBudget: budget,
-      timing: data.get("timing") || "movein",
-      room: data.get("room") || "small",
-      focus: data.get("focus") || "value",
-      search: String(data.get("search") || "").trim(),
-      sort: data.get("sort") || "priority",
-      showCount: data.get("showCount") || "24"
+      ...planDefaults,
+      ...plan,
+      purchaseBudget: passedBudget || parseCurrency(plan.purchaseBudget)
     };
   }
 
   function rankItem([id, item], preferences) {
     let score = item.weight * 10;
-    if (preferences.timing === "movein" && item.firstDay) score += 32;
-    if (preferences.room === "small" && item.compact) score += 14;
-    if (preferences.focus === "value" && item.weight >= 8) score += 8;
-    if (preferences.focus === "comfort" && ["침구·수면", "욕실"].includes(item.category)) score += 12;
-    if (preferences.focus === "balanced" && item.firstDay) score += 8;
+    const signal = itemSignals[id];
+    const matchedCondition = signal && preferences[signal.condition] === signal.match;
+    const compactMatch = preferences.storage === "limited" && item.compact;
+    if (item.firstDay) score += 32;
+    if (matchedCondition) score += 24;
+    if (compactMatch) score += 14;
 
-    let reason = "체크리스트에서 아직 완료되지 않은 항목";
-    if (preferences.timing === "movein" && item.firstDay) reason = "입주 첫날 바로 쓰는 항목";
-    else if (preferences.room === "small" && item.compact) reason = "작은 방의 수납과 동선을 고려한 항목";
-    else if (preferences.focus === "value" && item.weight >= 8) reason = "예산을 먼저 배정해 확인할 항목";
-    else if (preferences.focus === "comfort" && ["침구·수면", "욕실"].includes(item.category)) reason = "생활 만족도를 먼저 높이는 항목";
+    let reason = item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "현재 보유하지 않은 준비 항목";
+    if (matchedCondition) reason = signal.reason;
+    else if (compactMatch) reason = "수납 여유가 적다는 조건을 반영한 항목";
 
     const searchTerms = ["자취", item.title];
-    if (preferences.room === "small" && item.compact) searchTerms.push("소형");
-    if (preferences.focus === "value") searchTerms.push("가성비");
-    if (preferences.timing === "movein" && item.firstDay) searchTerms.push("당일배송");
-
-    return { id, ...item, score, reason, searchQuery: searchTerms.join(" ") };
+    if (compactMatch) searchTerms.push("소형");
+    if (signal?.search) searchTerms.push(signal.search);
+    return {
+      id,
+      ...item,
+      score,
+      reason,
+      criteria: signal?.criteria || categoryCriteria[item.category],
+      conditionMatched: Boolean(matchedCondition),
+      searchQuery: searchTerms.join(" ")
+    };
   }
 
   function storeLinks(item) {
@@ -513,48 +590,40 @@ function setupRecommendation() {
     }).join("");
   }
 
-  const decisionOptions = [
-    ["review", "검토 중"],
-    ["candidate", "구매 후보"],
-    ["later", "입주 후 결정"],
-    ["skip", "지금은 필요 없음"],
-    ["prepared", "이미 준비함"]
-  ];
-
   const recommendationPhases = {
-    now: { title: "지금 구매할 것", description: "입주 전 또는 첫날에 먼저 챙길 항목" },
-    week: { title: "입주 첫 주에 확인", description: "생활하면서 필요를 확인할 항목" },
-    later: { title: "입주 후 결정", description: "공간과 생활 패턴을 본 뒤 정할 항목" },
-    skip: { title: "현재는 보류", description: "지금 예산에서는 제외한 항목" }
+    now: { title: "지금 필요", description: "입주 전 또는 입주 직후에 먼저 준비할 항목" },
+    confirm: { title: "조건 확인", description: "집 옵션이나 실제 생활을 확인한 뒤 결정할 항목" },
+    later: { title: "나중에 결정", description: "입주 후 사용 패턴이 생긴 다음 선택할 항목" }
   };
 
   function getPhase(item, preferences) {
-    if (item.decision === "later") return "later";
-    if (item.decision === "skip") return "skip";
-    if (item.decision === "candidate" || (preferences.timing === "movein" && item.firstDay)) return "now";
-    return "week";
+    if (item.decision === "later" || item.decision === "skip") return "later";
+    if (item.decision === "candidate") return "now";
+    if (immediateItemIds.has(item.id)) return "now";
+    return "confirm";
   }
 
-  function decisionSelect(item) {
-    const options = decisionOptions.map(([value, label]) => {
-      const selected = item.decision === value ? " selected" : "";
-      return `<option value="${value}"${selected}>${label}</option>`;
-    }).join("");
-    return `<label class="match-decision">결정 <select data-recommendation-decision data-item-id="${item.id}" aria-label="${item.title} 구매 결정">${options}</select></label>`;
+  function decisionButtons(item) {
+    const current = item.decision === "prepared" ? "prepared" : item.decision === "later" ? "later" : item.decision === "candidate" ? "candidate" : "";
+    return `<div class="match-decision" role="group" aria-label="${item.title} 상태 선택">
+      <button type="button" data-recommendation-decision="candidate" data-item-id="${item.id}" class="${current === "candidate" ? "is-selected" : ""}">필요함</button>
+      <button type="button" data-recommendation-decision="prepared" data-item-id="${item.id}" class="${current === "prepared" ? "is-selected" : ""}">이미 있음</button>
+      <button type="button" data-recommendation-decision="later" data-item-id="${item.id}" class="${current === "later" ? "is-selected" : ""}">나중에</button>
+    </div>`;
   }
 
   function createMatchCard(item, index, allocation) {
     const card = document.createElement("article");
     card.className = "match-card";
-    const allocationText = item.phase === "later" ? "입주 후" : item.phase === "skip" ? "제외" : allocation ? formatWon(allocation) : "미입력";
+    const allocationText = item.phase === "later" ? "입주 후" : item.phase === "confirm" ? "조건 확인" : allocation ? formatWon(allocation) : "예산 미입력";
     card.innerHTML = `
       <div class="match-rank"><span>${String(index + 1).padStart(2, "0")}</span><strong>${item.category}</strong></div>
-      <div class="match-copy"><h3>${item.title}</h3><p>${item.reason}</p><small>검색어: ${item.searchQuery}</small></div>
+      <div class="match-copy"><h3>${item.title}</h3><p>${item.reason}</p><small>고를 때: ${item.criteria}</small></div>
       <div class="match-side">
-        <div class="match-budget"><span>예산 배정</span><strong>${allocationText}</strong></div>
-        ${decisionSelect(item)}
+        <div class="match-budget"><span>계획</span><strong>${allocationText}</strong></div>
+        ${decisionButtons(item)}
       </div>
-      <div class="match-actions">${storeLinks(item)}</div>
+      <div class="match-actions"><span>검색어: ${item.searchQuery}</span>${storeLinks(item)}</div>
     `;
     return card;
   }
@@ -564,43 +633,37 @@ function setupRecommendation() {
     const storedState = readStoredState();
     const savedChecks = storedState.checklist || {};
     const decisions = storedState.recommendationDecisions || {};
-    const searchTerm = preferences.search.toLocaleLowerCase("ko-KR");
     const ranked = Object.entries(recommendationCatalog)
       .filter(([id]) => !savedChecks[id])
-      .filter(([, item]) => !searchTerm || `${item.title} ${item.category}`.toLocaleLowerCase("ko-KR").includes(searchTerm))
       .map((entry) => ({ ...rankItem(entry, preferences), decision: decisions[entry[0]] || "review" }))
       .map((item) => ({ ...item, phase: getPhase(item, preferences) }))
       .sort((a, b) => {
-        const phaseOrder = { now: 0, week: 1, later: 2, skip: 3 };
-        const decisionOrder = { candidate: 0, review: 1, later: 2, skip: 3 };
+        const phaseOrder = { now: 0, confirm: 1, later: 2 };
+        const decisionOrder = { candidate: 0, review: 1, later: 2 };
         const phaseDifference = phaseOrder[a.phase] - phaseOrder[b.phase];
         if (phaseDifference) return phaseDifference;
-        if (preferences.sort === "alphabetical") return a.title.localeCompare(b.title, "ko");
-        if (preferences.sort === "category") return a.category.localeCompare(b.category, "ko") || a.title.localeCompare(b.title, "ko");
         return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
-    const active = ranked.filter((item) => item.phase === "now" || item.phase === "week");
-    const deferred = ranked.filter((item) => item.phase === "later" || item.phase === "skip");
-    const limit = preferences.showCount === "all" ? active.length : Number(preferences.showCount);
-    const visible = [...active.slice(0, limit), ...deferred];
-    const totalScore = active.reduce((sum, item) => sum + item.score, 0);
+    const nowItems = ranked.filter((item) => item.phase === "now");
+    const totalScore = nowItems.reduce((sum, item) => sum + item.score, 0);
 
-    const searchSummary = preferences.search ? `검색 '${preferences.search}' · ` : "";
     summary.textContent = ranked.length
-      ? `${searchSummary}전체 ${ranked.length}개 · 지금 ${active.length}개 · 입주 후 ${ranked.filter((item) => item.phase === "later").length}개`
+      ? `보유품을 제외한 ${ranked.length}개 중 지금 ${nowItems.length}개를 먼저 봐요.`
       : "추천할 구매 항목이 없습니다";
+    if (conditionSummary) {
+      const labels = Object.entries(planConditionLabels).map(([name, labels]) => labels[preferences[name]]).filter(Boolean);
+      conditionSummary.innerHTML = labels.map((label) => `<span>${label}</span>`).join("") || "조건을 아직 고르지 않았어요.";
+    }
     results.innerHTML = "";
 
     if (!ranked.length) {
-      results.innerHTML = preferences.search
-        ? '<p class="purchase-empty">검색어와 일치하는 준비물이 없습니다. 다른 단어로 다시 찾아보세요.</p>'
-        : '<p class="purchase-empty">체크리스트의 구매 항목을 모두 완료했습니다. 새로 필요해진 물건이 있다면 체크리스트에서 완료를 해제하세요.</p>';
+      results.innerHTML = '<p class="purchase-empty">보유품으로 선택한 항목을 모두 제외했습니다. 새로 필요한 물건이 있다면 보유품 선택을 수정하세요.</p>';
       note.textContent = "";
       return;
     }
 
     Object.keys(recommendationPhases).forEach((phase) => {
-      const groupItems = visible.filter((item) => item.phase === phase);
+      const groupItems = ranked.filter((item) => item.phase === phase);
       if (!groupItems.length) return;
 
       const group = document.createElement("section");
@@ -610,7 +673,7 @@ function setupRecommendation() {
       const list = document.createElement("div");
       list.className = "match-list";
       groupItems.forEach((item, index) => {
-        const allocation = preferences.purchaseBudget && totalScore && (item.phase === "now" || item.phase === "week")
+        const allocation = preferences.purchaseBudget && totalScore && item.phase === "now"
           ? Math.round((preferences.purchaseBudget * item.score) / totalScore)
           : 0;
         list.appendChild(createMatchCard(item, index, allocation));
@@ -620,37 +683,22 @@ function setupRecommendation() {
     });
 
     note.textContent = preferences.purchaseBudget
-      ? `입력한 ${formatWon(preferences.purchaseBudget)}은 지금 구매할 항목의 우선순위 점수 비율로만 나눴습니다. 입주 후 결정·보류 항목은 배정에서 제외됩니다.`
-      : "예산을 입력하면 지금 구매할 항목에만 우선순위 점수 비율로 예산을 나눕니다.";
+      ? `입력한 ${formatWon(preferences.purchaseBudget)}은 지금 필요한 항목에만 임시로 나눈 값입니다. 실제 가격과 배송 조건은 판매처에서 확인하세요.`
+      : "예산은 선택값입니다. 항목을 고른 뒤 필요할 때만 전체 준비물 예산을 다시 정리하세요.";
     setupNaverShoppingLinks();
   }
 
-  function saveAndRender() {
-    const preferences = getPreferences();
-    writeStoredState({ ...readStoredState(), recommendation: preferences });
-    renderRecommendations();
-  }
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    saveAndRender();
-  });
-  form.addEventListener("input", saveAndRender);
-  form.addEventListener("change", saveAndRender);
-  results.addEventListener("change", (event) => {
-    const select = event.target.closest("[data-recommendation-decision]");
-    if (!select) return;
-
-    const itemId = select.dataset.itemId;
-    const nextDecision = select.value;
+  results.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-recommendation-decision]");
+    if (!button) return;
+    const itemId = button.dataset.itemId;
+    const nextDecision = button.dataset.recommendationDecision;
     const state = readStoredState();
     const nextChecks = { ...(state.checklist || {}) };
     const nextDecisions = { ...(state.recommendationDecisions || {}) };
 
     if (nextDecision === "prepared") {
       nextChecks[itemId] = true;
-      delete nextDecisions[itemId];
-    } else if (nextDecision === "review") {
       delete nextDecisions[itemId];
     } else {
       nextDecisions[itemId] = nextDecision;
