@@ -639,83 +639,9 @@ function setupRecommendation() {
       <div class="match-side">
         ${decisionButtons(item)}
       </div>
-      <div class="match-actions"><span>직접 검색하거나, 실제 판매 데이터가 연결된 상품만 비교하세요.</span><button class="compare-product" type="button" data-product-compare="${item.searchQuery}">실제 상품 비교</button>${storeLinks(item)}</div>
-      <div class="live-product-result" data-live-product-result></div>
+      <div class="match-actions"><span>판매처에서 제품 구성, 배송비와 최신 가격을 직접 확인하세요.</span>${storeLinks(item)}</div>
     `;
     return card;
-  }
-
-  function showLiveProducts(container, payload) {
-    container.replaceChildren();
-    const products = Array.isArray(payload.products) ? payload.products : [];
-    const status = document.createElement("p");
-    status.className = "live-product-status";
-
-    if (!products.length) {
-      status.textContent = payload.message || "현재 비교할 판매 데이터를 찾지 못했습니다. 판매처에서 최신 가격을 확인해 주세요.";
-      container.appendChild(status);
-      return;
-    }
-
-    status.textContent = `쿠팡 파트너스 상품 데이터 기준 · ${payload.updatedAt || "방금"} 조회 · 이 링크를 통한 구매 시 일정액의 수수료를 제공받을 수 있습니다.`;
-    container.appendChild(status);
-    const list = document.createElement("div");
-    list.className = "live-product-list";
-    products.forEach((product) => {
-      const card = document.createElement("article");
-      card.className = "live-product-card";
-      if (product.image) {
-        const image = document.createElement("img");
-        image.alt = "";
-        image.loading = "lazy";
-        image.src = product.image;
-        card.appendChild(image);
-      }
-      const copy = document.createElement("div");
-      const title = document.createElement("h4");
-      title.textContent = product.name || "상품명 없음";
-      const price = document.createElement("strong");
-      price.textContent = Number.isFinite(product.price) ? formatWon(product.price) : "가격 정보 없음";
-      copy.append(title, price);
-      if (product.badge) {
-        const badge = document.createElement("small");
-        badge.textContent = product.badge;
-        copy.appendChild(badge);
-      }
-      card.appendChild(copy);
-      if (product.url) {
-        const link = document.createElement("a");
-        link.href = product.url;
-        link.target = "_blank";
-        link.rel = "noreferrer";
-        link.textContent = "상품 보기";
-        card.appendChild(link);
-      }
-      list.appendChild(card);
-    });
-    container.appendChild(list);
-  }
-
-  async function loadLiveProducts(button) {
-    const card = button.closest(".match-card");
-    const container = card?.querySelector("[data-live-product-result]");
-    if (!container) return;
-    const query = button.dataset.productCompare;
-    button.disabled = true;
-    button.textContent = "상품 데이터 불러오는 중";
-    try {
-      const response = await fetch(`/api/coupang-products?query=${encodeURIComponent(query)}`);
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok && !payload.message) {
-        payload.message = "실제 판매 데이터 연결을 준비 중입니다. 확인된 가격 데이터가 없어서 가격을 표시하지 않습니다.";
-      }
-      showLiveProducts(container, payload);
-    } catch {
-      showLiveProducts(container, { message: "실시간 비교를 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요." });
-    } finally {
-      button.disabled = false;
-      button.textContent = "실제 상품 비교";
-    }
   }
 
   function renderRecommendations() {
@@ -774,16 +700,11 @@ function setupRecommendation() {
       results.appendChild(group);
     });
 
-    note.textContent = "가격은 예산에서 나눠 만든 값이 아니라, 판매처 API가 돌려준 상품 데이터가 있을 때만 표시합니다. 전체 초기 비용은 별도 계산에서 정리하세요.";
+    note.textContent = "가격은 판매처마다 수시로 달라 이 화면에 추정값을 표시하지 않습니다. 제품 구성과 최신 가격은 판매처에서 확인하고, 전체 초기 비용은 별도 계산에서 정리하세요.";
     setupNaverShoppingLinks();
   }
 
   results.addEventListener("click", (event) => {
-    const compareButton = event.target.closest("[data-product-compare]");
-    if (compareButton) {
-      loadLiveProducts(compareButton);
-      return;
-    }
     const button = event.target.closest("[data-recommendation-decision]");
     if (!button) return;
     const itemId = button.dataset.itemId;
