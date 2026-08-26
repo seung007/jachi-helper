@@ -554,7 +554,11 @@ function setupRecommendation() {
   const results = document.querySelector("#recommendationResults");
   const note = document.querySelector("#recommendationNote");
   const conditionSummary = document.querySelector("#recommendationConditions");
+  const purchasePlanSummary = document.querySelector("#purchasePlanSummary");
+  const purchasePlanStatus = document.querySelector("#purchasePlanStatus");
+  const copyPurchasePlan = document.querySelector("#copyPurchasePlan");
   if (!summary || !results || !note) return;
+  let currentPlan = [];
 
   function getPreferences() {
     const savedPlan = readStoredState().planPreferences;
@@ -644,6 +648,49 @@ function setupRecommendation() {
     return card;
   }
 
+  function updatePurchasePlan(ranked, savedChecks) {
+    if (!purchasePlanSummary || !purchasePlanStatus || !copyPurchasePlan) return;
+    const needed = ranked.filter((item) => item.decision === "candidate");
+    const later = ranked.filter((item) => item.decision === "later");
+    const ownedCount = Object.values(savedChecks).filter(Boolean).length;
+    currentPlan = needed;
+
+    if (!needed.length) {
+      purchasePlanSummary.textContent = "필요한 물건을 고르면 목록을 만들 수 있어요.";
+      purchasePlanStatus.textContent = `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}로 정리됐어요.`;
+      copyPurchasePlan.disabled = true;
+      return;
+    }
+
+    purchasePlanSummary.textContent = `지금 살 물건 ${needed.length}개를 골랐어요.`;
+    purchasePlanStatus.textContent = `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}는 목록에서 뺐어요.`;
+    copyPurchasePlan.disabled = false;
+  }
+
+  async function copySelectedPlan() {
+    if (!currentPlan.length || !purchasePlanStatus) return;
+    const lines = currentPlan.map((item, index) => `${index + 1}. ${item.title} - 고를 때: ${item.criteria}`);
+    const text = ["첫 자취 구매 목록", "", ...lines, "", "제품 구성과 최신 가격은 판매처에서 확인하세요."].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(text);
+      purchasePlanStatus.textContent = "구매 목록을 복사했습니다. 메모나 장바구니 준비에 붙여 넣어 보세요.";
+    } catch {
+      const temporaryInput = document.createElement("textarea");
+      temporaryInput.value = text;
+      temporaryInput.setAttribute("readonly", "");
+      temporaryInput.style.position = "fixed";
+      temporaryInput.style.opacity = "0";
+      document.body.appendChild(temporaryInput);
+      temporaryInput.select();
+      const copied = document.execCommand("copy");
+      temporaryInput.remove();
+      purchasePlanStatus.textContent = copied
+        ? "구매 목록을 복사했습니다. 메모나 장바구니 준비에 붙여 넣어 보세요."
+        : "복사하지 못했습니다. 브라우저 권한을 확인한 뒤 다시 시도하세요.";
+    }
+  }
+
   function renderRecommendations() {
     const preferences = getPreferences();
     const storedState = readStoredState();
@@ -661,6 +708,7 @@ function setupRecommendation() {
         return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
     const nowItems = ranked.filter((item) => item.phase === "now");
+    updatePurchasePlan(ranked, savedChecks);
 
     summary.textContent = ranked.length
       ? `보유품을 제외한 ${ranked.length}개 중 지금 ${nowItems.length}개를 먼저 봐요.`
@@ -723,6 +771,7 @@ function setupRecommendation() {
     writeStoredState({ ...state, checklist: nextChecks, recommendationDecisions: nextDecisions });
     renderRecommendations();
   });
+  copyPurchasePlan?.addEventListener("click", copySelectedPlan);
   renderRecommendations();
 }
 
@@ -792,16 +841,9 @@ function setupBudget() {
       verdict.textContent = `계약 전에 ${formatWon(initialCosts)}을 확보해야 합니다. 월 수입과 지출을 더하면 첫 달 부담도 함께 확인할 수 있습니다.`;
     }
 
-    if (getBudgetValue("setup")) {
-      const setupBudget = getBudgetValue("setup");
-      nextStep.textContent = `준비물 비용 ${formatWon(setupBudget)}을 구매 후보별 예산 배정으로 이어 보세요.`;
-      recommendLink.href = `/recommend?purchaseBudget=${setupBudget}`;
-      recommendLink.textContent = "준비물 예산으로 추천받기";
-    } else {
-      nextStep.textContent = "준비물 비용을 아직 모른다면 체크리스트에서 필요한 물품부터 고르세요.";
-      recommendLink.href = "/checklist";
-      recommendLink.textContent = "준비물 먼저 정하기";
-    }
+    nextStep.textContent = "준비물은 먼저 필요한 것만 정한 뒤, 실제 판매처 금액을 반영해 다시 확인하세요.";
+    recommendLink.href = "/checklist";
+    recommendLink.textContent = "준비물 먼저 정하기";
   }
 
   function saveBudget() {
@@ -832,22 +874,6 @@ function setupBudget() {
   });
 
   renderBudget();
-}
-
-function setupQuickCost() {
-  const quickForm = document.querySelector("#quickCostForm");
-  const quickTotal = document.querySelector("#quickMoveInTotal");
-  if (!quickForm || !quickTotal) return;
-
-  const renderQuickTotal = () => {
-    const total = ["deposit", "contract", "setup"].reduce((sum, name) => {
-      return sum + parseCurrency(quickForm.elements[name]?.value);
-    }, 0);
-    quickTotal.textContent = formatWon(total);
-  };
-
-  quickForm.addEventListener("input", renderQuickTotal);
-  renderQuickTotal();
 }
 
 function setupResultTabs() {
@@ -890,7 +916,6 @@ setupChecklist();
 setupCurrencyInputs();
 setupRecommendation();
 setupBudget();
-setupQuickCost();
 formatAllCurrencyInputs();
 setupResultTabs();
 setupNaverShoppingLinks();

@@ -44,6 +44,14 @@
           <p id="recommendationSummary" aria-live="polite"></p>
         </div>
         <p class="recommendation-caution">각 항목에서 <strong>필요함</strong>, <strong>이미 있음</strong>, <strong>나중에</strong>를 누르면 이 기기에 저장됩니다. 이 화면은 제품 가격을 추정하거나 순위를 매기지 않습니다.</p>
+        <section class="plan-completion" aria-label="구매 목록 정리">
+          <div>
+            <p>내가 정한 구매 목록</p>
+            <strong id="purchasePlanSummary" aria-live="polite">필요한 물건을 고르면 목록을 만들 수 있어요.</strong>
+            <small id="purchasePlanStatus" aria-live="polite">판매처에서 최신 가격과 제품 구성을 확인하세요.</small>
+          </div>
+          <button class="button secondary" id="copyPurchasePlan" type="button" disabled>구매 목록 복사</button>
+        </section>
         <div id="recommendationResults"></div>
         <p class="recommendation-note" id="recommendationNote"></p>
       </section>
