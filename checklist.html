@@ -41,30 +41,35 @@
       <form class="plan-setup" id="planSetupForm" action="/recommend" method="get">
         <section class="plan-step" aria-labelledby="owned-title">
           <div class="plan-step-head"><span>01</span><div><p class="eyebrow">이미 가진 물건</p><h2 id="owned-title">보유품만 먼저 빼세요.</h2></div></div>
-          <p class="plan-step-copy">새로 살 필요 없는 물건은 결과에서 제외됩니다. 항목을 눌러 선택하고, 위의 태그에서 바로 지울 수 있어요.</p>
+          <p class="plan-step-copy">새로 살 필요 없는 물건은 결과에서 제외됩니다. 카테고리를 고르거나 이름을 검색해 빠르게 빼세요.</p>
           <div class="selected-items" id="ownedSelected" aria-live="polite"></div>
           <details class="owned-picker">
             <summary><span>보유품 선택하기</span><strong id="ownedCount">0개 선택</strong></summary>
-            <div class="owned-picker-body" id="moveInChecklist" aria-label="보유품 목록"></div>
+            <div class="owned-picker-body">
+              <label class="owned-search" for="ownedSearch"><span class="sr-only">보유품 검색</span><input id="ownedSearch" type="search" placeholder="예: 수건, 멀티탭" autocomplete="off" /></label>
+              <div class="owned-category-tabs" id="ownedCategoryTabs" role="tablist" aria-label="보유품 카테고리"></div>
+              <div id="moveInChecklist" aria-live="polite"></div>
+            </div>
           </details>
         </section>
 
         <section class="plan-step" aria-labelledby="conditions-title">
-          <div class="plan-step-head"><span>02</span><div><p class="eyebrow">내 생활 조건</p><h2 id="conditions-title">딱 다섯 가지만 고르세요.</h2></div></div>
+          <div class="plan-step-head"><span>02</span><div><p class="eyebrow">내 생활 조건</p><h2 id="conditions-title">기본 조건 세 가지만 고르세요.</h2></div></div>
+          <p class="plan-step-copy">정답은 없어요. 지금 생활에 가까운 쪽을 고르면, 관련 물품의 확인 순서만 달라집니다.</p>
           <div class="plan-conditions">
             <fieldset><legend>집에서 요리하나요?</legend><div class="segmented-options"><label><input name="cooking" type="radio" value="often" checked /><span>자주 해요</span></label><label><input name="cooking" type="radio" value="rarely" /><span>가끔 해요</span></label></div></fieldset>
             <fieldset><legend>빨래는 주로 어떻게 말리나요?</legend><div class="segmented-options"><label><input name="drying" type="radio" value="indoor" checked /><span>실내 건조</span></label><label><input name="drying" type="radio" value="dryer" /><span>건조기 사용</span></label></div></fieldset>
-            <fieldset><legend>운동복을 자주 세탁하나요?</legend><div class="segmented-options"><label><input name="workout" type="radio" value="yes" /><span>자주 해요</span></label><label><input name="workout" type="radio" value="no" checked /><span>아니요</span></label></div></fieldset>
-            <fieldset><legend>향에 민감한가요?</legend><div class="segmented-options"><label><input name="fragrance" type="radio" value="sensitive" /><span>민감해요</span></label><label><input name="fragrance" type="radio" value="normal" checked /><span>상관없어요</span></label></div></fieldset>
             <fieldset><legend>수납 공간은 어떤가요?</legend><div class="segmented-options"><label><input name="storage" type="radio" value="limited" checked /><span>넉넉하지 않아요</span></label><label><input name="storage" type="radio" value="normal" /><span>여유 있어요</span></label></div></fieldset>
           </div>
+          <details class="optional-conditions">
+            <summary>세탁·향 조건도 반영하기 <span>선택</span></summary>
+            <div class="plan-conditions optional-condition-grid">
+              <fieldset><legend>운동복을 자주 세탁하나요?</legend><div class="segmented-options"><label><input name="workout" type="radio" value="yes" /><span>자주 해요</span></label><label><input name="workout" type="radio" value="no" checked /><span>아니요</span></label></div></fieldset>
+              <fieldset><legend>향에 민감한가요?</legend><div class="segmented-options"><label><input name="fragrance" type="radio" value="sensitive" /><span>민감해요</span></label><label><input name="fragrance" type="radio" value="normal" checked /><span>상관없어요</span></label></div></fieldset>
+            </div>
+          </details>
         </section>
-
-        <section class="plan-step plan-budget-step" aria-labelledby="plan-budget-title">
-          <div><p class="eyebrow">선택 입력</p><h2 id="plan-budget-title">준비물 예산이 있나요?</h2><p>지금 정하지 않아도 됩니다. 입력하면 ‘지금 필요’ 항목에만 임시로 나눠 볼 수 있어요.</p></div>
-          <label class="plan-budget-input">준비물 총 예산<span class="amount-input"><input name="purchaseBudget" type="text" inputmode="numeric" data-currency placeholder="예: 200,000" /><b>원</b></span></label>
-        </section>
-        <div class="plan-submit"><button class="button primary" type="submit">내 구매 계획 만들기</button><a class="text-link" href="/budget">전체 초기 비용도 함께 계산하기</a></div>
+        <div class="plan-submit"><button class="button primary" type="submit">내 구매 계획 만들기</button><a class="text-link" href="/budget">초기 비용은 따로 계산하기</a></div>
       </form>
     </main>
     <footer><strong>자취도우미</strong><span>처음 사는 자취 준비를 덜 헤매게.</span></footer>

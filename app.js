@@ -423,10 +423,12 @@ function setupChecklist() {
   const selected = document.querySelector("#ownedSelected");
   const selectedCount = document.querySelector("#ownedCount");
   const form = document.querySelector("#planSetupForm");
+  const searchInput = document.querySelector("#ownedSearch");
+  const categoryTabs = document.querySelector("#ownedCategoryTabs");
   if (!checklist || !progress || !storageNote) return;
 
   const state = readStoredState();
-  const savedChecks = state.checklist && typeof state.checklist === "object" ? state.checklist : {};
+  const checks = state.checklist && typeof state.checklist === "object" ? { ...state.checklist } : {};
   const savedPlan = state.planPreferences && typeof state.planPreferences === "object"
     ? state.planPreferences
     : planDefaults;
@@ -434,21 +436,9 @@ function setupChecklist() {
     title: group.category,
     items: group.items.map(([key, title]) => ({ id: `${group.prefix}-${key}`, title }))
   }));
-
-  checklist.innerHTML = groups.map((group) => `
-    <fieldset class="owned-group">
-      <legend>${group.title}</legend>
-      <div class="owned-options">
-        ${group.items.map((item) => `<label><input type="checkbox" data-check-id="${item.id}" /><span>${item.title}</span></label>`).join("")}
-      </div>
-    </fieldset>
-  `).join("");
-
-  const checkboxes = [...checklist.querySelectorAll("[data-check-id]")];
-
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = Boolean(savedChecks[checkbox.dataset.checkId]);
-  });
+  const labelsById = Object.fromEntries(groups.flatMap((group) => group.items.map((item) => [item.id, item.title])));
+  let activeCategory = groups[0]?.title || "";
+  let searchTerm = "";
 
   if (form) {
     Object.entries(planDefaults).forEach(([name, fallback]) => {
@@ -460,16 +450,16 @@ function setupChecklist() {
   }
 
   function updateProgress() {
-    const completed = checkboxes.filter((checkbox) => checkbox.checked).length;
+    const checkedIds = Object.keys(checks).filter((id) => checks[id]);
+    const completed = checkedIds.length;
     progress.textContent = completed ? `보유품 ${completed}개 제외됨` : "보유품을 먼저 빼세요";
     if (!selected || !selectedCount) return;
 
-    const checked = checkboxes.filter((checkbox) => checkbox.checked);
-    selectedCount.textContent = `${checked.length}개 선택`;
-    selected.innerHTML = checked.length
-      ? checked.map((checkbox) => {
-        const label = checkbox.closest("label")?.querySelector("span")?.textContent || checkbox.dataset.checkId;
-        return `<button type="button" class="selected-chip" data-remove-owned="${checkbox.dataset.checkId}">${label}<span aria-hidden="true">×</span><span class="sr-only"> 보유품에서 제거</span></button>`;
+    selectedCount.textContent = `${completed}개 선택`;
+    selected.innerHTML = completed
+      ? checkedIds.map((id) => {
+        const label = labelsById[id] || id;
+        return `<button type="button" class="selected-chip" data-remove-owned="${id}">${label}<span aria-hidden="true">×</span><span class="sr-only"> 보유품에서 제거</span></button>`;
       }).join("")
       : '<p class="selected-empty">이미 가진 물건이 있다면 위 목록에서 골라 주세요.</p>';
   }
@@ -483,30 +473,63 @@ function setupChecklist() {
       workout: data.get("workout") || planDefaults.workout,
       fragrance: data.get("fragrance") || planDefaults.fragrance,
       storage: data.get("storage") || planDefaults.storage,
-      purchaseBudget: parseCurrency(data.get("purchaseBudget"))
+      purchaseBudget: 0
     };
   }
 
   function saveChecklist() {
-    const checks = Object.fromEntries(checkboxes.map((checkbox) => [checkbox.dataset.checkId, checkbox.checked]));
     const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
     storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   }
 
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      updateProgress();
-      saveChecklist();
+  function renderOwnedPicker() {
+    const matchingGroups = groups.filter((group) => {
+      if (!searchTerm) return group.title === activeCategory;
+      return group.items.some((item) => item.title.toLowerCase().includes(searchTerm));
     });
+    if (categoryTabs) {
+      categoryTabs.innerHTML = groups.map((group) => `<button type="button" role="tab" aria-selected="${group.title === activeCategory}" class="${group.title === activeCategory ? "is-active" : ""}" data-owned-category="${group.title}">${group.title}</button>`).join("");
+    }
+    checklist.innerHTML = matchingGroups.length
+      ? matchingGroups.map((group) => `
+        <fieldset class="owned-group">
+          <legend>${group.title}</legend>
+          <div class="owned-options">
+            ${group.items.filter((item) => !searchTerm || item.title.toLowerCase().includes(searchTerm)).map((item) => `<label><input type="checkbox" data-check-id="${item.id}" ${checks[item.id] ? "checked" : ""} /><span>${item.title}</span></label>`).join("")}
+          </div>
+        </fieldset>
+      `).join("")
+      : '<p class="owned-no-results">찾는 보유품이 없어요. 다른 이름으로 검색해 보세요.</p>';
+
+    checklist.querySelectorAll("[data-check-id]").forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        checks[checkbox.dataset.checkId] = checkbox.checked;
+        updateProgress();
+        saveChecklist();
+      });
+    });
+    updateProgress();
+  }
+
+  categoryTabs?.addEventListener("click", (event) => {
+    const tab = event.target.closest("[data-owned-category]");
+    if (!tab) return;
+    activeCategory = tab.dataset.ownedCategory;
+    searchTerm = "";
+    if (searchInput) searchInput.value = "";
+    renderOwnedPicker();
+  });
+
+  searchInput?.addEventListener("input", () => {
+    searchTerm = searchInput.value.trim().toLowerCase();
+    renderOwnedPicker();
   });
 
   selected?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove-owned]");
     if (!button) return;
-    const checkbox = checkboxes.find((item) => item.dataset.checkId === button.dataset.removeOwned);
-    if (!checkbox) return;
-    checkbox.checked = false;
-    updateProgress();
+    checks[button.dataset.removeOwned] = false;
+    renderOwnedPicker();
     saveChecklist();
   });
 
@@ -515,18 +538,15 @@ function setupChecklist() {
   form?.addEventListener("submit", saveChecklist);
 
   resetButton?.addEventListener("click", () => {
-    checkboxes.forEach((checkbox) => {
-      checkbox.checked = false;
-    });
+    Object.keys(checks).forEach((id) => { checks[id] = false; });
     form?.reset();
-    updateProgress();
-    const checks = Object.fromEntries(checkboxes.map((checkbox) => [checkbox.dataset.checkId, checkbox.checked]));
+    renderOwnedPicker();
     const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
     delete nextState.recommendationDecisions;
     storageNote.textContent = writeStoredState(nextState) ? "선택과 구매 결정을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   });
 
-  updateProgress();
+  renderOwnedPicker();
 }
 
 function setupRecommendation() {
@@ -536,15 +556,13 @@ function setupRecommendation() {
   const conditionSummary = document.querySelector("#recommendationConditions");
   if (!summary || !results || !note) return;
 
-  const passedBudget = parseCurrency(new URLSearchParams(window.location.search).get("purchaseBudget"));
-
   function getPreferences() {
     const savedPlan = readStoredState().planPreferences;
     const plan = savedPlan && typeof savedPlan === "object" ? savedPlan : planDefaults;
     return {
       ...planDefaults,
       ...plan,
-      purchaseBudget: passedBudget || parseCurrency(plan.purchaseBudget)
+      purchaseBudget: 0
     };
   }
 
@@ -612,20 +630,92 @@ function setupRecommendation() {
     </div>`;
   }
 
-  function createMatchCard(item, index, allocation) {
+  function createMatchCard(item, index) {
     const card = document.createElement("article");
     card.className = "match-card";
-    const allocationText = item.phase === "later" ? "입주 후" : item.phase === "confirm" ? "조건 확인" : allocation ? formatWon(allocation) : "예산 미입력";
     card.innerHTML = `
       <div class="match-rank"><span>${String(index + 1).padStart(2, "0")}</span><strong>${item.category}</strong></div>
       <div class="match-copy"><h3>${item.title}</h3><p>${item.reason}</p><small>고를 때: ${item.criteria}</small></div>
       <div class="match-side">
-        <div class="match-budget"><span>계획</span><strong>${allocationText}</strong></div>
         ${decisionButtons(item)}
       </div>
-      <div class="match-actions"><span>검색어: ${item.searchQuery}</span>${storeLinks(item)}</div>
+      <div class="match-actions"><span>직접 검색하거나, 실제 판매 데이터가 연결된 상품만 비교하세요.</span><button class="compare-product" type="button" data-product-compare="${item.searchQuery}">실제 상품 비교</button>${storeLinks(item)}</div>
+      <div class="live-product-result" data-live-product-result></div>
     `;
     return card;
+  }
+
+  function showLiveProducts(container, payload) {
+    container.replaceChildren();
+    const products = Array.isArray(payload.products) ? payload.products : [];
+    const status = document.createElement("p");
+    status.className = "live-product-status";
+
+    if (!products.length) {
+      status.textContent = payload.message || "현재 비교할 판매 데이터를 찾지 못했습니다. 판매처에서 최신 가격을 확인해 주세요.";
+      container.appendChild(status);
+      return;
+    }
+
+    status.textContent = `쿠팡 파트너스 상품 데이터 기준 · ${payload.updatedAt || "방금"} 조회 · 이 링크를 통한 구매 시 일정액의 수수료를 제공받을 수 있습니다.`;
+    container.appendChild(status);
+    const list = document.createElement("div");
+    list.className = "live-product-list";
+    products.forEach((product) => {
+      const card = document.createElement("article");
+      card.className = "live-product-card";
+      if (product.image) {
+        const image = document.createElement("img");
+        image.alt = "";
+        image.loading = "lazy";
+        image.src = product.image;
+        card.appendChild(image);
+      }
+      const copy = document.createElement("div");
+      const title = document.createElement("h4");
+      title.textContent = product.name || "상품명 없음";
+      const price = document.createElement("strong");
+      price.textContent = Number.isFinite(product.price) ? formatWon(product.price) : "가격 정보 없음";
+      copy.append(title, price);
+      if (product.badge) {
+        const badge = document.createElement("small");
+        badge.textContent = product.badge;
+        copy.appendChild(badge);
+      }
+      card.appendChild(copy);
+      if (product.url) {
+        const link = document.createElement("a");
+        link.href = product.url;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = "상품 보기";
+        card.appendChild(link);
+      }
+      list.appendChild(card);
+    });
+    container.appendChild(list);
+  }
+
+  async function loadLiveProducts(button) {
+    const card = button.closest(".match-card");
+    const container = card?.querySelector("[data-live-product-result]");
+    if (!container) return;
+    const query = button.dataset.productCompare;
+    button.disabled = true;
+    button.textContent = "상품 데이터 불러오는 중";
+    try {
+      const response = await fetch(`/api/coupang-products?query=${encodeURIComponent(query)}`);
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok && !payload.message) {
+        payload.message = "실제 판매 데이터 연결을 준비 중입니다. 확인된 가격 데이터가 없어서 가격을 표시하지 않습니다.";
+      }
+      showLiveProducts(container, payload);
+    } catch {
+      showLiveProducts(container, { message: "실시간 비교를 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요." });
+    } finally {
+      button.disabled = false;
+      button.textContent = "실제 상품 비교";
+    }
   }
 
   function renderRecommendations() {
@@ -645,7 +735,6 @@ function setupRecommendation() {
         return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
     const nowItems = ranked.filter((item) => item.phase === "now");
-    const totalScore = nowItems.reduce((sum, item) => sum + item.score, 0);
 
     summary.textContent = ranked.length
       ? `보유품을 제외한 ${ranked.length}개 중 지금 ${nowItems.length}개를 먼저 봐요.`
@@ -669,26 +758,32 @@ function setupRecommendation() {
       const group = document.createElement("section");
       group.className = "recommendation-group";
       const phaseInfo = recommendationPhases[phase];
-      group.innerHTML = `<div class="recommendation-group-head"><h3>${phaseInfo.title}</h3><p>${phaseInfo.description}</p></div>`;
       const list = document.createElement("div");
       list.className = "match-list";
-      groupItems.forEach((item, index) => {
-        const allocation = preferences.purchaseBudget && totalScore && item.phase === "now"
-          ? Math.round((preferences.purchaseBudget * item.score) / totalScore)
-          : 0;
-        list.appendChild(createMatchCard(item, index, allocation));
-      });
-      group.appendChild(list);
+      groupItems.forEach((item, index) => list.appendChild(createMatchCard(item, index)));
+      if (phase === "now") {
+        group.innerHTML = `<div class="recommendation-group-head"><h3>${phaseInfo.title}</h3><p>${phaseInfo.description}</p></div>`;
+        group.appendChild(list);
+      } else {
+        const details = document.createElement("details");
+        details.className = "recommendation-fold";
+        details.innerHTML = `<summary><span><strong>${phaseInfo.title}</strong><small>${phaseInfo.description}</small></span><b>${groupItems.length}개 보기</b></summary>`;
+        details.appendChild(list);
+        group.appendChild(details);
+      }
       results.appendChild(group);
     });
 
-    note.textContent = preferences.purchaseBudget
-      ? `입력한 ${formatWon(preferences.purchaseBudget)}은 지금 필요한 항목에만 임시로 나눈 값입니다. 실제 가격과 배송 조건은 판매처에서 확인하세요.`
-      : "예산은 선택값입니다. 항목을 고른 뒤 필요할 때만 전체 준비물 예산을 다시 정리하세요.";
+    note.textContent = "가격은 예산에서 나눠 만든 값이 아니라, 판매처 API가 돌려준 상품 데이터가 있을 때만 표시합니다. 전체 초기 비용은 별도 계산에서 정리하세요.";
     setupNaverShoppingLinks();
   }
 
   results.addEventListener("click", (event) => {
+    const compareButton = event.target.closest("[data-product-compare]");
+    if (compareButton) {
+      loadLiveProducts(compareButton);
+      return;
+    }
     const button = event.target.closest("[data-recommendation-decision]");
     if (!button) return;
     const itemId = button.dataset.itemId;
