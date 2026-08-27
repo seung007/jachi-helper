@@ -33,7 +33,7 @@
       </section>
 
       <section class="plan-result-intro" aria-label="반영한 조건">
-        <div><p class="eyebrow">반영한 내 조건</p><h2>이 조건으로 준비물을 나눴어요.</h2></div>
+        <div class="plan-result-label"><p class="eyebrow">반영한 내 조건</p><small>선택은 20분 후 자동 초기화됩니다.</small></div>
         <div class="condition-summary" id="recommendationConditions"></div>
         <a class="button secondary" href="/checklist">조건 수정</a>
       </section>
@@ -50,7 +50,7 @@
             <strong id="purchasePlanSummary" aria-live="polite">필요한 물건을 고르면 목록을 만들 수 있어요.</strong>
             <small id="purchasePlanStatus" aria-live="polite">판매처에서 최신 가격과 제품 구성을 확인하세요.</small>
           </div>
-          <button class="button secondary" id="copyPurchasePlan" type="button" disabled>구매 목록 복사</button>
+          <button class="button secondary" id="filterPurchasePlan" type="button" disabled>선택한 것만 보기</button>
         </section>
         <div id="recommendationResults"></div>
         <p class="recommendation-note" id="recommendationNote"></p>
@@ -58,7 +58,7 @@
 
       <section class="recommend-method" aria-labelledby="recommend-method-title">
         <p class="eyebrow">이 결과의 범위</p>
-        <h2 id="recommend-method-title">검색하기 전, 불필요한 구매를 먼저 뺍니다.</h2>
+        <h2 id="recommend-method-title">검색하기 전, 불필요한 구매를 먼저 제외합니다.</h2>
         <div>
           <p>보유품으로 고른 항목은 결과에서 제외했고, 요리·건조·운동복·향·수납 조건은 관련 항목의 순서와 구매 기준에만 반영했습니다.</p>
           <p>실제 상품 데이터가 연결되지 않은 항목에는 가격을 추정해 표시하지 않습니다. 검색은 최종 확인을 위한 다음 행동입니다.</p>

@@ -215,10 +215,30 @@ const legacyBudgetGroups = {
   setup: ["moving", "supplies", "oneTimeOther"]
 };
 
+const purchasePlanCacheTtlMs = 20 * 60 * 1000;
+
+function clearExpiredPurchasePlan(state) {
+  const expiresAt = Number(state.purchasePlanExpiresAt);
+  if (!expiresAt || expiresAt > Date.now()) return state;
+
+  const nextState = { ...state };
+  delete nextState.checklist;
+  delete nextState.planPreferences;
+  delete nextState.recommendationDecisions;
+  delete nextState.purchasePlanExpiresAt;
+
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(nextState));
+  } catch {
+    // Keep the current page usable even when browser storage is unavailable.
+  }
+  return nextState;
+}
+
 function readStoredState() {
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
-    return saved && typeof saved === "object" ? saved : {};
+    return saved && typeof saved === "object" ? clearExpiredPurchasePlan(saved) : {};
   } catch {
     return {};
   }
@@ -231,6 +251,10 @@ function writeStoredState(state) {
   } catch {
     return false;
   }
+}
+
+function writePurchasePlanState(state) {
+  return writeStoredState({ ...state, purchasePlanExpiresAt: Date.now() + purchasePlanCacheTtlMs });
 }
 
 function formatWon(value) {
@@ -445,7 +469,7 @@ function setupChecklist() {
 
   function saveChecklist() {
     const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
-    storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
+    storageNote.textContent = writePurchasePlanState(nextState) ? "선택은 20분 동안 이 기기에 저장됩니다." : "이 브라우저에서는 저장할 수 없습니다.";
   }
 
   function renderOwnedPicker() {
@@ -509,6 +533,7 @@ function setupChecklist() {
     renderOwnedPicker();
     const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
     delete nextState.recommendationDecisions;
+    delete nextState.purchasePlanExpiresAt;
     storageNote.textContent = writeStoredState(nextState) ? "선택과 구매 결정을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   });
 
@@ -522,9 +547,9 @@ function setupRecommendation() {
   const conditionSummary = document.querySelector("#recommendationConditions");
   const purchasePlanSummary = document.querySelector("#purchasePlanSummary");
   const purchasePlanStatus = document.querySelector("#purchasePlanStatus");
-  const copyPurchasePlan = document.querySelector("#copyPurchasePlan");
+  const filterPurchasePlan = document.querySelector("#filterPurchasePlan");
   if (!summary || !results || !note) return;
-  let currentPlan = [];
+  let showSelectedOnly = false;
 
   function getPreferences() {
     const savedPlan = readStoredState().planPreferences;
@@ -615,46 +640,26 @@ function setupRecommendation() {
   }
 
   function updatePurchasePlan(ranked, savedChecks) {
-    if (!purchasePlanSummary || !purchasePlanStatus || !copyPurchasePlan) return;
+    if (!purchasePlanSummary || !purchasePlanStatus || !filterPurchasePlan) return;
     const needed = ranked.filter((item) => item.decision === "candidate");
     const later = ranked.filter((item) => item.decision === "later");
     const ownedCount = Object.values(savedChecks).filter(Boolean).length;
-    currentPlan = needed;
 
     if (!needed.length) {
       purchasePlanSummary.textContent = "필요한 물건을 고르면 목록을 만들 수 있어요.";
       purchasePlanStatus.textContent = `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}로 정리됐어요.`;
-      copyPurchasePlan.disabled = true;
+      showSelectedOnly = false;
+      filterPurchasePlan.disabled = true;
+      filterPurchasePlan.textContent = "선택한 것만 보기";
       return;
     }
 
     purchasePlanSummary.textContent = `지금 살 물건 ${needed.length}개를 골랐어요.`;
-    purchasePlanStatus.textContent = `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}는 목록에서 뺐어요.`;
-    copyPurchasePlan.disabled = false;
-  }
-
-  async function copySelectedPlan() {
-    if (!currentPlan.length || !purchasePlanStatus) return;
-    const lines = currentPlan.map((item, index) => `${index + 1}. ${item.title} - 고를 때: ${item.criteria}`);
-    const text = ["첫 자취 구매 목록", "", ...lines, "", "제품 구성과 최신 가격은 판매처에서 확인하세요."].join("\n");
-
-    try {
-      await navigator.clipboard.writeText(text);
-      purchasePlanStatus.textContent = "구매 목록을 복사했습니다. 메모나 장바구니 준비에 붙여 넣어 보세요.";
-    } catch {
-      const temporaryInput = document.createElement("textarea");
-      temporaryInput.value = text;
-      temporaryInput.setAttribute("readonly", "");
-      temporaryInput.style.position = "fixed";
-      temporaryInput.style.opacity = "0";
-      document.body.appendChild(temporaryInput);
-      temporaryInput.select();
-      const copied = document.execCommand("copy");
-      temporaryInput.remove();
-      purchasePlanStatus.textContent = copied
-        ? "구매 목록을 복사했습니다. 메모나 장바구니 준비에 붙여 넣어 보세요."
-        : "복사하지 못했습니다. 브라우저 권한을 확인한 뒤 다시 시도하세요.";
-    }
+    purchasePlanStatus.textContent = showSelectedOnly
+      ? "선택한 물건만 보고 있어요. 판매처 검색에서 제품 구성과 최신 가격을 확인하세요."
+      : `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}는 목록에서 뺐어요.`;
+    filterPurchasePlan.disabled = false;
+    filterPurchasePlan.textContent = showSelectedOnly ? "전체 항목 보기" : "선택한 것만 보기";
   }
 
   function renderRecommendations() {
@@ -662,7 +667,7 @@ function setupRecommendation() {
     const storedState = readStoredState();
     const savedChecks = storedState.checklist || {};
     const decisions = storedState.recommendationDecisions || {};
-    const ranked = Object.entries(recommendationCatalog)
+    const allRanked = Object.entries(recommendationCatalog)
       .filter(([id]) => !savedChecks[id])
       .map((entry) => ({ ...rankItem(entry, preferences), decision: decisions[entry[0]] || "review" }))
       .map((item) => ({ ...item, phase: getPhase(item, preferences) }))
@@ -673,10 +678,13 @@ function setupRecommendation() {
         if (phaseDifference) return phaseDifference;
         return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
+    updatePurchasePlan(allRanked, savedChecks);
+    const ranked = showSelectedOnly ? allRanked.filter((item) => item.decision === "candidate") : allRanked;
     const nowItems = ranked.filter((item) => item.phase === "now");
-    updatePurchasePlan(ranked, savedChecks);
 
-    summary.textContent = ranked.length
+    summary.textContent = showSelectedOnly
+      ? `선택한 ${ranked.length}개만 보고 있어요.`
+      : ranked.length
       ? `보유품을 제외한 ${ranked.length}개 중 지금 ${nowItems.length}개를 먼저 봐요.`
       : "추천할 구매 항목이 없습니다";
     if (conditionSummary) {
@@ -733,10 +741,13 @@ function setupRecommendation() {
       nextDecisions[itemId] = nextDecision;
     }
 
-    writeStoredState({ ...state, checklist: nextChecks, recommendationDecisions: nextDecisions });
+    writePurchasePlanState({ ...state, checklist: nextChecks, recommendationDecisions: nextDecisions });
     renderRecommendations();
   });
-  copyPurchasePlan?.addEventListener("click", copySelectedPlan);
+  filterPurchasePlan?.addEventListener("click", () => {
+    showSelectedOnly = !showSelectedOnly;
+    renderRecommendations();
+  });
   renderRecommendations();
 }
 
