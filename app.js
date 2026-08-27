@@ -259,40 +259,6 @@ function formatAllCurrencyInputs() {
   document.querySelectorAll("[data-currency]").forEach(formatCurrencyInput);
 }
 
-function setupNaverShoppingLinks() {
-  const links = document.querySelectorAll("[data-naver-shopping-query]");
-  if (!links.length) return;
-
-  let notice = document.querySelector("#naverShoppingNotice");
-  if (!notice) {
-    notice = document.createElement("p");
-    notice.id = "naverShoppingNotice";
-    notice.className = "shopping-notice";
-    notice.setAttribute("aria-live", "polite");
-    document.body.appendChild(notice);
-  }
-
-  links.forEach((link) => {
-    if (link.dataset.naverShoppingBound === "true") return;
-    link.dataset.naverShoppingBound = "true";
-    link.addEventListener("click", () => {
-      const query = link.dataset.naverShoppingQuery;
-      if (!query || !navigator.clipboard?.writeText) return;
-
-      navigator.clipboard.writeText(query).then(
-        () => {
-          notice.textContent = `네이버쇼핑 검색어 '${query}'를 복사했습니다.`;
-          notice.classList.add("is-visible");
-        },
-        () => {
-          notice.textContent = "네이버쇼핑이 새 창에서 열렸습니다.";
-          notice.classList.add("is-visible");
-        }
-      );
-    });
-  });
-}
-
 function renderList(target, list) {
   if (!target) return;
   target.innerHTML = "";
@@ -600,15 +566,15 @@ function setupRecommendation() {
   function storeLinks(item) {
     return item.stores.map((store) => {
       if (store === "coupang") {
-        return `<a href="https://www.coupang.com/np/search?q=${encodeURIComponent(item.searchQuery)}" target="_blank" rel="noreferrer">쿠팡 검색</a>`;
+        return `<a href="https://www.coupang.com/np/search?q=${encodeURIComponent(item.searchQuery)}" target="_blank" rel="noreferrer" aria-label="쿠팡에서 ${item.searchQuery} 검색">쿠팡에서 검색</a>`;
       }
       if (store === "naver") {
-        return `<a href="https://shopping.naver.com/home" data-naver-shopping-query="${item.searchQuery}" target="_blank" rel="noreferrer">네이버쇼핑</a>`;
+        return `<a href="https://search.shopping.naver.com/search/all?query=${encodeURIComponent(item.searchQuery)}" target="_blank" rel="noreferrer" aria-label="네이버쇼핑에서 ${item.searchQuery} 검색">네이버쇼핑에서 검색</a>`;
       }
       if (store === "daiso") {
-        return '<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰</a>';
+        return '<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰 열기</a>';
       }
-      return '<a href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집</a>';
+      return '<a href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집 열기</a>';
     }).join("");
   }
 
@@ -749,7 +715,6 @@ function setupRecommendation() {
     });
 
     note.textContent = "가격은 판매처마다 수시로 달라 이 화면에 추정값을 표시하지 않습니다. 제품 구성과 최신 가격은 판매처에서 확인하고, 전체 초기 비용은 별도 계산에서 정리하세요.";
-    setupNaverShoppingLinks();
   }
 
   results.addEventListener("click", (event) => {
@@ -918,4 +883,3 @@ setupRecommendation();
 setupBudget();
 formatAllCurrencyInputs();
 setupResultTabs();
-setupNaverShoppingLinks();
