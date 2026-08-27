@@ -23,9 +23,9 @@
     <header class="topbar">
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
-        <a href="/budget">초기 비용</a>
         <a href="/checklist" aria-current="page">구매 계획</a>
         <a href="/recommend">결과 보기</a>
+        <a href="/budget">비용 계산</a>
       </nav>
     </header>
     <main class="subpage plan-page">
@@ -69,7 +69,14 @@
             </div>
           </details>
         </section>
-        <div class="plan-submit"><button class="button primary" type="submit">내 구매 계획 만들기</button><a class="text-link" href="/budget">초기 비용은 따로 계산하기</a></div>
+        <section class="plan-step plan-budget-step" aria-labelledby="purchase-budget-title">
+          <div>
+            <div class="plan-step-head"><span>03</span><div><p class="eyebrow">준비물 예산</p><h2 id="purchase-budget-title">구매에 쓸 금액만 적어 주세요.</h2></div></div>
+            <p class="plan-step-copy">선택 사항입니다. 보증금과 월세는 제외하고, 이번에 준비물을 사는 데 쓸 금액만 입력하세요.</p>
+          </div>
+          <label class="plan-budget-input" for="purchaseBudget">준비물 구매 예산 <span>선택</span><span class="amount-input"><input id="purchaseBudget" name="purchaseBudget" type="text" inputmode="numeric" enterkeyhint="done" data-currency placeholder="예: 500,000" /><b>원</b></span></label>
+        </section>
+        <div class="plan-submit"><button class="button primary" type="submit">내 구매 계획 보기</button><a class="text-link" href="/budget">보증금·월 지출은 따로 계산하기</a></div>
       </form>
     </main>
     <footer><strong>자취도우미</strong><span>처음 사는 자취 준비를 덜 헤매게.</span></footer>

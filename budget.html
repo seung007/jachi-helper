@@ -23,14 +23,14 @@
     <header class="topbar">
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
-        <a href="/budget" aria-current="page">초기 비용</a>
         <a href="/checklist">구매 계획</a>
         <a href="/recommend">결과 보기</a>
+        <a href="/budget" aria-current="page">비용 계산</a>
       </nav>
     </header>
     <main class="subpage">
       <section class="page-title">
-        <p class="eyebrow">첫 자취 비용 계산</p>
+        <p class="eyebrow">보조 도구 · 첫 자취 비용 계산</p>
         <h1>입주 전 돈과 매달 비용을 나눠 보세요.</h1>
         <p>금액만 입력하면 계약 전 필요한 돈, 매달 지출, 첫 달 부담을 바로 계산합니다.</p>
       </section>
@@ -68,23 +68,10 @@
             <p id="budgetNextStep">이 결과는 입력값의 합계와 차이입니다. 생활 가능 여부나 필요한 저축액을 판단하지 않습니다.</p>
           </div>
           <p class="planner-note">보증금·계약·이사·준비물은 입주 전 입력 합계에 포함됩니다. 비어 있는 칸은 0원으로 계산하며, 비상자금·대출 상환·변동지출·수입 변동은 반영하지 않습니다.</p>
-          <div class="budget-primary-actions"><a class="button primary" id="budgetRecommendLink" href="/checklist">준비물 먼저 정하기</a><button class="button secondary" id="printBudget" type="button">계산표 PDF로 저장</button></div>
+          <div class="budget-primary-actions"><a class="button primary" id="budgetRecommendLink" href="/checklist">준비물 구매 계획 만들기</a><button class="button secondary" id="printBudget" type="button">계산표 PDF로 저장</button></div>
           <div class="result-actions"><span id="budgetStorageNote">입력하면 20분 동안 저장됩니다.</span><button class="button secondary" id="resetBudget" type="button">예산 초기화</button></div>
         </aside>
       </section>
-      <section class="shop-links" aria-labelledby="shop-links-title">
-        <div class="shop-links-head">
-          <div><p class="eyebrow">판매처 둘러보기</p><h2 id="shop-links-title">준비물을 고른 뒤 판매처를 둘러보세요</h2></div>
-          <p>이 화면에서는 특정 제품을 정하지 않았습니다. 필요한 물건을 고르면 구매 계획에서 바로 검색할 수 있어요.</p>
-        </div>
-        <div class="shop-grid">
-          <a class="shop-card" href="https://shopping.naver.com/home" target="_blank" rel="noreferrer"><span><strong>네이버쇼핑</strong><small>홈페이지 열기</small></span><b>열기</b></a>
-          <a class="shop-card" href="https://www.coupang.com/" target="_blank" rel="noreferrer"><span><strong>쿠팡</strong><small>홈페이지 열기</small></span><b>열기</b></a>
-          <a class="shop-card" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer"><span><strong>다이소몰</strong><small>홈페이지 열기</small></span><b>열기</b></a>
-          <a class="shop-card" href="https://ohou.se/store" target="_blank" rel="noreferrer"><span><strong>오늘의집</strong><small>홈페이지 열기</small></span><b>열기</b></a>
-        </div>
-      </section>
-      <p class="page-cta"><a class="button primary" href="/checklist">준비물 체크리스트 보기</a> <a class="button secondary" href="/recommend">내 조건으로 추천받기</a></p>
     </main>
     <footer><strong>자취도우미</strong><span>입력한 기준으로 내 자취 예산을 정리하기.</span></footer>
     <script>

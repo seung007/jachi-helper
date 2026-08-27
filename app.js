@@ -478,6 +478,7 @@ function setupChecklist() {
   const savedPlan = state.planPreferences && typeof state.planPreferences === "object"
     ? state.planPreferences
     : {};
+  const requestedPurchaseBudget = parseCurrency(new URLSearchParams(window.location.search).get("purchaseBudget"));
   const groups = recommendationGroups.map((group) => ({
     title: group.category,
     items: group.items.map(([key, title]) => ({ id: `${group.prefix}-${key}`, title }))
@@ -490,7 +491,9 @@ function setupChecklist() {
   if (form) {
     Object.entries(planDefaults).forEach(([name, fallback]) => {
       const input = form.elements[name];
-      const value = savedPlan[name] ?? fallback ?? "";
+      const value = name === "purchaseBudget" && requestedPurchaseBudget
+        ? requestedPurchaseBudget
+        : savedPlan[name] ?? fallback ?? "";
       if (input instanceof RadioNodeList) input.value = String(value);
       else if (input) input.value = value ? String(value) : "";
     });
@@ -521,7 +524,7 @@ function setupChecklist() {
       workout: data.get("workout") || planDefaults.workout,
       fragrance: data.get("fragrance") || planDefaults.fragrance,
       storage: data.get("storage") || planDefaults.storage,
-      purchaseBudget: 0
+      purchaseBudget: parseCurrency(data.get("purchaseBudget"))
     };
   }
 
@@ -627,7 +630,7 @@ function setupRecommendation() {
     return {
       ...planDefaults,
       ...plan,
-      purchaseBudget: 0
+      purchaseBudget: parseCurrency(plan.purchaseBudget)
     };
   }
 
@@ -709,15 +712,18 @@ function setupRecommendation() {
     return card;
   }
 
-  function updatePurchasePlan(ranked, savedChecks) {
+  function updatePurchasePlan(ranked, savedChecks, preferences) {
     if (!purchasePlanSummary || !purchasePlanStatus || !filterPurchasePlan) return;
     const needed = ranked.filter((item) => item.decision === "candidate");
     const later = ranked.filter((item) => item.decision === "later");
     const ownedCount = Object.values(savedChecks).filter(Boolean).length;
+    const budgetPrefix = preferences.purchaseBudget
+      ? `준비물 예산 ${formatWon(preferences.purchaseBudget)} · `
+      : "";
 
     if (!needed.length) {
       purchasePlanSummary.textContent = "필요한 물건을 고르면 목록을 만들 수 있어요.";
-      purchasePlanStatus.textContent = `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}로 정리됐어요.`;
+      purchasePlanStatus.textContent = `${budgetPrefix}이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}로 정리됐어요.`;
       showSelectedOnly = false;
       filterPurchasePlan.disabled = true;
       filterPurchasePlan.textContent = "선택한 것만 보기";
@@ -726,8 +732,8 @@ function setupRecommendation() {
 
     purchasePlanSummary.textContent = `지금 살 물건 ${needed.length}개를 골랐어요.`;
     purchasePlanStatus.textContent = showSelectedOnly
-      ? "선택한 물건만 보고 있어요. 판매처 검색에서 제품 구성과 최신 가격을 확인하세요."
-      : `이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}는 목록에서 뺐어요.`;
+      ? `${budgetPrefix}선택한 물건만 보고 있어요. 판매처에서 최신 가격을 확인하세요.`
+      : `${budgetPrefix}이미 있는 물건 ${ownedCount}개${later.length ? `, 나중에 볼 물건 ${later.length}개` : ""}는 목록에서 뺐어요.`;
     filterPurchasePlan.disabled = false;
     filterPurchasePlan.textContent = showSelectedOnly ? "전체 항목 보기" : "선택한 것만 보기";
   }
@@ -767,7 +773,7 @@ function setupRecommendation() {
         if (phaseDifference) return phaseDifference;
         return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
-    updatePurchasePlan(allRanked, savedChecks);
+    updatePurchasePlan(allRanked, savedChecks, preferences);
     const ranked = showSelectedOnly ? allRanked.filter((item) => item.decision === "candidate") : allRanked;
     const nowItems = ranked.filter((item) => item.phase === "now");
 
@@ -778,6 +784,7 @@ function setupRecommendation() {
       : "추천할 구매 항목이 없습니다";
     if (conditionSummary) {
       const labels = Object.entries(planConditionLabels).map(([name, labels]) => labels[preferences[name]]).filter(Boolean);
+      if (preferences.purchaseBudget) labels.push(`준비물 예산 ${formatWon(preferences.purchaseBudget)}`);
       conditionSummary.innerHTML = labels.map((label) => `<span>${label}</span>`).join("") || "조건을 아직 고르지 않았어요.";
     }
     results.innerHTML = "";
@@ -915,8 +922,11 @@ function setupBudget() {
     }
 
     nextStep.textContent = "비상자금, 대출 상환, 변동지출, 수입 변동을 입력하지 않았으므로 이 결과만으로 여유 여부나 목표 저축액을 판단하지 않습니다.";
-    recommendLink.href = "/checklist";
-    recommendLink.textContent = "준비물 먼저 정하기";
+    const setupBudget = getBudgetValue("setup");
+    recommendLink.href = setupBudget ? `/checklist?purchaseBudget=${setupBudget}` : "/checklist";
+    recommendLink.textContent = setupBudget
+      ? `${formatWon(setupBudget)}으로 구매 계획 만들기`
+      : "준비물 구매 계획 만들기";
   }
 
   function saveBudget() {

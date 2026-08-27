@@ -189,6 +189,18 @@ h2 {
   max-width: 720px;
 }
 
+.hero-helper-link {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 18px 0 0;
+}
+
+.hero-helper-link a {
+  border-bottom: 1px solid var(--green);
+  color: var(--green);
+}
+
 .cost-preview {
   background: var(--white);
   border: 1px solid var(--line);
@@ -398,7 +410,7 @@ h2 {
 .home-flow-grid {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .home-flow-grid a {
@@ -465,6 +477,10 @@ h2 {
   animation-delay: 280ms;
 }
 
+.home-hero .hero-copy > *:nth-child(5) {
+  animation-delay: 340ms;
+}
+
 .home-flow .section-head {
   animation-delay: 380ms;
 }
@@ -479,6 +495,10 @@ h2 {
 
 .home-flow-grid a:nth-child(3) {
   animation-delay: 560ms;
+}
+
+.home-flow-grid a:nth-child(4) {
+  animation-delay: 620ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1492,8 +1512,31 @@ li {
   font-weight: 800;
 }
 
+.plan-budget-input > span:first-of-type {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 5px;
+}
+
 .plan-budget-input .amount-input {
   margin-top: 8px;
+}
+
+.plan-budget-input .amount-input input {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 48px;
+  padding-left: 14px;
+  width: 100%;
+}
+
+.plan-budget-input .amount-input input:focus {
+  border-color: var(--green);
+  outline: 3px solid var(--sky);
+  outline-offset: 1px;
 }
 
 .plan-submit {
@@ -2442,9 +2485,12 @@ footer strong {
   .checklist-grid,
   .detailed-checklist,
   .feature-grid,
-  .advice-grid,
-  .home-flow-grid {
+  .advice-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-flow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .result-tabs {
@@ -2654,6 +2700,7 @@ footer strong {
   .budget-form,
   .stage-options,
   .stage-links,
+  .home-flow-grid,
   .owned-options,
   .planner-next-grid,
   .recommendation-grid {
