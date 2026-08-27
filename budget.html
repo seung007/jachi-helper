@@ -30,22 +30,29 @@
     </header>
     <main class="subpage">
       <section class="page-title">
-        <p class="eyebrow">계약 전 먼저 볼 금액</p>
-        <h1>계약 전에 필요한 현금을 나눠 보세요</h1>
-        <p>보증금만 보면 계약·이사·준비물과 첫 달 지출이 섞입니다. 필요한 현금과 준비물 예산을 따로 정리해, 구매 계획이나 공유할 계산표로 이어가세요.</p>
+        <p class="eyebrow">첫 자취 비용 계산</p>
+        <h1>입주 전 돈과 매달 비용을 나눠 보세요.</h1>
+        <p>금액만 입력하면 계약 전 필요한 돈, 매달 지출, 첫 달 부담을 바로 계산합니다.</p>
       </section>
       <section class="budget-tool" aria-label="자취 예산 입력과 결과">
         <form class="budget-form budget-simple" id="budgetForm">
-          <section class="budget-input-group"><h2>입주 전 자금</h2><div class="budget-input-grid">
-            <label class="budget-input-card"><span>보증금</span><small>계약에 필요한 보증금</small><span class="amount-input"><input name="deposit" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>계약·이사 비용</span><small>중개·이사·청소 등을 합쳐서</small><span class="amount-input"><input name="contract" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>준비물 비용</span><small>입주 전 구매 예정 금액</small><span class="amount-input"><input name="setup" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
-          </div></section>
-          <section class="budget-input-group"><h2>매달 비용</h2><div class="budget-input-grid">
-            <label class="budget-input-card"><span>월 수입</span><small>월에 들어오는 총 금액</small><span class="amount-input"><input name="income" type="text" inputmode="numeric" data-currency placeholder="예: 1,800,000" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>월 주거비</span><small>월세와 관리비를 합쳐서</small><span class="amount-input"><input name="housing" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
-            <label class="budget-input-card"><span>월 생활비</span><small>식비·교통·통신·공과금 등을 합쳐서</small><span class="amount-input"><input name="living" type="text" inputmode="numeric" data-currency placeholder="0" /><b>원</b></span></label>
-          </div></section>
+          <div class="budget-form-head"><div><p class="eyebrow">내 현금흐름</p><h2>숫자만 차례로 입력하세요.</h2></div><small>Enter를 누르면 다음 칸으로 이동합니다.</small></div>
+          <section class="budget-entry-group" aria-labelledby="move-in-budget-title">
+            <div class="budget-entry-heading"><span>한 번</span><div><h3 id="move-in-budget-title">입주 전 필요한 돈</h3><p>계약 전에 준비할 현금입니다.</p></div></div>
+            <div class="budget-entry-list">
+              <label class="budget-entry-row"><span><strong>보증금</strong><small>계약에 필요한 보증금</small></span><span class="amount-input"><input name="deposit" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="0" /><b>원</b></span></label>
+              <label class="budget-entry-row"><span><strong>계약·이사 비용</strong><small>중개·이사·청소 등을 합쳐서</small></span><span class="amount-input"><input name="contract" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="0" /><b>원</b></span></label>
+              <label class="budget-entry-row"><span><strong>준비물 비용</strong><small>입주 전 구매 예정 금액</small></span><span class="amount-input"><input name="setup" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="0" /><b>원</b></span></label>
+            </div>
+          </section>
+          <section class="budget-entry-group" aria-labelledby="monthly-budget-title">
+            <div class="budget-entry-heading"><span>매달</span><div><h3 id="monthly-budget-title">들어오고 나가는 돈</h3><p>한 달 생활이 가능한지 확인합니다.</p></div></div>
+            <div class="budget-entry-list">
+              <label class="budget-entry-row"><span><strong>월 수입</strong><small>월에 들어오는 총 금액</small></span><span class="amount-input"><input name="income" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="예: 1,800,000" /><b>원</b></span></label>
+              <label class="budget-entry-row"><span><strong>월 주거비</strong><small>월세와 관리비를 합쳐서</small></span><span class="amount-input"><input name="housing" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="0" /><b>원</b></span></label>
+              <label class="budget-entry-row"><span><strong>월 생활비</strong><small>식비·교통·통신·공과금 등을 합쳐서</small></span><span class="amount-input"><input name="living" type="text" inputmode="numeric" enterkeyhint="done" data-currency placeholder="0" /><b>원</b></span></label>
+            </div>
+          </section>
         </form>
         <aside class="budget-summary" aria-live="polite">
           <p class="eyebrow">계산 결과</p>
@@ -71,7 +78,7 @@
           <p>각 판매처의 가격, 배송 조건, 재고는 이동한 뒤 직접 확인하세요.</p>
         </div>
         <div class="shop-grid">
-          <a class="shop-card" href="https://shopping.naver.com/home" data-naver-shopping-query="자취 준비물" target="_blank" rel="noreferrer"><span><strong>네이버쇼핑</strong><small>자취 준비물 검색어 복사</small></span><b>열기</b></a>
+          <a class="shop-card" href="https://search.shopping.naver.com/search/all?query=%EC%9E%90%EC%B7%A8%20%EC%A4%80%EB%B9%84%EB%AC%BC" target="_blank" rel="noreferrer"><span><strong>네이버쇼핑</strong><small>자취 준비물 직접 검색</small></span><b>열기</b></a>
           <a class="shop-card" href="https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8%20%EC%A4%80%EB%B9%84%EB%AC%BC" target="_blank" rel="noreferrer"><span><strong>쿠팡</strong><small>자취 준비물 검색</small></span><b>열기</b></a>
           <a class="shop-card" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer"><span><strong>다이소몰</strong><small>생활 소모품 둘러보기</small></span><b>열기</b></a>
           <a class="shop-card" href="https://ohou.se/store" target="_blank" rel="noreferrer"><span><strong>오늘의집</strong><small>생활·가구 둘러보기</small></span><b>열기</b></a>

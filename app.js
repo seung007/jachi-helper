@@ -825,6 +825,19 @@ function setupBudget() {
     saveBudget();
   });
 
+  const focusOrder = ["deposit", "contract", "setup", "income", "housing", "living"];
+  budgetForm.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" || event.isComposing) return;
+    const currentIndex = focusOrder.indexOf(event.target.name);
+    if (currentIndex === -1) return;
+    event.preventDefault();
+    const nextInput = budgetForm.elements[focusOrder[currentIndex + 1]];
+    if (nextInput) {
+      nextInput.focus();
+      nextInput.select();
+    }
+  });
+
   resetButton?.addEventListener("click", () => {
     budgetForm.reset();
     const nextState = readStoredState();

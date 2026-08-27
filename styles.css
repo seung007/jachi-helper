@@ -2070,8 +2070,8 @@ li {
 .budget-tool {
   align-items: start;
   display: grid;
-  gap: 18px;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  gap: 20px;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
 }
 
 .budget-form {
@@ -2084,40 +2084,109 @@ li {
   grid-template-columns: 1fr;
 }
 
-.budget-input-group {
-  background: transparent;
-  border: 0;
-  padding: 0;
-}
-
-.budget-input-group h2 {
-  font-size: 19px;
-  margin: 0 0 10px;
-}
-
-.budget-input-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.budget-input-card {
+.budget-form-head,
+.budget-entry-group {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 8px;
-  color: var(--ink);
-  padding: 18px;
 }
 
-.budget-input-card span {
-  font-size: 17px;
-  font-weight: 900;
+.budget-form-head {
+  align-items: end;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 16px 18px;
 }
 
-.budget-input-card small {
+.budget-form-head .eyebrow {
+  margin-bottom: 3px;
+}
+
+.budget-form-head h2 {
+  font-size: 21px;
+  margin-bottom: 0;
+}
+
+.budget-form-head > small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.budget-entry-group {
+  overflow: hidden;
+}
+
+.budget-entry-heading {
+  align-items: center;
+  background: #f5f8f6;
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.budget-entry-heading > span {
+  align-items: center;
+  background: var(--mint);
+  border-radius: 4px;
+  color: var(--green);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 8px;
+}
+
+.budget-entry-heading h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.budget-entry-heading p {
+  color: var(--muted);
+  font-size: 12px;
   font-weight: 700;
+  margin: 2px 0 0;
+}
+
+.budget-entry-list {
+  display: grid;
+}
+
+.budget-entry-row {
+  align-items: center;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 220px);
+  padding: 12px 16px;
+}
+
+.budget-entry-row + .budget-entry-row {
+  border-top: 1px solid var(--line);
+}
+
+.budget-entry-row > span:first-child {
+  display: grid;
+  gap: 2px;
+}
+
+.budget-entry-row strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.budget-entry-row small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.budget-entry-row .amount-input input {
+  min-height: 44px;
 }
 
 .amount-input {
@@ -2163,6 +2232,7 @@ li {
 .budget-summary-grid {
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .budget-summary-grid div {
@@ -2180,11 +2250,17 @@ li {
 }
 
 .budget-summary-grid strong {
-  font-size: 24px;
+  font-size: 20px;
+  white-space: nowrap;
 }
 
 .budget-summary-grid div:first-child {
   background: var(--mint);
+  grid-column: 1 / -1;
+}
+
+.budget-summary-grid div:first-child strong {
+  font-size: 26px;
 }
 
 .budget-summary .planner-note {
@@ -2313,7 +2389,7 @@ footer strong {
     position: static;
   }
 
-  .budget-input-card,
+  .budget-entry-group,
   .budget-summary {
     break-inside: avoid;
   }
@@ -2373,10 +2449,6 @@ footer strong {
     position: static;
   }
 
-  .budget-input-grid {
-    grid-template-columns: 1fr;
-  }
-
   .plan-conditions {
     grid-template-columns: 1fr;
   }
@@ -2391,6 +2463,14 @@ footer strong {
 
   .budget-summary {
     position: static;
+  }
+
+  .budget-form-head {
+    display: grid;
+  }
+
+  .budget-form-head > small {
+    text-align: left;
   }
 
   .stage-picker,
@@ -2446,6 +2526,16 @@ footer strong {
   .result-actions .button {
     justify-content: center;
     width: 100%;
+  }
+
+  .budget-entry-row {
+    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) 154px;
+    padding: 10px 14px;
+  }
+
+  .budget-entry-row .amount-input input {
+    min-height: 42px;
   }
 
   .recommend-results-head {
