@@ -842,22 +842,22 @@ function setupBudget() {
 
     moveInCash.textContent = formatWon(initialCosts);
     monthlyTotal.textContent = formatWon(monthlyExpenses);
-    remaining.textContent = balance >= 0 ? formatWon(balance) : `${formatWon(Math.abs(balance))} 부족`;
+    remaining.textContent = balance >= 0 ? formatWon(balance) : `-${formatWon(Math.abs(balance))}`;
     remaining.style.color = balance < 0 ? "#c83d2d" : "#1d6f51";
     firstMonth.textContent = formatWon(initialCosts + monthlyExpenses);
 
     if (!initialCosts && !income && !monthlyExpenses) {
-      verdict.textContent = "보증금, 계약·이사, 준비물 비용을 적으면 계약 전에 필요한 현금을 한 번에 볼 수 있습니다.";
+      verdict.textContent = "입력한 입주 전 비용과 월 수입·지출을 각각 합산해 보여 줍니다.";
     } else if (income || monthlyExpenses) {
       const monthlyMessage = balance >= 0
-        ? `월 수입에서 ${formatWon(balance)}이 남는 것으로 계산됩니다.`
-        : `월 수입보다 ${formatWon(Math.abs(balance))}이 더 필요한 것으로 계산됩니다.`;
-      verdict.textContent = `입주 첫 달에는 ${formatWon(initialCosts + monthlyExpenses)}을 준비해야 합니다. ${monthlyMessage}`;
+        ? `월 수입 - 월 지출은 ${formatWon(balance)}입니다.`
+        : `월 수입 - 월 지출은 -${formatWon(Math.abs(balance))}입니다.`;
+      verdict.textContent = `입주 전·첫 달 입력 합계는 ${formatWon(initialCosts + monthlyExpenses)}입니다. ${monthlyMessage}`;
     } else {
-      verdict.textContent = `계약 전에 ${formatWon(initialCosts)}을 확보해야 합니다. 월 수입과 지출을 더하면 첫 달 부담도 함께 확인할 수 있습니다.`;
+      verdict.textContent = `입주 전 입력 합계는 ${formatWon(initialCosts)}입니다. 월 수입과 지출을 입력하면 그 차이도 함께 볼 수 있습니다.`;
     }
 
-    nextStep.textContent = "준비물은 먼저 필요한 것만 정한 뒤, 실제 판매처 금액을 반영해 다시 확인하세요.";
+    nextStep.textContent = "비상자금, 대출 상환, 변동지출, 수입 변동을 입력하지 않았으므로 이 결과만으로 여유 여부나 목표 저축액을 판단하지 않습니다.";
     recommendLink.href = "/checklist";
     recommendLink.textContent = "준비물 먼저 정하기";
   }

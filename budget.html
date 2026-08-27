@@ -46,7 +46,7 @@
             </div>
           </section>
           <section class="budget-entry-group" aria-labelledby="monthly-budget-title">
-            <div class="budget-entry-heading"><span>매달</span><div><h3 id="monthly-budget-title">들어오고 나가는 돈</h3><p>한 달 생활이 가능한지 확인합니다.</p></div></div>
+            <div class="budget-entry-heading"><span>매달</span><div><h3 id="monthly-budget-title">들어오고 나가는 돈</h3><p>월 수입과 직접 입력한 지출의 차이를 계산합니다.</p></div></div>
             <div class="budget-entry-list">
               <label class="budget-entry-row"><span><strong>월 수입</strong><small>월에 들어오는 총 금액</small></span><span class="amount-input"><input name="income" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="예: 1,800,000" /><b>원</b></span></label>
               <label class="budget-entry-row"><span><strong>월 주거비</strong><small>월세와 관리비를 합쳐서</small></span><span class="amount-input"><input name="housing" type="text" inputmode="numeric" enterkeyhint="next" data-currency placeholder="0" /><b>원</b></span></label>
@@ -57,17 +57,17 @@
         <aside class="budget-summary" aria-live="polite">
           <p class="eyebrow">계산 결과</p>
           <div class="budget-summary-grid">
-            <div><span>입주 전 확보 금액</span><strong id="budgetMoveInCash">0원</strong></div>
+            <div><span>입주 전 입력 합계</span><strong id="budgetMoveInCash">0원</strong></div>
             <div><span>매달 지출</span><strong id="budgetMonthlyTotal">0원</strong></div>
-            <div><span>수입에서 남는 금액</span><strong id="budgetRemaining">0원</strong></div>
-            <div><span>첫 달 함께 준비할 금액</span><strong id="budgetFirstMonth">0원</strong></div>
+            <div><span>월 수입 - 월 지출</span><strong id="budgetRemaining">0원</strong></div>
+            <div><span>입주 전·첫 달 입력 합계</span><strong id="budgetFirstMonth">0원</strong></div>
           </div>
           <p class="budget-verdict" id="budgetVerdict" aria-live="polite"></p>
           <div class="budget-next-step">
-            <span>계산 다음 단계</span>
-            <p id="budgetNextStep">준비물은 먼저 필요한 것만 정한 뒤, 실제 판매처 금액을 반영해 다시 확인하세요.</p>
+            <span>계산의 범위</span>
+            <p id="budgetNextStep">이 결과는 입력값의 합계와 차이입니다. 생활 가능 여부나 필요한 저축액을 판단하지 않습니다.</p>
           </div>
-          <p class="planner-note">입주 전 확보 금액에는 보증금이 포함됩니다. 비어 있는 칸은 0원으로 계산하며, 실제 계약 비용과 청구 금액은 별도로 확인하세요.</p>
+          <p class="planner-note">보증금·계약·이사·준비물은 입주 전 입력 합계에 포함됩니다. 비어 있는 칸은 0원으로 계산하며, 비상자금·대출 상환·변동지출·수입 변동은 반영하지 않습니다.</p>
           <div class="budget-primary-actions"><a class="button primary" id="budgetRecommendLink" href="/checklist">준비물 먼저 정하기</a><button class="button secondary" id="printBudget" type="button">계산표 PDF로 저장</button></div>
           <div class="result-actions"><span id="budgetStorageNote">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetBudget" type="button">예산 초기화</button></div>
         </aside>

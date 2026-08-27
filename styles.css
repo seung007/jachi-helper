@@ -2255,7 +2255,8 @@ li {
 
 .budget-summary-grid strong {
   font-size: 20px;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .budget-summary-grid div:first-child {
