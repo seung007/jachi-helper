@@ -398,6 +398,116 @@ h2 {
   padding: 24px clamp(20px, 7vw, 96px) 56px;
 }
 
+.home-preview {
+  padding: 12px clamp(20px, 7vw, 96px) 36px;
+}
+
+.home-preview-head {
+  align-items: end;
+  display: flex;
+  gap: 28px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.home-preview-head > div {
+  max-width: 760px;
+}
+
+.home-preview-head h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.home-preview-head p:last-child {
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.home-preview-head .button {
+  flex: 0 0 auto;
+  justify-content: center;
+}
+
+.home-preview-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-preview-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.home-preview-image {
+  aspect-ratio: 16 / 7;
+  background-image: url("/assets/checklist-categories.png");
+  background-repeat: no-repeat;
+  background-size: 200% auto;
+}
+
+.home-preview-copy {
+  display: grid;
+  gap: 7px;
+  padding: 16px;
+}
+
+.home-preview-copy > span {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.home-preview-copy h3 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.home-preview-copy p {
+  line-height: 1.45;
+  margin: 0;
+}
+
+.home-preview-copy small {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.home-preview-stores {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 5px;
+  padding-top: 12px;
+}
+
+.home-preview-stores em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  margin-right: auto;
+}
+
+.home-preview-stores a {
+  border-bottom: 1px solid var(--green);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.home-preview-fallback {
+  border-left: 4px solid var(--green);
+  padding-left: 14px;
+}
+
 .home-flow .section-head {
   margin-bottom: 18px;
 }
@@ -456,6 +566,8 @@ h2 {
 }
 
 .home-hero .hero-copy > *,
+.home-preview-head,
+.home-preview-item,
 .home-flow .section-head,
 .home-flow-grid a {
   animation: home-enter 520ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
@@ -482,27 +594,45 @@ h2 {
 }
 
 .home-flow .section-head {
+  animation-delay: 680ms;
+}
+
+.home-preview-head {
   animation-delay: 380ms;
 }
 
-.home-flow-grid a:nth-child(1) {
+.home-preview-item:nth-child(1) {
   animation-delay: 440ms;
 }
 
-.home-flow-grid a:nth-child(2) {
+.home-preview-item:nth-child(2) {
   animation-delay: 500ms;
 }
 
-.home-flow-grid a:nth-child(3) {
+.home-preview-item:nth-child(3) {
   animation-delay: 560ms;
 }
 
+.home-flow-grid a:nth-child(1) {
+  animation-delay: 740ms;
+}
+
+.home-flow-grid a:nth-child(2) {
+  animation-delay: 800ms;
+}
+
+.home-flow-grid a:nth-child(3) {
+  animation-delay: 860ms;
+}
+
 .home-flow-grid a:nth-child(4) {
-  animation-delay: 620ms;
+  animation-delay: 920ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .home-hero .hero-copy > *,
+  .home-preview-head,
+  .home-preview-item,
   .home-flow .section-head,
   .home-flow-grid a {
     animation: none;
@@ -2493,6 +2623,14 @@ footer strong {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .home-preview-head {
+    align-items: start;
+  }
+
+  .home-preview-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .result-tabs {
     border-bottom: 1px solid var(--line);
     display: flex;
@@ -2573,6 +2711,7 @@ footer strong {
   .hero,
   .planner,
   .feature-map,
+  .home-preview,
   .home-flow,
   .seo-band,
   .subpage {
@@ -2590,12 +2729,14 @@ footer strong {
   }
 
   .hero-actions,
+  .home-preview-head,
   .result-actions {
     align-items: stretch;
     flex-direction: column;
   }
 
   .hero-actions .button,
+  .home-preview-head .button,
   .result-actions .button {
     justify-content: center;
     width: 100%;
@@ -2701,6 +2842,7 @@ footer strong {
   .stage-options,
   .stage-links,
   .home-flow-grid,
+  .home-preview-grid,
   .owned-options,
   .planner-next-grid,
   .recommendation-grid {

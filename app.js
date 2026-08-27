@@ -198,6 +198,12 @@ const immediateItemIds = new Set([
   "life-powerstrip"
 ]);
 
+const homePreviewItems = [
+  { id: "bath-towel", context: "입주 첫날", imagePosition: "100% 0%" },
+  { id: "kitchen-pot", context: "요리를 자주 한다면", imagePosition: "0% 100%" },
+  { id: "laundry-dryer", context: "실내 건조라면", imagePosition: "100% 100%" }
+];
+
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
 const budgetFieldNames = [
@@ -326,6 +332,51 @@ function parseCurrency(value) {
 function formatCurrencyInput(input) {
   const digits = input.value.replace(/[^\d]/g, "");
   input.value = digits ? Number(digits).toLocaleString("ko-KR") : "";
+}
+
+function createStoreSearchLink(store, searchQuery) {
+  const query = encodeURIComponent(searchQuery);
+  if (store === "coupang") {
+    return `<a href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" aria-label="쿠팡에서 ${searchQuery} 검색">쿠팡</a>`;
+  }
+  if (store === "naver") {
+    return `<a href="https://search.shopping.naver.com/search/all?query=${query}" target="_blank" rel="noreferrer" aria-label="네이버쇼핑에서 ${searchQuery} 검색">네이버쇼핑</a>`;
+  }
+  if (store === "daiso") {
+    return '<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰</a>';
+  }
+  return '<a href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집</a>';
+}
+
+function setupHomePreview() {
+  const previewList = document.querySelector("#homePreviewList");
+  if (!previewList) return;
+
+  homePreviewItems.forEach(({ id, context, imagePosition }) => {
+    const item = recommendationCatalog[id];
+    if (!item) return;
+    const signal = itemSignals[id];
+    const reason = signal?.reason || (item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "생활 조건을 확인한 뒤 결정할 항목");
+    const criteria = signal?.criteria || categoryCriteria[item.category];
+    const searchQuery = `자취 ${item.title}`;
+    const stores = item.stores
+      .filter((store) => store === "naver" || store === "coupang")
+      .map((store) => createStoreSearchLink(store, searchQuery))
+      .join("");
+    const card = document.createElement("article");
+    card.className = "home-preview-item";
+    card.innerHTML = `
+      <div class="home-preview-image" role="img" aria-label="${item.category} 준비물 예시" style="background-position: ${imagePosition}"></div>
+      <div class="home-preview-copy">
+        <span>${context}</span>
+        <h3>${item.title}</h3>
+        <p>${reason}</p>
+        <small>${criteria}</small>
+        <div class="home-preview-stores"><em>최신 가격 확인</em>${stores}</div>
+      </div>
+    `;
+    previewList.append(card);
+  });
 }
 
 function setupCurrencyInputs() {
@@ -662,18 +713,7 @@ function setupRecommendation() {
   }
 
   function storeLinks(item) {
-    return item.stores.map((store) => {
-      if (store === "coupang") {
-        return `<a href="https://www.coupang.com/np/search?q=${encodeURIComponent(item.searchQuery)}" target="_blank" rel="noreferrer" aria-label="쿠팡에서 ${item.searchQuery} 검색">쿠팡에서 검색</a>`;
-      }
-      if (store === "naver") {
-        return `<a href="https://search.shopping.naver.com/search/all?query=${encodeURIComponent(item.searchQuery)}" target="_blank" rel="noreferrer" aria-label="네이버쇼핑에서 ${item.searchQuery} 검색">네이버쇼핑에서 검색</a>`;
-      }
-      if (store === "daiso") {
-        return '<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰 열기</a>';
-      }
-      return '<a href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집 열기</a>';
-    }).join("");
+    return item.stores.map((store) => createStoreSearchLink(store, item.searchQuery)).join("");
   }
 
   const recommendationPhases = {
@@ -1009,6 +1049,7 @@ function setupResultTabs() {
 
 plannerForm?.addEventListener("input", renderPlanner);
 document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
+setupHomePreview();
 setupPlannerStage();
 renderPlanner();
 setupChecklist();
