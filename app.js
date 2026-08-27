@@ -145,11 +145,11 @@ const recommendationCatalog = Object.fromEntries(
 );
 
 const planDefaults = {
-  cooking: "often",
-  drying: "indoor",
-  workout: "no",
-  fragrance: "normal",
-  storage: "limited",
+  cooking: "",
+  drying: "",
+  workout: "",
+  fragrance: "",
+  storage: "",
   purchaseBudget: 0
 };
 
@@ -442,7 +442,7 @@ function setupChecklist() {
   const checks = state.checklist && typeof state.checklist === "object" ? { ...state.checklist } : {};
   const savedPlan = state.planPreferences && typeof state.planPreferences === "object"
     ? state.planPreferences
-    : planDefaults;
+    : {};
   const groups = recommendationGroups.map((group) => ({
     title: group.category,
     items: group.items.map(([key, title]) => ({ id: `${group.prefix}-${key}`, title }))
@@ -455,7 +455,7 @@ function setupChecklist() {
   if (form) {
     Object.entries(planDefaults).forEach(([name, fallback]) => {
       const input = form.elements[name];
-      const value = savedPlan[name] ?? fallback;
+      const value = savedPlan[name] ?? fallback ?? "";
       if (input instanceof RadioNodeList) input.value = String(value);
       else if (input) input.value = value ? String(value) : "";
     });
@@ -578,6 +578,10 @@ function setupRecommendation() {
   const purchasePlanSummary = document.querySelector("#purchasePlanSummary");
   const purchasePlanStatus = document.querySelector("#purchasePlanStatus");
   const filterPurchasePlan = document.querySelector("#filterPurchasePlan");
+  const resultIntro = document.querySelector("#recommendationResultIntro");
+  const resultSection = document.querySelector("#recommendationResultSection");
+  const startSection = document.querySelector("#recommendationStart");
+  const methodSection = document.querySelector("#recommendationMethod");
   if (!summary || !results || !note) return;
   let showSelectedOnly = false;
   const openRecommendationPhases = new Set();
@@ -694,9 +698,27 @@ function setupRecommendation() {
   }
 
   function renderRecommendations() {
+    const storedState = readStoredState();
+    const hasSavedPlan = Boolean(
+      storedState.purchasePlanExpiresAt
+      && storedState.planPreferences
+      && typeof storedState.planPreferences === "object"
+    );
+
+    if (!hasSavedPlan) {
+      resultIntro?.setAttribute("hidden", "");
+      resultSection?.setAttribute("hidden", "");
+      methodSection?.setAttribute("hidden", "");
+      startSection?.removeAttribute("hidden");
+      return;
+    }
+
+    resultIntro?.removeAttribute("hidden");
+    resultSection?.removeAttribute("hidden");
+    methodSection?.removeAttribute("hidden");
+    startSection?.setAttribute("hidden", "");
     results.querySelectorAll(".recommendation-fold[open]").forEach((details) => openRecommendationPhases.add(details.dataset.phase));
     const preferences = getPreferences();
-    const storedState = readStoredState();
     const savedChecks = storedState.checklist || {};
     const decisions = storedState.recommendationDecisions || {};
     const allRanked = Object.entries(recommendationCatalog)

@@ -36,7 +36,7 @@
       </section>
       <section class="checklist-toolbar" aria-label="구매 계획 저장 상태">
         <div><span>현재 선택</span><strong id="checklistProgress">보유품을 먼저 빼세요</strong></div>
-        <div class="checklist-actions"><span id="checklistStorageNote" aria-live="polite">이 기기에 자동 저장됩니다.</span><button class="button secondary" id="resetChecklist" type="button">선택 초기화</button></div>
+        <div class="checklist-actions"><span id="checklistStorageNote" aria-live="polite">선택하면 20분 동안 저장됩니다.</span><button class="button secondary" id="resetChecklist" type="button">선택 초기화</button></div>
       </section>
       <form class="plan-setup" id="planSetupForm" action="/recommend" method="get">
         <section class="plan-step" aria-labelledby="owned-title">
@@ -57,15 +57,15 @@
           <div class="plan-step-head"><span>02</span><div><p class="eyebrow">내 생활 조건</p><h2 id="conditions-title">기본 조건 세 가지만 고르세요.</h2></div></div>
           <p class="plan-step-copy">정답은 없어요. 지금 생활에 가까운 쪽을 고르면, 관련 물품의 확인 순서만 달라집니다.</p>
           <div class="plan-conditions">
-            <fieldset><legend>집에서 요리하나요?</legend><div class="segmented-options"><label><input name="cooking" type="radio" value="often" checked /><span>자주 해요</span></label><label><input name="cooking" type="radio" value="rarely" /><span>가끔 해요</span></label></div></fieldset>
-            <fieldset><legend>빨래는 주로 어떻게 말리나요?</legend><div class="segmented-options"><label><input name="drying" type="radio" value="indoor" checked /><span>실내 건조</span></label><label><input name="drying" type="radio" value="dryer" /><span>건조기 사용</span></label></div></fieldset>
-            <fieldset><legend>수납 공간은 어떤가요?</legend><div class="segmented-options"><label><input name="storage" type="radio" value="limited" checked /><span>넉넉하지 않아요</span></label><label><input name="storage" type="radio" value="normal" /><span>여유 있어요</span></label></div></fieldset>
+            <fieldset><legend>집에서 요리하나요?</legend><div class="segmented-options"><label><input name="cooking" type="radio" value="often" /><span>자주 해요</span></label><label><input name="cooking" type="radio" value="rarely" /><span>가끔 해요</span></label></div></fieldset>
+            <fieldset><legend>빨래는 주로 어떻게 말리나요?</legend><div class="segmented-options"><label><input name="drying" type="radio" value="indoor" /><span>실내 건조</span></label><label><input name="drying" type="radio" value="dryer" /><span>건조기 사용</span></label></div></fieldset>
+            <fieldset><legend>수납 공간은 어떤가요?</legend><div class="segmented-options"><label><input name="storage" type="radio" value="limited" /><span>넉넉하지 않아요</span></label><label><input name="storage" type="radio" value="normal" /><span>여유 있어요</span></label></div></fieldset>
           </div>
           <details class="optional-conditions">
             <summary>세탁·향 조건도 반영하기 <span>선택</span></summary>
             <div class="plan-conditions optional-condition-grid">
-              <fieldset><legend>운동복을 자주 세탁하나요?</legend><div class="segmented-options"><label><input name="workout" type="radio" value="yes" /><span>자주 해요</span></label><label><input name="workout" type="radio" value="no" checked /><span>아니요</span></label></div></fieldset>
-              <fieldset><legend>향에 민감한가요?</legend><div class="segmented-options"><label><input name="fragrance" type="radio" value="sensitive" /><span>민감해요</span></label><label><input name="fragrance" type="radio" value="normal" checked /><span>상관없어요</span></label></div></fieldset>
+              <fieldset><legend>운동복을 자주 세탁하나요?</legend><div class="segmented-options"><label><input name="workout" type="radio" value="yes" /><span>자주 해요</span></label><label><input name="workout" type="radio" value="no" /><span>아니요</span></label></div></fieldset>
+              <fieldset><legend>향에 민감한가요?</legend><div class="segmented-options"><label><input name="fragrance" type="radio" value="sensitive" /><span>민감해요</span></label><label><input name="fragrance" type="radio" value="normal" /><span>상관없어요</span></label></div></fieldset>
             </div>
           </details>
         </section>

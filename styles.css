@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1136,6 +1140,25 @@ li {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 24px;
+}
+
+.recommendation-start {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-width: 760px;
+  padding: 28px;
+}
+
+.recommendation-start h2 {
+  font-size: 26px;
+  margin: 4px 0 10px;
+}
+
+.recommendation-start p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
 }
 
 .plan-step-head {
