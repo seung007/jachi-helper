@@ -216,10 +216,20 @@ const legacyBudgetGroups = {
 };
 
 const purchasePlanCacheTtlMs = 20 * 60 * 1000;
+let purchasePlanExpiryTimer;
+
+function hasPurchasePlanData(state) {
+  return Boolean(
+    Object.keys(state.checklist || {}).length
+    || Object.keys(state.planPreferences || {}).length
+    || Object.keys(state.recommendationDecisions || {}).length
+  );
+}
 
 function clearExpiredPurchasePlan(state) {
   const expiresAt = Number(state.purchasePlanExpiresAt);
-  if (!expiresAt || expiresAt > Date.now()) return state;
+  if (expiresAt > Date.now()) return state;
+  if (!expiresAt && !hasPurchasePlanData(state)) return state;
 
   const nextState = { ...state };
   delete nextState.checklist;
@@ -255,6 +265,17 @@ function writeStoredState(state) {
 
 function writePurchasePlanState(state) {
   return writeStoredState({ ...state, purchasePlanExpiresAt: Date.now() + purchasePlanCacheTtlMs });
+}
+
+function schedulePurchasePlanExpiry(onExpire) {
+  window.clearTimeout(purchasePlanExpiryTimer);
+  const expiresAt = Number(readStoredState().purchasePlanExpiresAt);
+  if (!expiresAt) return;
+
+  purchasePlanExpiryTimer = window.setTimeout(() => {
+    clearExpiredPurchasePlan(readStoredState());
+    onExpire();
+  }, Math.max(0, expiresAt - Date.now()) + 50);
 }
 
 function formatWon(value) {
@@ -429,6 +450,7 @@ function setupChecklist() {
   const labelsById = Object.fromEntries(groups.flatMap((group) => group.items.map((item) => [item.id, item.title])));
   let activeCategory = groups[0]?.title || "";
   let searchTerm = "";
+  let showAllSelected = false;
 
   if (form) {
     Object.entries(planDefaults).forEach(([name, fallback]) => {
@@ -446,11 +468,12 @@ function setupChecklist() {
     if (!selected || !selectedCount) return;
 
     selectedCount.textContent = `${completed}개 선택`;
+    const visibleIds = showAllSelected ? checkedIds : checkedIds.slice(0, 4);
     selected.innerHTML = completed
-      ? checkedIds.map((id) => {
+      ? `${visibleIds.map((id) => {
         const label = labelsById[id] || id;
         return `<button type="button" class="selected-chip" data-remove-owned="${id}">${label}<span aria-hidden="true">×</span><span class="sr-only"> 보유품에서 제거</span></button>`;
-      }).join("")
+      }).join("")}${completed > 4 ? `<button type="button" class="selected-expand" data-toggle-selected aria-expanded="${showAllSelected}">${showAllSelected ? "접기" : `+${completed - 4}개 더 보기`}</button>` : ""}`
       : '<p class="selected-empty">이미 가진 물건이 있다면 위 목록에서 골라 주세요.</p>';
   }
 
@@ -516,6 +539,12 @@ function setupChecklist() {
   });
 
   selected?.addEventListener("click", (event) => {
+    const toggle = event.target.closest("[data-toggle-selected]");
+    if (toggle) {
+      showAllSelected = !showAllSelected;
+      updateProgress();
+      return;
+    }
     const button = event.target.closest("[data-remove-owned]");
     if (!button) return;
     checks[button.dataset.removeOwned] = false;
@@ -538,6 +567,7 @@ function setupChecklist() {
   });
 
   renderOwnedPicker();
+  schedulePurchasePlanExpiry(() => window.location.reload());
 }
 
 function setupRecommendation() {
@@ -550,6 +580,7 @@ function setupRecommendation() {
   const filterPurchasePlan = document.querySelector("#filterPurchasePlan");
   if (!summary || !results || !note) return;
   let showSelectedOnly = false;
+  const openRecommendationPhases = new Set();
 
   function getPreferences() {
     const savedPlan = readStoredState().planPreferences;
@@ -663,6 +694,7 @@ function setupRecommendation() {
   }
 
   function renderRecommendations() {
+    results.querySelectorAll(".recommendation-fold[open]").forEach((details) => openRecommendationPhases.add(details.dataset.phase));
     const preferences = getPreferences();
     const storedState = readStoredState();
     const savedChecks = storedState.checklist || {};
@@ -715,7 +747,13 @@ function setupRecommendation() {
       } else {
         const details = document.createElement("details");
         details.className = "recommendation-fold";
+        details.dataset.phase = phase;
+        details.open = openRecommendationPhases.has(phase);
         details.innerHTML = `<summary><span><strong>${phaseInfo.title}</strong><small>${phaseInfo.description}</small></span><b>${groupItems.length}개 보기</b></summary>`;
+        details.addEventListener("toggle", () => {
+          if (details.open) openRecommendationPhases.add(phase);
+          else openRecommendationPhases.delete(phase);
+        });
         details.appendChild(list);
         group.appendChild(details);
       }
@@ -742,6 +780,7 @@ function setupRecommendation() {
     }
 
     writePurchasePlanState({ ...state, checklist: nextChecks, recommendationDecisions: nextDecisions });
+    schedulePurchasePlanExpiry(() => window.location.reload());
     renderRecommendations();
   });
   filterPurchasePlan?.addEventListener("click", () => {
@@ -749,6 +788,7 @@ function setupRecommendation() {
     renderRecommendations();
   });
   renderRecommendations();
+  schedulePurchasePlanExpiry(() => window.location.reload());
 }
 
 function setupBudget() {

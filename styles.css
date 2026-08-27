@@ -1179,9 +1179,9 @@ li {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-  min-height: 42px;
+  gap: 6px;
+  margin-top: 12px;
+  min-height: 30px;
 }
 
 .selected-empty {
@@ -1200,18 +1200,35 @@ li {
   cursor: pointer;
   display: inline-flex;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
-  gap: 7px;
-  min-height: 34px;
-  padding: 6px 10px 6px 12px;
+  gap: 5px;
+  min-height: 30px;
+  padding: 4px 8px 4px 10px;
 }
 
 .selected-chip > span:first-child {
   color: var(--green);
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 1;
+}
+
+.selected-expand {
+  background: var(--white);
+  border: 1px dashed #9bc7b1;
+  border-radius: 4px;
+  color: var(--green);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  min-height: 30px;
+  padding: 4px 9px;
+}
+
+.selected-expand:hover {
+  background: var(--mint);
 }
 
 .owned-picker {
