@@ -216,7 +216,9 @@ const legacyBudgetGroups = {
 };
 
 const purchasePlanCacheTtlMs = 20 * 60 * 1000;
+const budgetCacheTtlMs = 20 * 60 * 1000;
 let purchasePlanExpiryTimer;
+let budgetExpiryTimer;
 
 function hasPurchasePlanData(state) {
   return Boolean(
@@ -245,10 +247,28 @@ function clearExpiredPurchasePlan(state) {
   return nextState;
 }
 
+function clearExpiredBudget(state) {
+  const expiresAt = Number(state.budgetExpiresAt);
+  if (expiresAt > Date.now()) return state;
+  if (!expiresAt && !state.budget) return state;
+
+  const nextState = { ...state };
+  delete nextState.budget;
+  delete nextState.budgetExpiresAt;
+
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(nextState));
+  } catch {
+    // Keep the current page usable even when browser storage is unavailable.
+  }
+  return nextState;
+}
+
 function readStoredState() {
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
-    return saved && typeof saved === "object" ? clearExpiredPurchasePlan(saved) : {};
+    if (!saved || typeof saved !== "object") return {};
+    return clearExpiredBudget(clearExpiredPurchasePlan(saved));
   } catch {
     return {};
   }
@@ -267,6 +287,10 @@ function writePurchasePlanState(state) {
   return writeStoredState({ ...state, purchasePlanExpiresAt: Date.now() + purchasePlanCacheTtlMs });
 }
 
+function writeBudgetState(state) {
+  return writeStoredState({ ...state, budgetExpiresAt: Date.now() + budgetCacheTtlMs });
+}
+
 function schedulePurchasePlanExpiry(onExpire) {
   window.clearTimeout(purchasePlanExpiryTimer);
   const expiresAt = Number(readStoredState().purchasePlanExpiresAt);
@@ -274,6 +298,17 @@ function schedulePurchasePlanExpiry(onExpire) {
 
   purchasePlanExpiryTimer = window.setTimeout(() => {
     clearExpiredPurchasePlan(readStoredState());
+    onExpire();
+  }, Math.max(0, expiresAt - Date.now()) + 50);
+}
+
+function scheduleBudgetExpiry(onExpire) {
+  window.clearTimeout(budgetExpiryTimer);
+  const expiresAt = Number(readStoredState().budgetExpiresAt);
+  if (!expiresAt) return;
+
+  budgetExpiryTimer = window.setTimeout(() => {
+    clearExpiredBudget(readStoredState());
     onExpire();
   }, Math.max(0, expiresAt - Date.now()) + 50);
 }
@@ -890,7 +925,8 @@ function setupBudget() {
       return [name, input?.value ? String(parseCurrency(input.value)) : ""];
     }));
     const nextState = { ...readStoredState(), budget };
-    storageNote.textContent = writeStoredState(nextState) ? "이 기기에 자동 저장됐습니다." : "이 브라우저에서는 저장할 수 없습니다.";
+    storageNote.textContent = writeBudgetState(nextState) ? "입력은 20분 동안 이 기기에 저장됩니다." : "이 브라우저에서는 저장할 수 없습니다.";
+    scheduleBudgetExpiry(() => window.location.reload());
   }
 
   budgetForm.addEventListener("input", () => {
@@ -915,6 +951,7 @@ function setupBudget() {
     budgetForm.reset();
     const nextState = readStoredState();
     delete nextState.budget;
+    delete nextState.budgetExpiresAt;
     storageNote.textContent = writeStoredState(nextState) ? "입력한 예산을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
     renderBudget();
   });
@@ -925,6 +962,7 @@ function setupBudget() {
   });
 
   renderBudget();
+  scheduleBudgetExpiry(() => window.location.reload());
 }
 
 function setupResultTabs() {
