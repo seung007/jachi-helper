@@ -440,6 +440,8 @@ h2 {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 8px;
+  display: grid;
+  grid-template-rows: auto 1fr;
   min-width: 0;
   overflow: hidden;
 }
@@ -454,6 +456,7 @@ h2 {
 .home-preview-copy {
   display: grid;
   gap: 7px;
+  grid-template-rows: auto auto auto 1fr auto;
   padding: 16px;
 }
 
@@ -479,12 +482,10 @@ h2 {
 }
 
 .home-preview-stores {
-  align-items: center;
   border-top: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  margin-top: 5px;
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
   padding-top: 12px;
 }
 
@@ -493,14 +494,32 @@ h2 {
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
-  margin-right: auto;
 }
 
-.home-preview-stores a {
-  border-bottom: 1px solid var(--green);
+.home-preview-store-actions {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+}
+
+.home-preview-store-actions a {
+  align-items: center;
+  background: var(--mint);
+  border: 1px solid var(--line);
+  border-radius: 6px;
   color: var(--green);
+  display: flex;
   font-size: 13px;
   font-weight: 900;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 40px;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.home-preview-store-actions a:hover {
+  border-color: var(--green);
 }
 
 .home-preview-fallback {

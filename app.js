@@ -385,7 +385,10 @@ function setupHomePreview() {
         <h3>${item.title}</h3>
         <p>${reason}</p>
         <small>${criteria}</small>
-        <div class="home-preview-stores"><em>최신 가격 확인</em>${stores}</div>
+        <div class="home-preview-stores">
+          <em>판매처에서 최신 가격 확인</em>
+          <div class="home-preview-store-actions">${stores}</div>
+        </div>
       </div>
     `;
     previewList.append(card);
