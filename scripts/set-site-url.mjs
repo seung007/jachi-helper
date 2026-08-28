@@ -7,7 +7,7 @@ if (!siteUrl || !/^https:\/\/[a-z0-9.-]+/.test(siteUrl)) {
   process.exit(1);
 }
 
-const files = ["index.html", "checklist.html", "budget.html", "robots.txt", "sitemap.xml"];
+const files = ["index.html", "checklist.html", "budget.html", "recommend.html", "planner.html", "robots.txt", "sitemap.xml"];
 
 for (const file of files) {
   const next = readFileSync(file, "utf8").replaceAll("https://jachi-helper.vercel.app", siteUrl);

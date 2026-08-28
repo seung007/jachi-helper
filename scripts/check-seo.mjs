@@ -21,7 +21,8 @@ for (const page of pages) {
     ["google verification", /<meta\s+name="google-site-verification"\s+content="[^"]+"/],
     ["og title", /<meta\s+property="og:title"\s+content="[^"]+"/],
     ["og image", /<meta\s+property="og:image"\s+content="https:\/\/[^"]+"/],
-    ["Vercel Analytics", /<script\s+defer\s+src="\/_vercel\/insights\/script\.js"><\/script>/]
+    ["Vercel Analytics", /<script\s+defer\s+src="\/_vercel\/insights\/script\.js"><\/script>/],
+    ["Google Analytics", /googletagmanager\.com\/gtag\/js\?id=G-2N6W41XSD2/]
   ];
 
   for (const [label, pattern] of checks) {

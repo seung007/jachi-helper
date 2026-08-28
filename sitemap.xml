@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jachi-helper.vercel.app/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://jachi-helper.vercel.app/checklist</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jachi-helper.vercel.app/budget</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jachi-helper.vercel.app/recommend</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

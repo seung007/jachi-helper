@@ -1,6 +1,16 @@
 const allRooms = ["full", "semi", "empty"];
 const allLifestyles = ["cook", "delivery", "remote"];
 
+function trackAnalyticsEvent(eventName, parameters = {}) {
+  try {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, parameters);
+    }
+  } catch {
+    // Analytics must never interrupt the purchase-planning flow.
+  }
+}
+
 const items = [
   { name: "침구와 수건", group: "must", category: "sleep", rooms: allRooms, lifestyles: allLifestyles },
   { name: "욕실 소모품", group: "must", category: "bath", rooms: allRooms, lifestyles: allLifestyles },
@@ -334,18 +344,19 @@ function formatCurrencyInput(input) {
   input.value = digits ? Number(digits).toLocaleString("ko-KR") : "";
 }
 
-function createStoreSearchLink(store, searchQuery) {
+function createStoreSearchLink(store, searchQuery, itemId, placement) {
   const query = encodeURIComponent(searchQuery);
+  const tracking = `data-store-link data-store="${store}" data-item-id="${itemId}" data-placement="${placement}"`;
   if (store === "coupang") {
-    return `<a href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" aria-label="쿠팡에서 ${searchQuery} 검색">쿠팡</a>`;
+    return `<a href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색">쿠팡</a>`;
   }
   if (store === "naver") {
-    return `<a href="https://search.shopping.naver.com/search/all?query=${query}" target="_blank" rel="noreferrer" aria-label="네이버쇼핑에서 ${searchQuery} 검색">네이버쇼핑</a>`;
+    return `<a href="https://search.shopping.naver.com/search/all?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버쇼핑에서 ${searchQuery} 검색">네이버쇼핑</a>`;
   }
   if (store === "daiso") {
-    return '<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer">다이소몰</a>';
+    return `<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}>다이소몰</a>`;
   }
-  return '<a href="https://ohou.se/store" target="_blank" rel="noreferrer">오늘의집</a>';
+  return `<a href="https://ohou.se/store" target="_blank" rel="noreferrer" ${tracking}>오늘의집</a>`;
 }
 
 function setupHomePreview() {
@@ -361,7 +372,7 @@ function setupHomePreview() {
     const searchQuery = `자취 ${item.title}`;
     const stores = item.stores
       .filter((store) => store === "naver" || store === "coupang")
-      .map((store) => createStoreSearchLink(store, searchQuery))
+      .map((store) => createStoreSearchLink(store, searchQuery, id, "home_preview"))
       .join("");
     const card = document.createElement("article");
     card.className = "home-preview-item";
@@ -538,6 +549,14 @@ function setupChecklist() {
   let activeCategory = groups[0]?.title || "";
   let searchTerm = "";
   let showAllSelected = false;
+  let hasTrackedPlanStart = false;
+  let hasTrackedPlanComplete = false;
+
+  function trackPlanStart() {
+    if (hasTrackedPlanStart) return;
+    hasTrackedPlanStart = true;
+    trackAnalyticsEvent("plan_start", { flow: "purchase_plan" });
+  }
 
   if (form) {
     Object.entries(planDefaults).forEach(([name, fallback]) => {
@@ -641,9 +660,26 @@ function setupChecklist() {
     saveChecklist();
   });
 
-  form?.addEventListener("input", saveChecklist);
-  form?.addEventListener("change", saveChecklist);
-  form?.addEventListener("submit", saveChecklist);
+  form?.addEventListener("input", () => {
+    trackPlanStart();
+    saveChecklist();
+  });
+  form?.addEventListener("change", () => {
+    trackPlanStart();
+    saveChecklist();
+  });
+  form?.addEventListener("submit", () => {
+    saveChecklist();
+    if (hasTrackedPlanComplete) return;
+    hasTrackedPlanComplete = true;
+    const preferences = getPlanPreferences();
+    trackAnalyticsEvent("plan_complete", {
+      owned_count: Object.values(checks).filter(Boolean).length,
+      answered_conditions: [preferences.cooking, preferences.drying, preferences.storage].filter(Boolean).length,
+      has_purchase_budget: preferences.purchaseBudget ? 1 : 0,
+      transport_type: "beacon"
+    });
+  });
 
   resetButton?.addEventListener("click", () => {
     Object.keys(checks).forEach((id) => { checks[id] = false; });
@@ -713,7 +749,7 @@ function setupRecommendation() {
   }
 
   function storeLinks(item) {
-    return item.stores.map((store) => createStoreSearchLink(store, item.searchQuery)).join("");
+    return item.stores.map((store) => createStoreSearchLink(store, item.searchQuery, item.id, "recommendation")).join("");
   }
 
   const recommendationPhases = {
@@ -1047,9 +1083,23 @@ function setupResultTabs() {
   renderTabs();
 }
 
+function setupStoreClickTracking() {
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-store-link]");
+    if (!link) return;
+    trackAnalyticsEvent("store_click", {
+      store: link.dataset.store || "unknown",
+      item_id: link.dataset.itemId || "unknown",
+      placement: link.dataset.placement || "unknown",
+      transport_type: "beacon"
+    });
+  });
+}
+
 plannerForm?.addEventListener("input", renderPlanner);
 document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 setupHomePreview();
+setupStoreClickTracking();
 setupPlannerStage();
 renderPlanner();
 setupChecklist();
