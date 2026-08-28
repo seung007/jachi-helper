@@ -351,7 +351,7 @@ function createStoreSearchLink(store, searchQuery, itemId, placement) {
     return `<a href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색">쿠팡</a>`;
   }
   if (store === "naver") {
-    return `<a href="https://search.naver.com/search.naver?where=shopping&query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버 쇼핑 결과에서 ${searchQuery} 검색">네이버쇼핑</a>`;
+    return `<a href="https://shopping.naver.com/ns/search?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버플러스 스토어에서 ${searchQuery} 검색">네이버+ 스토어</a>`;
   }
   if (store === "daiso") {
     return `<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}>다이소몰</a>`;
