@@ -351,7 +351,9 @@ function createStoreSearchLink(store, searchQuery, itemId, placement) {
     return `<a href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색">쿠팡</a>`;
   }
   if (store === "naver") {
-    return `<a href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색">네이버에서 상품 검색</a>`;
+    return `
+      <a href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색">네이버 상품 검색</a>
+      <a href="https://shopping.naver.com/ns/home" target="_blank" rel="noreferrer" data-store-link data-store="naver_store" data-item-id="${itemId}" data-placement="${placement}" data-copy-query="${query}" aria-label="${searchQuery} 검색어를 복사하고 네이버플러스 스토어 열기">검색어 복사 · 네이버+ 열기</a>`;
   }
   if (store === "daiso") {
     return `<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}>다이소몰</a>`;
@@ -1087,6 +1089,11 @@ function setupStoreClickTracking() {
   document.addEventListener("click", (event) => {
     const link = event.target.closest("[data-store-link]");
     if (!link) return;
+
+    if (link.dataset.copyQuery && navigator.clipboard) {
+      navigator.clipboard.writeText(decodeURIComponent(link.dataset.copyQuery)).catch(() => {});
+    }
+
     trackAnalyticsEvent("store_click", {
       store: link.dataset.store || "unknown",
       item_id: link.dataset.itemId || "unknown",
