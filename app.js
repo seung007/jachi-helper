@@ -1,5 +1,6 @@
 const allRooms = ["full", "semi", "empty"];
 const allLifestyles = ["cook", "delivery", "remote"];
+const recommendationRuleVersion = "v1";
 
 function trackAnalyticsEvent(eventName, parameters = {}) {
   try {
@@ -8,6 +9,30 @@ function trackAnalyticsEvent(eventName, parameters = {}) {
     }
   } catch {
     // Analytics must never interrupt the purchase-planning flow.
+  }
+}
+
+const pendingAnalyticsKey = "jachi-helper:pending-analytics-events";
+
+function queueAnalyticsEvent(eventName, parameters = {}) {
+  try {
+    const pending = JSON.parse(sessionStorage.getItem(pendingAnalyticsKey) || "[]");
+    pending.push({ eventName, parameters, queuedAt: Date.now() });
+    sessionStorage.setItem(pendingAnalyticsKey, JSON.stringify(pending.slice(-10)));
+  } catch {
+    trackAnalyticsEvent(eventName, parameters);
+  }
+}
+
+function flushPendingAnalyticsEvents() {
+  try {
+    const pending = JSON.parse(sessionStorage.getItem(pendingAnalyticsKey) || "[]");
+    sessionStorage.removeItem(pendingAnalyticsKey);
+    pending.forEach(({ eventName, parameters, queuedAt }) => {
+      trackAnalyticsEvent(eventName, { ...parameters, queued_delay_ms: Math.max(0, Date.now() - Number(queuedAt || Date.now())) });
+    });
+  } catch {
+    sessionStorage.removeItem(pendingAnalyticsKey);
   }
 }
 
@@ -171,6 +196,22 @@ const planConditionLabels = {
   storage: { limited: "수납이 넉넉하지 않아요", normal: "수납 여유가 있어요" }
 };
 
+const recommendationFeedbackReasons = {
+  missing: [
+    ["bath_laundry", "욕실·세탁"],
+    ["kitchen", "주방"],
+    ["bedding_storage", "침구·수납"],
+    ["safety_living", "안전·생활"],
+    ["other", "기타"]
+  ],
+  unnecessary: [
+    ["provided", "집에 기본 제공"],
+    ["not_used", "평소 사용하지 않음"],
+    ["space", "놓을 공간이 부족함"],
+    ["budget", "예산상 우선순위가 낮음"]
+  ]
+};
+
 const categoryCriteria = {
   "침구·수면": "침대·창문 규격과 세탁 가능 여부를 확인하세요.",
   "욕실": "욕실 수납과 기본 제공 품목을 먼저 확인하세요.",
@@ -208,11 +249,58 @@ const immediateItemIds = new Set([
   "life-powerstrip"
 ]);
 
-const homePreviewItems = [
-  { id: "bath-towel", context: "입주 첫날", imagePosition: "100% 0%" },
-  { id: "kitchen-pot", context: "요리를 자주 한다면", imagePosition: "0% 100%" },
-  { id: "laundry-dryer", context: "실내 건조라면", imagePosition: "100% 100%" }
-];
+const homePreviewPresets = {
+  default: {
+    summary: "기본 준비 39개 중 구매 시점이 다른 대표 6개예요.",
+    items: [
+      { id: "bath-towel", status: "now", statusLabel: "지금 필요", context: "입주 첫날" },
+      { id: "bath-toiletries", status: "now", statusLabel: "지금 필요", context: "첫날 기본" },
+      { id: "life-powerstrip", status: "check", statusLabel: "조건 확인", context: "콘센트 확인" },
+      { id: "bedding-curtain", status: "check", statusLabel: "조건 확인", context: "창문 규격 확인" },
+      { id: "life-storage", status: "later", statusLabel: "나중에", context: "공간 실측 후" },
+      { id: "kitchen-dishes", status: "later", statusLabel: "나중에", context: "생활 습관 확인 후" }
+    ]
+  },
+  cooking: {
+    summary: "직접 요리할 때 먼저 살 것과 확인할 것을 6개로 나눴어요.",
+    items: [
+      { id: "kitchen-cutlery", status: "now", statusLabel: "지금 필요", context: "입주 첫 끼" },
+      { id: "kitchen-bag", status: "now", statusLabel: "지금 필요", context: "음식물 처리" },
+      { id: "kitchen-pot", status: "check", statusLabel: "조건 확인", context: "가열 방식 확인" },
+      { id: "kitchen-pan", status: "check", statusLabel: "조건 확인", context: "필요한 크기 확인" },
+      { id: "kitchen-container", status: "later", statusLabel: "나중에", context: "조리 습관이 생긴 뒤" },
+      { id: "kitchen-dishes", status: "later", statusLabel: "나중에", context: "필요한 수량 확인 후" }
+    ]
+  },
+  drying: {
+    summary: "실내 건조에서 공간과 세탁 습관을 확인할 대표 6개예요.",
+    items: [
+      { id: "laundry-detergent", status: "now", statusLabel: "지금 필요", context: "세탁 기본" },
+      { id: "bath-basket", status: "now", statusLabel: "지금 필요", context: "세탁물 분리" },
+      { id: "laundry-dryer", status: "check", statusLabel: "조건 확인", context: "펼칠 공간 확인" },
+      { id: "laundry-net", status: "check", statusLabel: "조건 확인", context: "세탁할 옷감 확인" },
+      { id: "laundry-softener", status: "later", statusLabel: "나중에", context: "향 취향을 안 뒤" },
+      { id: "laundry-clips", status: "later", statusLabel: "나중에", context: "건조대 구성 확인 후" }
+    ]
+  },
+  storage: {
+    summary: "수납이 부족할 때 바로 사지 않고 판단할 대표 6개예요.",
+    items: [
+      { id: "bedding-hanger", status: "now", statusLabel: "지금 필요", context: "옷장 기본" },
+      { id: "life-powerstrip", status: "now", statusLabel: "지금 필요", context: "좁은 동선 정리" },
+      { id: "life-storage", status: "check", statusLabel: "조건 확인", context: "빈 공간 실측" },
+      { id: "bath-basket", status: "check", statusLabel: "조건 확인", context: "세탁 동선 확인" },
+      { id: "clean-trash", status: "later", statusLabel: "나중에", context: "분리수거 방식 확인 후" },
+      { id: "life-light", status: "later", statusLabel: "나중에", context: "실제 밝기를 본 뒤" }
+    ]
+  }
+};
+
+const homePresetPreferences = {
+  cooking: { cooking: "often" },
+  drying: { drying: "indoor" },
+  storage: { storage: "limited" }
+};
 
 const plannerForm = document.querySelector("#plannerForm");
 const storageKey = "jachi-helper:v1";
@@ -231,7 +319,7 @@ const legacyBudgetGroups = {
   setup: ["moving", "supplies", "oneTimeOther"]
 };
 
-const purchasePlanCacheTtlMs = 20 * 60 * 1000;
+const purchasePlanCacheTtlMs = 30 * 24 * 60 * 60 * 1000;
 const budgetCacheTtlMs = 20 * 60 * 1000;
 let purchasePlanExpiryTimer;
 let budgetExpiryTimer;
@@ -240,6 +328,13 @@ function hasPurchasePlanData(state) {
   return Boolean(
     Object.keys(state.checklist || {}).length
     || Object.keys(state.planPreferences || {}).length
+    || Object.keys(state.recommendationDecisions || {}).length
+  );
+}
+
+function hasCompletedPurchasePlan(state) {
+  return Boolean(
+    state.purchasePlanCompletedAt
     || Object.keys(state.recommendationDecisions || {}).length
   );
 }
@@ -253,6 +348,8 @@ function clearExpiredPurchasePlan(state) {
   delete nextState.checklist;
   delete nextState.planPreferences;
   delete nextState.recommendationDecisions;
+  delete nextState.recommendationFeedback;
+  delete nextState.purchasePlanCompletedAt;
   delete nextState.purchasePlanExpiresAt;
 
   try {
@@ -312,10 +409,17 @@ function schedulePurchasePlanExpiry(onExpire) {
   const expiresAt = Number(readStoredState().purchasePlanExpiresAt);
   if (!expiresAt) return;
 
-  purchasePlanExpiryTimer = window.setTimeout(() => {
-    clearExpiredPurchasePlan(readStoredState());
-    onExpire();
-  }, Math.max(0, expiresAt - Date.now()) + 50);
+  const checkExpiry = () => {
+    const remaining = expiresAt - Date.now();
+    if (remaining <= 0) {
+      clearExpiredPurchasePlan(readStoredState());
+      onExpire();
+      return;
+    }
+    purchasePlanExpiryTimer = window.setTimeout(checkExpiry, Math.min(remaining + 50, 2_000_000_000));
+  };
+
+  checkExpiry();
 }
 
 function scheduleBudgetExpiry(onExpire) {
@@ -348,51 +452,231 @@ function createStoreSearchLink(store, searchQuery, itemId, placement) {
   const query = encodeURIComponent(searchQuery);
   const tracking = `data-store-link data-store="${store}" data-item-id="${itemId}" data-placement="${placement}"`;
   if (store === "coupang") {
-    return `<a href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색">쿠팡</a>`;
+    return `<a class="store-search-link store-coupang" href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색"><span>쿠팡</span><strong>상품 검색</strong></a>`;
   }
   if (store === "naver") {
     return `
-      <a href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색">네이버 상품 검색</a>
-      <a href="https://shopping.naver.com/ns/home" target="_blank" rel="noreferrer" data-store-link data-store="naver_store" data-item-id="${itemId}" data-placement="${placement}" data-copy-query="${query}" aria-label="${searchQuery} 검색어를 복사하고 네이버플러스 스토어 열기">검색어 복사 · 네이버+ 열기</a>`;
+      <a class="store-search-link store-naver" href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색"><span>네이버</span><strong>상품 검색</strong></a>
+      <a class="store-search-link store-naver-plus" href="https://shopping.naver.com/ns/home" target="_blank" rel="noreferrer" data-store-link data-store="naver_store" data-item-id="${itemId}" data-placement="${placement}" data-copy-query="${query}" aria-label="${searchQuery} 검색어를 복사하고 네이버플러스 스토어 열기"><span>네이버+</span><strong>검색어 복사</strong></a>`;
   }
   if (store === "daiso") {
-    return `<a href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}>다이소몰</a>`;
+    return `<a class="store-search-link store-daiso" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}><span>다이소몰</span><strong>상품 찾기</strong></a>`;
   }
-  return `<a href="https://ohou.se/store" target="_blank" rel="noreferrer" ${tracking}>오늘의집</a>`;
+  return `<a class="store-search-link store-ohouse" href="https://ohou.se/store" target="_blank" rel="noreferrer" ${tracking}><span>오늘의집</span><strong>상품 찾기</strong></a>`;
 }
 
 function setupHomePreview() {
   const previewList = document.querySelector("#homePreviewList");
+  const previewOptions = document.querySelector("#homePreviewOptions");
+  const previewSummary = document.querySelector("#homePreviewSummary");
+  const previewCta = document.querySelector("#homePreviewCta");
+  const searchForm = document.querySelector("#homeCatalogSearch");
+  const searchInput = document.querySelector("#homeCatalogQuery");
+  const categoryTabs = document.querySelector("#homeCategoryTabs");
+  const sortSelect = document.querySelector("#homeCatalogSort");
   if (!previewList) return;
+  let activePreset = "default";
+  let activeCategory = "all";
+  let searchTerm = "";
+  let activeSort = "priority";
 
-  homePreviewItems.forEach(({ id, context, imagePosition }) => {
-    const item = recommendationCatalog[id];
-    if (!item) return;
-    const signal = itemSignals[id];
-    const reason = signal?.reason || (item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "생활 조건을 확인한 뒤 결정할 항목");
-    const criteria = signal?.criteria || categoryCriteria[item.category];
-    const searchQuery = `자취 ${item.title}`;
-    const stores = item.stores
-      .filter((store) => store === "naver" || store === "coupang")
-      .map((store) => createStoreSearchLink(store, searchQuery, id, "home_preview"))
-      .join("");
-    const card = document.createElement("article");
-    card.className = "home-preview-item";
-    card.innerHTML = `
-      <div class="home-preview-image" role="img" aria-label="${item.category} 준비물 예시" style="background-position: ${imagePosition}"></div>
-      <div class="home-preview-copy">
-        <span>${context}</span>
-        <h3>${item.title}</h3>
-        <p>${reason}</p>
-        <small>${criteria}</small>
-        <div class="home-preview-stores">
-          <em>판매처에서 최신 가격 확인</em>
-          <div class="home-preview-store-actions">${stores}</div>
+  function defaultPreviewMeta(id, item) {
+    if (immediateItemIds.has(id)) return { status: "now", statusLabel: "입주 첫날", context: "먼저 확인" };
+    if (item.firstDay) return { status: "now", statusLabel: "입주 직후", context: "기본 준비" };
+    return { status: "check", statusLabel: "조건 확인", context: "구매 전 확인" };
+  }
+
+  function catalogItems() {
+    const normalizedSearch = searchTerm.trim().toLocaleLowerCase("ko");
+    const isBrowsingCatalog = Boolean(normalizedSearch || activeCategory !== "all");
+    const source = isBrowsingCatalog
+      ? Object.entries(recommendationCatalog).map(([id, item]) => ({ id, ...item, ...defaultPreviewMeta(id, item) }))
+      : homePreviewPresets[activePreset].items.map((preview) => ({
+          ...recommendationCatalog[preview.id],
+          ...preview
+        }));
+
+    const filtered = source.filter((item) => {
+      const categoryMatches = activeCategory === "all" || item.category === activeCategory;
+      const searchMatches = !normalizedSearch || `${item.title} ${item.category}`.toLocaleLowerCase("ko").includes(normalizedSearch);
+      return categoryMatches && searchMatches;
+    });
+
+    return filtered.sort((a, b) => {
+      if (activeSort === "name") return a.title.localeCompare(b.title, "ko");
+      if (activeSort === "first-day") return Number(b.firstDay) - Number(a.firstDay) || b.weight - a.weight || a.title.localeCompare(b.title, "ko");
+      return b.weight - a.weight || Number(b.firstDay) - Number(a.firstDay) || a.title.localeCompare(b.title, "ko");
+    });
+  }
+
+  function syncCategoryTabs() {
+    categoryTabs?.querySelectorAll("[data-home-category]").forEach((button) => {
+      const selected = button.dataset.homeCategory === activeCategory;
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+  }
+
+  function renderPreview() {
+    const preset = homePreviewPresets[activePreset] || homePreviewPresets.default;
+    const items = catalogItems();
+    previewList.innerHTML = "";
+    if (previewSummary) {
+      const displayCount = Math.min(items.length, 12);
+      if (searchTerm.trim()) previewSummary.textContent = `“${searchTerm.trim()}” 검색 결과 ${items.length}개 중 ${displayCount}개를 보여 드립니다.`;
+      else if (activeCategory !== "all") previewSummary.textContent = `${activeCategory} 준비물 ${items.length}개 중 ${displayCount}개를 보여 드립니다.`;
+      else previewSummary.textContent = preset.summary;
+    }
+    if (previewCta) {
+      previewCta.href = activePreset === "default" ? "/checklist" : `/checklist?homePreset=${activePreset}`;
+      previewCta.dataset.preset = activePreset;
+    }
+
+    if (!items.length) {
+      previewList.innerHTML = '<p class="home-catalog-empty">일치하는 준비물이 없습니다. 다른 이름이나 카테고리로 찾아보세요.</p>';
+      return;
+    }
+
+    items.slice(0, 12).forEach((item) => {
+      const { id, status, statusLabel, context } = item;
+      const signal = itemSignals[id];
+      const reason = signal?.reason || (item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "생활 조건을 확인한 뒤 결정할 항목");
+      const criteria = signal?.criteria || categoryCriteria[item.category];
+      const imageGroup = id.split("-")[0];
+      const searchQuery = `자취 ${item.title}`;
+      const storeActions = item.stores.map((store) => createStoreSearchLink(store, searchQuery, id, "home_catalog")).join("");
+      const card = document.createElement("article");
+      card.className = "home-preview-item";
+      card.innerHTML = `
+        <div class="home-product-image home-product-image-${imageGroup}" role="img" aria-label="${item.category} 카테고리 대표 이미지">
+          <span>${item.category} 대표 이미지</span>
         </div>
-      </div>
-    `;
-    previewList.append(card);
+        <div class="home-preview-copy">
+          <div class="home-preview-meta"><span>${item.category}</span><b class="home-preview-status-${status}">${statusLabel} · ${context}</b></div>
+          <h3>${item.title}</h3>
+          <p>${reason}</p>
+          <small>${criteria}</small>
+          <div class="home-preview-stores"><em>판매처에서 최신 가격 확인</em><div class="home-preview-store-actions">${storeActions}</div></div>
+        </div>
+      `;
+      previewList.append(card);
+    });
+  }
+
+  previewOptions?.addEventListener("change", (event) => {
+    const input = event.target.closest("input[name='homePreset']");
+    if (!input) return;
+    activePreset = input.value;
+    activeCategory = "all";
+    searchTerm = "";
+    if (searchInput) searchInput.value = "";
+    syncCategoryTabs();
+    renderPreview();
+    trackAnalyticsEvent("home_demo_select", { preset: input.value });
   });
+
+  searchForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    searchTerm = searchInput?.value || "";
+    renderPreview();
+    trackAnalyticsEvent("home_catalog_search", { query_length: searchTerm.trim().length, result_count: catalogItems().length });
+  });
+
+  searchInput?.addEventListener("input", () => {
+    searchTerm = searchInput.value;
+    renderPreview();
+  });
+
+  categoryTabs?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-home-category]");
+    if (!button) return;
+    activeCategory = button.dataset.homeCategory || "all";
+    syncCategoryTabs();
+    renderPreview();
+    trackAnalyticsEvent("home_catalog_category", { category: activeCategory });
+  });
+
+  sortSelect?.addEventListener("change", () => {
+    activeSort = sortSelect.value;
+    renderPreview();
+    trackAnalyticsEvent("home_catalog_sort", { sort: activeSort });
+  });
+
+  syncCategoryTabs();
+  renderPreview();
+}
+
+function setupHomeShare() {
+  const button = document.querySelector("#shareHome");
+  if (!button) return;
+
+  button.addEventListener("click", async () => {
+    const shareUrl = `${window.location.origin}/?utm_source=share&utm_medium=referral&utm_campaign=first_home_plan`;
+    const shareData = {
+      title: "자취도우미",
+      text: "첫 자취 준비물 39개에서 이미 가진 물건을 빼고 구매 계획을 정리해 보세요.",
+      url: shareUrl
+    };
+    try {
+      if (navigator.share) await navigator.share(shareData);
+      else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(`${shareData.text} ${shareUrl}`);
+        button.textContent = "공유 링크 복사됨";
+        window.setTimeout(() => { button.textContent = "친구에게 공유"; }, 1800);
+      }
+      trackAnalyticsEvent("home_share", { method: navigator.share ? "native" : "clipboard" });
+    } catch {
+      // Closing the native share sheet is not an error that should interrupt the page.
+    }
+  });
+}
+
+function setupHomeCtaTracking() {
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-home-cta]");
+    if (!link) return;
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    queueAnalyticsEvent("home_cta_click", {
+      placement: link.dataset.homeCta || "unknown",
+      preset: link.dataset.preset || "none",
+      destination: new URL(link.href, window.location.origin).pathname,
+      source_path: window.location.pathname,
+      transport_type: "beacon"
+    });
+  });
+}
+
+function setupHomeReturnState() {
+  const heroCta = document.querySelector("#heroPrimaryCta");
+  const resumeNote = document.querySelector("#homeResumeNote");
+  if (!heroCta || !resumeNote) return;
+
+  const state = readStoredState();
+  const hasSavedPlan = Boolean(state.purchasePlanExpiresAt && hasPurchasePlanData(state));
+  if (!hasSavedPlan) return;
+
+  if (hasCompletedPurchasePlan(state)) {
+    const decisions = state.recommendationDecisions || {};
+    const checklist = state.checklist || {};
+    const catalogIds = Object.keys(recommendationCatalog);
+    const preparedCount = catalogIds.filter((id) => checklist[id]).length;
+    const neededCount = catalogIds.filter((id) => decisions[id] === "candidate").length;
+    const laterCount = catalogIds.filter((id) => decisions[id] === "later").length;
+    const undecidedCount = Math.max(0, catalogIds.length - preparedCount - neededCount - laterCount);
+    heroCta.href = "/recommend";
+    heroCta.textContent = "지난 구매 계획 이어보기";
+    heroCta.dataset.homeCta = "resume_result";
+    resumeNote.textContent = `필요함 ${neededCount}개 · 이미 있음 ${preparedCount}개 · 나중에 ${laterCount}개 · 미결정 ${undecidedCount}개`;
+    return;
+  }
+
+  heroCta.href = "/checklist";
+  heroCta.textContent = "작성 중인 목록 이어서 만들기";
+  heroCta.dataset.homeCta = "resume_draft";
+  const selectedCount = Object.values(state.checklist || {}).filter(Boolean).length;
+  const preferences = state.planPreferences || {};
+  const answeredCount = [preferences.cooking, preferences.drying, preferences.storage].filter(Boolean).length;
+  resumeNote.textContent = `보유품 ${selectedCount}개 선택 · 생활 조건 ${answeredCount}/3 완료 · 이 기기에 30일 동안 저장`;
 }
 
 function setupCurrencyInputs() {
@@ -545,7 +829,12 @@ function setupChecklist() {
   const savedPlan = state.planPreferences && typeof state.planPreferences === "object"
     ? state.planPreferences
     : {};
-  const requestedPurchaseBudget = parseCurrency(new URLSearchParams(window.location.search).get("purchaseBudget"));
+  const requestedParams = new URLSearchParams(window.location.search);
+  const requestedPurchaseBudget = parseCurrency(requestedParams.get("purchaseBudget"));
+  const requestedHomePreset = homePresetPreferences[requestedParams.get("homePreset")]
+    ? requestedParams.get("homePreset")
+    : "";
+  const requestedPreferences = homePresetPreferences[requestedHomePreset] || {};
   const groups = recommendationGroups.map((group) => ({
     title: group.category,
     items: group.items.map(([key, title]) => ({ id: `${group.prefix}-${key}`, title }))
@@ -556,11 +845,18 @@ function setupChecklist() {
   let showAllSelected = false;
   let hasTrackedPlanStart = false;
   let hasTrackedPlanComplete = false;
+  const trackedPlanSteps = new Set();
 
-  function trackPlanStart() {
+  function trackPlanStart(source = "checklist") {
     if (hasTrackedPlanStart) return;
     hasTrackedPlanStart = true;
-    trackAnalyticsEvent("plan_start", { flow: "purchase_plan" });
+    trackAnalyticsEvent("plan_start", { flow: "purchase_plan", source });
+  }
+
+  function trackPlanStep(step, parameters = {}) {
+    if (trackedPlanSteps.has(step)) return;
+    trackedPlanSteps.add(step);
+    trackAnalyticsEvent("plan_step_complete", { flow: "purchase_plan", step, ...parameters });
   }
 
   if (form) {
@@ -568,7 +864,7 @@ function setupChecklist() {
       const input = form.elements[name];
       const value = name === "purchaseBudget" && requestedPurchaseBudget
         ? requestedPurchaseBudget
-        : savedPlan[name] ?? fallback ?? "";
+        : requestedPreferences[name] ?? savedPlan[name] ?? fallback ?? "";
       if (input instanceof RadioNodeList) input.value = String(value);
       else if (input) input.value = value ? String(value) : "";
     });
@@ -605,7 +901,7 @@ function setupChecklist() {
 
   function saveChecklist() {
     const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
-    storageNote.textContent = writePurchasePlanState(nextState) ? "선택은 20분 동안 이 기기에 저장됩니다." : "이 브라우저에서는 저장할 수 없습니다.";
+    storageNote.textContent = writePurchasePlanState(nextState) ? "선택은 마지막 수정부터 30일 동안 이 기기에 저장됩니다." : "이 브라우저에서는 저장할 수 없습니다.";
   }
 
   function renderOwnedPicker() {
@@ -632,6 +928,10 @@ function setupChecklist() {
         checks[checkbox.dataset.checkId] = checkbox.checked;
         updateProgress();
         saveChecklist();
+        trackPlanStep("owned", {
+          selected_count: Object.values(checks).filter(Boolean).length,
+          completion_method: "item_selection"
+        });
       });
     });
     updateProgress();
@@ -672,16 +972,26 @@ function setupChecklist() {
   form?.addEventListener("change", () => {
     trackPlanStart();
     saveChecklist();
+    const preferences = getPlanPreferences();
+    const answeredConditions = [preferences.cooking, preferences.drying, preferences.storage].filter(Boolean).length;
+    if (answeredConditions === 3) trackPlanStep("conditions", { answered_conditions: answeredConditions });
   });
   form?.addEventListener("submit", () => {
     saveChecklist();
+    writePurchasePlanState({ ...readStoredState(), purchasePlanCompletedAt: Date.now() });
+    trackPlanStep("owned", {
+      selected_count: Object.values(checks).filter(Boolean).length,
+      completion_method: "form_submit"
+    });
+    trackPlanStep("conditions", { answered_conditions: 3, completion_method: "form_submit" });
     if (hasTrackedPlanComplete) return;
     hasTrackedPlanComplete = true;
     const preferences = getPlanPreferences();
-    trackAnalyticsEvent("plan_complete", {
+    queueAnalyticsEvent("plan_complete", {
       owned_count: Object.values(checks).filter(Boolean).length,
       answered_conditions: [preferences.cooking, preferences.drying, preferences.storage].filter(Boolean).length,
       has_purchase_budget: preferences.purchaseBudget ? 1 : 0,
+      entry_preset: requestedHomePreset || "none",
       transport_type: "beacon"
     });
   });
@@ -692,10 +1002,16 @@ function setupChecklist() {
     renderOwnedPicker();
     const nextState = { ...readStoredState(), checklist: checks, planPreferences: getPlanPreferences() };
     delete nextState.recommendationDecisions;
+    delete nextState.recommendationFeedback;
+    delete nextState.purchasePlanCompletedAt;
     delete nextState.purchasePlanExpiresAt;
     storageNote.textContent = writeStoredState(nextState) ? "선택과 구매 결정을 초기화했습니다." : "이 브라우저에서는 저장할 수 없습니다.";
   });
 
+  if (requestedHomePreset) {
+    trackPlanStart("home_demo");
+    saveChecklist();
+  }
   renderOwnedPicker();
   schedulePurchasePlanExpiry(() => window.location.reload());
 }
@@ -714,6 +1030,8 @@ function setupRecommendation() {
   const methodSection = document.querySelector("#recommendationMethod");
   if (!summary || !results || !note) return;
   let showSelectedOnly = false;
+  let hasTrackedResultView = false;
+  let hasTrackedEmptyResult = false;
   const openRecommendationPhases = new Set();
 
   function getPreferences() {
@@ -799,7 +1117,7 @@ function setupRecommendation() {
     const later = ranked.filter((item) => item.decision === "later");
     const ownedCount = Object.values(savedChecks).filter(Boolean).length;
     const budgetPrefix = preferences.purchaseBudget
-      ? `준비물 예산 ${formatWon(preferences.purchaseBudget)} · `
+      ? `구매 예산 메모 ${formatWon(preferences.purchaseBudget)} · `
       : "";
 
     if (!needed.length) {
@@ -832,6 +1150,10 @@ function setupRecommendation() {
       resultSection?.setAttribute("hidden", "");
       methodSection?.setAttribute("hidden", "");
       startSection?.removeAttribute("hidden");
+      if (!hasTrackedEmptyResult) {
+        hasTrackedEmptyResult = true;
+        trackAnalyticsEvent("recommend_empty_view", { reason: "no_saved_plan" });
+      }
       return;
     }
 
@@ -854,6 +1176,15 @@ function setupRecommendation() {
         if (phaseDifference) return phaseDifference;
         return decisionOrder[a.decision] - decisionOrder[b.decision] || b.score - a.score || a.title.localeCompare(b.title, "ko");
       });
+    if (!hasTrackedResultView) {
+      hasTrackedResultView = true;
+      trackAnalyticsEvent("recommend_result_view", {
+        result_count: allRanked.length,
+        owned_count: Object.values(savedChecks).filter(Boolean).length,
+        answered_conditions: [preferences.cooking, preferences.drying, preferences.storage].filter(Boolean).length,
+        rule_version: recommendationRuleVersion
+      });
+    }
     updatePurchasePlan(allRanked, savedChecks, preferences);
     const ranked = showSelectedOnly ? allRanked.filter((item) => item.decision === "candidate") : allRanked;
     const nowItems = ranked.filter((item) => item.phase === "now");
@@ -865,7 +1196,7 @@ function setupRecommendation() {
       : "추천할 구매 항목이 없습니다";
     if (conditionSummary) {
       const labels = Object.entries(planConditionLabels).map(([name, labels]) => labels[preferences[name]]).filter(Boolean);
-      if (preferences.purchaseBudget) labels.push(`준비물 예산 ${formatWon(preferences.purchaseBudget)}`);
+      if (preferences.purchaseBudget) labels.push(`구매 예산 메모 ${formatWon(preferences.purchaseBudget)}`);
       conditionSummary.innerHTML = labels.map((label) => `<span>${label}</span>`).join("") || "조건을 아직 고르지 않았어요.";
     }
     results.innerHTML = "";
@@ -916,6 +1247,7 @@ function setupRecommendation() {
     const state = readStoredState();
     const nextChecks = { ...(state.checklist || {}) };
     const nextDecisions = { ...(state.recommendationDecisions || {}) };
+    const previousDecision = nextDecisions[itemId] || (nextChecks[itemId] ? "prepared" : "review");
 
     if (nextDecision === "prepared") {
       nextChecks[itemId] = true;
@@ -924,6 +1256,13 @@ function setupRecommendation() {
       nextDecisions[itemId] = nextDecision;
     }
 
+    trackAnalyticsEvent("recommendation_decision", {
+      item_id: itemId,
+      category: recommendationCatalog[itemId]?.category || "unknown",
+      decision: nextDecision,
+      previous_decision: previousDecision,
+      rule_version: recommendationRuleVersion
+    });
     writePurchasePlanState({ ...state, checklist: nextChecks, recommendationDecisions: nextDecisions });
     schedulePurchasePlanExpiry(() => window.location.reload());
     renderRecommendations();
@@ -934,6 +1273,21 @@ function setupRecommendation() {
   });
   renderRecommendations();
   schedulePurchasePlanExpiry(() => window.location.reload());
+}
+
+function setupPlanResultNavigation() {
+  const state = readStoredState();
+  const hasSavedPlan = Boolean(
+    state.purchasePlanExpiresAt
+    && state.planPreferences
+    && typeof state.planPreferences === "object"
+  );
+  document.querySelectorAll("[data-plan-results-link]").forEach((link) => {
+    link.hidden = !hasSavedPlan;
+  });
+  document.querySelectorAll("[data-plan-result-route]").forEach((link) => {
+    link.href = hasSavedPlan ? "/recommend" : "/checklist";
+  });
 }
 
 function setupBudget() {
@@ -1088,6 +1442,62 @@ function setupResultTabs() {
   renderTabs();
 }
 
+function setupRecommendationFeedback() {
+  const feedbackButtons = [...document.querySelectorAll("[data-recommend-feedback]")];
+  const reasons = document.querySelector("#recommendFeedbackReasons");
+  const status = document.querySelector("#recommendFeedbackStatus");
+  if (!feedbackButtons.length || !reasons || !status) return;
+
+  let feedback = readStoredState().recommendationFeedback || {};
+
+  function saveFeedback(type, reason = "") {
+    feedback = { type, reason, savedAt: Date.now(), ruleVersion: recommendationRuleVersion };
+    writePurchasePlanState({ ...readStoredState(), recommendationFeedback: feedback });
+    trackAnalyticsEvent("recommend_feedback", {
+      feedback_type: type,
+      feedback_reason: reason || "none",
+      rule_version: recommendationRuleVersion
+    });
+  }
+
+  function renderFeedback() {
+    feedbackButtons.forEach((button) => {
+      const selected = button.dataset.recommendFeedback === feedback.type;
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+
+    const options = recommendationFeedbackReasons[feedback.type] || [];
+    reasons.hidden = options.length === 0;
+    reasons.innerHTML = options.map(([value, label]) => (
+      `<button type="button" data-recommend-feedback-reason="${value}" class="${feedback.reason === value ? "is-selected" : ""}" aria-pressed="${feedback.reason === value}">${label}</button>`
+    )).join("");
+
+    if (feedback.type === "helpful") status.textContent = "의견을 반영했습니다. 감사합니다.";
+    else if (feedback.reason) status.textContent = "선택한 이유까지 반영했습니다. 감사합니다.";
+    else if (feedback.type) status.textContent = "가장 가까운 이유 하나를 선택해 주세요.";
+    else status.textContent = "";
+  }
+
+  feedbackButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const type = button.dataset.recommendFeedback;
+      if (type === "helpful") saveFeedback(type);
+      else feedback = { type, reason: "", savedAt: Date.now(), ruleVersion: recommendationRuleVersion };
+      renderFeedback();
+    });
+  });
+
+  reasons.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-recommend-feedback-reason]");
+    if (!button || !feedback.type) return;
+    saveFeedback(feedback.type, button.dataset.recommendFeedbackReason);
+    renderFeedback();
+  });
+
+  renderFeedback();
+}
+
 function setupStoreClickTracking() {
   document.addEventListener("click", (event) => {
     const link = event.target.closest("[data-store-link]");
@@ -1101,6 +1511,7 @@ function setupStoreClickTracking() {
       store: link.dataset.store || "unknown",
       item_id: link.dataset.itemId || "unknown",
       placement: link.dataset.placement || "unknown",
+      rule_version: recommendationRuleVersion,
       transport_type: "beacon"
     });
   });
@@ -1108,13 +1519,19 @@ function setupStoreClickTracking() {
 
 plannerForm?.addEventListener("input", renderPlanner);
 document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
+flushPendingAnalyticsEvents();
+setupHomeReturnState();
 setupHomePreview();
+setupHomeShare();
+setupHomeCtaTracking();
 setupStoreClickTracking();
 setupPlannerStage();
 renderPlanner();
 setupChecklist();
 setupCurrencyInputs();
 setupRecommendation();
+setupRecommendationFeedback();
+setupPlanResultNavigation();
 setupBudget();
 formatAllCurrencyInputs();
 setupResultTabs();

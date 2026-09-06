@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+.vercel
+artifacts
+output
+data/exports
+node_modules

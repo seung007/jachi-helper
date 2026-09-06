@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "check": "node scripts/check-seo.mjs",
+    "verify:flow": "node scripts/verify-growth-flow.mjs",
+    "promotion:build": "node scripts/build-promotion-pack.mjs",
     "set-naver-code": "node scripts/set-naver-code.mjs",
     "set-site-url": "node scripts/set-site-url.mjs",
     "serve": "node scripts/serve.mjs",
     "fetch:naver-trends": "node scripts/fetch-naver-trends.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
   }
 }

@@ -48,7 +48,7 @@
       }
     </script>
   </head>
-  <body>
+  <body class="home-page">
     <header class="topbar">
       <a class="brand" href="/" aria-label="자취도우미 홈">
         <span class="brand-mark">ㅈ</span>
@@ -56,54 +56,99 @@
       </a>
       <nav aria-label="주요 메뉴">
         <a href="/checklist">구매 계획</a>
-        <a href="/recommend">결과 보기</a>
+        <a href="/recommend" data-plan-results-link>결과 보기</a>
         <a href="/budget">비용 계산</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero home-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">첫 자취 구매 계획</p>
-          <h1>입주 전에 꼭 살 것만 골라봐.</h1>
-          <p class="lede">
-            이미 가진 물건을 빼고 생활 조건 다섯 가지만 고르면, 지금 필요한 것과 나중에 사도 되는 것을 나눠 드립니다.
-          </p>
-          <div class="hero-actions"><a class="button primary" href="/checklist">내 구매 계획 만들기</a></div>
-          <p class="hero-helper-link">보증금과 월 지출은 <a href="/budget">비용 계산 도구</a>에서 따로 정리할 수 있어요.</p>
-        </div>
-      </section>
-
-      <section class="home-preview" aria-labelledby="home-preview-title">
-        <div class="home-preview-head">
+      <section class="home-discovery" id="quick-preview" aria-labelledby="home-discovery-title">
+        <div class="home-discovery-intro">
           <div>
-            <p class="eyebrow">구매 계획 미리보기</p>
-            <h2 id="home-preview-title">조건이 달라지면, 먼저 볼 물건도 달라져요.</h2>
-            <p>광고 상품이 아니라 자취도우미가 준비물을 나누는 방식의 예시입니다.</p>
+            <h1 id="home-discovery-title">첫 자취 준비물,<br />필요한 것부터 찾으세요.</h1>
+            <p>39개 준비물을 검색하고 구매 시점을 확인한 뒤, 내 생활 조건에 맞는 구매 계획으로 이어가세요.</p>
           </div>
-          <a class="button primary" href="/checklist">내 조건으로 골라보기</a>
+          <div class="home-discovery-actions">
+            <a class="button primary" id="heroPrimaryCta" href="/checklist" data-home-cta="hero">내 준비물 계획 만들기</a>
+            <button class="button secondary" id="shareHome" type="button">친구에게 공유</button>
+          </div>
+          <p class="hero-return-note" id="homeResumeNote">완성한 목록은 이 기기에 30일 동안 저장되어 다음 방문에도 이어서 볼 수 있어요.</p>
         </div>
-        <div class="home-preview-grid" id="homePreviewList" aria-live="polite"></div>
+
+        <div class="home-catalog-shell">
+          <form class="home-catalog-search" id="homeCatalogSearch" role="search">
+            <label class="sr-only" for="homeCatalogQuery">준비물 검색</label>
+            <span aria-hidden="true">⌕</span>
+            <input id="homeCatalogQuery" type="search" placeholder="수건, 멀티탭, 세탁세제를 검색해 보세요" autocomplete="off" />
+            <button type="submit">검색</button>
+          </form>
+
+          <div class="home-category-tabs" id="homeCategoryTabs" aria-label="준비물 카테고리">
+            <button type="button" data-home-category="all" class="is-selected">전체</button>
+            <button type="button" data-home-category="침구·수면">침구</button>
+            <button type="button" data-home-category="욕실">욕실</button>
+            <button type="button" data-home-category="주방">주방</button>
+            <button type="button" data-home-category="청소">청소</button>
+            <button type="button" data-home-category="세탁">세탁</button>
+            <button type="button" data-home-category="생활·수납">생활·수납</button>
+            <button type="button" data-home-category="안전·건강">안전·건강</button>
+          </div>
+
+          <div class="home-catalog-toolbar">
+            <div>
+              <span>첫 자취 준비물 39개</span>
+              <strong id="homePreviewSummary" aria-live="polite">기본 준비에서 먼저 볼 6개입니다.</strong>
+            </div>
+            <label>정렬
+              <select id="homeCatalogSort">
+                <option value="priority">기본 준비순</option>
+                <option value="first-day">입주 첫날 우선</option>
+                <option value="name">가나다순</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="home-preview-grid" id="homePreviewList" aria-live="polite"></div>
+
+          <div class="home-catalog-refine">
+            <fieldset class="home-preview-demo">
+              <legend>생활 방식으로 다시 보기</legend>
+              <div class="home-preview-options" id="homePreviewOptions">
+                <label><input type="radio" name="homePreset" value="default" checked /><span>기본 준비</span></label>
+                <label><input type="radio" name="homePreset" value="cooking" /><span>요리를 자주 해요</span></label>
+                <label><input type="radio" name="homePreset" value="drying" /><span>실내에서 말려요</span></label>
+                <label><input type="radio" name="homePreset" value="storage" /><span>수납이 부족해요</span></label>
+              </div>
+            </fieldset>
+            <p>최저가·인기순은 공식 상품 데이터가 연결된 뒤 제공합니다.</p>
+          </div>
+
+          <div class="home-preview-action">
+            <p>전체 계획에서는 보유품을 빼고 생활 조건을 더 반영합니다.</p>
+            <a class="button primary" id="homePreviewCta" href="/checklist" data-home-cta="home_demo">39개 준비물 계획 만들기</a>
+          </div>
+        </div>
         <noscript><p class="home-preview-fallback">구매 계획을 만들면 입주 첫날 필요한 물건과 생활 조건을 확인한 뒤 살 물건을 나눠 볼 수 있습니다.</p></noscript>
       </section>
 
       <section class="home-flow" aria-labelledby="feature-map-title">
         <div class="section-head">
-          <p class="eyebrow">첫 자취 준비 흐름</p>
-          <h2 id="feature-map-title">고르고, 미루고, 필요한 것만 사세요.</h2>
+          <p class="eyebrow">자취도우미가 하는 일</p>
+          <h2 id="feature-map-title">더 추천하기보다, 결정을 줄여 드립니다.</h2>
+          <p>판매처로 이동하기 전에 불필요한 구매를 빼고 확인할 조건을 남깁니다.</p>
         </div>
-        <div class="home-flow-grid">
-          <a href="/checklist"><span>01</span><strong>보유품 제외</strong><small>이미 있는 물건부터 빼기</small></a>
-          <a href="/checklist"><span>02</span><strong>생활 조건 선택</strong><small>요리·세탁·수납만 고르기</small></a>
-          <a href="/checklist"><span>03</span><strong>준비물 예산</strong><small>구매에 쓸 금액만 정하기</small></a>
-          <a href="/recommend"><span>04</span><strong>구매 계획 확인</strong><small>지금 필요와 나중 구매로 나누기</small></a>
-        </div>
+        <ol class="home-flow-grid">
+          <li><span>01</span><div><strong>먼저 뺍니다</strong><small>이미 가진 물건은 다시 추천하지 않습니다.</small></div></li>
+          <li><span>02</span><div><strong>구매 시점을 나눕니다</strong><small>지금 필요·조건 확인·나중으로 구분합니다.</small></div></li>
+          <li><span>03</span><div><strong>다음 행동을 연결합니다</strong><small>구매 기준과 검색어를 확인하고 판매처로 이동합니다.</small></div></li>
+        </ol>
+        <a class="home-flow-link" href="/checklist" data-home-cta="flow_start">준비물 계획 시작하기 <span aria-hidden="true">→</span></a>
       </section>
     </main>
 
     <footer>
       <strong>자취도우미</strong>
-      <span>첫 자취 구매 계획 · 초기 비용 · 준비물 정리</span>
+      <div class="footer-meta"><span>첫 자취 구매 계획 · 초기 비용 · 준비물 정리</span><a href="/data-policy">데이터 이용 안내</a></div>
     </footer>
 
     <script>

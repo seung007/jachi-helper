@@ -28,7 +28,7 @@
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
         <a href="/checklist">구매 계획</a>
-        <a href="/recommend" aria-current="page">결과 보기</a>
+        <a href="/recommend" aria-current="page" data-plan-results-link>결과 보기</a>
         <a href="/budget">비용 계산</a>
       </nav>
     </header>
@@ -36,18 +36,18 @@
       <section class="page-title">
         <p class="eyebrow">첫 자취 구매 계획 · 2/2</p>
         <h1>내 조건으로 구매 계획을 만들어요.</h1>
-        <p>보유품과 생활 조건으로 먼저 확인할 물건을 정리하고, 입력한 준비물 예산을 함께 보여줍니다. 제품 가격은 추정하지 않고 판매처에서 직접 확인하게 합니다.</p>
+        <p>보유품과 생활 조건으로 먼저 확인할 물건을 정리하고, 입력한 구매 예산 메모를 함께 보여줍니다. 제품 가격은 추정하지 않고 판매처에서 직접 확인하게 합니다.</p>
       </section>
 
       <section class="recommendation-start" id="recommendationStart" aria-labelledby="recommendation-start-title" hidden>
         <p class="eyebrow">첫 자취 구매 계획</p>
         <h2 id="recommendation-start-title">먼저 보유품과 생활 조건을 골라 주세요.</h2>
-        <p>저장된 선택이 없거나 20분이 지나 초기화됐습니다. 기본 조건을 임의로 적용하지 않습니다.</p>
+        <p>저장된 구매 계획이 없습니다. 기본 조건을 임의로 적용하지 않으니 내 조건부터 골라 주세요.</p>
         <a class="button primary" href="/checklist">구매 계획 시작하기</a>
       </section>
 
       <section class="plan-result-intro" id="recommendationResultIntro" aria-label="반영한 조건">
-        <div class="plan-result-label"><p class="eyebrow">반영한 내 조건</p><small>선택은 20분 후 자동 초기화됩니다.</small></div>
+        <div class="plan-result-label"><p class="eyebrow">반영한 내 조건</p><small>선택은 마지막 수정부터 30일 동안 이 기기에 저장됩니다.</small></div>
         <div class="condition-summary" id="recommendationConditions"></div>
         <a class="button secondary" href="/checklist">조건 수정</a>
       </section>
@@ -62,12 +62,26 @@
           <div>
             <p>내가 정한 구매 목록</p>
             <strong id="purchasePlanSummary" aria-live="polite">필요한 물건을 고르면 목록을 만들 수 있어요.</strong>
-            <small id="purchasePlanStatus" aria-live="polite">준비물 예산 안에서 판매처의 최신 가격과 제품 구성을 확인하세요.</small>
+            <small id="purchasePlanStatus" aria-live="polite">저장한 구매 예산 메모를 참고해 판매처의 최신 가격과 제품 구성을 확인하세요.</small>
           </div>
           <button class="button secondary" id="filterPurchasePlan" type="button" disabled>선택한 것만 보기</button>
         </section>
         <div id="recommendationResults"></div>
         <p class="recommendation-note" id="recommendationNote"></p>
+        <section class="recommend-feedback" aria-labelledby="recommend-feedback-title">
+          <div>
+            <p class="eyebrow">목록 품질 확인</p>
+            <h2 id="recommend-feedback-title">이 준비물 목록이 현실과 맞았나요?</h2>
+            <p>한 번만 알려 주시면 다음 추천 규칙을 고치는 근거로 사용합니다.</p>
+          </div>
+          <div class="recommend-feedback-options" role="group" aria-label="준비물 목록 평가">
+            <button type="button" data-recommend-feedback="helpful">도움이 됐어요</button>
+            <button type="button" data-recommend-feedback="missing">빠진 준비물이 있어요</button>
+            <button type="button" data-recommend-feedback="unnecessary">불필요한 추천이 있어요</button>
+          </div>
+          <div class="recommend-feedback-reasons" id="recommendFeedbackReasons" hidden></div>
+          <p class="recommend-feedback-status" id="recommendFeedbackStatus" aria-live="polite"></p>
+        </section>
       </section>
 
       <section class="recommend-method" id="recommendationMethod" aria-labelledby="recommend-method-title">
@@ -79,7 +93,7 @@
         </div>
       </section>
     </main>
-    <footer><strong>자취도우미</strong><span>첫 자취 준비를 내 조건에 맞게 정리하기.</span></footer>
+    <footer><strong>자취도우미</strong><div class="footer-meta"><span>첫 자취 준비를 내 조건에 맞게 정리하기.</span><a href="/data-policy">데이터 이용 안내</a></div></footer>
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
