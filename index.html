@@ -64,15 +64,16 @@
     <main>
       <section class="home-discovery" id="quick-preview" aria-labelledby="home-discovery-title">
         <div class="home-discovery-intro">
-          <div>
-            <h1 id="home-discovery-title">첫 자취 준비물,<br />필요한 것부터 찾으세요.</h1>
-            <p>39개 준비물을 검색하고 구매 시점을 확인한 뒤, 내 생활 조건에 맞는 구매 계획으로 이어가세요.</p>
+          <div class="home-discovery-copy">
+            <p class="home-discovery-eyebrow">첫 자취 준비물 찾기</p>
+            <h1 id="home-discovery-title">무엇부터 준비할지 바로 찾아보세요.</h1>
+            <p>39개 준비물을 검색하고, 이미 가진 물건은 빼고, 내 생활에 필요한 순서로 정리할 수 있어요.</p>
           </div>
           <div class="home-discovery-actions">
-            <a class="button primary" id="heroPrimaryCta" href="/checklist" data-home-cta="hero">내 준비물 계획 만들기</a>
-            <button class="button secondary" id="shareHome" type="button">친구에게 공유</button>
+            <a class="button primary" id="heroPrimaryCta" href="/checklist" data-home-cta="hero">내 목록 만들기</a>
+            <button class="button secondary" id="shareHome" type="button">공유</button>
           </div>
-          <p class="hero-return-note" id="homeResumeNote">완성한 목록은 이 기기에 30일 동안 저장되어 다음 방문에도 이어서 볼 수 있어요.</p>
+          <p class="hero-return-note" id="homeResumeNote">완성한 목록은 이 기기에 30일 동안 저장됩니다.</p>
         </div>
 
         <div class="home-catalog-shell">
@@ -94,6 +95,19 @@
             <button type="button" data-home-category="안전·건강">안전·건강</button>
           </div>
 
+          <div class="home-catalog-refine">
+            <fieldset class="home-preview-demo">
+              <legend>생활 방식</legend>
+              <div class="home-preview-options" id="homePreviewOptions">
+                <label><input type="radio" name="homePreset" value="default" checked /><span>기본 준비</span></label>
+                <label><input type="radio" name="homePreset" value="cooking" /><span>요리를 자주 해요</span></label>
+                <label><input type="radio" name="homePreset" value="drying" /><span>실내에서 말려요</span></label>
+                <label><input type="radio" name="homePreset" value="storage" /><span>수납이 부족해요</span></label>
+              </div>
+            </fieldset>
+            <p>생활 방식을 고르면 먼저 볼 준비물이 달라집니다.</p>
+          </div>
+
           <div class="home-catalog-toolbar">
             <div>
               <span>첫 자취 준비물 39개</span>
@@ -110,22 +124,9 @@
 
           <div class="home-preview-grid" id="homePreviewList" aria-live="polite"></div>
 
-          <div class="home-catalog-refine">
-            <fieldset class="home-preview-demo">
-              <legend>생활 방식으로 다시 보기</legend>
-              <div class="home-preview-options" id="homePreviewOptions">
-                <label><input type="radio" name="homePreset" value="default" checked /><span>기본 준비</span></label>
-                <label><input type="radio" name="homePreset" value="cooking" /><span>요리를 자주 해요</span></label>
-                <label><input type="radio" name="homePreset" value="drying" /><span>실내에서 말려요</span></label>
-                <label><input type="radio" name="homePreset" value="storage" /><span>수납이 부족해요</span></label>
-              </div>
-            </fieldset>
-            <p>최저가·인기순은 공식 상품 데이터가 연결된 뒤 제공합니다.</p>
-          </div>
-
           <div class="home-preview-action">
-            <p>전체 계획에서는 보유품을 빼고 생활 조건을 더 반영합니다.</p>
-            <a class="button primary" id="homePreviewCta" href="/checklist" data-home-cta="home_demo">39개 준비물 계획 만들기</a>
+            <p><strong>더 정확하게 정리할까요?</strong><span>전체 계획에서 보유품을 빼고 생활 조건을 더 반영합니다.</span></p>
+            <a class="button primary" id="homePreviewCta" href="/checklist" data-home-cta="home_demo">39개 준비물로 계획 만들기</a>
           </div>
         </div>
         <noscript><p class="home-preview-fallback">구매 계획을 만들면 입주 첫날 필요한 물건과 생활 조건을 확인한 뒤 살 물건을 나눠 볼 수 있습니다.</p></noscript>

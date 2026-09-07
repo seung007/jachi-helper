@@ -455,6 +455,9 @@ function createStoreSearchLink(store, searchQuery, itemId, placement) {
     return `<a class="store-search-link store-coupang" href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색"><span>쿠팡</span><strong>상품 검색</strong></a>`;
   }
   if (store === "naver") {
+    if (placement === "home_catalog") {
+      return `<a class="store-search-link store-naver" href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색"><span>네이버</span><strong>검색하기</strong></a>`;
+    }
     return `
       <a class="store-search-link store-naver" href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색"><span>네이버</span><strong>상품 검색</strong></a>
       <a class="store-search-link store-naver-plus" href="https://shopping.naver.com/ns/home" target="_blank" rel="noreferrer" data-store-link data-store="naver_store" data-item-id="${itemId}" data-placement="${placement}" data-copy-query="${query}" aria-label="${searchQuery} 검색어를 복사하고 네이버플러스 스토어 열기"><span>네이버+</span><strong>검색어 복사</strong></a>`;
