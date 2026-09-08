@@ -92,10 +92,26 @@ try {
   assert(await page.locator("#homeCatalogQuery").isVisible(), "home must expose preparation-item search in the first flow");
   assert(await page.locator("#homeCategoryTabs button").count() === 8, "home must expose all preparation-item categories");
   assert(await page.locator("#homePreviewList .home-preview-item").count() === 6, "home must render six preview items");
+  const defaultProductVisuals = await page.locator("#homePreviewList .home-product-image").evaluateAll((images) =>
+    images.map((image) => {
+      const style = getComputedStyle(image);
+      return `${style.backgroundImage}|${style.backgroundPosition}`;
+    })
+  );
+  assert(defaultProductVisuals.every((visual) => visual.includes("home-items-")), "home preview must use item-specific product imagery");
+  assert(new Set(defaultProductVisuals).size === 6, "home preview must not repeat one category image across different items");
   assert(await page.locator("#homePreviewList [data-store-link]").count() > 0, "home preview items must link to current store searches");
   assert(!(await page.locator("#homeCatalogSort").innerText()).includes("최저가"), "home must not claim lowest-price sorting without official product data");
   assert(!(await page.locator("[data-plan-results-link]").isVisible()), "empty home must hide the result navigation link");
   assert(await page.getByRole("link", { name: "데이터 이용 안내" }).isVisible(), "home must link to the data-use guide");
+  for (const categoryButton of await page.locator("#homeCategoryTabs button:not([data-home-category='all'])").all()) {
+    await categoryButton.click();
+    const categoryImages = page.locator("#homePreviewList .home-product-image");
+    const imageCount = await categoryImages.count();
+    assert(imageCount > 0, "each preparation category must render at least one item");
+    assert(await categoryImages.evaluateAll((images) => images.every((image) => image.classList.contains("has-item-image"))), "all 39 catalog items must have matching imagery");
+  }
+  await page.locator("#homeCategoryTabs [data-home-category='all']").click();
   report.checks.push("home renders a searchable six-item catalog with store searches and no fabricated price ranking");
 
   await page.getByLabel("요리를 자주 해요").check();
@@ -201,6 +217,14 @@ try {
     await responsivePage.waitForTimeout(800);
     await assertNoHorizontalOverflow(responsivePage, viewport.name);
     assert(await responsivePage.locator("#homePreviewList .home-preview-item").count() === 6, `${viewport.name}: preview cards are missing`);
+    const visualOverlap = await responsivePage.locator("#homePreviewList .home-preview-item").evaluateAll((cards) =>
+      cards.some((card) => {
+        const image = card.querySelector(".home-product-image")?.getBoundingClientRect();
+        const copy = card.querySelector(".home-preview-copy")?.getBoundingClientRect();
+        return image && copy && image.right > copy.left + 1;
+      })
+    );
+    assert(!visualOverlap, `${viewport.name}: product imagery overlaps card content`);
     await responsivePage.screenshot({ path: resolve(outputDir, `${viewport.name}-home.png`), fullPage: true });
     report.checks.push(`${viewport.name} home has no horizontal overflow`);
     await responsiveContext.close();

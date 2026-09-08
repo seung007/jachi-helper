@@ -296,6 +296,48 @@ const homePreviewPresets = {
   }
 };
 
+const homeProductImages = {
+  "bedding-cover": ["bed-bath", "0% 0%"],
+  "bedding-duvet": ["bed-bath", "50% 0%"],
+  "bedding-pillow": ["bed-bath", "100% 0%"],
+  "bedding-pad": ["bed-bath", "0% 100%"],
+  "bath-towel": ["default", "0% 0%"],
+  "bath-toiletries": ["default", "50% 0%"],
+  "bath-toothbrush": ["bed-bath", "50% 100%"],
+  "bath-mat": ["bed-bath", "100% 100%"],
+  "bath-toilet-paper": ["cleaning", "0% 0%"],
+  "life-powerstrip": ["default", "100% 0%"],
+  "bedding-curtain": ["default", "0% 100%"],
+  "life-storage": ["default", "50% 100%"],
+  "kitchen-dishes": ["cooking", "100% 100%"],
+  "kitchen-cutlery": ["cooking", "0% 0%"],
+  "kitchen-bag": ["cooking", "50% 0%"],
+  "kitchen-pot": ["cooking", "100% 0%"],
+  "kitchen-pan": ["cooking", "0% 100%"],
+  "kitchen-container": ["cooking", "50% 100%"],
+  "laundry-detergent": ["drying", "0% 0%"],
+  "bath-basket": ["drying", "50% 0%"],
+  "laundry-dryer": ["drying", "100% 0%"],
+  "laundry-net": ["drying", "0% 100%"],
+  "laundry-softener": ["drying", "50% 100%"],
+  "laundry-clips": ["drying", "100% 100%"],
+  "laundry-bag": ["laundry-bag", "center", "cover"],
+  "bedding-hanger": ["storage", "0% 0%"],
+  "clean-wipes": ["cleaning", "50% 0%"],
+  "clean-detergent": ["cleaning", "100% 0%"],
+  "clean-broom": ["cleaning", "0% 100%"],
+  "clean-gloves": ["cleaning", "50% 100%"],
+  "clean-recycle": ["cleaning", "100% 100%"],
+  "clean-trash": ["storage", "50% 100%"],
+  "life-scissors": ["misc", "0% 0%"],
+  "life-tape": ["misc", "50% 0%"],
+  "life-umbrella": ["misc", "100% 0%"],
+  "life-light": ["storage", "100% 100%"],
+  "safe-door": ["misc", "0% 100%"],
+  "safe-medicine": ["misc", "50% 100%"],
+  "safe-flashlight": ["misc", "100% 100%"]
+};
+
 const homePresetPreferences = {
   cooking: { cooking: "often" },
   drying: { drying: "indoor" },
@@ -546,13 +588,17 @@ function setupHomePreview() {
       const reason = signal?.reason || (item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "생활 조건을 확인한 뒤 결정할 항목");
       const criteria = signal?.criteria || categoryCriteria[item.category];
       const imageGroup = id.split("-")[0];
+      const productImage = homeProductImages[id];
+      const imageStyle = productImage
+        ? ` style="--product-image: url('/assets/${productImage[2] ? "home-item" : "home-items"}-${productImage[0]}.webp'); --product-image-position: ${productImage[1]}; --product-image-size: ${productImage[2] || "300% 200%"}"`
+        : "";
       const searchQuery = `자취 ${item.title}`;
       const storeActions = item.stores.map((store) => createStoreSearchLink(store, searchQuery, id, "home_catalog")).join("");
       const card = document.createElement("article");
       card.className = "home-preview-item";
       card.innerHTML = `
-        <div class="home-product-image home-product-image-${imageGroup}" role="img" aria-label="${item.category} 카테고리 대표 이미지">
-          <span>${item.category} 대표 이미지</span>
+        <div class="home-product-image home-product-image-${imageGroup}${productImage ? " has-item-image" : " is-item-placeholder"}"${imageStyle} role="img" aria-label="${item.title} 품목 예시 이미지">
+          ${productImage ? "" : `<span>${item.title}</span>`}
         </div>
         <div class="home-preview-copy">
           <div class="home-preview-meta"><span>${item.category}</span><b class="home-preview-status-${status}">${statusLabel} · ${context}</b></div>
