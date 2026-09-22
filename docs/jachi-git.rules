@@ -1,0 +1,17 @@
+# Machine-local Codex rules; install in ~/.codex/rules/jachi-helper.rules.
+# Explicit user approval before committing is required by AGENTS.md.
+prefix_rule(
+    pattern = ["git", "-C", "C:/Users/user/Documents/ChatGPT/프로젝트/jachi-helper", "add", "--"],
+    decision = "allow",
+    justification = "User authorized staging reviewed files in jachi-helper."
+)
+prefix_rule(
+    pattern = ["git", "-C", "C:/Users/user/Documents/ChatGPT/프로젝트/jachi-helper", "commit", "-m"],
+    decision = "prompt",
+    justification = "User revoked standing approval; obtain explicit approval for each reviewed change before committing."
+)
+prefix_rule(
+    pattern = ["git", "-C", "C:/Users/user/Documents/ChatGPT/프로젝트/jachi-helper", "push", "--", "https://github.com/seung007/jachi-helper.git", "HEAD:refs/heads/main"],
+    decision = "prompt",
+    justification = "Confirm the user has approved publishing these commits before pushing."
+)

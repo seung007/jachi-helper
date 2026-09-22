@@ -1,7 +1,8 @@
 import { readFileSync, existsSync, statSync } from "node:fs";
 
-const requiredFiles = ["index.html", "checklist.html", "budget.html", "recommend.html", "data-policy.html", "assets/jachi-studio-hero-v2.webp", "assets/checklist-categories-hero.webp", "assets/checklist-categories-card.webp", "robots.txt", "sitemap.xml", "vercel.json"];
-const pages = ["index.html", "checklist.html", "budget.html", "recommend.html", "data-policy.html"];
+const detergentAssets = ["downy", "liq", "beat", "snuggle", "acts", "tech", "persil", "fi-ji"].map((id) => `assets/detergents/${id}.webp`);
+const requiredFiles = ["index.html", "item.html", "services.html", "checklist.html", "budget.html", "recommend.html", "data-policy.html", "assets/jachi-studio-hero-v2.webp", "assets/checklist-categories-hero.webp", "assets/checklist-categories-card.webp", ...detergentAssets, "robots.txt", "sitemap.xml", "vercel.json"];
+const pages = ["index.html", "item.html", "services.html", "checklist.html", "budget.html", "recommend.html", "data-policy.html"];
 let failed = false;
 
 for (const file of requiredFiles) {
@@ -50,6 +51,12 @@ if (!/<loc>https:\/\/[^<]+<\/loc>/.test(sitemap)) {
 for (const asset of ["assets/jachi-studio-hero-v2.webp", "assets/checklist-categories-hero.webp", "assets/checklist-categories-card.webp"]) {
   if (existsSync(asset) && statSync(asset).size > 200_000) {
     console.error(`${asset}: optimized image must stay below 200 KB`);
+    failed = true;
+  }
+}
+for (const asset of detergentAssets) {
+  if (existsSync(asset) && statSync(asset).size > 50_000) {
+    console.error(`${asset}: detergent image must stay below 50 KB`);
     failed = true;
   }
 }

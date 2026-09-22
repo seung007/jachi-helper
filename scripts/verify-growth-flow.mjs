@@ -100,6 +100,12 @@ try {
   );
   assert(defaultProductVisuals.every((visual) => visual.includes("home-items-")), "home preview must use item-specific product imagery");
   assert(new Set(defaultProductVisuals).size === 6, "home preview must not repeat one category image across different items");
+  assert(await page.getByRole("button", { name: "39개 전체 보기" }).isVisible(), "home must expose the full catalog from the six-item preview");
+  await page.getByRole("button", { name: "39개 전체 보기" }).click();
+  assert(await page.locator("#homePreviewList .home-preview-item").count() === 39, "home full-catalog control must render all 39 items");
+  assert((await page.locator("#homePreviewSummary").innerText()).includes("39개를 모두"), "home full-catalog summary must state that all items are visible");
+  await page.getByRole("button", { name: "대표 6개만 보기" }).click();
+  assert(await page.locator("#homePreviewList .home-preview-item").count() === 6, "home full-catalog control must collapse back to six items");
   assert(await page.locator("#homePreviewList [data-store-link]").count() > 0, "home preview items must link to current store searches");
   assert(!(await page.locator("#homeCatalogSort").innerText()).includes("최저가"), "home must not claim lowest-price sorting without official product data");
   assert(!(await page.locator("[data-plan-results-link]").isVisible()), "empty home must hide the result navigation link");
@@ -112,7 +118,7 @@ try {
     assert(await categoryImages.evaluateAll((images) => images.every((image) => image.classList.contains("has-item-image"))), "all 39 catalog items must have matching imagery");
   }
   await page.locator("#homeCategoryTabs [data-home-category='all']").click();
-  report.checks.push("home renders a searchable six-item catalog with store searches and no fabricated price ranking");
+  report.checks.push("home renders a searchable six-item preview that expands to all 39 items, with store searches and no fabricated price ranking");
 
   await page.getByLabel("요리를 자주 해요").check();
   if (shouldVerifyGa4) await waitForGa4Event("home_demo_select");

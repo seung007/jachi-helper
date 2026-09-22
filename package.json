@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "check": "node scripts/check-seo.mjs",
+    "check": "node scripts/check-seo.mjs && node scripts/verify-item-guidance.mjs",
     "verify:flow": "node scripts/verify-growth-flow.mjs",
     "promotion:build": "node scripts/build-promotion-pack.mjs",
     "set-naver-code": "node scripts/set-naver-code.mjs",

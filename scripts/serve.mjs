@@ -9,6 +9,7 @@ const types = {
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".svg": "image/svg+xml",
+  ".webp": "image/webp",
   ".txt": "text/plain; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
   ".json": "application/json; charset=utf-8"
@@ -30,7 +31,10 @@ createServer((req, res) => {
     return;
   }
 
-  res.writeHead(200, { "content-type": types[extname(file)] || "application/octet-stream" });
+  res.writeHead(200, {
+    "cache-control": "no-store",
+    "content-type": types[extname(file)] || "application/octet-stream"
+  });
   createReadStream(file).pipe(res);
 }).listen(port, () => {
   console.log(`Local preview: http://localhost:${port}`);

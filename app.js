@@ -1,6 +1,6 @@
 const allRooms = ["full", "semi", "empty"];
 const allLifestyles = ["cook", "delivery", "remote"];
-const recommendationRuleVersion = "v1";
+const recommendationRuleVersion = "v2-item-guidance";
 
 function trackAnalyticsEvent(eventName, parameters = {}) {
   try {
@@ -212,14 +212,46 @@ const recommendationFeedbackReasons = {
   ]
 };
 
-const categoryCriteria = {
-  "침구·수면": "침대·창문 규격과 세탁 가능 여부를 확인하세요.",
-  "욕실": "욕실 수납과 기본 제공 품목을 먼저 확인하세요.",
-  "주방": "가스·인덕션 종류와 실제 조리 빈도를 확인하세요.",
-  "청소": "바닥 재질과 관리사무소 분리수거 기준을 확인하세요.",
-  "세탁": "세탁기 유무와 건조 공간을 먼저 확인하세요.",
-  "생활·수납": "콘센트 위치와 수납할 공간을 재보세요.",
-  "안전·건강": "집에 이미 비치된 안전 설비와 보관 위치를 확인하세요."
+const itemGuidance = {
+  "bedding-cover": { phase: "confirm", reason: "사용할 매트리스 크기를 확인한 뒤 고릅니다.", criteria: "매트리스의 가로·세로·높이와 커버 세탁 방법을 확인하세요." },
+  "bedding-duvet": { phase: "now", reason: "첫날 잠잘 때 사용할 이불부터 준비합니다.", criteria: "이미 가진 이불, 사용할 침구 크기와 계절에 맞는 두께를 확인하세요." },
+  "bedding-pillow": { phase: "now", reason: "첫날 사용할 베개가 없다면 먼저 준비합니다.", criteria: "평소 편한 높이, 베개 크기와 커버 분리 세탁 여부를 확인하세요." },
+  "bedding-pad": { phase: "later", reason: "방수 기능이 필요한지 정한 뒤 추가로 고릅니다.", criteria: "매트리스 크기, 방수 소재와 세탁·건조 방법을 확인하세요." },
+  "bedding-hanger": { phase: "confirm", reason: "옷장에 걸 공간과 옷 수량을 먼저 확인합니다.", criteria: "옷장 봉 길이, 옷걸이 폭·두께와 필요한 수량을 확인하세요." },
+  "bedding-curtain": { phase: "confirm", reason: "창문 크기와 설치 가능 방식을 먼저 확인합니다.", criteria: "창문 가로·세로, 커튼봉 유무와 타공 가능 여부를 확인하세요." },
+  "bath-towel": { phase: "now", reason: "첫날 씻은 뒤 사용할 수건부터 준비합니다.", criteria: "가져갈 수건 수량과 세탁·건조 주기에 맞춰 필요한 수량을 정하세요." },
+  "bath-toiletries": { phase: "now", reason: "첫날 사용할 샴푸와 바디워시부터 챙깁니다.", criteria: "평소 쓰던 제품의 남은 양과 욕실에 둘 용기 크기를 확인하세요." },
+  "bath-toothbrush": { phase: "now", reason: "첫날 사용할 개인 칫솔과 치약부터 챙깁니다.", criteria: "가져갈 칫솔·치약이 있는지 확인하고 필요한 것만 준비하세요." },
+  "bath-mat": { phase: "later", reason: "욕실 앞 물기와 동선을 본 뒤 필요하면 추가합니다.", criteria: "문이 열리는 높이, 바닥에서 미끄러지는지와 세탁 방법을 확인하세요." },
+  "bath-toilet-paper": { phase: "now", reason: "입주 당일 사용할 화장지부터 챙깁니다.", criteria: "남은 화장지와 보관 공간을 확인하고 처음부터 대량 구매하지 마세요." },
+  "bath-basket": { phase: "confirm", reason: "세탁물을 모아 둘 위치와 공간을 먼저 확인합니다.", criteria: "바구니를 놓을 폭·높이, 통풍 구조와 옮기기 편한 손잡이를 확인하세요." },
+  "kitchen-pot": { phase: "confirm", reason: "사용할 가열 기구와 만들 음식을 먼저 확인합니다.", criteria: "가스·인덕션 호환, 한 번에 조리할 양과 보관할 폭을 확인하세요." },
+  "kitchen-pan": { phase: "confirm", reason: "가열 기구와 자주 할 요리에 맞춰 고릅니다.", criteria: "가스·인덕션 호환, 팬 지름과 손잡이까지 들어갈 수납 공간을 확인하세요." },
+  "kitchen-cutlery": { phase: "now", reason: "집에서 첫 끼를 먹을 수저와 젓가락부터 챙깁니다.", criteria: "이미 가진 수저 세트와 필요한 인원수, 세척 방법을 확인하세요." },
+  "kitchen-dishes": { phase: "confirm", reason: "집에서 먹는 방식에 맞춰 최소 수량부터 정합니다.", criteria: "접시·컵을 따로 확인하고 전자레인지 사용 표시와 수납 크기를 살펴보세요." },
+  "kitchen-container": { phase: "later", reason: "남는 음식의 양을 본 뒤 필요한 용기를 추가합니다.", criteria: "냉장고 선반 크기, 용기 용량과 전자레인지·냉동 사용 표시를 확인하세요." },
+  "kitchen-bag": { phase: "confirm", reason: "거주지에서 쓰는 쓰레기 배출 방식을 먼저 확인합니다.", criteria: "거주지 지자체의 종량제 봉투 종류·판매처와 음식물 배출 방식을 확인하세요.", search: "종량제 봉투 판매처 음식물 배출 방법", stores: ["naver"] },
+  "clean-wipes": { phase: "now", reason: "입주 전후 표면을 닦을 청소용품부터 챙깁니다.", criteria: "닦을 표면에 사용 가능한지와 일회용·세탁용 여부를 확인하세요." },
+  "clean-detergent": { phase: "confirm", reason: "청소할 곳과 표면에 맞는 세제를 고릅니다.", criteria: "주방·욕실 중 사용할 곳, 적용 가능한 재질과 제품 사용 주의사항을 확인하세요." },
+  "clean-broom": { phase: "confirm", reason: "바닥과 청소 도구를 둘 공간을 먼저 확인합니다.", criteria: "바닥 재질, 밀대 폭과 교체 청소포 규격을 확인하세요." },
+  "clean-gloves": { phase: "confirm", reason: "설거지·청소에 사용할 장갑을 구분해 고릅니다.", criteria: "손 크기, 장갑 길이와 제품에 표시된 사용 용도를 확인하세요." },
+  "clean-trash": { phase: "confirm", reason: "봉투 규격과 쓰레기통을 둘 위치를 먼저 확인합니다.", criteria: "사용할 봉투 용량, 뚜껑이 열리는 공간과 세척 편의성을 확인하세요." },
+  "clean-recycle": { phase: "confirm", reason: "건물의 재활용품 수거 방식을 먼저 확인합니다.", criteria: "배출 요일·장소, 품목별 분리 방법과 별도 봉투 필요 여부를 확인하세요.", search: "재활용품 분리배출 방법", stores: ["naver"] },
+  "laundry-detergent": { phase: "confirm", reason: "세탁기와 세탁할 옷에 맞는 세제부터 확인합니다.", criteria: "일반·드럼 세탁기 호환, 의류 세탁 표시와 권장 사용량을 확인하세요." },
+  "laundry-dryer": { phase: "confirm", reason: "빨래를 말릴 방식과 펼칠 공간을 먼저 확인합니다.", criteria: "건조대를 펼친 폭·높이, 접었을 때 크기와 통로를 확인하세요." },
+  "laundry-clips": { phase: "later", reason: "건조대 구성과 빨래 고정 필요를 본 뒤 추가합니다.", criteria: "건조대에 집게가 포함되는지, 집게가 물릴 두께를 확인하세요." },
+  "laundry-net": { phase: "confirm", reason: "세탁할 의류의 표시를 확인한 뒤 망을 고릅니다.", criteria: "의류 세탁 표시, 망 크기와 지퍼 덮개 유무를 확인하세요." },
+  "laundry-softener": { phase: "later", reason: "옷감에 사용 가능한지 보고 필요하면 추가합니다.", criteria: "의류의 섬유유연제 사용 가능 여부, 향과 권장 사용량을 확인하세요." },
+  "laundry-bag": { phase: "later", reason: "세탁물 보관·운반에 별도 봉투가 필요한지 확인합니다.", criteria: "젖은 세탁물 보관 여부, 통풍 구조와 운반할 용량을 확인하세요." },
+  "life-powerstrip": { phase: "confirm", reason: "콘센트와 사용할 전기기기를 먼저 확인합니다.", criteria: "제품 정격 용량, 연결할 기기의 소비전력과 필요한 코드 길이를 확인하세요." },
+  "life-storage": { phase: "confirm", reason: "정리할 물건과 빈 공간을 확인한 뒤 고릅니다.", criteria: "물건과 수납 공간의 가로·세로·높이, 뚜껑을 여는 공간을 재보세요." },
+  "life-scissors": { phase: "now", reason: "이삿짐 포장을 열 도구가 없다면 먼저 챙깁니다.", criteria: "기존 가위·커터칼 보유 여부와 날을 덮어 보관할 수 있는지 확인하세요." },
+  "life-tape": { phase: "later", reason: "포장·고정할 일이 생기면 용도에 맞춰 고릅니다.", criteria: "붙일 표면, 필요한 접착력과 제거 시 흔적 여부를 확인하세요." },
+  "life-light": { phase: "later", reason: "기존 조명으로 생활해 본 뒤 부족한 곳에 추가합니다.", criteria: "설치 위치, 전원 방식과 필요한 밝기를 확인하세요." },
+  "life-umbrella": { phase: "confirm", reason: "가져갈 우산이 있는지 먼저 확인합니다.", criteria: "휴대할 크기·무게와 젖은 우산을 둘 위치를 확인하세요." },
+  "safe-door": { phase: "confirm", reason: "문의 종류와 사용 가능한 고정 방식을 확인합니다.", criteria: "문 아래 틈과 바닥 재질을 확인하고 건물의 문 관리 안내를 따르세요." },
+  "safe-medicine": { phase: "confirm", reason: "보유한 약을 확인하고 필요한 품목은 약국에 문의합니다.", criteria: "보유 약의 사용기한·보관 표시를 확인하고 필요한 약은 약사와 상의하세요.", search: "근처 약국", stores: ["naver"] },
+  "safe-flashlight": { phase: "confirm", reason: "정전 때 사용할 조명과 보관 위치를 확인합니다.", criteria: "이미 가진 손전등, 배터리 규격과 충전 상태를 확인하세요." }
 };
 
 const itemSignals = {
@@ -235,63 +267,57 @@ const itemSignals = {
   "bath-basket": { condition: "storage", match: "limited", reason: "세탁물 동선을 정리할 때 필요한 항목", criteria: "욕실·세탁기 주변에 둘 공간을 확인하세요." }
 };
 
-const immediateItemIds = new Set([
-  "bedding-duvet",
-  "bedding-pillow",
-  "bath-towel",
-  "bath-toiletries",
-  "bath-toothbrush",
-  "bath-toilet-paper",
-  "kitchen-bag",
-  "clean-wipes",
-  "clean-detergent",
-  "clean-trash",
-  "life-powerstrip"
-]);
+function getItemGuidance(id, preferences = {}, decision = "review") {
+  const item = recommendationCatalog[id];
+  const guidance = itemGuidance[id];
+  const signal = itemSignals[id];
+  const matchedCondition = Boolean(signal && preferences[signal.condition] === signal.match);
+  let phase = guidance.phase;
+  let reason = guidance.reason;
+  let criteria = guidance.criteria;
+  if (matchedCondition) {
+    reason = `${signal.reason}. ${guidance.reason}`;
+    criteria = `${criteria} ${signal.criteria}`;
+  }
+  if (decision === "later" || decision === "skip") {
+    phase = "later";
+    reason = `직접 나중에 결정하기로 남긴 항목입니다. ${guidance.reason}`;
+  } else if (decision === "candidate") {
+    phase = "now";
+    reason = `직접 필요하다고 선택한 항목입니다. ${guidance.reason}`;
+  }
+  const searchTerms = [guidance.search || item.title.replace(/[·]/g, " ").replace(/ 또는 /g, " ")];
+  if (matchedCondition && signal.search) searchTerms.push(signal.search);
+  return { phase, reason, criteria, conditionMatched: matchedCondition, searchQuery: searchTerms.join(" "), stores: guidance.stores || item.stores };
+}
 
 const homePreviewPresets = {
   default: {
     summary: "기본 준비 39개 중 구매 시점이 다른 대표 6개예요.",
     items: [
-      { id: "bath-towel", status: "now", statusLabel: "지금 필요", context: "입주 첫날" },
-      { id: "bath-toiletries", status: "now", statusLabel: "지금 필요", context: "첫날 기본" },
-      { id: "life-powerstrip", status: "check", statusLabel: "조건 확인", context: "콘센트 확인" },
-      { id: "bedding-curtain", status: "check", statusLabel: "조건 확인", context: "창문 규격 확인" },
-      { id: "life-storage", status: "later", statusLabel: "나중에", context: "공간 실측 후" },
-      { id: "kitchen-dishes", status: "later", statusLabel: "나중에", context: "생활 습관 확인 후" }
+      { id: "bath-towel" }, { id: "bath-toiletries" }, { id: "life-powerstrip" },
+      { id: "bedding-curtain" }, { id: "life-storage" }, { id: "kitchen-dishes" }
     ]
   },
   cooking: {
     summary: "직접 요리할 때 먼저 살 것과 확인할 것을 6개로 나눴어요.",
     items: [
-      { id: "kitchen-cutlery", status: "now", statusLabel: "지금 필요", context: "입주 첫 끼" },
-      { id: "kitchen-bag", status: "now", statusLabel: "지금 필요", context: "음식물 처리" },
-      { id: "kitchen-pot", status: "check", statusLabel: "조건 확인", context: "가열 방식 확인" },
-      { id: "kitchen-pan", status: "check", statusLabel: "조건 확인", context: "필요한 크기 확인" },
-      { id: "kitchen-container", status: "later", statusLabel: "나중에", context: "조리 습관이 생긴 뒤" },
-      { id: "kitchen-dishes", status: "later", statusLabel: "나중에", context: "필요한 수량 확인 후" }
+      { id: "kitchen-cutlery" }, { id: "kitchen-bag" }, { id: "kitchen-pot" },
+      { id: "kitchen-pan" }, { id: "kitchen-container" }, { id: "kitchen-dishes" }
     ]
   },
   drying: {
     summary: "실내 건조에서 공간과 세탁 습관을 확인할 대표 6개예요.",
     items: [
-      { id: "laundry-detergent", status: "now", statusLabel: "지금 필요", context: "세탁 기본" },
-      { id: "bath-basket", status: "now", statusLabel: "지금 필요", context: "세탁물 분리" },
-      { id: "laundry-dryer", status: "check", statusLabel: "조건 확인", context: "펼칠 공간 확인" },
-      { id: "laundry-net", status: "check", statusLabel: "조건 확인", context: "세탁할 옷감 확인" },
-      { id: "laundry-softener", status: "later", statusLabel: "나중에", context: "향 취향을 안 뒤" },
-      { id: "laundry-clips", status: "later", statusLabel: "나중에", context: "건조대 구성 확인 후" }
+      { id: "laundry-detergent" }, { id: "bath-basket" }, { id: "laundry-dryer" },
+      { id: "laundry-net" }, { id: "laundry-softener" }, { id: "laundry-clips" }
     ]
   },
   storage: {
     summary: "수납이 부족할 때 바로 사지 않고 판단할 대표 6개예요.",
     items: [
-      { id: "bedding-hanger", status: "now", statusLabel: "지금 필요", context: "옷장 기본" },
-      { id: "life-powerstrip", status: "now", statusLabel: "지금 필요", context: "좁은 동선 정리" },
-      { id: "life-storage", status: "check", statusLabel: "조건 확인", context: "빈 공간 실측" },
-      { id: "bath-basket", status: "check", statusLabel: "조건 확인", context: "세탁 동선 확인" },
-      { id: "clean-trash", status: "later", statusLabel: "나중에", context: "분리수거 방식 확인 후" },
-      { id: "life-light", status: "later", statusLabel: "나중에", context: "실제 밝기를 본 뒤" }
+      { id: "bedding-hanger" }, { id: "life-powerstrip" }, { id: "life-storage" },
+      { id: "bath-basket" }, { id: "clean-trash" }, { id: "life-light" }
     ]
   }
 };
@@ -337,6 +363,17 @@ const homeProductImages = {
   "safe-medicine": ["misc", "50% 100%"],
   "safe-flashlight": ["misc", "100% 100%"]
 };
+
+const detergentProducts = [
+  { id: "downy", brand: "다우니", name: "다우니 세탁세제 탈취실내건조", company: "한국피앤지판매유한회사", machine: "일반·드럼 겸용", volume: 3.0, price: 23800, cost: 169, oil: 2, sebum: 2, blood: 2, allergens: 5, recycle: "우수", ph: "약알칼리성", indoor: true, position: "4% 22%", mobilePosition: "0% 22%" },
+  { id: "liq", brand: "리큐", name: "리큐 진한겔 하이브리드 실내건조", company: "애경산업", machine: "드럼용", volume: 3.5, price: 13500, cost: 77, oil: 2, sebum: 2, blood: 2, allergens: 4, recycle: "우수", ph: "약알칼리성", indoor: true, position: "29% 22%", mobilePosition: "19% 22%" },
+  { id: "beat", brand: "비트", name: "비트 실내건조 시트러스 블라썸", company: "라이온코리아", machine: "일반·드럼 겸용", volume: 2.8, price: 9900, cost: 78, oil: 1, sebum: 2, blood: 1, allergens: 2, recycle: "우수", ph: "약알칼리성", indoor: true, position: "54% 22%", mobilePosition: "56% 22%" },
+  { id: "snuggle", brand: "스너글", name: "스너글 액체 세탁세제 블루스파클 플러스+실내건조", company: "유니레버코리아", machine: "일반·드럼 겸용", volume: 2.7, price: 23700, cost: 176, oil: 2, sebum: 2, blood: 2, allergens: 3, recycle: "보통", ph: "약알칼리성", indoor: true, position: "80% 22%", mobilePosition: "93% 22%" },
+  { id: "acts", brand: "액츠", name: "액츠 퍼펙트 실내건조_비", company: "피죤", machine: "드럼용", volume: 3.0, price: 8350, cost: 56, oil: 2, sebum: 2, blood: 2, allergens: 1, recycle: "우수", ph: "약알칼리성", indoor: true, position: "4% 75%", mobilePosition: "0% 75%" },
+  { id: "tech", brand: "테크", name: "테크 실내건조 베이직 뉴", company: "LG생활건강", machine: "드럼용", volume: 2.7, price: 11900, cost: 88, oil: 1, sebum: 2, blood: 2, allergens: 1, recycle: "우수", ph: "약알칼리성", indoor: true, position: "29% 75%", mobilePosition: "19% 75%" },
+  { id: "persil", brand: "퍼실", name: "퍼실 퓨어프레쉬 플러스", company: "헨켈홈케어코리아", machine: "드럼용", volume: 2.7, price: 16600, cost: 123, oil: 2, sebum: 2, blood: 3, allergens: 5, recycle: "우수", ph: "중성", indoor: false, leakNote: "시험 대상 제조번호에서 뚜껑 누액이 확인돼 업체가 개선 계획을 회신했습니다.", position: "54% 75%", mobilePosition: "56% 75%" },
+  { id: "fi-ji", brand: "피지", name: "피지 바이럭스 탈취 실내건조 오리지널", company: "LG생활건강", machine: "일반·드럼 겸용", volume: 2.7, price: 15900, cost: 118, oil: 2, sebum: 2, blood: 1, allergens: 5, recycle: "우수", ph: "약알칼리성", indoor: true, position: "80% 75%", mobilePosition: "93% 75%" }
+];
 
 const homePresetPreferences = {
   cooking: { cooking: "often" },
@@ -497,17 +534,12 @@ function createStoreSearchLink(store, searchQuery, itemId, placement) {
     return `<a class="store-search-link store-coupang" href="https://www.coupang.com/np/search?q=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="쿠팡에서 ${searchQuery} 검색"><span>쿠팡</span><strong>상품 검색</strong></a>`;
   }
   if (store === "naver") {
-    if (placement === "home_catalog") {
-      return `<a class="store-search-link store-naver" href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색"><span>네이버</span><strong>검색하기</strong></a>`;
-    }
-    return `
-      <a class="store-search-link store-naver" href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 상품 검색"><span>네이버</span><strong>상품 검색</strong></a>
-      <a class="store-search-link store-naver-plus" href="https://shopping.naver.com/ns/home" target="_blank" rel="noreferrer" data-store-link data-store="naver_store" data-item-id="${itemId}" data-placement="${placement}" data-copy-query="${query}" aria-label="${searchQuery} 검색어를 복사하고 네이버플러스 스토어 열기"><span>네이버+</span><strong>검색어 복사</strong></a>`;
+    return `<a class="store-search-link store-naver" href="https://search.naver.com/search.naver?query=${query}" target="_blank" rel="noreferrer" ${tracking} aria-label="네이버에서 ${searchQuery} 통합검색"><span>네이버</span><strong>통합검색</strong></a>`;
   }
   if (store === "daiso") {
-    return `<a class="store-search-link store-daiso" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}><span>다이소몰</span><strong>상품 찾기</strong></a>`;
+    return `<a class="store-search-link store-daiso" href="https://www.daisomall.co.kr/" target="_blank" rel="noreferrer" ${tracking}><span>다이소몰</span><strong>홈 열기</strong></a>`;
   }
-  return `<a class="store-search-link store-ohouse" href="https://ohou.se/store" target="_blank" rel="noreferrer" ${tracking}><span>오늘의집</span><strong>상품 찾기</strong></a>`;
+  return `<a class="store-search-link store-ohouse" href="https://ohou.se/store" target="_blank" rel="noreferrer" ${tracking}><span>오늘의집</span><strong>스토어 열기</strong></a>`;
 }
 
 function setupHomePreview() {
@@ -519,27 +551,26 @@ function setupHomePreview() {
   const searchInput = document.querySelector("#homeCatalogQuery");
   const categoryTabs = document.querySelector("#homeCategoryTabs");
   const sortSelect = document.querySelector("#homeCatalogSort");
+  const moreButton = document.querySelector("#homeCatalogMore");
   if (!previewList) return;
   let activePreset = "default";
   let activeCategory = "all";
   let searchTerm = "";
   let activeSort = "priority";
+  let showAllItems = false;
 
-  function defaultPreviewMeta(id, item) {
-    if (immediateItemIds.has(id)) return { status: "now", statusLabel: "입주 첫날", context: "먼저 확인" };
-    if (item.firstDay) return { status: "now", statusLabel: "입주 직후", context: "기본 준비" };
-    return { status: "check", statusLabel: "조건 확인", context: "구매 전 확인" };
+  function defaultPreviewMeta(id) {
+    const guidance = getItemGuidance(id, homePresetPreferences[activePreset] || {});
+    const labels = { now: ["now", "지금 필요", "기본 준비"], confirm: ["check", "조건 확인", "구매 전 확인"], later: ["later", "나중에", "필요할 때 추가"] };
+    const [status, statusLabel, context] = labels[guidance.phase];
+    return { ...guidance, status, statusLabel, context };
   }
 
   function catalogItems() {
     const normalizedSearch = searchTerm.trim().toLocaleLowerCase("ko");
     const isBrowsingCatalog = Boolean(normalizedSearch || activeCategory !== "all");
-    const source = isBrowsingCatalog
-      ? Object.entries(recommendationCatalog).map(([id, item]) => ({ id, ...item, ...defaultPreviewMeta(id, item) }))
-      : homePreviewPresets[activePreset].items.map((preview) => ({
-          ...recommendationCatalog[preview.id],
-          ...preview
-        }));
+    const source = Object.entries(recommendationCatalog).map(([id, item]) => ({ id, ...item, ...defaultPreviewMeta(id) }));
+    const presetOrder = new Map(homePreviewPresets[activePreset].items.map(({ id }, index) => [id, index]));
 
     const filtered = source.filter((item) => {
       const categoryMatches = activeCategory === "all" || item.category === activeCategory;
@@ -549,7 +580,12 @@ function setupHomePreview() {
 
     return filtered.sort((a, b) => {
       if (activeSort === "name") return a.title.localeCompare(b.title, "ko");
-      if (activeSort === "first-day") return Number(b.firstDay) - Number(a.firstDay) || b.weight - a.weight || a.title.localeCompare(b.title, "ko");
+      if (activeSort === "first-day") return Number(b.phase === "now") - Number(a.phase === "now") || b.weight - a.weight || a.title.localeCompare(b.title, "ko");
+      if (!isBrowsingCatalog) {
+        const aPreset = presetOrder.has(a.id) ? presetOrder.get(a.id) : Number.MAX_SAFE_INTEGER;
+        const bPreset = presetOrder.has(b.id) ? presetOrder.get(b.id) : Number.MAX_SAFE_INTEGER;
+        if (aPreset !== bPreset) return aPreset - bPreset;
+      }
       return b.weight - a.weight || Number(b.firstDay) - Number(a.firstDay) || a.title.localeCompare(b.title, "ko");
     });
   }
@@ -565,12 +601,19 @@ function setupHomePreview() {
   function renderPreview() {
     const preset = homePreviewPresets[activePreset] || homePreviewPresets.default;
     const items = catalogItems();
+    const isBrowsingCatalog = Boolean(searchTerm.trim() || activeCategory !== "all");
+    const displayedItems = isBrowsingCatalog || showAllItems ? items : items.slice(0, 6);
     previewList.innerHTML = "";
     if (previewSummary) {
-      const displayCount = Math.min(items.length, 12);
-      if (searchTerm.trim()) previewSummary.textContent = `“${searchTerm.trim()}” 검색 결과 ${items.length}개 중 ${displayCount}개를 보여 드립니다.`;
-      else if (activeCategory !== "all") previewSummary.textContent = `${activeCategory} 준비물 ${items.length}개 중 ${displayCount}개를 보여 드립니다.`;
+      if (searchTerm.trim()) previewSummary.textContent = `“${searchTerm.trim()}” 검색 결과 ${items.length}개를 모두 보여 드립니다.`;
+      else if (activeCategory !== "all") previewSummary.textContent = `${activeCategory} 준비물 ${items.length}개를 모두 보여 드립니다.`;
+      else if (showAllItems) previewSummary.textContent = `생활 방식에 맞춘 준비물 ${items.length}개를 모두 보여 드립니다.`;
       else previewSummary.textContent = preset.summary;
+    }
+    if (moreButton) {
+      moreButton.hidden = isBrowsingCatalog || items.length <= 6;
+      moreButton.textContent = showAllItems ? "대표 6개만 보기" : `${items.length}개 전체 보기`;
+      moreButton.setAttribute("aria-expanded", String(showAllItems));
     }
     if (previewCta) {
       previewCta.href = activePreset === "default" ? "/checklist" : `/checklist?homePreset=${activePreset}`;
@@ -582,30 +625,30 @@ function setupHomePreview() {
       return;
     }
 
-    items.slice(0, 12).forEach((item) => {
+    displayedItems.forEach((item) => {
       const { id, status, statusLabel, context } = item;
-      const signal = itemSignals[id];
-      const reason = signal?.reason || (item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "생활 조건을 확인한 뒤 결정할 항목");
-      const criteria = signal?.criteria || categoryCriteria[item.category];
+      const { reason, criteria, searchQuery } = item;
       const imageGroup = id.split("-")[0];
       const productImage = homeProductImages[id];
       const imageStyle = productImage
         ? ` style="--product-image: url('/assets/${productImage[2] ? "home-item" : "home-items"}-${productImage[0]}.webp'); --product-image-position: ${productImage[1]}; --product-image-size: ${productImage[2] || "300% 200%"}"`
         : "";
-      const searchQuery = `자취 ${item.title}`;
       const storeActions = item.stores.map((store) => createStoreSearchLink(store, searchQuery, id, "home_catalog")).join("");
       const card = document.createElement("article");
       card.className = "home-preview-item";
       card.innerHTML = `
-        <div class="home-product-image home-product-image-${imageGroup}${productImage ? " has-item-image" : " is-item-placeholder"}"${imageStyle} role="img" aria-label="${item.title} 품목 예시 이미지">
-          ${productImage ? "" : `<span>${item.title}</span>`}
-        </div>
+        <a class="home-product-detail-link" href="/item?id=${encodeURIComponent(id)}" data-product-detail="${id}" aria-label="${item.title} 구매 기준 보기">
+          <div class="home-product-image home-product-image-${imageGroup}${productImage ? " has-item-image" : " is-item-placeholder"}"${imageStyle} role="img" aria-label="${item.title} 품목 예시 이미지">
+            ${productImage ? "" : `<span>${item.title}</span>`}
+          </div>
+        </a>
         <div class="home-preview-copy">
           <div class="home-preview-meta"><span>${item.category}</span><b class="home-preview-status-${status}">${statusLabel} · ${context}</b></div>
-          <h3>${item.title}</h3>
+          <h3><a href="/item?id=${encodeURIComponent(id)}" data-product-detail="${id}">${item.title}</a></h3>
           <p>${reason}</p>
           <small>${criteria}</small>
-          <div class="home-preview-stores"><em>판매처에서 최신 가격 확인</em><div class="home-preview-store-actions">${storeActions}</div></div>
+          <a class="item-detail-cta" href="/item?id=${encodeURIComponent(id)}" data-product-detail="${id}">${id === "laundry-detergent" ? "8개 제품 비교" : "구매 기준 보기"}<span aria-hidden="true">→</span></a>
+          <div class="home-preview-stores"><em>${itemGuidance[id].search ? "관련 정보 확인" : "판매처에서 최신 가격 확인"}</em><div class="home-preview-store-actions">${storeActions}</div></div>
         </div>
       `;
       previewList.append(card);
@@ -618,6 +661,7 @@ function setupHomePreview() {
     activePreset = input.value;
     activeCategory = "all";
     searchTerm = "";
+    showAllItems = false;
     if (searchInput) searchInput.value = "";
     syncCategoryTabs();
     renderPreview();
@@ -651,8 +695,187 @@ function setupHomePreview() {
     trackAnalyticsEvent("home_catalog_sort", { sort: activeSort });
   });
 
+  moreButton?.addEventListener("click", () => {
+    showAllItems = !showAllItems;
+    renderPreview();
+    if (!showAllItems) previewList.scrollIntoView({ behavior: "smooth", block: "start" });
+    trackAnalyticsEvent("home_catalog_expand", { expanded: showAllItems });
+  });
+
   syncCategoryTabs();
   renderPreview();
+}
+
+function homeImageStyleForItem(id) {
+  const image = homeProductImages[id];
+  if (!image) return null;
+  return {
+    url: `/assets/${image[2] ? "home-item" : "home-items"}-${image[0]}.webp`,
+    position: image[1],
+    size: image[2] || "300% 200%"
+  };
+}
+
+function setupItemDetail() {
+  const title = document.querySelector("#itemTitle");
+  if (!title) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const itemId = params.get("id") || "laundry-detergent";
+  const item = recommendationCatalog[itemId];
+  const category = document.querySelector("#itemCategory");
+  const reason = document.querySelector("#itemReason");
+  const criteria = document.querySelector("#itemCriteria");
+  const heroImage = document.querySelector("#itemHeroImage");
+  const storeActions = document.querySelector("#itemStoreActions");
+  const detergentCompare = document.querySelector("#detergentCompare");
+
+  if (!item) {
+    title.textContent = "준비물을 찾을 수 없습니다.";
+    reason.textContent = "전체 준비물에서 다시 선택해 주세요.";
+    document.title = "준비물을 찾을 수 없습니다 | 자취도우미";
+    return;
+  }
+
+  const guidance = getItemGuidance(itemId);
+  const image = homeImageStyleForItem(itemId);
+  category.textContent = item.category;
+  title.textContent = item.title;
+  reason.textContent = guidance.reason;
+  criteria.textContent = guidance.criteria;
+  document.title = `${item.title} 구매 기준 | 자취도우미`;
+  heroImage.setAttribute("aria-label", `${item.title} 품목 예시 이미지`);
+  if (image) {
+    heroImage.style.backgroundImage = `url('${image.url}')`;
+    heroImage.style.backgroundPosition = image.position;
+    heroImage.style.backgroundSize = image.size;
+  } else {
+    heroImage.textContent = item.title;
+  }
+  storeActions.innerHTML = guidance.stores.map((store) => createStoreSearchLink(store, guidance.searchQuery, itemId, "item_detail")).join("");
+  detergentCompare.hidden = itemId !== "laundry-detergent";
+  trackAnalyticsEvent("product_detail_view", { item_id: itemId, category: item.category });
+
+  if (itemId === "laundry-detergent") setupDetergentComparison();
+}
+
+function setupDetergentComparison() {
+  const grid = document.querySelector("#detergentGrid");
+  const modes = document.querySelector("#detergentModes");
+  const sort = document.querySelector("#detergentSort");
+  const explanation = document.querySelector("#detergentExplanation");
+  const savedCount = document.querySelector("#detergentSavedCount");
+  if (!grid || !modes || !sort || !explanation || !savedCount) return;
+
+  const savedKey = "jachi-helper:detergent-comparison:v1";
+  let activeMode = "balanced";
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(savedKey) || "[]"); } catch { saved = []; }
+
+  const performanceLabel = (value) => ({ 3: "우수", 2: "양호", 1: "보통" }[value] || "-");
+  const modeCopy = {
+    balanced: "제품별 차이를 먼저 살펴보세요. 특정 종합 1위를 만들지 않고 시험 항목을 나란히 보여 드립니다.",
+    indoor: "시험 대상 중 제품명에 실내건조가 표시된 제품을 먼저 봅니다. 이 시험은 건조 냄새 제거 효과를 별도로 순위화하지 않았습니다.",
+    workout: "운동복과 관련된 피지 오염 성능은 8종 모두 ‘양호’였습니다. 세탁기 호환과 1회 비용을 함께 비교하세요.",
+    sensitive: "제품에 표시된 알레르기 반응가능물질 종류가 적은 순서로 봅니다. 종류 수가 적다고 저자극을 보장하지는 않습니다.",
+    stains: "혈액·잉크와 기름·단백질 오염 시험 결과가 높은 제품을 먼저 봅니다."
+  };
+
+  function sortProducts(products) {
+    const sortMode = sort.value;
+    return [...products].sort((a, b) => {
+      if (sortMode === "cost") return a.cost - b.cost;
+      if (sortMode === "stain") return b.blood - a.blood || b.oil - a.oil || a.cost - b.cost;
+      if (sortMode === "name") return a.brand.localeCompare(b.brand, "ko");
+      if (activeMode === "indoor") return Number(b.indoor) - Number(a.indoor) || a.cost - b.cost;
+      if (activeMode === "workout") return b.sebum - a.sebum || a.cost - b.cost;
+      if (activeMode === "sensitive") return a.allergens - b.allergens || a.cost - b.cost;
+      if (activeMode === "stains") return b.blood - a.blood || b.oil - a.oil || a.cost - b.cost;
+      return detergentProducts.indexOf(a) - detergentProducts.indexOf(b);
+    });
+  }
+
+  function reasonFor(product) {
+    if (activeMode === "indoor") return product.indoor ? "제품명에 실내건조가 표시된 시험 제품" : "실내건조 표기 없음 · 다른 시험 항목으로 비교";
+    if (activeMode === "workout") return `피지 오염 ${performanceLabel(product.sebum)} · ${product.machine}`;
+    if (activeMode === "sensitive") return `표시된 알레르기 반응가능물질 ${product.allergens}종`;
+    if (activeMode === "stains") return `혈액·잉크 ${performanceLabel(product.blood)} · 기름·단백질 ${performanceLabel(product.oil)}`;
+    return `1회 ${product.cost.toLocaleString("ko-KR")}원 · ${product.machine}`;
+  }
+
+  function render() {
+    explanation.innerHTML = `<strong>${activeMode === "balanced" ? "기본 비교" : modes.querySelector(".is-selected")?.textContent || "조건 비교"}</strong><p>${modeCopy[activeMode]}</p>`;
+    savedCount.textContent = `비교함 ${saved.length}개`;
+    grid.innerHTML = sortProducts(detergentProducts).map((product) => {
+      const isSaved = saved.includes(product.id);
+      const storeLinks = ["coupang", "naver"].map((store) => createStoreSearchLink(store, product.name, `detergent-${product.id}`, "product_compare")).join("");
+      return `
+        <article class="detergent-card">
+          <div class="detergent-photo"><img src="/assets/detergents/${product.id}.webp" alt="${product.name} 한국소비자원 시험 대상 제품" /></div>
+          <div class="detergent-card-body">
+            <div class="detergent-brand-row"><span>${product.brand}</span><button type="button" class="save-product${isSaved ? " is-saved" : ""}" data-save-detergent="${product.id}" aria-pressed="${isSaved}">${isSaved ? "비교함 저장됨" : "비교함 담기"}</button></div>
+            <h3>${product.name}</h3>
+            <p class="detergent-match">${reasonFor(product)}</p>
+            <dl class="detergent-facts">
+              <div><dt>1회 비용</dt><dd>${product.cost.toLocaleString("ko-KR")}원</dd></div>
+              <div><dt>시험 당시 가격</dt><dd>${product.price.toLocaleString("ko-KR")}원</dd></div>
+              <div><dt>용량</dt><dd>${product.volume.toFixed(1)}L</dd></div>
+              <div><dt>세탁기</dt><dd>${product.machine}</dd></div>
+              <div><dt>기름·단백질</dt><dd>${performanceLabel(product.oil)}</dd></div>
+              <div><dt>혈액·잉크</dt><dd>${performanceLabel(product.blood)}</dd></div>
+            </dl>
+            ${product.leakNote ? `<p class="detergent-caution">${product.leakNote}</p>` : ""}
+            <div class="detergent-store-actions">${storeLinks}</div>
+          </div>
+        </article>`;
+    }).join("");
+  }
+
+  modes.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-laundry-mode]");
+    if (!button) return;
+    activeMode = button.dataset.laundryMode;
+    modes.querySelectorAll("[data-laundry-mode]").forEach((modeButton) => {
+      const selected = modeButton === button;
+      modeButton.classList.toggle("is-selected", selected);
+      modeButton.setAttribute("aria-pressed", String(selected));
+    });
+    render();
+    trackAnalyticsEvent("product_filter_select", { item_id: "laundry-detergent", filter: activeMode });
+  });
+
+  sort.addEventListener("change", () => {
+    render();
+    trackAnalyticsEvent("product_sort", { item_id: "laundry-detergent", sort: sort.value, filter: activeMode });
+  });
+
+  grid.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-save-detergent]");
+    if (!button) return;
+    const id = button.dataset.saveDetergent;
+    saved = saved.includes(id) ? saved.filter((savedId) => savedId !== id) : [...saved, id];
+    localStorage.setItem(savedKey, JSON.stringify(saved));
+    render();
+    trackAnalyticsEvent("product_save", { item_id: `detergent-${id}`, saved: saved.includes(id) });
+  });
+
+  render();
+}
+
+function setupProductDetailTracking() {
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-product-detail]");
+    if (!link) return;
+    queueAnalyticsEvent("product_detail_click", { item_id: link.dataset.productDetail, placement: "home_catalog" });
+  });
+}
+
+function setupServiceTracking() {
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-service-link]");
+    if (!link) return;
+    trackAnalyticsEvent("service_outbound", { service: link.dataset.serviceLink, transport_type: "beacon" });
+  });
 }
 
 function setupHomeShare() {
@@ -1095,28 +1318,17 @@ function setupRecommendation() {
 
   function rankItem([id, item], preferences) {
     let score = item.weight * 10;
-    const signal = itemSignals[id];
-    const matchedCondition = signal && preferences[signal.condition] === signal.match;
+    const guidance = getItemGuidance(id, preferences);
     const compactMatch = preferences.storage === "limited" && item.compact;
     if (item.firstDay) score += 32;
-    if (matchedCondition) score += 24;
+    if (guidance.conditionMatched) score += 24;
     if (compactMatch) score += 14;
 
-    let reason = item.firstDay ? "입주 직후 바로 쓸 가능성이 높은 항목" : "현재 보유하지 않은 준비 항목";
-    if (matchedCondition) reason = signal.reason;
-    else if (compactMatch) reason = "수납 여유가 적다는 조건을 반영한 항목";
-
-    const searchTerms = ["자취", item.title];
-    if (compactMatch) searchTerms.push("소형");
-    if (signal?.search) searchTerms.push(signal.search);
     return {
       id,
       ...item,
       score,
-      reason,
-      criteria: signal?.criteria || categoryCriteria[item.category],
-      conditionMatched: Boolean(matchedCondition),
-      searchQuery: searchTerms.join(" ")
+      ...guidance
     };
   }
 
@@ -1129,13 +1341,6 @@ function setupRecommendation() {
     confirm: { title: "조건 확인", description: "집 옵션이나 실제 생활을 확인한 뒤 결정할 항목" },
     later: { title: "나중에 결정", description: "입주 후 사용 패턴이 생긴 다음 선택할 항목" }
   };
-
-  function getPhase(item, preferences) {
-    if (item.decision === "later" || item.decision === "skip") return "later";
-    if (item.decision === "candidate") return "now";
-    if (immediateItemIds.has(item.id)) return "now";
-    return "confirm";
-  }
 
   function decisionButtons(item) {
     const current = item.decision === "prepared" ? "prepared" : item.decision === "later" ? "later" : item.decision === "candidate" ? "candidate" : "";
@@ -1155,7 +1360,7 @@ function setupRecommendation() {
       <div class="match-side">
         ${decisionButtons(item)}
       </div>
-      <div class="match-actions"><span>판매처에서 제품 구성, 배송비와 최신 가격을 직접 확인하세요.</span>${storeLinks(item)}</div>
+      <div class="match-actions"><span>${itemGuidance[item.id].search ? "관련 정보를 검색해 필요한 조건을 확인하세요." : "판매처에서 제품 구성, 배송비와 최신 가격을 직접 확인하세요."}</span>${storeLinks(item)}</div>
     `;
     return card;
   }
@@ -1217,7 +1422,7 @@ function setupRecommendation() {
     const allRanked = Object.entries(recommendationCatalog)
       .filter(([id]) => !savedChecks[id])
       .map((entry) => ({ ...rankItem(entry, preferences), decision: decisions[entry[0]] || "review" }))
-      .map((item) => ({ ...item, phase: getPhase(item, preferences) }))
+      .map((item) => ({ ...item, ...getItemGuidance(item.id, preferences, item.decision) }))
       .sort((a, b) => {
         const phaseOrder = { now: 0, confirm: 1, later: 2 };
         const decisionOrder = { candidate: 0, review: 1, later: 2 };
@@ -1571,8 +1776,11 @@ document.querySelector("#copyPlan")?.addEventListener("click", copyPlan);
 flushPendingAnalyticsEvents();
 setupHomeReturnState();
 setupHomePreview();
+setupItemDetail();
 setupHomeShare();
 setupHomeCtaTracking();
+setupProductDetailTracking();
+setupServiceTracking();
 setupStoreClickTracking();
 setupPlannerStage();
 renderPlanner();

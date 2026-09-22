@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>준비물 비교 | 자취도우미</title>
+    <meta name="description" content="첫 자취 준비물의 구매 시점과 선택 기준을 확인하고 실제 판매처에서 상품을 찾아보세요." />
+    <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
+    <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://jachi-helper.vercel.app/item" />
+    <meta property="og:title" content="준비물 비교 | 자취도우미" />
+    <meta property="og:description" content="내 생활 조건에 맞는 준비물과 비교 기준을 확인하세요." />
+    <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-2N6W41XSD2");
+    </script>
+  </head>
+  <body class="item-page">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="자취도우미 홈"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
+      <nav aria-label="주요 메뉴"><a href="/">준비물 찾기</a><a href="/services">생활 서비스</a><a href="/checklist">내 계획</a></nav>
+    </header>
+
+    <main class="item-main">
+      <a class="back-link" href="/#quick-preview">준비물 전체 보기</a>
+      <section class="item-hero" aria-labelledby="itemTitle">
+        <div class="item-hero-image" id="itemHeroImage" role="img"></div>
+        <div class="item-hero-copy">
+          <p class="eyebrow" id="itemCategory">준비물</p>
+          <h1 id="itemTitle">준비물을 불러오는 중입니다.</h1>
+          <p class="item-lede" id="itemReason"></p>
+          <div class="item-criteria"><strong>고를 때 확인하세요</strong><p id="itemCriteria"></p></div>
+          <div class="item-store-actions" id="itemStoreActions"></div>
+        </div>
+      </section>
+
+      <section class="detergent-compare" id="detergentCompare" aria-labelledby="detergentTitle" hidden>
+        <header class="compare-head">
+          <div>
+            <p class="eyebrow">공공 시험자료로 비교</p>
+            <h2 id="detergentTitle">액체 세탁세제 8종을 같은 기준으로 봅니다.</h2>
+            <p>한국소비자원이 드럼세탁기·세탁량 3kg 기준으로 시험한 제품입니다. 가격은 2025년 시험 당시 공식몰 가격이며 현재 판매가는 판매처에서 다시 확인하세요.</p>
+          </div>
+          <a class="source-link" href="https://www.isafe.go.kr/DATA/bbs/85/20250807011108527.pdf" target="_blank" rel="noreferrer">시험자료 원문</a>
+        </header>
+
+        <div class="compare-trust" role="note">
+          <strong>비교 범위</strong>
+          <span>오염별 세척성능</span><span>세탁기 호환</span><span>1회 사용비</span><span>표시된 알레르기 반응가능물질 수</span>
+        </div>
+
+        <div class="compare-controls">
+          <fieldset>
+            <legend>내 상황</legend>
+            <div class="compare-modes" id="detergentModes">
+              <button type="button" class="is-selected" data-laundry-mode="balanced" aria-pressed="true">기본 비교</button>
+              <button type="button" data-laundry-mode="indoor" aria-pressed="false">실내건조</button>
+              <button type="button" data-laundry-mode="workout" aria-pressed="false">운동복</button>
+              <button type="button" data-laundry-mode="sensitive" aria-pressed="false">향·성분 민감</button>
+              <button type="button" data-laundry-mode="stains" aria-pressed="false">얼룩이 잦음</button>
+            </div>
+          </fieldset>
+          <label>정렬
+            <select id="detergentSort">
+              <option value="match">내 조건 우선</option>
+              <option value="cost">1회 비용 낮은 순</option>
+              <option value="stain">얼룩 세척성능 순</option>
+              <option value="name">이름순</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="compare-explanation" id="detergentExplanation" aria-live="polite"></div>
+        <div class="detergent-save-summary"><strong id="detergentSavedCount">비교함 0개</strong><span>관심 제품은 이 기기에 저장됩니다.</span></div>
+        <div class="detergent-grid" id="detergentGrid" aria-live="polite"></div>
+
+        <div class="comparison-method">
+          <strong>표시를 읽는 방법</strong>
+          <p>별 3개는 우수, 2개는 양호, 1개는 보통입니다. 시험 결과는 해당 제품과 당시 판매 제품에 한하며, ‘알레르기 반응가능물질 수가 적다’는 정보가 저자극이나 무알레르기를 보장하지 않습니다.</p>
+        </div>
+      </section>
+
+      <section class="item-next">
+        <p class="eyebrow">다음 행동</p>
+        <h2>이미 가진 물건을 빼고 내 목록에 남겨 보세요.</h2>
+        <a class="button primary" href="/checklist">내 준비물 목록 만들기</a>
+      </section>
+    </main>
+
+    <nav class="mobile-dock" aria-label="모바일 주요 메뉴">
+      <a href="/"><span>홈</span><small>준비물 찾기</small></a>
+      <a class="is-current" href="/#quick-preview" aria-current="page"><span>품목</span><small>비교하기</small></a>
+      <a href="/services"><span>서비스</span><small>이사·청소</small></a>
+      <a href="/checklist"><span>내 계획</span><small>목록 만들기</small></a>
+    </nav>
+
+    <footer><strong>자취도우미</strong><div class="footer-meta"><span>시험자료와 판매처 정보를 구분해 제공합니다.</span><a href="/data-policy">데이터 이용 안내</a></div></footer>
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

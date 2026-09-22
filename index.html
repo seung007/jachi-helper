@@ -22,7 +22,7 @@
     <meta property="og:url" content="https://jachi-helper.vercel.app/" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=20260922-2" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -56,7 +56,7 @@
       </a>
       <nav aria-label="주요 메뉴">
         <a href="/checklist">구매 계획</a>
-        <a href="/recommend" data-plan-results-link>결과 보기</a>
+        <a href="/services">생활 서비스</a>
         <a href="/budget">비용 계산</a>
       </nav>
     </header>
@@ -95,18 +95,15 @@
             <button type="button" data-home-category="안전·건강">안전·건강</button>
           </div>
 
-          <div class="home-catalog-refine">
-            <fieldset class="home-preview-demo">
-              <legend>생활 방식</legend>
-              <div class="home-preview-options" id="homePreviewOptions">
-                <label><input type="radio" name="homePreset" value="default" checked /><span>기본 준비</span></label>
-                <label><input type="radio" name="homePreset" value="cooking" /><span>요리를 자주 해요</span></label>
-                <label><input type="radio" name="homePreset" value="drying" /><span>실내에서 말려요</span></label>
-                <label><input type="radio" name="homePreset" value="storage" /><span>수납이 부족해요</span></label>
-              </div>
-            </fieldset>
-            <p>생활 방식을 고르면 먼저 볼 준비물이 달라집니다.</p>
-          </div>
+          <fieldset class="home-lifestyle-filter">
+            <legend>생활 방식</legend>
+            <div class="home-lifestyle-options" id="homePreviewOptions">
+              <label><input type="radio" name="homePreset" value="default" checked /><span>기본 준비</span></label>
+              <label><input type="radio" name="homePreset" value="cooking" /><span>요리를 자주 해요</span></label>
+              <label><input type="radio" name="homePreset" value="drying" /><span>실내에서 말려요</span></label>
+              <label><input type="radio" name="homePreset" value="storage" /><span>수납이 부족해요</span></label>
+            </div>
+          </fieldset>
 
           <div class="home-catalog-toolbar">
             <div>
@@ -123,6 +120,10 @@
           </div>
 
           <div class="home-preview-grid" id="homePreviewList" aria-live="polite"></div>
+
+          <div class="home-catalog-more">
+            <button type="button" id="homeCatalogMore" aria-controls="homePreviewList" aria-expanded="false">39개 전체 보기</button>
+          </div>
 
           <div class="home-preview-action">
             <p><strong>더 정확하게 정리할까요?</strong><span>전체 계획에서 보유품을 빼고 생활 조건을 더 반영합니다.</span></p>
@@ -147,6 +148,13 @@
       </section>
     </main>
 
+    <nav class="mobile-dock" aria-label="모바일 주요 메뉴">
+      <a class="is-current" href="/" aria-current="page"><span>홈</span><small>준비물 찾기</small></a>
+      <a href="/#quick-preview"><span>품목</span><small>39개 탐색</small></a>
+      <a href="/services"><span>서비스</span><small>이사·청소</small></a>
+      <a href="/checklist"><span>내 계획</span><small>목록 만들기</small></a>
+    </nav>
+
     <footer>
       <strong>자취도우미</strong>
       <div class="footer-meta"><span>첫 자취 구매 계획 · 초기 비용 · 준비물 정리</span><a href="/data-policy">데이터 이용 안내</a></div>
@@ -156,6 +164,6 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/app.js" defer></script>
+    <script src="/app.js?v=20260922-2" defer></script>
   </body>
 </html>
