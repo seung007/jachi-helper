@@ -12,7 +12,8 @@
     <meta property="og:title" content="자취 생활 서비스 | 자취도우미" />
     <meta property="og:description" content="이사부터 폐기까지, 필요한 시점과 비교 기준을 먼저 확인하세요." />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=20261006-2" />
+    <link rel="stylesheet" href="/decision.css?v=20260928-3" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -25,14 +26,14 @@
   <body class="services-page">
     <header class="topbar">
       <a class="brand" href="/" aria-label="자취도우미 홈"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
-      <nav aria-label="주요 메뉴"><a href="/">준비물 찾기</a><a href="/services" aria-current="page">생활 서비스</a><a href="/checklist">내 계획</a></nav>
+      <nav aria-label="주요 메뉴"><a href="/">준비물 찾기</a><a href="/checklist" data-plan-result-route>내 준비표</a><a href="/services" aria-current="page">생활 서비스</a></nav>
     </header>
 
     <main class="services-main">
       <section class="services-intro">
         <p class="eyebrow">자취 생활 서비스</p>
-        <h1>무엇을 신청하기 전에,<br />비교할 기준부터 확인하세요.</h1>
-        <p>여러 업체를 나열하는 대신 필요한 시점, 준비할 정보, 계약 전에 볼 항목을 짧게 정리했습니다.</p>
+        <h1>필요할 때 찾는 생활 서비스</h1>
+        <p>현재 제공하는 연결처 4개입니다. 전체 업체 목록이나 추천 순위는 아닙니다.</p>
       </section>
 
       <nav class="service-stage-tabs" aria-label="생활 서비스 시점">
@@ -68,14 +69,16 @@
 
     <nav class="mobile-dock" aria-label="모바일 주요 메뉴">
       <a href="/"><span>홈</span><small>준비물 찾기</small></a>
-      <a href="/#quick-preview"><span>품목</span><small>39개 탐색</small></a>
+      <a href="/#quick-preview"><span>품목</span><small data-catalog-count data-catalog-count-suffix="개 탐색">66개 탐색</small></a>
       <a class="is-current" href="/services" aria-current="page"><span>서비스</span><small>이사·청소</small></a>
-      <a href="/checklist"><span>내 계획</span><small>목록 만들기</small></a>
+      <a href="/checklist" data-plan-result-route><span>내 준비표</span><small>결정 모아보기</small></a>
     </nav>
 
     <footer><strong>자취도우미</strong><div class="footer-meta"><span>외부 서비스의 조건은 해당 업체에서 최종 확인하세요.</span><a href="/data-policy">데이터 이용 안내</a></div></footer>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/app.js" defer></script>
+    <script src="/app.js?v=20261006-2" defer></script>
+    <script src="/decision-core.js?v=20260928-3" defer></script>
+    <script src="/decision-flow.js?v=20260928-4" defer></script>
   </body>
 </html>

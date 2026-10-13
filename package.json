@@ -3,15 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "check": "node scripts/check-seo.mjs && node scripts/verify-item-guidance.mjs",
+    "check": "node scripts/check-seo.mjs && node scripts/verify-item-guidance.mjs && node --test scripts/build-chat-dataset.test.mjs scripts/serve.test.mjs scripts/decision-core.test.mjs scripts/shopping-offers.test.mjs scripts/comparison-core.test.mjs scripts/comparison-catalog.test.mjs scripts/comparison-loader.test.mjs scripts/comparison-display.test.mjs scripts/product-catalog.test.mjs",
+    "check:comparison": "node --test scripts/comparison-core.test.mjs scripts/comparison-catalog.test.mjs scripts/comparison-loader.test.mjs scripts/comparison-display.test.mjs",
+    "check:catalog": "node --test scripts/product-catalog.test.mjs",
+    "verify:comparison": "node scripts/verify-comparison-browser.mjs && node scripts/verify-comparison-integration.mjs && node scripts/verify-product-profiles-browser.mjs",
+    "comparison:build": "node scripts/build-comparison-catalog.mjs",
+    "comparison:collect:food": "node scripts/collect-comparison-food.mjs",
+    "comparison:collect:household": "node scripts/collect-comparison-household.mjs",
+    "verify:decision": "node scripts/verify-decision-flow.mjs",
     "verify:flow": "node scripts/verify-growth-flow.mjs",
     "promotion:build": "node scripts/build-promotion-pack.mjs",
+    "research:chat": "node scripts/build-chat-dataset.mjs",
     "set-naver-code": "node scripts/set-naver-code.mjs",
     "set-site-url": "node scripts/set-site-url.mjs",
     "serve": "node scripts/serve.mjs",
     "fetch:naver-trends": "node scripts/fetch-naver-trends.mjs"
   },
   "devDependencies": {
+    "lucide": "^1.53.0",
     "playwright": "^1.63.0"
   }
 }

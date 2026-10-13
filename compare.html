@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>제품 비교 | 자취도우미</title>
+    <meta name="description" content="같은 구매 목적의 제품을 확인된 규격과 항목별 출처로 비교합니다." />
+    <meta name="robots" content="noindex,follow" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/comparison.css?v=20261013-1" />
+    <script defer src="/assets/vendor/catalog-icons.js"></script>
+    <script defer src="/comparison-core.js"></script>
+    <script defer src="/comparison-index.js"></script>
+    <script defer src="/comparison-loader.js"></script>
+    <script defer src="/comparison-display.js?v=20261013-1"></script>
+    <script defer src="/comparison.js?v=20261013-1"></script>
+  </head>
+  <body class="comparison-page">
+    <a class="comparison-skip" href="#comparisonMain">비교 내용으로 이동</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="자취도우미 홈"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
+      <nav aria-label="주요 메뉴"><a href="/">상품 찾기</a><a href="/compare" aria-current="page">제품 비교</a></nav>
+    </header>
+    <main id="comparisonMain" class="comparison-main">
+      <div class="comparison-heading"><div><a id="catalogBack" class="comparison-back" href="/#catalog">상품 목록</a><h1 id="comparisonTitle">제품 고르기</h1></div><div class="comparison-tools"><button id="saveSelection" class="comparison-icon-button" type="button" title="선택 제품 저장" aria-label="선택 제품 저장" disabled><span data-icon="Bookmark"></span></button><button id="restoreSelection" class="comparison-restore" type="button" disabled>저장 복원</button><button id="copySelection" class="comparison-icon-button" type="button" title="비교 링크 복사" aria-label="비교 링크 복사"><span data-icon="Link"></span></button></div></div>
+      <p id="comparisonError" class="comparison-error" role="alert" hidden></p>
+      <button id="retryLoad" class="comparison-text-button" type="button" hidden>자료 다시 불러오기</button>
+      <p id="comparisonStatus" class="comparison-status" role="status" aria-live="polite"></p>
+      <div class="comparison-context"><p id="comparisonCoverage"></p><label id="comparisonGroupLabel" hidden>사용 목적<select id="comparisonGroup" aria-label="비교 사용 목적"></select></label><details class="comparison-item-switch"><summary>다른 품목</summary><label>품목<select id="comparisonItem" aria-label="비교 품목"></select></label></details></div>
+      <fieldset id="cookingFilter" class="comparison-cooking-filter" hidden><legend>사용할 열원</legend><label><input type="radio" name="heat" value="all" checked />전체</label><label><input type="radio" name="heat" value="induction" />인덕션</label><label><input type="radio" name="heat" value="gas" />가스레인지</label></fieldset>
+      <div id="comparisonFeatureFilters" class="comparison-feature-filters" aria-label="품목별 선택 조건" hidden></div>
+      <section id="candidateSection" class="comparison-pool" aria-labelledby="candidateTitle"><div class="comparison-pool-heading"><h2 id="candidateTitle">비교할 제품</h2><span id="candidateCount"></span></div><div id="comparisonCandidates"></div></section>
+      <section id="comparisonWorkspace" aria-label="제품 선택과 상세 비교" hidden>
+        <div class="comparison-workspace-heading"><h2 id="comparisonPurpose" class="comparison-sr">제품 비교</h2><button id="browseProducts" class="comparison-text-button" type="button">제품 다시 고르기</button></div>
+        <div id="comparisonSelectors" class="comparison-selection-roster" aria-label="선택한 전체 제품"></div>
+        <p id="comparisonVisible" class="comparison-muted"></p>
+        <div id="comparisonProductHeaders" class="comparison-product-headers" aria-label="현재 비교 제품"></div>
+        <div class="comparison-toolbar"><label class="comparison-toggle"><input type="checkbox" id="differencesOnly" />차이만 보기</label><fieldset class="comparison-segment"><legend class="comparison-sr">규격 범위</legend><label><input type="radio" name="scope" value="essential" checked /><span>핵심 규격</span></label><label><input type="radio" name="scope" value="all" /><span>전체 규격</span></label></fieldset><label class="comparison-toggle"><input type="checkbox" id="showEvidence" />출처 보기</label><fieldset class="comparison-segment comparison-column-control"><legend class="comparison-sr">비교 제품 수</legend><label><input type="radio" name="columns" value="2" checked /><span>2개</span></label><label><input type="radio" name="columns" value="3" /><span>3개</span></label><label><input type="radio" name="columns" value="4" /><span>4개</span></label></fieldset></div>
+        <section id="comparisonDiffSummary" class="comparison-differences" aria-label="확인된 주요 차이"></section>
+        <div id="comparisonTableArea"></div>
+        <p class="comparison-muted comparison-price-note">최신 가격·배송비·재고와 정확한 옵션은 판매처에서 확인하세요.</p>
+        <p id="comparisonUpdated" class="comparison-muted"></p>
+      </section>
+      <section id="comparisonEmpty" class="comparison-empty" hidden><h2>아직 비교할 제품이 없습니다</h2><p>같은 사용 목적의 적합성이 확인된 서로 다른 모델이 필요합니다.</p></section>
+      <div id="comparisonTray" class="comparison-tray" hidden><div id="selectionTrayProducts" class="comparison-tray-products" aria-label="비교 선택 목록"></div><button id="startCompare" type="button" class="comparison-primary" disabled>선택 제품 비교</button></div>
+      <dialog id="productPicker" class="comparison-picker" aria-labelledby="pickerTitle"><div class="comparison-picker-heading"><h2 id="pickerTitle">제품 교체</h2><button id="closePicker" class="comparison-icon-button" type="button" aria-label="제품 교체 닫기" title="닫기"><span data-icon="X"></span></button></div><div id="pickerContents"></div></dialog>
+      <noscript><p class="comparison-error">제품 비교를 보려면 JavaScript가 필요합니다. <a href="/">상품 목록으로 돌아가기</a></p></noscript>
+    </main>
+  </body>
+</html>

@@ -3,20 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>첫 자취 구매 계획 만들기 | 자취도우미</title>
+    <title>내 준비표 설정 | 자취도우미</title>
     <meta
       name="description"
-      content="첫 자취에서 이미 가진 물건을 빼고 생활 조건을 선택해 필요한 준비물 구매 계획을 만드세요."
+      content="첫 자취에서 이미 가진 물건을 빼고 생활 조건을 선택해 내 준비표를 더 정확하게 정리하세요."
     />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://jachi-helper.vercel.app/checklist" />
-    <meta property="og:title" content="첫 자취 구매 계획" />
+    <meta property="og:title" content="내 준비표 설정 | 자취도우미" />
     <meta property="og:description" content="이미 가진 물건을 빼고 필요한 준비물부터 정리하세요." />
     <meta property="og:url" content="https://jachi-helper.vercel.app/checklist" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=20261006-2" />
+    <link rel="stylesheet" href="/decision.css?v=20260928-3" />
+    <link rel="stylesheet" href="/catalog.css?v=20261012-2" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -30,16 +32,18 @@
     <header class="topbar">
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
-        <a href="/checklist" aria-current="page">구매 계획</a>
-        <a href="/recommend" data-plan-results-link>결과 보기</a>
-        <a href="/budget">비용 계산</a>
+        <a href="/">준비물 찾기</a>
+        <a href="/checklist" aria-current="page" data-plan-result-route>내 준비표</a>
+        <a href="/services">생활 서비스</a>
       </nav>
     </header>
     <main class="subpage plan-page">
+      <section class="catalog-saved-shelf" data-catalog-saved aria-label="저장한 품목"></section>
+      <section class="journey-saved" data-decision-saved data-decision-scope="products" hidden></section>
       <section class="page-title">
-        <p class="eyebrow">첫 자취 구매 계획 · 1/2</p>
-        <h1>입주 전에 꼭 살 것만 골라볼게요.</h1>
-        <p>이미 가진 물건을 먼저 빼고, 생활 조건만 선택하세요. 긴 입력 없이 구매 우선순위를 정리합니다.</p>
+        <p class="eyebrow">내 준비표 설정</p>
+        <h1>이미 있는 물건과 생활 조건을 반영하세요.</h1>
+        <p>홈에서 고른 준비물을 이어서 정리하거나, 보유품과 생활 조건을 한 번에 반영할 수 있습니다.</p>
       </section>
       <section class="checklist-toolbar" aria-label="구매 계획 저장 상태">
         <div><span>현재 선택</span><strong id="checklistProgress">보유품을 먼저 빼세요</strong></div>
@@ -83,7 +87,7 @@
           </div>
           <label class="plan-budget-input" for="purchaseBudget">구매 예산 메모 <span>선택</span><span class="amount-input"><input id="purchaseBudget" name="purchaseBudget" type="text" inputmode="numeric" enterkeyhint="done" data-currency placeholder="예: 500,000" /><b>원</b></span></label>
         </section>
-        <div class="plan-submit"><button class="button primary" type="submit">내 구매 계획 보기</button><a class="text-link" href="/budget">보증금·월 지출은 따로 계산하기</a></div>
+        <div class="plan-submit"><button class="button primary" type="submit">내 준비표 확인</button><a class="text-link" href="/budget">입주 자금도 정리하기</a></div>
       </form>
     </main>
     <footer><strong>자취도우미</strong><div class="footer-meta"><span>처음 사는 자취 준비를 덜 헤매게.</span><a href="/data-policy">데이터 이용 안내</a></div></footer>
@@ -91,6 +95,13 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/app.js" defer></script>
+    <script src="/product-catalog.js?v=20261010-1" defer></script>
+    <script src="/assets/vendor/catalog-icons.js?v=20261010-1" defer></script>
+    <script src="/comparison-core.js?v=20261012-2" defer></script>
+    <script src="/comparison-display.js?v=20261012-2" defer></script>
+    <script src="/catalog.js?v=20261012-2" defer></script>
+    <script src="/app.js?v=20261006-2" defer></script>
+    <script src="/decision-core.js?v=20260928-3" defer></script>
+    <script src="/decision-flow.js?v=20260928-4" defer></script>
   </body>
 </html>

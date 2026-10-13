@@ -3,17 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>첫 자취 구매 계획 | 자취도우미</title>
+    <title>내 준비표 | 자취도우미</title>
     <meta name="description" content="이미 가진 물건과 생활 조건을 반영해 첫 자취에서 지금 필요한 물건, 조건을 확인할 물건, 나중에 살 물건을 나눠 보세요." />
     <meta name="naver-site-verification" content="3007e193c6d0bfd01d35d6d4ad6667933b82c45c" />
     <meta name="google-site-verification" content="heeiJCrIsYaTG4sZC4F5j3YFtp5eGX3yBLhQbUchY_w" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://jachi-helper.vercel.app/recommend" />
-    <meta property="og:title" content="첫 자취 구매 계획" />
+    <meta property="og:title" content="내 준비표 | 자취도우미" />
     <meta property="og:description" content="내 조건으로 자취 준비물 구매 순서를 정리하세요." />
     <meta property="og:url" content="https://jachi-helper.vercel.app/recommend" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=20261006-2" />
+    <link rel="stylesheet" href="/decision.css?v=20260928-3" />
+    <link rel="stylesheet" href="/catalog.css?v=20261012-2" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -27,34 +29,36 @@
     <header class="topbar">
       <a class="brand" href="/"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
       <nav aria-label="주요 메뉴">
-        <a href="/checklist">구매 계획</a>
-        <a href="/recommend" aria-current="page" data-plan-results-link>결과 보기</a>
-        <a href="/budget">비용 계산</a>
+        <a href="/">준비물 찾기</a>
+        <a href="/recommend" aria-current="page" data-plan-result-route>내 준비표</a>
+        <a href="/services">생활 서비스</a>
       </nav>
     </header>
     <main class="subpage recommend-page">
+      <section class="catalog-saved-shelf" data-catalog-saved aria-label="저장한 품목"></section>
+      <section class="journey-saved" data-decision-saved data-decision-scope="products" hidden></section>
       <section class="page-title">
-        <p class="eyebrow">첫 자취 구매 계획 · 2/2</p>
-        <h1>내 조건으로 구매 계획을 만들어요.</h1>
-        <p>보유품과 생활 조건으로 먼저 확인할 물건을 정리하고, 입력한 구매 예산 메모를 함께 보여줍니다. 제품 가격은 추정하지 않고 판매처에서 직접 확인하게 합니다.</p>
+        <p class="eyebrow">내 준비표</p>
+        <h1>지금 살 것과 미룰 것을 한곳에서 확인하세요.</h1>
+        <p>홈에서 고른 상태와 보유품, 생활 조건을 한데 모아 보여줍니다. 제품 가격은 추정하지 않고 판매처에서 직접 확인하게 합니다.</p>
       </section>
 
       <section class="recommendation-start" id="recommendationStart" aria-labelledby="recommendation-start-title" hidden>
-        <p class="eyebrow">첫 자취 구매 계획</p>
+        <p class="eyebrow">내 준비표</p>
         <h2 id="recommendation-start-title">먼저 보유품과 생활 조건을 골라 주세요.</h2>
-        <p>저장된 구매 계획이 없습니다. 기본 조건을 임의로 적용하지 않으니 내 조건부터 골라 주세요.</p>
-        <a class="button primary" href="/checklist">구매 계획 시작하기</a>
+        <p>아직 정리한 준비물이 없습니다. 기본 조건을 임의로 적용하지 않으니 내 조건부터 골라 주세요.</p>
+        <a class="button primary" href="/checklist">내 준비표 설정하기</a>
       </section>
 
       <section class="plan-result-intro" id="recommendationResultIntro" aria-label="반영한 조건">
         <div class="plan-result-label"><p class="eyebrow">반영한 내 조건</p><small>선택은 마지막 수정부터 30일 동안 이 기기에 저장됩니다.</small></div>
         <div class="condition-summary" id="recommendationConditions"></div>
-        <a class="button secondary" href="/checklist">조건 수정</a>
+        <a class="button secondary" href="/checklist">조건·보유품 수정</a>
       </section>
 
       <section class="recommend-results plan-results" id="recommendationResultSection" aria-labelledby="recommendation-results-title">
         <div class="recommend-results-head">
-          <div><p class="eyebrow">내 구매 계획</p><h2 id="recommendation-results-title">무엇을 먼저 살지 결정하세요.</h2></div>
+          <div><p class="eyebrow">내 준비표</p><h2 id="recommendation-results-title">무엇을 먼저 살지 결정하세요.</h2></div>
           <p id="recommendationSummary" aria-live="polite"></p>
         </div>
         <p class="recommendation-caution">각 항목에서 <strong>필요함</strong>, <strong>이미 있음</strong>, <strong>나중에</strong>를 누르면 이 기기에 저장됩니다. 이 화면은 제품 가격을 추정하거나 순위를 매기지 않습니다.</p>
@@ -98,6 +102,13 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/app.js" defer></script>
+    <script src="/product-catalog.js?v=20261010-1" defer></script>
+    <script src="/assets/vendor/catalog-icons.js?v=20261010-1" defer></script>
+    <script src="/comparison-core.js?v=20261012-2" defer></script>
+    <script src="/comparison-display.js?v=20261012-2" defer></script>
+    <script src="/catalog.js?v=20261012-2" defer></script>
+    <script src="/app.js?v=20261006-2" defer></script>
+    <script src="/decision-core.js?v=20260928-3" defer></script>
+    <script src="/decision-flow.js?v=20260928-4" defer></script>
   </body>
 </html>

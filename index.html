@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>자취도우미 | 첫 자취 구매 계획</title>
+    <title>자취도우미 | 첫 자취 준비물 찾기</title>
     <meta
       name="description"
       content="첫 자취에서 이미 가진 물건을 빼고, 내 생활 조건에 맞춰 지금 필요한 준비물부터 정리하는 도구입니다."
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://jachi-helper.vercel.app/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="자취도우미" />
-    <meta property="og:title" content="자취도우미 | 첫 자취 구매 계획" />
+    <meta property="og:title" content="자취도우미 | 첫 자취 준비물 찾기" />
     <meta
       property="og:description"
       content="첫 자취에서 꼭 살 준비물만 내 조건으로 정리합니다."
@@ -22,7 +22,9 @@
     <meta property="og:url" content="https://jachi-helper.vercel.app/" />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=20260922-2" />
+    <link rel="stylesheet" href="/styles.css?v=20261006-2" />
+    <link rel="stylesheet" href="/decision.css?v=20260928-3" />
+    <link rel="stylesheet" href="/catalog.css?v=20261012-2" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -55,9 +57,9 @@
         <span>자취도우미</span>
       </a>
       <nav aria-label="주요 메뉴">
-        <a href="/checklist">구매 계획</a>
+        <a href="/" aria-current="page">준비물 찾기</a>
+        <a href="/checklist" data-plan-result-route>내 준비표</a>
         <a href="/services">생활 서비스</a>
-        <a href="/budget">비용 계산</a>
       </nav>
     </header>
 
@@ -65,72 +67,49 @@
       <section class="home-discovery" id="quick-preview" aria-labelledby="home-discovery-title">
         <div class="home-discovery-intro">
           <div class="home-discovery-copy">
-            <p class="home-discovery-eyebrow">첫 자취 준비물 찾기</p>
-            <h1 id="home-discovery-title">무엇부터 준비할지 바로 찾아보세요.</h1>
-            <p>39개 준비물을 검색하고, 이미 가진 물건은 빼고, 내 생활에 필요한 순서로 정리할 수 있어요.</p>
+            <p class="home-discovery-eyebrow">먹거리부터 생활용품까지</p>
+            <h1 id="home-discovery-title">자취용품 추천·비교</h1>
+            <p>내 생활에 맞는 물건을 찾아보세요.</p>
           </div>
-          <div class="home-discovery-actions">
-            <a class="button primary" id="heroPrimaryCta" href="/checklist" data-home-cta="hero">내 목록 만들기</a>
-            <button class="button secondary" id="shareHome" type="button">공유</button>
-          </div>
-          <p class="hero-return-note" id="homeResumeNote">완성한 목록은 이 기기에 30일 동안 저장됩니다.</p>
         </div>
 
-        <div class="home-catalog-shell">
-          <form class="home-catalog-search" id="homeCatalogSearch" role="search">
-            <label class="sr-only" for="homeCatalogQuery">준비물 검색</label>
-            <span aria-hidden="true">⌕</span>
-            <input id="homeCatalogQuery" type="search" placeholder="수건, 멀티탭, 세탁세제를 검색해 보세요" autocomplete="off" />
-            <button type="submit">검색</button>
+        <section class="catalog" id="catalog" aria-label="전체 생활용품">
+          <form class="catalog-search" id="catalogSearch" role="search">
+            <label class="sr-only" for="catalogQuery">품목·상품·조건 검색</label>
+            <input id="catalogQuery" type="search" placeholder="냉동밥, 운동복 세제, 수납 박스" autocomplete="off" />
+            <button type="submit" aria-label="상품 검색" title="검색"><i data-catalog-icon="Search"></i></button>
           </form>
-
-          <div class="home-category-tabs" id="homeCategoryTabs" aria-label="준비물 카테고리">
-            <button type="button" data-home-category="all" class="is-selected">전체</button>
-            <button type="button" data-home-category="침구·수면">침구</button>
-            <button type="button" data-home-category="욕실">욕실</button>
-            <button type="button" data-home-category="주방">주방</button>
-            <button type="button" data-home-category="청소">청소</button>
-            <button type="button" data-home-category="세탁">세탁</button>
-            <button type="button" data-home-category="생활·수납">생활·수납</button>
-            <button type="button" data-home-category="안전·건강">안전·건강</button>
+          <div class="catalog-categories" id="catalogCategories" aria-label="품목 분류"></div>
+          <div class="catalog-toolbar">
+            <details class="catalog-filter-panel" id="catalogFilterPanel">
+              <summary><i data-catalog-icon="SlidersHorizontal"></i>세부 분류·정렬<i data-catalog-icon="ChevronDown"></i></summary>
+              <div class="catalog-refine">
+            <label>세부 분류 <select id="catalogSubgroup"><option value="all">전체 세부 분류</option></select></label>
+            <label>정렬 <select id="catalogSort"><option value="default">기본순</option><option value="name">가나다순</option></select></label>
+              </div>
+            </details>
+            <button type="button" id="catalogSaved" aria-pressed="false"><i data-catalog-icon="Bookmark"></i>저장 <span>0</span></button>
           </div>
-
-          <fieldset class="home-lifestyle-filter">
-            <legend>생활 방식</legend>
-            <div class="home-lifestyle-options" id="homePreviewOptions">
-              <label><input type="radio" name="homePreset" value="default" checked /><span>기본 준비</span></label>
-              <label><input type="radio" name="homePreset" value="cooking" /><span>요리를 자주 해요</span></label>
-              <label><input type="radio" name="homePreset" value="drying" /><span>실내에서 말려요</span></label>
-              <label><input type="radio" name="homePreset" value="storage" /><span>수납이 부족해요</span></label>
-            </div>
-          </fieldset>
-
-          <div class="home-catalog-toolbar">
-            <div>
-              <span>첫 자취 준비물 39개 · 이미지는 품목 구분용 예시</span>
-              <strong id="homePreviewSummary" aria-live="polite">기본 준비에서 먼저 볼 6개입니다.</strong>
-            </div>
-            <label>정렬
-              <select id="homeCatalogSort">
-                <option value="priority">기본 준비순</option>
-                <option value="first-day">입주 첫날 우선</option>
-                <option value="name">가나다순</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="home-preview-grid" id="homePreviewList" aria-live="polite"></div>
-
-          <div class="home-catalog-more">
-            <button type="button" id="homeCatalogMore" aria-controls="homePreviewList" aria-expanded="false">39개 전체 보기</button>
-          </div>
-
-          <div class="home-preview-action">
-            <p><strong>더 정확하게 정리할까요?</strong><span>전체 계획에서 보유품을 빼고 생활 조건을 더 반영합니다.</span></p>
-            <a class="button primary" id="homePreviewCta" href="/checklist" data-home-cta="home_demo">39개 준비물로 계획 만들기</a>
-          </div>
+          <div class="catalog-applied-filters" id="catalogAppliedFilters" aria-label="선택한 조건" hidden></div>
+          <div class="catalog-results-heading"><h2 id="catalogHeading">전체 품목</h2><p id="catalogCount" role="status">품목을 불러오는 중입니다.</p></div>
+          <div class="catalog-grid" id="catalogGrid"></div>
+          <div class="catalog-empty" id="catalogEmpty" hidden><h3>일치하는 품목이 없습니다.</h3><p>검색어나 분류를 바꿔 보세요.</p><button type="button" id="catalogReset">전체 품목 보기</button></div>
+          <div class="catalog-pagination"><button type="button" id="catalogMore" hidden>더 보기</button><button type="button" id="catalogAll" hidden>전체 펼치기</button><p id="catalogShown"></p></div>
+          <p class="catalog-price-note">상품의 최신 가격·배송비·재고는 각 판매처에서 확인하세요.</p>
+          <p id="catalogNotice" role="status"></p>
+          <noscript><p>전체 품목 검색은 JavaScript를 켜면 사용할 수 있습니다. <a href="/checklist">기본 준비표 보기</a></p></noscript>
+        </section>
+        <dialog class="catalog-dialog" id="catalogDetail" aria-labelledby="catalogDetailTitle">
+          <header class="catalog-dialog-header"><p id="catalogDetailCategory"></p><button type="button" id="catalogClose" aria-label="상품 상세 닫기" title="닫기"><i data-catalog-icon="X"></i></button></header>
+          <div id="catalogDetailBody"></div>
+        </dialog>
+        <div class="home-discovery-actions home-shopping-plan">
+          <a class="button secondary" id="heroPrimaryCta" href="/checklist" data-home-cta="hero">내 준비표 만들기</a>
+          <button class="button secondary" id="shareHome" type="button">공유</button>
         </div>
-        <noscript><p class="home-preview-fallback">구매 계획을 만들면 입주 첫날 필요한 물건과 생활 조건을 확인한 뒤 살 물건을 나눠 볼 수 있습니다.</p></noscript>
+        <p class="hero-return-note" id="homeResumeNote">완성한 목록은 이 기기에 30일 동안 저장됩니다.</p>
+        <section class="journey-saved" data-decision-saved data-decision-scope="products" hidden></section>
+        <noscript><p class="home-preview-fallback">내 준비표를 만들면 입주 첫날 필요한 물건과 생활 조건을 확인한 뒤 살 물건을 나눠 볼 수 있습니다.</p></noscript>
       </section>
 
       <section class="home-flow" aria-labelledby="feature-map-title">
@@ -144,26 +123,37 @@
           <li><span>02</span><div><strong>구매 시점을 나눕니다</strong><small>지금 필요·조건 확인·나중으로 구분합니다.</small></div></li>
           <li><span>03</span><div><strong>다음 행동을 연결합니다</strong><small>구매 기준과 검색어를 확인하고 판매처로 이동합니다.</small></div></li>
         </ol>
-        <a class="home-flow-link" href="/checklist" data-home-cta="flow_start">준비물 계획 시작하기 <span aria-hidden="true">→</span></a>
+        <a class="home-flow-link" href="/checklist" data-home-cta="flow_start">내 준비표 자세히 설정하기 <span aria-hidden="true">→</span></a>
       </section>
     </main>
 
     <nav class="mobile-dock" aria-label="모바일 주요 메뉴">
       <a class="is-current" href="/" aria-current="page"><span>홈</span><small>준비물 찾기</small></a>
-      <a href="/#quick-preview"><span>품목</span><small>39개 탐색</small></a>
+      <a href="/#catalog"><span>품목</span><small data-full-catalog-count>213개 탐색</small></a>
       <a href="/services"><span>서비스</span><small>이사·청소</small></a>
-      <a href="/checklist"><span>내 계획</span><small>목록 만들기</small></a>
+      <a href="/checklist" data-plan-result-route><span>내 준비표</span><small>결정 모아보기</small></a>
     </nav>
+    <div class="catalog-toast" id="catalogToast" role="status" hidden></div>
+    <button class="catalog-back-top" id="catalogBackTop" type="button" aria-label="목록 맨 위로" title="맨 위로" hidden><i data-catalog-icon="ArrowUp"></i></button>
 
     <footer>
       <strong>자취도우미</strong>
-      <div class="footer-meta"><span>첫 자취 구매 계획 · 초기 비용 · 준비물 정리</span><a href="/data-policy">데이터 이용 안내</a></div>
+      <div class="footer-meta"><span>첫 자취 준비물 · 내 준비표 · 생활 서비스</span><a href="/data-policy">데이터 이용 안내</a></div>
     </footer>
 
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/app.js?v=20260922-2" defer></script>
+    <script src="/shopping-offers.js?v=20261006-2" defer></script>
+    <script src="/product-catalog.js?v=20261010-1" defer></script>
+    <script src="/comparison-summary.js?v=20261012-1" defer></script>
+    <script src="/assets/vendor/catalog-icons.js?v=20261010-1" defer></script>
+    <script src="/app.js?v=20261008-1" defer></script>
+    <script src="/comparison-core.js?v=20261012-2" defer></script>
+    <script src="/comparison-display.js?v=20261012-2" defer></script>
+    <script src="/catalog.js?v=20261012-2" defer></script>
+    <script src="/decision-core.js?v=20260928-3" defer></script>
+    <script src="/decision-flow.js?v=20260928-4" defer></script>
   </body>
 </html>

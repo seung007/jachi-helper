@@ -1,8 +1,14 @@
 .env
 .env.*
-!.env.example
 .vercel
 artifacts
 output
 data/exports
 node_modules
+docs
+scripts
+AGENTS.md
+README.md
+.github
+outputs
+council-*.md

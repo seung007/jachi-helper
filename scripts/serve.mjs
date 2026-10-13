@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { createReadStream, existsSync, statSync } from "node:fs";
-import { extname, join, normalize } from "node:path";
+import { extname, join, normalize, relative, sep } from "node:path";
 
 const root = process.cwd();
 const port = Number(process.env.PORT || 4173);
@@ -23,9 +23,10 @@ function resolvePath(url) {
   return candidate.startsWith(root) ? candidate : join(root, "index.html");
 }
 
-createServer((req, res) => {
+const server = createServer((req, res) => {
   const file = resolvePath(req.url || "/");
-  if (!existsSync(file) || !statSync(file).isFile()) {
+  const relativeFile = relative(root, file).split(sep).join("/").toLowerCase();
+  if (relativeFile.startsWith("data/exports/") || !existsSync(file) || !statSync(file).isFile()) {
     res.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
     res.end("Not found");
     return;
@@ -37,5 +38,5 @@ createServer((req, res) => {
   });
   createReadStream(file).pipe(res);
 }).listen(port, () => {
-  console.log(`Local preview: http://localhost:${port}`);
+  console.log(`Local preview: http://localhost:${server.address().port}`);
 });

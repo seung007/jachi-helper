@@ -12,7 +12,9 @@
     <meta property="og:title" content="준비물 비교 | 자취도우미" />
     <meta property="og:description" content="내 생활 조건에 맞는 준비물과 비교 기준을 확인하세요." />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=20261006-2" />
+    <link rel="stylesheet" href="/decision.css?v=20260928-3" />
+    <link rel="stylesheet" href="/catalog.css?v=20261012-2" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -25,7 +27,7 @@
   <body class="item-page">
     <header class="topbar">
       <a class="brand" href="/" aria-label="자취도우미 홈"><span class="brand-mark">ㅈ</span><span>자취도우미</span></a>
-      <nav aria-label="주요 메뉴"><a href="/">준비물 찾기</a><a href="/services">생활 서비스</a><a href="/checklist">내 계획</a></nav>
+      <nav aria-label="주요 메뉴"><a href="/">준비물 찾기</a><a href="/checklist" data-plan-result-route>내 준비표</a><a href="/services">생활 서비스</a></nav>
     </header>
 
     <main class="item-main">
@@ -38,6 +40,7 @@
           <p class="item-lede" id="itemReason"></p>
           <div class="item-criteria"><strong>고를 때 확인하세요</strong><p id="itemCriteria"></p></div>
           <div class="item-store-actions" id="itemStoreActions"></div>
+          <a class="journey-context-link" id="itemDecisionEntry" href="/decision?scenario=duvet&amp;from=item" data-decision-entry="duvet" hidden>내 크기·세탁 방식으로 이불 선택 기준 찾기 <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
@@ -46,7 +49,7 @@
           <div>
             <p class="eyebrow">공공 시험자료로 비교</p>
             <h2 id="detergentTitle">액체 세탁세제 8종을 같은 기준으로 봅니다.</h2>
-            <p>한국소비자원이 드럼세탁기·세탁량 3kg 기준으로 시험한 제품입니다. 가격은 2025년 시험 당시 공식몰 가격이며 현재 판매가는 판매처에서 다시 확인하세요.</p>
+            <p>한국소비자원 2025년 자료의 오염별 세척 성능과 표시 성분입니다. 현재 판매 옵션의 배합·용량이 다를 수 있습니다. <a href="/#homeProductComparison">판매 옵션과 가격 보기</a></p>
           </div>
           <a class="source-link" href="https://www.isafe.go.kr/DATA/bbs/85/20250807011108527.pdf" target="_blank" rel="noreferrer">시험자료 원문</a>
         </header>
@@ -70,8 +73,10 @@
           <label>정렬
             <select id="detergentSort">
               <option value="match">내 조건 우선</option>
-              <option value="cost">1회 비용 낮은 순</option>
-              <option value="stain">얼룩 세척성능 순</option>
+              <option value="cost">2025 자료 사용비순</option>
+              <option value="sebum">피지 세척 성능순</option>
+              <option value="oil">기름·단백질 성능순</option>
+              <option value="stain">혈액·잉크 성능순</option>
               <option value="name">이름순</option>
             </select>
           </label>
@@ -83,10 +88,11 @@
 
         <div class="comparison-method">
           <strong>표시를 읽는 방법</strong>
-          <p>별 3개는 우수, 2개는 양호, 1개는 보통입니다. 시험 결과는 해당 제품과 당시 판매 제품에 한하며, ‘알레르기 반응가능물질 수가 적다’는 정보가 저자극이나 무알레르기를 보장하지 않습니다.</p>
+          <p>우수·양호·보통은 오염별 세척 성능 평가입니다. 시험 결과는 2025년 시험 대상 제품에 한하며, 이후 제품 변경 여부는 판매처에서 확인하세요. 표시된 알레르기 반응가능물질 수가 적다는 이유만으로 저자극이나 무알레르기를 보장하지 않습니다.</p>
         </div>
       </section>
 
+      <section data-catalog-related class="catalog catalog-related" hidden></section>
       <section class="item-next">
         <p class="eyebrow">다음 행동</p>
         <h2>이미 가진 물건을 빼고 내 목록에 남겨 보세요.</h2>
@@ -98,12 +104,20 @@
       <a href="/"><span>홈</span><small>준비물 찾기</small></a>
       <a class="is-current" href="/#quick-preview" aria-current="page"><span>품목</span><small>비교하기</small></a>
       <a href="/services"><span>서비스</span><small>이사·청소</small></a>
-      <a href="/checklist"><span>내 계획</span><small>목록 만들기</small></a>
+      <a href="/checklist" data-plan-result-route><span>내 준비표</span><small>결정 모아보기</small></a>
     </nav>
 
     <footer><strong>자취도우미</strong><div class="footer-meta"><span>시험자료와 판매처 정보를 구분해 제공합니다.</span><a href="/data-policy">데이터 이용 안내</a></div></footer>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/app.js" defer></script>
+    <script src="/app.js?v=20261006-2" defer></script>
+    <script src="/decision-core.js?v=20260928-3" defer></script>
+    <script src="/decision-flow.js?v=20260928-4" defer></script>
+    <script src="/product-catalog.js?v=20261010-1" defer></script>
+    <script src="/comparison-summary.js?v=20261012-1" defer></script>
+    <script src="/assets/vendor/catalog-icons.js?v=20261010-1" defer></script>
+    <script src="/comparison-core.js?v=20261012-2" defer></script>
+    <script src="/comparison-display.js?v=20261012-2" defer></script>
+    <script src="/catalog.js?v=20261012-2" defer></script>
   </body>
 </html>

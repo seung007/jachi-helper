@@ -100,30 +100,32 @@ try {
   );
   assert(defaultProductVisuals.every((visual) => visual.includes("home-items-")), "home preview must use item-specific product imagery");
   assert(new Set(defaultProductVisuals).size === 6, "home preview must not repeat one category image across different items");
-  assert(await page.getByRole("button", { name: "39개 전체 보기" }).isVisible(), "home must expose the full catalog from the six-item preview");
-  await page.getByRole("button", { name: "39개 전체 보기" }).click();
-  assert(await page.locator("#homePreviewList .home-preview-item").count() === 39, "home full-catalog control must render all 39 items");
-  assert((await page.locator("#homePreviewSummary").innerText()).includes("39개를 모두"), "home full-catalog summary must state that all items are visible");
+  const catalogCount = await page.evaluate(() => Object.keys(recommendationCatalog).length);
+  assert(await page.getByRole("button", { name: `${catalogCount}개 전체 보기` }).isVisible(), "home must expose the full catalog from the six-item preview");
+  await page.getByRole("button", { name: `${catalogCount}개 전체 보기` }).click();
+  assert(await page.locator("#homePreviewList .home-preview-item").count() === catalogCount, "home full-catalog control must render every item");
+  assert((await page.locator("#homePreviewSummary").innerText()).includes(`${catalogCount}개를 모두`), "home full-catalog summary must state that all items are visible");
   await page.getByRole("button", { name: "대표 6개만 보기" }).click();
   assert(await page.locator("#homePreviewList .home-preview-item").count() === 6, "home full-catalog control must collapse back to six items");
   assert(await page.locator("#homePreviewList [data-store-link]").count() > 0, "home preview items must link to current store searches");
   assert(!(await page.locator("#homeCatalogSort").innerText()).includes("최저가"), "home must not claim lowest-price sorting without official product data");
-  assert(!(await page.locator("[data-plan-results-link]").isVisible()), "empty home must hide the result navigation link");
+  assert(await page.locator("[data-plan-result-route]").first().isVisible(), "home must always expose the plan navigation");
+  assert((await page.locator("[data-plan-result-route]").first().getAttribute("href")) === "/checklist", "empty plan navigation must open plan setup");
   assert(await page.getByRole("link", { name: "데이터 이용 안내" }).isVisible(), "home must link to the data-use guide");
   for (const categoryButton of await page.locator("#homeCategoryTabs button:not([data-home-category='all'])").all()) {
     await categoryButton.click();
     const categoryImages = page.locator("#homePreviewList .home-product-image");
     const imageCount = await categoryImages.count();
     assert(imageCount > 0, "each preparation category must render at least one item");
-    assert(await categoryImages.evaluateAll((images) => images.every((image) => image.classList.contains("has-item-image"))), "all 39 catalog items must have matching imagery");
+    assert(await categoryImages.evaluateAll((images) => images.every((image) => image.classList.contains("has-item-image"))), "all catalog items must have matching imagery");
   }
   await page.locator("#homeCategoryTabs [data-home-category='all']").click();
-  report.checks.push("home renders a searchable six-item preview that expands to all 39 items, with store searches and no fabricated price ranking");
+  report.checks.push(`home renders a searchable six-item preview that expands to all ${catalogCount} items, with store searches and no fabricated price ranking`);
 
   await page.getByLabel("요리를 자주 해요").check();
   if (shouldVerifyGa4) await waitForGa4Event("home_demo_select");
   const cookingTitles = await page.locator("#homePreviewList h3").allTextContents();
-  assert(cookingTitles.join("|") === "음식물·종량제 봉투|수저·젓가락|냄비|프라이팬|접시·컵|밀폐용기", "cooking preset did not change all six preview items");
+  assert(cookingTitles.join("|") === "수저·젓가락|음식물·종량제 봉투|냄비|프라이팬|밀폐용기|접시·컵", "cooking preset did not change all six preview items");
   const cookingStatuses = await page.locator("#homePreviewList .home-preview-meta b").allTextContents();
   assert(cookingStatuses.every((label) => /지금 필요|조건 확인|나중에/.test(label)), "home preview must explain purchase timing");
   const demoHref = await page.locator("#homePreviewCta").getAttribute("href");
@@ -140,7 +142,7 @@ try {
   }
   assert(await page.getByLabel("자주 해요", { exact: true }).first().isChecked(), "home cooking preset was not applied on the checklist");
   assert((await page.locator("#checklistStorageNote").innerText()).includes("30일"), "purchase-plan storage note must say thirty days");
-  assert(await page.locator("[data-plan-results-link]").isVisible(), "saved preset must make the result navigation available");
+  assert((await page.locator("[data-plan-result-route]").first().getAttribute("href")) === "/recommend", "saved preset must route plan navigation to the result");
 
   const expiryDistance = await page.evaluate(() => {
     const state = JSON.parse(localStorage.getItem("jachi-helper:v1") || "{}");
@@ -156,7 +158,7 @@ try {
   await page.getByLabel("수건", { exact: true }).check();
   if (shouldVerifyGa4) await waitForGa4Event("plan_step_complete");
 
-  await page.getByRole("button", { name: "내 구매 계획 보기" }).click({ noWaitAfter: true });
+  await page.getByRole("button", { name: "내 준비표 확인" }).click({ noWaitAfter: true });
   await waitForRoute(page, "/recommend");
   if (shouldVerifyGa4) {
     await page.waitForFunction(() => Boolean(window.google_tag_manager), null, { timeout: 10_000 });
@@ -197,7 +199,7 @@ try {
   await page.screenshot({ path: resolve(outputDir, "desktop-result.png"), fullPage: true });
   report.checks.push("completed plan renders results, stores one decision and feedback, and emits the full funnel events");
   await page.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
-  assert((await page.locator("#heroPrimaryCta").innerText()) === "지난 구매 계획 이어보기", "completed users must receive a clear return path on home");
+  assert((await page.locator("#heroPrimaryCta").innerText()) === "내 준비표 이어보기", "completed users must receive a clear return path on home");
   assert((await page.locator("#heroPrimaryCta").getAttribute("href")) === "/recommend", "completed users must resume at their saved result");
   assert((await page.locator("#homeResumeNote").innerText()).includes("필요함 1개"), "completed users must see saved-plan progress on home");
   await page.waitForTimeout(800);

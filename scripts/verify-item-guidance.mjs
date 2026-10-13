@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 
 // Load the static catalog and link renderer without starting DOM event handlers.
@@ -8,14 +8,30 @@ const modelEnd = source.indexOf("const plannerForm =");
 const linksStart = source.indexOf("function createStoreSearchLink(");
 const linksEnd = source.indexOf("function setupHomePreview(", linksStart);
 assert(modelEnd > 0 && linksStart > modelEnd && linksEnd > linksStart);
-const { catalog, guidance, presets, preferences, describe, link } = runInNewContext(
+const { catalog, subgroups, guidance, presets, preferences, describe, link, images, products, sortProducts } = runInNewContext(
   `${source.slice(0, modelEnd)}\n${source.slice(linksStart, linksEnd)}\n` +
-  "({ catalog: recommendationCatalog, guidance: itemGuidance, presets: homePreviewPresets, preferences: homePresetPreferences, describe: getItemGuidance, link: createStoreSearchLink })"
+  "({ catalog: recommendationCatalog, subgroups: catalogSubgroups, guidance: itemGuidance, presets: homePreviewPresets, preferences: homePresetPreferences, describe: getItemGuidance, link: createStoreSearchLink, images: homeProductImages, products: detergentProducts, sortProducts: sortDetergentProducts })"
 );
 
-assert.equal(Object.keys(catalog).length, 39);
+assert.equal(Object.keys(catalog).length, 66);
+const subgroupIds = [];
+for (const [category, groups] of Object.entries(subgroups)) {
+  for (const group of groups) {
+    assert(group.criteria && group.ids.length);
+    for (const id of group.ids) {
+      assert.equal(catalog[id]?.category, category, `${id}: wrong subgroup category`);
+      subgroupIds.push(id);
+    }
+  }
+}
+assert.equal(new Set(subgroupIds).size, subgroupIds.length, "Subgroup membership must be unique");
+assert.deepEqual(subgroupIds.sort(), Object.keys(catalog).sort(), "Subgroups must cover the complete catalog");
+assert.equal(new Set(Object.values(catalog).map((item) => item.title)).size, 66);
 assert.deepEqual(Object.keys(guidance).sort(), Object.keys(catalog).sort());
+assert.deepEqual(Object.keys(images).sort(), Object.keys(catalog).sort());
 for (const [id] of Object.entries(catalog)) {
+  const image = images[id];
+  assert(existsSync(new URL(image[3] === "direct" ? `..${image[0]}` : `../assets/${image[2] ? "home-item" : "home-items"}-${image[0]}.webp`, import.meta.url)), `${id}: missing image asset`);
   const item = describe(id);
   assert(["now", "confirm", "later"].includes(item.phase), `${id}: invalid phase`);
   assert(item.reason && item.criteria && item.searchQuery, `${id}: missing guidance`);
@@ -59,4 +75,18 @@ for (const [presetName, preset] of Object.entries(presets)) {
 assert.match(link("daiso", "수건", "bath-towel", "test"), /홈 열기/);
 assert.match(link("ohouse", "베개", "bedding-pillow", "test"), /스토어 열기/);
 assert.match(link("naver", "수건", "bath-towel", "test"), /통합검색/);
-console.log("39 item guidance checks passed: coverage, decisions, condition matching, presets and link destinations");
+assert.equal(describe("bedding-sleep-mask").phase, "later");
+assert.equal(describe("kitchen-cutting-board", { cooking: "often" }).conditionMatched, true);
+assert.match(describe("bath-drain-strainer").criteria, /지름/);
+assert.match(describe("life-screwdriver").criteria, /나사/);
+assert.equal(products.length, 8);
+assert.equal(sortProducts(products, "workout")[0].id, "acts");
+assert.equal(sortProducts(products, "balanced", "cost")[0].cost, 56);
+assert.equal(sortProducts(products, "balanced", "stain")[0].id, "persil");
+assert.equal(sortProducts(products, "balanced", "sebum")[0].id, "acts");
+assert.equal(sortProducts(products, "balanced", "oil").at(-1).oil, 1);
+assert.equal(products[0].id, "downy", "Sorting must not mutate source order");
+assert.equal(preferences.workout.workout, "yes");
+assert.equal(presets.bedding.items[0].id, "bedding-duvet");
+assert.equal(presets.storage.items[0].id, "life-measuring-tape");
+console.log(`${Object.keys(catalog).length} item guidance checks passed: coverage, images, decisions, condition matching, presets and link destinations`);
