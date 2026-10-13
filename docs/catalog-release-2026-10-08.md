@@ -1,5 +1,16 @@
 # 213개 품목 공개 범위
 
+## 2026-10-13 상품 비교·문서 정리 배포
+
+- 사용자 커밋·배포 승인. GitHub 계정 seung007, main 사이트 커밋 e164cf1. 아래 옛 기록의 사용자 승인은 다른 변경의 상시 승인이 아니다.
+- 기존 연결 프로젝트 jachi-helper / seung007s-projects에 배포: dpl_FGFBLbSTLfTsZ6rRAhYGrqF8mP3w, READY, 별칭 https://jachi-helper.vercel.app.
+- 상품별 조건 표시·사진 기반 후보 선택·비교·쿠팡 상품/검색 연결·저장·품목별 로딩, 문서 통합을 운영에 반영했다. 데이터 불일치·상세 규격 누락은 [후속 작업](next-actions.md)에 남긴다.
+- 배포 전 전체 회귀 101개+SEO+66개 안내, 비교 9분류×4폭 및 홈/상세 6폭 통과. 운영에서도 전체 210개 구매 카드·215개 상세 상품 연결/3개 안내 예외, 6폭, 냄비 홈→비교→저장 4폭 통과. GA/방문 분석 요청은 검사에서 차단했다.
+- 운영 index/compare HTML·catalog/comparison/display JS·P051 JSON 6개가 로컬과 SHA-256 일치. .env·docs/current-work.md·검사 스크립트·비공개 비교 큐는 404다. 커밋 경로 검사와 인증 키 패턴 검사에서 문제 없음.
+- 실제 보고서: output/playwright/catalog/report.json 및 output/playwright/comparison-integration/P051/report.json의 base가 운영 주소다. 전체 사진의 재사용 권한·실시간 가격·실사용 전환 성과까지 검증한 것은 아니다.
+
+## 이전 공개 범위
+
 > 필요시 읽는 당시 근거/검토 기록이다. 최신 상태는 [현재 작업](current-work.md), 방향·실행 규칙은 [제품 방향](product-vision.md)과 [AGENTS](../AGENTS.md)를 따른다. 아래 제안·실험 문턱·당시 승인·집계는 현재 명령이나 새 작업의 승인으로 재사용하지 않는다.
 
 - 사용자 승인: 일부만 처리하지 말고 전체 목록을 사이트에 반영하고 배포한다.
