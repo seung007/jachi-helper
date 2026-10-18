@@ -1,0 +1,238 @@
+{
+  "results": [
+    {
+      "id": "cowlr-home",
+      "url": "https://www.cowlr.kr/",
+      "observedAt": "2026-10-18T21:49:39.859Z",
+      "state": "rendered-and-measured-not-usability-tested",
+      "width": 390,
+      "height": 844,
+      "dismissed": "notification-intro",
+      "measurements": {
+        "mainPadding": "16px",
+        "samples": [
+          {
+            "tag": "H1",
+            "x": 16,
+            "y": 24,
+            "width": 142,
+            "height": 30,
+            "font": "20px",
+            "lineHeight": "28px",
+            "padding": "0px",
+            "radius": "0px"
+          },
+          {
+            "tag": "A",
+            "x": 16,
+            "y": 76,
+            "width": 358,
+            "height": 44,
+            "font": "14px",
+            "lineHeight": "20px",
+            "padding": "0px 12px",
+            "radius": "6px"
+          },
+          {
+            "tag": "A",
+            "x": 16,
+            "y": 120,
+            "width": 80,
+            "height": 44,
+            "font": "14px",
+            "lineHeight": "20px",
+            "padding": "0px 2px",
+            "radius": "0px"
+          },
+          {
+            "tag": "A",
+            "x": 16,
+            "y": 257,
+            "width": 358,
+            "height": 128,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px",
+            "radius": "12px"
+          },
+          {
+            "tag": "A",
+            "x": 16,
+            "y": 421,
+            "width": 358,
+            "height": 128,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px",
+            "radius": "12px"
+          },
+          {
+            "tag": "A",
+            "x": 16,
+            "y": 584,
+            "width": 358,
+            "height": 128,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px",
+            "radius": "12px"
+          },
+          {
+            "tag": "A",
+            "x": 16,
+            "y": 748,
+            "width": 358,
+            "height": 128,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px",
+            "radius": "12px"
+          }
+        ]
+      },
+      "stops": []
+    },
+    {
+      "id": "cowlr-category",
+      "url": "https://www.cowlr.kr/category",
+      "observedAt": "2026-10-18T21:49:43.380Z",
+      "state": "rendered-and-measured-not-usability-tested",
+      "width": 390,
+      "height": 844,
+      "dismissed": null,
+      "measurements": {
+        "mainPadding": "0px",
+        "samples": [
+          {
+            "tag": "H2",
+            "x": 182,
+            "y": 93,
+            "width": 104,
+            "height": 28,
+            "font": "20px",
+            "lineHeight": "28px",
+            "padding": "0px",
+            "radius": "0px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 151,
+            "width": 248,
+            "height": 66,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 225,
+            "width": 248,
+            "height": 66,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 299,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 365,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 431,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 497,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 563,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 629,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          },
+          {
+            "tag": "A",
+            "x": 126,
+            "y": 695,
+            "width": 248,
+            "height": 58,
+            "font": "16px",
+            "lineHeight": "24px",
+            "padding": "12px 16px",
+            "radius": "8px"
+          }
+        ]
+      },
+      "stops": []
+    },
+    {
+      "id": "nosearch-home",
+      "url": "https://nosearch.com/",
+      "observedAt": "2026-10-18T21:49:46.620Z",
+      "state": "unverified",
+      "width": 390,
+      "height": 844,
+      "dismissed": null,
+      "measurements": null,
+      "stops": [
+        {
+          "url": "https://nosearch.com/",
+          "reason": "robots_disallowed"
+        }
+      ]
+    }
+  ],
+  "limits": "Rendered public HTML and CSS measurements only. No business success, conversion, visual preference or full interaction claims. References are not a closed list."
+}
