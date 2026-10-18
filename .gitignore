@@ -5,3 +5,4 @@ node_modules/
 artifacts/
 output/
 data/exports/
+__pycache__/
