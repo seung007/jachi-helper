@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>자취도우미 와이어프레임 v1</title>
+  <link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+  <div class="prototype-bar"><span>와이어프레임 v1</span><a href="../wireframe-v1.md">설계 근거</a></div>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="#products">자취도우미</a>
+    <nav aria-label="주 메뉴" id="navigation"></nav>
+    <button class="icon-button" id="savedButton" title="저장한 상품" aria-label="저장한 상품"><i data-icon="Bookmark"></i></button>
+  </div></header>
+  <main id="main" tabindex="-1"></main>
+  <div id="compareTray" class="compare-tray" hidden></div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+  <dialog id="placeDialog" aria-labelledby="placeDialogTitle"><div class="dialog-title"><h2 id="placeDialogTitle">위치 보기</h2><button class="icon-button" data-close title="닫기" aria-label="닫기"><i data-icon="X"></i></button></div><p class="sample-note">위치 연결 구조 예시 · 실제 업소 정보가 아닙니다.</p><div class="map-placeholder"><i data-icon="MapPin"></i><span>장소 ID 또는 확인한 좌표</span></div><p id="placeDialogAddress"></p><p class="muted">실제 연결 시 위치 핀과 업체 상세를 구분합니다.</p></dialog>
+  <script src="../../assets/vendor/catalog-icons.js"></script>
+  <script src="data.js"></script><script src="wireframe.js"></script>
+</body>
+</html>
