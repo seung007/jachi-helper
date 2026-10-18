@@ -20,7 +20,7 @@
 
 1. 본인 저장장치나 비공개 클라우드로 ZIP 세 개를 옮긴다. 빌린 노트북에만 있는 ZIP은 외부 백업이 아니다.
 2. Node.js 24.15.0은 현재 검증에 사용한 버전이다. Git을 준비하고 `git clone https://github.com/seung007/jachi-helper.git`을 실행한다.
-3. 01 ZIP 안의 `jachi-helper/` 내용을 복제한 같은 프로젝트 폴더에 합친다. `data/exports/`를 빼면 서울 장소 검색과 분석 재현이 불가능하다.
+3. 코드는 GitHub 최신 버전을 사용한다. 01 ZIP은 8ca4240 시점 백업이므로 최신 코드 위에 통째로 덮어쓰지 않는다. ZIP에서 `jachi-helper/data/exports/`, 필요한 `output/`·`artifacts/` 등 Git 제외 자료를 같은 프로젝트 경로에 복원한다. `data/exports/`를 빼면 서울 장소 검색과 분석 재현이 불가능하다.
 4. 03 ZIP의 `project/.env`와 `project/.env.local`을 프로젝트 루트에 놓는다. 키를 채팅에 붙이거나 Git에 추가하지 않는다. 개인 config.toml은 경로·도구·현재 설정과 대조하는 참고용이며 무조건 덮어쓰지 않는다.
 5. 프로젝트에서 `npm ci`, `npm run check`, `npm run check:life`, `npm run serve`를 실행한다. 기본 미리보기는 http://localhost:4173 이다. 브라우저 검사는 로컬 Edge 설치 경로를 확인하고 BASE_URL을 실제 서버 주소에 맞춘다.
 6. 02 ZIP은 원문/참고/개인 환경을 구분해 복원한다. 스킬은 새 Codex 설치의 사용자 스킬 경로를 확인한 뒤 필요한 것만 옮기고, 자동화는 참고 사본만 보존한다. 오래된 경로·일정·권한을 검토하기 전 자동 활성화하지 않는다.

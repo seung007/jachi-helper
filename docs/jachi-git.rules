@@ -1,5 +1,6 @@
 # Machine-local Codex rules; install in ~/.codex/rules/jachi-helper.rules.
-# Explicit user approval before committing is required by AGENTS.md.
+# User authorized routine commits/pushes of completed, verified project work on 2026-10-19.
+# Tool prompts remain intact; scope and exclusions are defined in AGENTS.md.
 prefix_rule(
     pattern = ["git", "-C", "C:/Users/user/Documents/ChatGPT/프로젝트/jachi-helper", "add", "--"],
     decision = "allow",
@@ -8,10 +9,10 @@ prefix_rule(
 prefix_rule(
     pattern = ["git", "-C", "C:/Users/user/Documents/ChatGPT/프로젝트/jachi-helper", "commit", "-m"],
     decision = "prompt",
-    justification = "User revoked standing approval; obtain explicit approval for each reviewed change before committing."
+    justification = "Standing user approval covers completed, verified jachi-helper changes only; preserve tool approval checks."
 )
 prefix_rule(
     pattern = ["git", "-C", "C:/Users/user/Documents/ChatGPT/프로젝트/jachi-helper", "push", "--", "https://github.com/seung007/jachi-helper.git", "HEAD:refs/heads/main"],
     decision = "prompt",
-    justification = "Confirm the user has approved publishing these commits before pushing."
+    justification = "Standing user approval covers verified jachi-helper commits to this main branch; no force push or private data."
 )
