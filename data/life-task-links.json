@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "problems": [
+    {
+      "id": "laundry",
+      "label": "빨래·습기",
+      "icon": "WashingMachine",
+      "categoryIds": [
+        "laundry"
+      ],
+      "placeCategory": "laundry-clean",
+      "keywords": [
+        "빨래",
+        "세탁",
+        "이불",
+        "쉰내",
+        "건조"
+      ],
+      "productQuery": "세탁",
+      "productIds": [
+        "P102",
+        "P103",
+        "P104",
+        "P105",
+        "P110",
+        "P111",
+        "P113",
+        "P137",
+        "P138",
+        "P167",
+        "P170",
+        "P200"
+      ],
+      "note": "옷감·이불의 세탁 표시와 세탁기 용량을 먼저 확인하세요.",
+      "actions": [
+        {
+          "label": "세탁·건조 용품",
+          "href": "/?q=세탁#catalog"
+        },
+        {
+          "label": "이불 제품 비교",
+          "href": "/compare?item=P137"
+        }
+      ]
+    },
+    {
+      "id": "cleaning",
+      "label": "욕실·집 청소",
+      "icon": "Sparkles",
+      "categoryIds": [
+        "cleaning"
+      ],
+      "placeCategory": "laundry-clean",
+      "keywords": [
+        "청소",
+        "벌레",
+        "해충",
+        "욕실",
+        "물때"
+      ],
+      "productQuery": "청소",
+      "productIds": [
+        "P073",
+        "P127",
+        "P128",
+        "P165",
+        "P166"
+      ],
+      "note": "청소할 표면과 오염을 구분하고 제품의 사용·주의 표시를 확인하세요.",
+      "actions": [
+        {
+          "label": "청소용품 찾기",
+          "href": "/?q=청소#catalog"
+        }
+      ]
+    },
+    {
+      "id": "waste",
+      "label": "음식물·분리배출",
+      "icon": "Recycle",
+      "categoryIds": [
+        "waste"
+      ],
+      "placeCategory": null,
+      "keywords": [
+        "음식물",
+        "쓰레기",
+        "분리배출",
+        "버리기",
+        "폐기물"
+      ],
+      "productQuery": "음식물",
+      "productIds": [
+        "P134"
+      ],
+      "note": "배출 종류와 거주 구의 공식 배출 기준을 먼저 확인하세요.",
+      "actions": [
+        {
+          "label": "음식물 보관·배출 용품",
+          "href": "/?q=음식물#catalog"
+        }
+      ]
+    },
+    {
+      "id": "meals",
+      "label": "장보기·식사",
+      "icon": "ShoppingBasket",
+      "categoryIds": [
+        "shopping",
+        "meals"
+      ],
+      "placeCategory": "groceries",
+      "keywords": [
+        "혼밥",
+        "식사",
+        "장보기",
+        "간편식",
+        "도시락"
+      ],
+      "productQuery": "즉석밥",
+      "productIds": [
+        "P001",
+        "P066",
+        "P067"
+      ],
+      "note": "먹을 양과 보관 공간, 조리·수령 시간을 함께 비교하세요.",
+      "actions": [
+        {
+          "label": "먹거리 찾기",
+          "href": "/?category=먹거리#catalog"
+        },
+        {
+          "label": "즉석밥 비교",
+          "href": "/compare?item=P001"
+        }
+      ]
+    }
+  ]
+}

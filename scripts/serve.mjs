@@ -23,8 +23,36 @@ function resolvePath(url) {
   return candidate.startsWith(root) ? candidate : join(root, "index.html");
 }
 
-const server = createServer((req, res) => {
-  const file = resolvePath(req.url || "/");
+const server = createServer(async (req, res) => {
+  let url, file;
+  try {
+    url = new URL(req.url || "/", "http://localhost");
+    file = resolvePath(req.url || "/");
+  } catch {
+    res.writeHead(400); res.end("Invalid URL"); return;
+  }
+  if (url.pathname === "/api/life/places") {
+    res.setHeader("content-type", "application/json; charset=utf-8");
+    res.setHeader("cache-control", "no-store");
+    if (req.method !== "GET") {
+      res.writeHead(405, { allow: "GET" }); res.end(JSON.stringify({ error: "GET required" })); return;
+    }
+    try {
+      const allowed = new Set(["district", "dong", "dongType", "category", "q", "page", "pageSize"]);
+      const params = {};
+      for (const [key, value] of url.searchParams) {
+        if (!allowed.has(key) || key in params) throw Object.assign(Error("Invalid parameters"), { status: 400 });
+        params[key] = value;
+      }
+      const { searchLifePlaces } = await import("./life-place-index.mjs");
+      res.end(JSON.stringify(searchLifePlaces(params)));
+    } catch (error) {
+      const status = error.status === 400 ? 400 : 503;
+      res.writeHead(status);
+      res.end(JSON.stringify({ error: status === 400 ? "Invalid search parameters" : "Place data unavailable" }));
+    }
+    return;
+  }
   const relativeFile = relative(root, file).split(sep).join("/").toLowerCase();
   if (relativeFile.startsWith("data/exports/") || !existsSync(file) || !statSync(file).isFile()) {
     res.writeHead(404, { "content-type": "text/plain; charset=utf-8" });

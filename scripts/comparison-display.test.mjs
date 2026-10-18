@@ -14,14 +14,48 @@ const show = (key, text, scope) => D.present(product("A", { [key]: value(text) }
 const cookingProduct = (attributes = {}, name = '냄비', url = 'https://example.com/exact-pot') => ({id:'COOK',name,url,modelKey:'pot-model',eligibilityStatus:'verified',attributes});
 const sourced = text => ({value:text,status:'verified',sourceUrl:'https://example.com/spec',checkedAt:'2026-10-12T00:00:00Z'});
 
-test('Coupang uses exact verified source product URLs or honestly labeled name searches', () => {
+test('Coupang preserves exact SKU and option URLs without requiring search context', () => {
   const exact='https://www.coupang.com/vp/products/123?itemId=45&vendorItemId=67';
   assert.deepEqual(D.coupangLink({name:'제품',url:exact}),{url:exact,label:'쿠팡에서 보기',kind:'product'});
-  const result=D.coupangLink({name:'냄비 3L & 20cm',url:'https://ikea.com/example'});
-  assert.equal(result.kind,'search');assert.equal(result.label,'쿠팡에서 찾기');
-  assert.equal(new URL(result.url).searchParams.get('q'),'냄비 3L & 20cm');
-  assert.equal(D.coupangLink({name:'제품',url:'https://www.coupang.com.evil.test/vp/products/123'}).kind,'search');
-  assert.equal(D.coupangLink({name:''}),null);
+  assert.deepEqual(D.coupangLink({url:exact}),{url:exact,label:'쿠팡에서 보기',kind:'product'});
+  for (const host of ['www.coupang.com','m.coupang.com','coupang.com']) {
+    const url=`https://${host}/vp/products/123?itemId=45&vendorItemId=67`;
+    assert.equal(D.coupangLink({url},{title:'수건'}).url,url);
+  }
+});
+
+test('VÅGSJÖN uses category or purpose search, never the IKEA full product name', () => {
+  const towel={name:'VÅGSJÖN 복셴 세면타올 - 핑크 40x70 cm',url:'https://www.ikea.com/kr/ko/p/vagsjoen-hand-towel-pink-50609203/'};
+  const item={id:'P080',title:'수건',kind:'product'};
+  const before=JSON.stringify({towel,item});
+  for (const [group,query] of [[undefined,'수건'],[{label:'세면 수건'},'세면 수건'],[{label:'  '},'수건']]) {
+    const result=D.coupangLink(towel,item,group);
+    assert.equal(result.kind,'search');
+    assert.equal(result.label,'쿠팡 유사상품 검색');
+    const url=new URL(result.url);
+    assert.equal(url.hostname,'www.coupang.com');
+    assert.equal(url.pathname,'/np/search');
+    assert.equal(url.searchParams.get('q'),query);
+    assert.notEqual(url.searchParams.get('q'),towel.name);
+    assert.ok(!url.searchParams.get('q').includes('VÅGSJÖN'));
+  }
+  assert.equal(JSON.stringify({towel,item}),before);
+  const spoof={name:'제품',url:'https://www.coupang.com.evil.test/vp/products/123'};
+  assert.equal(D.coupangLink(spoof,item).kind,'search');
+  assert.equal(new URL(D.coupangLink(spoof,item).url).searchParams.get('q'),'수건');
+});
+
+test('Coupang never guesses searches without a named product and valid item context; guidance never buys', () => {
+  const named={name:'냄비 3L & 20cm',url:'https://www.ikea.com/example'};
+  for (const item of [undefined,null,{}, {title:''},{title:'   '},{title:123}]) {
+    assert.equal(D.coupangLink(named,item),null);
+    assert.equal(D.coupangLink(named,item,{label:'냄비'}),null);
+  }
+  for (const name of [undefined,null,'','   ',123]) assert.equal(D.coupangLink({name},{title:'냄비'}),null);
+  for (const product of [named,{name:'의약품',url:'https://www.coupang.com/vp/products/123?itemId=45'}]) {
+    assert.equal(D.coupangLink(product,{title:'의약품',kind:'guidance'}),null);
+    assert.equal(D.coupangLink({...product,kind:'guidance'},{title:'의약품'}),null);
+  }
 });
 test('Cookware heat sources are independent explicit statements, not absent=false', () => {
   const p=cookingProduct({compatibility:sourced('가스레인지에 사용하기 적합합니다.; 인덕션레인지에 사용하기 적합합니다.; 오븐 사용 가능.'),care:sourced('식기세척기 사용 가능.')});
@@ -560,6 +594,15 @@ test('unsafe source URLs never create verified details, selectors or matches', (
     assert.equal(D.cookingDetails({ ...b, name: '밥솥 6인용' }).servings.state, 'unknown');
     assert.equal(D.coupangLink({ url }), null);
   }
+});
+
+test('source field identifiers have Korean display names without changing their keys', () => {
+  const i = itemFor('P001');
+  const g = { attributeDefinitions: [field('foodType'), field('grain')] };
+  const p = { attributes: { foodType: sourced('곡류가공품'), grain: sourced('귀리') } };
+  const rows = D.details(i, g, p, { limit: 100 });
+  assert.equal(rows.find(r => r.key === 'foodType').label, '식품 유형');
+  assert.equal(rows.find(r => r.key === 'grain').label, '곡물 종류');
 });
 
 test('approved P051 purchase checks retain all four unknowns at limit six and essentials follow the same priority', () => {

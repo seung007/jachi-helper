@@ -1,0 +1,5254 @@
+{
+  "schemaVersion": 2,
+  "checkedOn": "2026-10-17",
+  "scope": "공식 기능 안내와 연결 정보. 실제 예약·설치·주소별 지원·실시간 가격 검증이 아님.",
+  "categories": [
+    {
+      "id": "shopping",
+      "label": "생활용품·장보기",
+      "subtopics": [
+        {
+          "id": "shopping:dad60fd8d99e",
+          "label": "다이소·생활용품점"
+        },
+        {
+          "id": "shopping:0a9c81e9a5e1",
+          "label": "대형마트"
+        },
+        {
+          "id": "shopping:cc8a26781ea2",
+          "label": "슈퍼마켓"
+        },
+        {
+          "id": "shopping:590f2a3e6ebd",
+          "label": "편의점"
+        },
+        {
+          "id": "shopping:771235d2e2cb",
+          "label": "식재료점"
+        },
+        {
+          "id": "shopping:0592f0ca31fb",
+          "label": "온라인 장보기"
+        },
+        {
+          "id": "shopping:8490d437357b",
+          "label": "매장 픽업"
+        }
+      ]
+    },
+    {
+      "id": "meals",
+      "label": "식사·카페",
+      "subtopics": [
+        {
+          "id": "meals:c00b6b2ea80b",
+          "label": "혼밥 식당"
+        },
+        {
+          "id": "meals:1ee00bbaa9ef",
+          "label": "음식 배달"
+        },
+        {
+          "id": "meals:133eb5bb8260",
+          "label": "포장 주문"
+        },
+        {
+          "id": "meals:717393eaedb5",
+          "label": "식당 예약"
+        },
+        {
+          "id": "meals:3c615f0664ab",
+          "label": "대기 접수"
+        },
+        {
+          "id": "meals:53cc9fb21b36",
+          "label": "카페"
+        },
+        {
+          "id": "meals:94f34c319781",
+          "label": "마감 음식"
+        }
+      ]
+    },
+    {
+      "id": "laundry",
+      "label": "세탁·수선",
+      "subtopics": [
+        {
+          "id": "laundry:26796c63fc3e",
+          "label": "일반 세탁소"
+        },
+        {
+          "id": "laundry:d9daee1c9e80",
+          "label": "셀프 빨래방"
+        },
+        {
+          "id": "laundry:2f54356ddbc1",
+          "label": "수거 세탁"
+        },
+        {
+          "id": "laundry:93ee70609e36",
+          "label": "이불 세탁"
+        },
+        {
+          "id": "laundry:2cdabbe76862",
+          "label": "운동화 세탁"
+        },
+        {
+          "id": "laundry:eee466a16b63",
+          "label": "옷 수선"
+        }
+      ]
+    },
+    {
+      "id": "cleaning",
+      "label": "청소·정리",
+      "subtopics": [
+        {
+          "id": "cleaning:62433145c9ac",
+          "label": "가사 청소"
+        },
+        {
+          "id": "cleaning:3ba11fbd87b5",
+          "label": "입주 청소"
+        },
+        {
+          "id": "cleaning:52dfb01923ed",
+          "label": "에어컨 청소"
+        },
+        {
+          "id": "cleaning:997a6f117f98",
+          "label": "세탁기 청소"
+        },
+        {
+          "id": "cleaning:27c4e4d63e23",
+          "label": "방제"
+        },
+        {
+          "id": "cleaning:3a3d60fa8d23",
+          "label": "정리수납"
+        }
+      ]
+    },
+    {
+      "id": "repairs",
+      "label": "집수리·설치",
+      "subtopics": [
+        {
+          "id": "repairs:8cd58eab1de8",
+          "label": "전기"
+        },
+        {
+          "id": "repairs:987c1934d281",
+          "label": "수도·누수"
+        },
+        {
+          "id": "repairs:35523fe32eed",
+          "label": "도어락"
+        },
+        {
+          "id": "repairs:d08e0af88d49",
+          "label": "방충망"
+        },
+        {
+          "id": "repairs:4f70fe7700b8",
+          "label": "가전 AS"
+        },
+        {
+          "id": "repairs:06476c01789f",
+          "label": "가구 조립"
+        }
+      ]
+    },
+    {
+      "id": "waste",
+      "label": "버리기·재활용",
+      "subtopics": [
+        {
+          "id": "waste:b8532f057124",
+          "label": "종량제 배출"
+        },
+        {
+          "id": "waste:07e830712231",
+          "label": "음식물 배출"
+        },
+        {
+          "id": "waste:5c80c00a717e",
+          "label": "분리배출"
+        },
+        {
+          "id": "waste:e97b98e3a2a2",
+          "label": "대형폐기물"
+        },
+        {
+          "id": "waste:2efe109a2670",
+          "label": "폐가전 수거"
+        },
+        {
+          "id": "waste:e26bd7b1fc7c",
+          "label": "헌옷 수거"
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "label": "보관·대여",
+      "subtopics": [
+        {
+          "id": "storage:cd48204e3748",
+          "label": "셀프 창고"
+        },
+        {
+          "id": "storage:401822314f43",
+          "label": "방문 보관"
+        },
+        {
+          "id": "storage:2d09e638082c",
+          "label": "계절 짐"
+        },
+        {
+          "id": "storage:16d54b7ba928",
+          "label": "단기 짐 보관"
+        },
+        {
+          "id": "storage:2ae225525056",
+          "label": "생활물품 대여"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "label": "택배·배송",
+      "subtopics": [
+        {
+          "id": "parcel:0cf1ae8f05a0",
+          "label": "편의점 택배"
+        },
+        {
+          "id": "parcel:849e8b72fa03",
+          "label": "우체국"
+        },
+        {
+          "id": "parcel:b9b021578b51",
+          "label": "퀵"
+        },
+        {
+          "id": "parcel:a5a118328918",
+          "label": "택배 보관"
+        },
+        {
+          "id": "parcel:005fc5d551c8",
+          "label": "반품 접수"
+        }
+      ]
+    },
+    {
+      "id": "used",
+      "label": "중고·나눔",
+      "subtopics": [
+        {
+          "id": "used:c00ca8b27444",
+          "label": "중고 거래"
+        },
+        {
+          "id": "used:0ff4a0091788",
+          "label": "무료 나눔"
+        },
+        {
+          "id": "used:001e0c3963f6",
+          "label": "중고 가전"
+        },
+        {
+          "id": "used:2657ec409533",
+          "label": "책 매입"
+        },
+        {
+          "id": "used:3fe90849dc45",
+          "label": "기부"
+        }
+      ]
+    },
+    {
+      "id": "mobility",
+      "label": "교통·차량",
+      "subtopics": [
+        {
+          "id": "mobility:8de097f8491c",
+          "label": "버스·지하철"
+        },
+        {
+          "id": "mobility:aecebdf56e44",
+          "label": "공공자전거"
+        },
+        {
+          "id": "mobility:94be61a73763",
+          "label": "택시"
+        },
+        {
+          "id": "mobility:05b77b915296",
+          "label": "공유차"
+        },
+        {
+          "id": "mobility:402473b26294",
+          "label": "주차"
+        },
+        {
+          "id": "mobility:c515d114eba1",
+          "label": "주유"
+        },
+        {
+          "id": "mobility:69a45f5f154b",
+          "label": "전기차 충전"
+        }
+      ]
+    },
+    {
+      "id": "housing",
+      "label": "주거·이사",
+      "subtopics": [
+        {
+          "id": "housing:0c5acfd6010b",
+          "label": "중개사무소"
+        },
+        {
+          "id": "housing:e84da9db91e2",
+          "label": "매물 찾기"
+        },
+        {
+          "id": "housing:06774a1cee9a",
+          "label": "공공임대"
+        },
+        {
+          "id": "housing:6b06e53d6949",
+          "label": "안심계약 도움"
+        },
+        {
+          "id": "housing:6d24fa9c274e",
+          "label": "이사·운반"
+        },
+        {
+          "id": "housing:5b3e71fdf75d",
+          "label": "이전 설치"
+        },
+        {
+          "id": "housing:c1e6427bafbe",
+          "label": "단기 거주"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "label": "병원·약국",
+      "subtopics": [
+        {
+          "id": "health:1bd3847e37f6",
+          "label": "병원·의원"
+        },
+        {
+          "id": "health:15f1e20a3b64",
+          "label": "약국"
+        },
+        {
+          "id": "health:e15f9c95be7a",
+          "label": "야간·휴일 진료"
+        },
+        {
+          "id": "health:6bd17a0fdbf7",
+          "label": "보건소"
+        },
+        {
+          "id": "health:319279d05427",
+          "label": "건강검진"
+        }
+      ]
+    },
+    {
+      "id": "exercise",
+      "label": "운동·체육",
+      "subtopics": [
+        {
+          "id": "exercise:ee4a9fe991e3",
+          "label": "헬스장"
+        },
+        {
+          "id": "exercise:b458b878d51b",
+          "label": "수영장"
+        },
+        {
+          "id": "exercise:927706959637",
+          "label": "공공 체육시설"
+        },
+        {
+          "id": "exercise:8842b67c7941",
+          "label": "운동 레슨"
+        },
+        {
+          "id": "exercise:696ea44bd602",
+          "label": "체육 대관"
+        }
+      ]
+    },
+    {
+      "id": "learning-space",
+      "label": "공간·배움",
+      "subtopics": [
+        {
+          "id": "learning-space:9ee22c8536d3",
+          "label": "도서관"
+        },
+        {
+          "id": "learning-space:f834643a916f",
+          "label": "스터디카페"
+        },
+        {
+          "id": "learning-space:0e5a8d60b14f",
+          "label": "공유오피스"
+        },
+        {
+          "id": "learning-space:12273a6a0f5b",
+          "label": "모임 공간"
+        },
+        {
+          "id": "learning-space:925b1718b5c9",
+          "label": "평생학습"
+        },
+        {
+          "id": "learning-space:2b7729be2d22",
+          "label": "원데이 클래스"
+        }
+      ]
+    },
+    {
+      "id": "leisure",
+      "label": "문화·여가",
+      "subtopics": [
+        {
+          "id": "leisure:1af88d86437a",
+          "label": "공원"
+        },
+        {
+          "id": "leisure:e9c0cbcfd144",
+          "label": "전시"
+        },
+        {
+          "id": "leisure:1c3a0a24ef01",
+          "label": "공연"
+        },
+        {
+          "id": "leisure:9cd4d79d5c6e",
+          "label": "공공 문화행사"
+        },
+        {
+          "id": "leisure:97d0a885a6b1",
+          "label": "동네 모임"
+        }
+      ]
+    },
+    {
+      "id": "pets",
+      "label": "반려생활",
+      "subtopics": [
+        {
+          "id": "pets:dec01dc9e1a4",
+          "label": "동물병원"
+        },
+        {
+          "id": "pets:8ea2f987ec3d",
+          "label": "반려용품"
+        },
+        {
+          "id": "pets:f28442d2111f",
+          "label": "돌봄"
+        },
+        {
+          "id": "pets:dd7d094046ca",
+          "label": "미용"
+        },
+        {
+          "id": "pets:5866dce0d071",
+          "label": "동물등록"
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "label": "지원·돌봄",
+      "subtopics": [
+        {
+          "id": "support:b4732aa80413",
+          "label": "1인가구 지원"
+        },
+        {
+          "id": "support:dab62e66ed80",
+          "label": "청년 지원"
+        },
+        {
+          "id": "support:219c920df2bb",
+          "label": "주거 지원"
+        },
+        {
+          "id": "support:b5f09931e50d",
+          "label": "일자리"
+        },
+        {
+          "id": "support:f28442d2111f",
+          "label": "돌봄"
+        },
+        {
+          "id": "support:d35dc68f3416",
+          "label": "생활 안전"
+        }
+      ]
+    },
+    {
+      "id": "bills",
+      "label": "공과금·생활행정",
+      "subtopics": [
+        {
+          "id": "bills:8cd58eab1de8",
+          "label": "전기"
+        },
+        {
+          "id": "bills:531b3f784d52",
+          "label": "도시가스"
+        },
+        {
+          "id": "bills:b42d1b5bced0",
+          "label": "수도"
+        },
+        {
+          "id": "bills:71b37827516f",
+          "label": "인터넷·통신"
+        },
+        {
+          "id": "bills:b080b9a48936",
+          "label": "지역상품권"
+        },
+        {
+          "id": "bills:4cb203ae4fe6",
+          "label": "소비자 상담"
+        },
+        {
+          "id": "bills:90540dc5832a",
+          "label": "생활 민원"
+        }
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "id": "laundry",
+      "label": "빨래·습기",
+      "icon": "WashingMachine",
+      "categoryIds": [
+        "laundry"
+      ],
+      "placeCategory": "laundry-clean",
+      "keywords": [
+        "빨래",
+        "세탁",
+        "이불",
+        "쉰내",
+        "건조"
+      ],
+      "productQuery": "세탁",
+      "productIds": [
+        "P102",
+        "P103",
+        "P104",
+        "P105",
+        "P110",
+        "P111",
+        "P113",
+        "P137",
+        "P138",
+        "P167",
+        "P170",
+        "P200"
+      ],
+      "note": "옷감·이불의 세탁 표시와 세탁기 용량을 먼저 확인하세요.",
+      "actions": [
+        {
+          "label": "세탁·건조 용품",
+          "href": "/?q=세탁#catalog"
+        },
+        {
+          "label": "이불 제품 비교",
+          "href": "/compare?item=P137"
+        }
+      ]
+    },
+    {
+      "id": "cleaning",
+      "label": "욕실·집 청소",
+      "icon": "Sparkles",
+      "categoryIds": [
+        "cleaning"
+      ],
+      "placeCategory": "laundry-clean",
+      "keywords": [
+        "청소",
+        "벌레",
+        "해충",
+        "욕실",
+        "물때"
+      ],
+      "productQuery": "청소",
+      "productIds": [
+        "P073",
+        "P127",
+        "P128",
+        "P165",
+        "P166"
+      ],
+      "note": "청소할 표면과 오염을 구분하고 제품의 사용·주의 표시를 확인하세요.",
+      "actions": [
+        {
+          "label": "청소용품 찾기",
+          "href": "/?q=청소#catalog"
+        }
+      ]
+    },
+    {
+      "id": "waste",
+      "label": "음식물·분리배출",
+      "icon": "Recycle",
+      "categoryIds": [
+        "waste"
+      ],
+      "placeCategory": null,
+      "keywords": [
+        "음식물",
+        "쓰레기",
+        "분리배출",
+        "버리기",
+        "폐기물"
+      ],
+      "productQuery": "음식물",
+      "productIds": [
+        "P134"
+      ],
+      "note": "배출 종류와 거주 구의 공식 배출 기준을 먼저 확인하세요.",
+      "actions": [
+        {
+          "label": "음식물 보관·배출 용품",
+          "href": "/?q=음식물#catalog"
+        }
+      ]
+    },
+    {
+      "id": "meals",
+      "label": "장보기·식사",
+      "icon": "ShoppingBasket",
+      "categoryIds": [
+        "shopping",
+        "meals"
+      ],
+      "placeCategory": "groceries",
+      "keywords": [
+        "혼밥",
+        "식사",
+        "장보기",
+        "간편식",
+        "도시락"
+      ],
+      "productQuery": "즉석밥",
+      "productIds": [
+        "P001",
+        "P066",
+        "P067"
+      ],
+      "note": "먹을 양과 보관 공간, 조리·수령 시간을 함께 비교하세요.",
+      "actions": [
+        {
+          "label": "먹거리 찾기",
+          "href": "/?category=먹거리#catalog"
+        },
+        {
+          "label": "즉석밥 비교",
+          "href": "/compare?item=P001"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "official-dasan",
+      "name": "120다산콜재단",
+      "type": "official",
+      "categoryIds": [
+        "bills",
+        "support"
+      ],
+      "subtopicIds": [
+        "bills:90540dc5832a"
+      ],
+      "description": "서울 생활·행정 문의의 상담서비스 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시 120다산콜재단",
+      "web": {
+        "url": "https://www.120dasan.or.kr/dsnc/main/main.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시·자치구 행정과 생활 상담.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.120dasan.or.kr/dsnc/main/main.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "gasapp",
+      "name": "가스앱",
+      "type": "service",
+      "categoryIds": [
+        "bills"
+      ],
+      "subtopicIds": [
+        "bills:531b3f784d52"
+      ],
+      "description": "지원 도시가스사의 요금 조회·납부, 자가검침과 방문 예약을 연결합니다.",
+      "whenToUse": "가스요금 확인, 검침 또는 이사 시 가스 연결이 필요할 때",
+      "keywords": [
+        "가스요금",
+        "자가검침",
+        "가스 방문",
+        "가스 연결"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "B1",
+        "M1"
+      ],
+      "operator": "SCG Lab (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.gasapp.co.kr/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?gl=KR&hl=en&id=com.biller.scg",
+      "iosUrl": "https://apps.apple.com/kr/app/id741949011",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "공급사·주소별로 지원이 다릅니다. 서울에 산다는 이유만으로 이용 가능하다고 판단하지 않습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.gasapp.co.kr/",
+        "https://apps.apple.com/kr/app/%EA%B0%80%EC%8A%A4%EC%95%B1-%EC%97%90%EB%84%88%EC%A7%80-%EC%A0%88%EC%95%BD%EC%9D%98-%EC%8B%9C%EC%9E%91/id741949011",
+        "https://apps.apple.com/kr/app/id741949011"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; account_and_supplier_eligibility_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-work24",
+      "name": "고용24",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:b5f09931e50d"
+      ],
+      "description": "지역별 채용, 취업지원, 실업급여, 국민내일배움카드와 직업훈련 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "고용노동부·한국고용정보원",
+      "web": {
+        "url": "https://www.work24.go.kr/cm/main.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 서비스; 채용·훈련 검색에서 서울 근무지·지역 선택 필요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.work24.go.kr/cm/main.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-disaster",
+      "name": "국민재난안전포털",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:d35dc68f3416"
+      ],
+      "description": "재난안전정보와 민방위 대피시설·쉼터 찾기.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "행정안전부",
+      "web": {
+        "url": "https://www.safekorea.go.kr/",
+        "label": "공식 안내",
+        "state": "official_search_index_only"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 서비스에서 서울·자치구를 선택해야 함.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.safekorea.go.kr/",
+        "https://old.safekorea.go.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_search_index_only"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "naver-map",
+      "name": "네이버지도",
+      "type": "service",
+      "categoryIds": [
+        "mobility",
+        "meals"
+      ],
+      "subtopicIds": [],
+      "description": "장소와 이동 경로를 찾고 지원 업체의 예약 정보를 확인하는 앱입니다.",
+      "whenToUse": "주변 장소를 찾거나 방문할 곳의 길찾기와 지원 예약 경로를 확인할 때",
+      "keywords": [
+        "근처 장소",
+        "길찾기",
+        "주변 식당",
+        "대중교통"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "T1",
+        "T2",
+        "F6"
+      ],
+      "operator": "NAVER Corp. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.nhn.android.nmap",
+      "iosUrl": "https://apps.apple.com/kr/app/id311867728",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "장소 일치 여부, 최신 영업정보, 예약 지원 여부"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.nhn.android.nmap",
+        "https://apps.apple.com/kr/app/%EB%84%A4%EC%9D%B4%EB%B2%84%EC%A7%80%EB%8F%84-%EC%9E%A5%EC%86%8C%EC%9D%98-%EB%B0%9C%EA%B2%AC%EA%B3%BC-%EC%98%88%EC%95%BD-%EB%82%B4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98/id311867728?at=311867728"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "dabang",
+      "name": "다방",
+      "type": "service",
+      "categoryIds": [
+        "housing"
+      ],
+      "subtopicIds": [
+        "housing:e84da9db91e2"
+      ],
+      "description": "주택·오피스텔·아파트 등의 매물을 지역과 조건으로 찾는 앱입니다.",
+      "whenToUse": "지역과 주택 조건을 좁혀 매물을 찾을 때",
+      "keywords": [
+        "방 찾기",
+        "원룸",
+        "오피스텔",
+        "매물"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "H1"
+      ],
+      "operator": "Station3, Inc. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=kr.co.station3.dabang",
+      "iosUrl": "https://apps.apple.com/kr/app/id814840066",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "광고·매물 갱신 시점, 실제 조건, 계약 상대"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=kr.co.station3.dabang",
+        "https://apps.apple.com/kr/app/%EB%8B%A4%EB%B0%A9-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-%EB%8C%80%ED%91%9C-%EB%B6%80%EB%8F%99%EC%82%B0-%EC%95%B1/id814840066"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "daiso-mall",
+      "name": "다이소몰",
+      "type": "service",
+      "categoryIds": [
+        "shopping"
+      ],
+      "subtopicIds": [
+        "shopping:dad60fd8d99e",
+        "shopping:8490d437357b"
+      ],
+      "description": "생활용품을 찾아 배송 또는 지원 매장 픽업으로 주문하는 앱입니다.",
+      "whenToUse": "생활용품을 찾고 배송이나 매장 픽업 지원을 확인할 때",
+      "keywords": [
+        "생활용품",
+        "다이소",
+        "매장 픽업",
+        "수납용품"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "P1",
+        "K1",
+        "K3",
+        "R4",
+        "C1"
+      ],
+      "operator": "ASUNGDAISO, Co.,Ltd. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.uxlayer.wipoint",
+      "iosUrl": "https://apps.apple.com/kr/app/id1070715498",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "픽업 지원 매장·상품, 수령 방법과 주문 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.uxlayer.wipoint",
+        "https://apps.apple.com/kr/app/%EB%8B%A4%EC%9D%B4%EC%86%8C%EB%AA%B0/id1070715498"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "danggeun",
+      "name": "당근",
+      "type": "service",
+      "categoryIds": [
+        "used"
+      ],
+      "subtopicIds": [
+        "used:c00ca8b27444"
+      ],
+      "description": "동네에서 중고 물건을 거래하거나 지역 정보를 찾는 서비스입니다.",
+      "whenToUse": "동네에서 중고 거래나 지역 정보를 찾아볼 때",
+      "keywords": [
+        "중고 거래",
+        "동네 정보",
+        "가구 거래",
+        "지역 정보"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T2",
+        "R3"
+      ],
+      "operator": "Danggeun Market Inc. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details/당근마켓?gl=KR&id=com.towneers.www",
+      "iosUrl": "https://apps.apple.com/kr/app/id1018769995",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "동네 인증·거래 금지 품목 정책 확인; 비공식 전국 검색 앱으로 대체하지 않음",
+        "국내 서비스 선택, 동네 인증, 거래·운반 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details/당근마켓?gl=KR&id=com.towneers.www",
+        "https://apps.apple.com/kr/app/%EB%8B%B9%EA%B7%BC/id1018769995?platform=vision"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_korean_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-legal-aid",
+      "name": "대한법률구조공단",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [],
+      "description": "법률상담 예약과 법률구조 서비스 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "대한법률구조공단",
+      "web": {
+        "url": "https://www.klac.or.kr/",
+        "label": "공식 안내",
+        "state": "official_search_index_and_http_title"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 법률구조 서비스; 서울 사무소 및 이용요건 확인 필요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.klac.or.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_search_index_and_http_title"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "pharm114",
+      "name": "대한약사회 약국 찾기",
+      "type": "service",
+      "categoryIds": [
+        "health"
+      ],
+      "subtopicIds": [
+        "health:15f1e20a3b64"
+      ],
+      "description": "지역과 약국명으로 약국 정보를 찾아보는 공식 웹 페이지입니다.",
+      "whenToUse": "가까운 약국 정보를 찾아볼 때",
+      "keywords": [
+        "약국 찾기",
+        "지역 약국",
+        "약국명",
+        "휴일지킴이약국"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "W1"
+      ],
+      "operator": "대한약사회 (기존 일반 약국 찾기 공식 페이지 주체)",
+      "web": {
+        "url": "https://www.kpanet.or.kr/pharmFindPage.cm?menuCd=1002070000",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "일반 약국 찾기와 별도 pharm114.or.kr 휴일지킴이약국의 현행 기능 검증을 구분",
+        "iOS·Android 공식 소비자 앱 링크는 미확인; 미제공으로 단정하지 않음",
+        "휴일 검색 큐를 이 일반 약국 찾기 레코드로 대체 완료하지 않음",
+        "방문 전 영업 여부를 전화로 확인하세요. pharm114 별도 사이트의 모바일 지원과 소비자용 공식 앱은 이번에 확인하지 못했습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.kpanet.or.kr/pharmFindPage.cm?menuCd=1002070000"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "ddangyo",
+      "name": "땡겨요",
+      "type": "service",
+      "categoryIds": [
+        "meals"
+      ],
+      "subtopicIds": [
+        "meals:1ee00bbaa9ef",
+        "meals:133eb5bb8260"
+      ],
+      "description": "주변 음식점의 음식 배달을 주문하는 고객용 앱입니다.",
+      "whenToUse": "식사를 주문하기 전에 주소별 매장과 결제 조건을 비교할 때",
+      "keywords": [
+        "음식 배달",
+        "혼밥",
+        "식사 주문",
+        "서울사랑상품권"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [],
+      "operator": "신한은행 (공식 양대 스토어 개발자 표기)",
+      "web": {
+        "url": "https://www.ddangyo.com/",
+        "label": "공식 서비스",
+        "state": "official_store_link_found_opened_no_readable_body"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.shinhan.o2o",
+      "iosUrl": "https://apps.apple.com/kr/app/id1598850912",
+      "regionCheck": "개별 배달 주소와 선택 매장에서 주문 가능한지 확인; 서울 전 주소 이용 미검증",
+      "costCheck": "메뉴 금액·배달비·최소 주문액과 상품권·쿠폰 적용 조건은 주문 화면에서 확인; 실제 결제 금액 미검증",
+      "conditions": [
+        "소비자용 앱이며 사장님용·배달원용 앱과 구분",
+        "스토어의 상품권 할인 광고를 모든 매장·주문의 혜택으로 일반화하지 않음",
+        "웹 주소는 공식 앱 설명에서 확인했지만 웹 주문 기능은 미확인",
+        "설치·로그인·주문은 실행하지 않음"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.shinhan.o2o",
+        "https://apps.apple.com/kr/app/%EB%95%A1%EA%B2%A8%EC%9A%94/id1598850912",
+        "https://www.ddangyo.com/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_store_link_found_opened_no_readable_body"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_store_feature_and_operator_read; web_body_unavailable; address_fees_transaction_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_consumer_store_feature_and_operator_read; web_body_unavailable; address_fees_transaction_not_verified"
+        }
+      ],
+      "usageMode": "consumer_app"
+    },
+    {
+      "id": "ddocdoc",
+      "name": "똑닥",
+      "type": "service",
+      "categoryIds": [
+        "health"
+      ],
+      "subtopicIds": [
+        "health:1bd3847e37f6"
+      ],
+      "description": "병원을 찾고, 지원하는 병원에서 진료 접수·예약과 대기순서를 확인하는 서비스입니다.",
+      "whenToUse": "병원에 가기 전 접수 방법과 순서를 확인할 때",
+      "keywords": [
+        "병원 접수",
+        "병원 예약",
+        "진료 대기"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "W1"
+      ],
+      "operator": "비브로스 (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.ddocdoc.com/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.bbros.sayup",
+      "iosUrl": "https://apps.apple.com/kr/app/id1014889755",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "병원마다 접수·예약 지원이 다릅니다. 유료 이용 조건과 접수 마감은 앱에서 확인하세요. 응급 대응을 대신하지 않습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.ddocdoc.com/",
+        "https://play.google.com/store/apps/details?hl=ko&id=com.bbros.sayup",
+        "https://apps.apple.com/kr/app/%EB%98%91%EB%8B%A5-%EB%B3%91%EC%9B%90-%EC%98%88%EC%95%BD-%EC%A0%91%EC%88%98-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%8C%80%EA%B8%B0%EC%88%9C%EC%84%9C/id1014889755",
+        "https://apps.apple.com/kr/app/id1014889755"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; booking_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "lastorder",
+      "name": "라스트오더",
+      "type": "service",
+      "categoryIds": [
+        "meals",
+        "shopping"
+      ],
+      "subtopicIds": [
+        "meals:94f34c319781"
+      ],
+      "description": "주변 매장의 마감할인 상품을 주문하고 정해진 시간에 방문하는 방식을 안내하는 앱입니다.",
+      "whenToUse": "식비를 줄이면서 방문 가능한 시간과 상품 수령 조건을 함께 비교할 때",
+      "keywords": [
+        "마감 할인",
+        "편의점 할인",
+        "식비 절약",
+        "방문 수령"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F3",
+        "B3"
+      ],
+      "operator": "MYRO Co., Ltd. (App Store developer label)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.myro.lastorder",
+      "iosUrl": "https://apps.apple.com/kr/app/%EB%9D%BC%EC%8A%A4%ED%8A%B8%EC%98%A4%EB%8D%94-%ED%8E%B8%EC%9D%98%EC%A0%90-%EC%9D%8C%EC%8B%9D%EC%A0%90-%EB%A7%88%EA%B0%90%ED%95%A0%EC%9D%B8/id1439949453",
+      "regionCheck": "현재 참여 매장·재고·수령 시간은 앱 또는 운영자 확인 필요",
+      "costCheck": "실제 판매 금액·수령 방식·취소 조건 확인; 광고 할인율로 최저가를 판단하지 않음",
+      "conditions": [
+        "공식 스토어 설명은 확인했지만 현재 주문 가능 여부는 미확인",
+        "Android 업데이트 2024-10-14/iOS 버전 기록 2023-02-02로 최신 운영 확인을 우선"
+      ],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.myro.lastorder",
+        "https://apps.apple.com/kr/app/%EB%9D%BC%EC%8A%A4%ED%8A%B8%EC%98%A4%EB%8D%94-%ED%8E%B8%EC%9D%98%EC%A0%90-%EC%9D%8C%EC%8B%9D%EC%A0%90-%EB%A7%88%EA%B0%90%ED%95%A0%EC%9D%B8/id1439949453"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "ios",
+          "state": "official_source_body_read"
+        },
+        {
+          "platform": "android",
+          "state": "official_source_body_read"
+        }
+      ],
+      "usageMode": "consumer_app_and_store_visit"
+    },
+    {
+      "id": "laundrygo",
+      "name": "런드리고",
+      "type": "service",
+      "categoryIds": [
+        "laundry"
+      ],
+      "subtopicIds": [
+        "laundry:2f54356ddbc1",
+        "laundry:eee466a16b63"
+      ],
+      "description": "세탁물을 문 앞에서 수거해 세탁·수선 후 배송하는 서비스입니다.",
+      "whenToUse": "집에서 세탁하기 어려운 품목의 수거와 배송 조건을 확인할 때",
+      "keywords": [
+        "수거 세탁",
+        "이불 세탁",
+        "세탁 배송",
+        "옷 수선"
+      ],
+      "problemIds": [
+        "laundry"
+      ],
+      "topicIds": [
+        "L2",
+        "L3",
+        "R2"
+      ],
+      "operator": "Lifegoeson Company Corp. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.laundrygo.com/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1453485913",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "수거 주소, 품목별 접수 범위, 요금과 배송일"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.laundrygo.com/",
+        "https://apps.apple.com/kr/app/%EB%9F%B0%EB%93%9C%EB%A6%AC%EA%B3%A0/id1453485913"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "recl",
+      "name": "리클",
+      "type": "service",
+      "categoryIds": [
+        "waste",
+        "used"
+      ],
+      "subtopicIds": [
+        "waste:e26bd7b1fc7c"
+      ],
+      "description": "의류·가방·신발의 수거와 검수 후 매입을 안내하는 서비스입니다.",
+      "whenToUse": "안 입는 옷을 정리하면서 매입 대상과 수거 기준을 확인할 때",
+      "keywords": [
+        "헌옷",
+        "옷 정리",
+        "의류 수거",
+        "헌옷 매입",
+        "가방",
+        "신발"
+      ],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [
+        "C4",
+        "P2",
+        "T2"
+      ],
+      "operator": null,
+      "web": {
+        "url": "https://www.recl.co.kr/guide/view",
+        "label": "공식 서비스",
+        "state": "official_guide_body_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "방문 수거와 택배 수거의 안내 지역을 구분하고 신청 화면에서 주소 확인",
+      "costCheck": "매입 기준과 제외 품목·최소 수량은 공식 가이드와 신청 화면에서 재확인",
+      "conditions": [
+        "가이드에 의류·가방·신발 수량 기준과 제외 품목이 제시됨",
+        "일부 경계 수량 설명은 앞뒤 문구가 일치하지 않아 정확한 접수 가능 여부를 앱에서 확인",
+        "이불 세탁이나 일반 생활쓰레기 수거와 다른 기능"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 안내의 일부 조건을 재확인해야 합니다.",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.recl.co.kr/guide/view"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_guide_body_read"
+        }
+      ],
+      "usageMode": "app_request_and_collection"
+    },
+    {
+      "id": "modu",
+      "name": "모두의주차장",
+      "type": "service",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [
+        "mobility:402473b26294"
+      ],
+      "description": "목적지 주변 주차장을 찾고 주차권을 확인하는 앱입니다.",
+      "whenToUse": "목적지 주변 주차장과 이용권 조건을 확인할 때",
+      "keywords": [
+        "주차장",
+        "주차권",
+        "목적지 주차",
+        "주차 요금"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T1"
+      ],
+      "operator": "Modu Company, Inc. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.parkingshare.mobile",
+      "iosUrl": "https://apps.apple.com/kr/app/id780174422",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "주차장 파트너 전용 앱 id1443454245로 대체하지 않음",
+        "차종·시간, 주차권 조건, 현장 만차 가능성"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.parkingshare.mobile",
+        "https://apps.apple.com/kr/app/%EB%AA%A8%EB%91%90%EC%9D%98%EC%A3%BC%EC%B0%A8%EC%9E%A5-%EC%A3%BC%EC%B0%A8%ED%95%A0%EC%9D%B8-%EC%84%B8%EC%B0%A8%ED%95%A0%EC%9D%B8-%EA%B3%B5%EC%9C%A0%EC%A3%BC%EC%B0%A8%EC%9E%A5/id780174422"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "dalock",
+      "name": "미니창고 다락",
+      "type": "service",
+      "categoryIds": [
+        "storage"
+      ],
+      "subtopicIds": [
+        "storage:cd48204e3748",
+        "storage:2d09e638082c",
+        "storage:16d54b7ba928"
+      ],
+      "description": "집에 두기 어려운 짐을 보관할 공간을 찾는 서비스입니다.",
+      "whenToUse": "계절 짐을 집 밖에 보관할 때 공간과 이용 조건을 확인하고 싶을 때",
+      "keywords": [
+        "보관 공간",
+        "계절 짐",
+        "짐 보관",
+        "창고"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "R4",
+        "L3"
+      ],
+      "operator": "세컨신드롬 (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.secondsyndrome.dalock",
+      "iosUrl": "https://apps.apple.com/kr/app/id1633014747",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "지점, 공간 크기, 기간, 출입 조건, 운반 비용"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?id=com.secondsyndrome.dalock",
+        "https://apps.apple.com/kr/app/%EB%AF%B8%EB%8B%88%EC%B0%BD%EA%B3%A0-%EB%8B%A4%EB%9D%BD/id1633014747"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-hangang",
+      "name": "미래한강본부 한강공원",
+      "type": "official",
+      "categoryIds": [
+        "leisure"
+      ],
+      "subtopicIds": [
+        "leisure:1af88d86437a"
+      ],
+      "description": "한강공원 시설·주차·행사·이용정보 및 통제구간 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시 미래한강본부",
+      "web": {
+        "url": "https://hangang.seoul.go.kr/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 한강공원; 서울의 모든 도시공원은 아님.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://hangang.seoul.go.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "miso",
+      "name": "미소",
+      "type": "service",
+      "categoryIds": [
+        "cleaning",
+        "repairs",
+        "housing"
+      ],
+      "subtopicIds": [
+        "cleaning:62433145c9ac",
+        "cleaning:3ba11fbd87b5"
+      ],
+      "description": "청소·이사·설치·수리 등의 서비스를 요청하는 플랫폼입니다.",
+      "whenToUse": "직접 하기 어려운 청소나 설치·수리 작업을 맡길 곳을 찾을 때",
+      "keywords": [
+        "가사 청소",
+        "집 청소",
+        "설치 문의",
+        "수리 견적"
+      ],
+      "problemIds": [
+        "cleaning"
+      ],
+      "topicIds": [
+        "C5",
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "operator": "Miso (App Store 개발자 표기; 법인명 별도 미확인)",
+      "web": {
+        "url": "https://miso.kr/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1071778654",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "요청 항목, 작업 범위, 추가 비용, 일정"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://miso.kr/",
+        "https://apps.apple.com/kr/app/%EB%AF%B8%EC%86%8C-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-1%EB%93%B1-%ED%99%88%EC%84%9C%EB%B9%84%EC%8A%A4/id1071778654"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; legal_operator_and_installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "baemin",
+      "name": "배달의민족",
+      "type": "service",
+      "categoryIds": [
+        "meals",
+        "shopping"
+      ],
+      "subtopicIds": [
+        "shopping:0592f0ca31fb",
+        "meals:1ee00bbaa9ef",
+        "meals:133eb5bb8260"
+      ],
+      "description": "음식 배달·픽업과 식료품 장보기를 제공하는 고객용 앱입니다.",
+      "whenToUse": "직접 조리할 여건이 없거나 장보기와 식사 주문을 비교할 때",
+      "keywords": [
+        "배민",
+        "혼밥",
+        "배달",
+        "포장",
+        "픽업",
+        "장보기"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "operator": "WoowaBrothers (Google Play developer label)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.sampleapp",
+      "iosUrl": null,
+      "regionCheck": "배달 주소와 매장을 선택해 제공 여부 확인",
+      "costCheck": "주문 화면에서 상품 금액·배달비·최소 주문·멤버십 적용 조건 확인",
+      "conditions": [
+        "픽업과 배달의 지원 매장·혜택은 구분해서 확인",
+        "광고의 무료·할인 문구를 모든 주문 조건으로 적용하지 않음"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.sampleapp"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "official_source_body_read"
+        }
+      ],
+      "usageMode": "consumer_app"
+    },
+    {
+      "id": "official-hira-open",
+      "name": "보건의료빅데이터개방시스템",
+      "type": "official",
+      "categoryIds": [
+        "health"
+      ],
+      "subtopicIds": [],
+      "description": "병의원·약국 공개현황 자료와 의료통계, 지역코드 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "건강보험심사평가원",
+      "web": {
+        "url": "https://opendata.hira.or.kr/op/opc/selectOpenData.do?sno=11925",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 자료에서 시도·시군구·주소로 서울만 추출해야 함.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://opendata.hira.or.kr/op/opc/selectOpenData.do?sno=11925",
+        "https://www.data.go.kr/data/15051059/fileData.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "bbegi",
+      "name": "빼기",
+      "type": "service",
+      "categoryIds": [
+        "waste"
+      ],
+      "subtopicIds": [
+        "waste:e97b98e3a2a2"
+      ],
+      "description": "대형폐기물 배출을 신청하거나 무거운 물건을 내려놓는 도움을 찾는 서비스입니다.",
+      "whenToUse": "대형폐기물 배출 절차나 운반 도움을 확인할 때",
+      "keywords": [
+        "대형폐기물",
+        "가구 버리기",
+        "내려드림",
+        "폐기물 배출"
+      ],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [
+        "C4",
+        "M1"
+      ],
+      "operator": "주식회사 같다 (App Store 개발자 표기)",
+      "web": {
+        "url": "https://child.gangbuk.go.kr/portal/main/contents.do?menuNo=200923",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1439557158",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "동명 가계부·게임 앱과 구분; 배출 수수료·내려드림 운반비·제휴 지역은 별도 조건",
+        "자치구 제휴 여부, 배출 수수료와 운반비 구분, 지정 배출 장소"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://child.gangbuk.go.kr/portal/main/contents.do?menuNo=200923",
+        "https://apps.apple.com/kr/app/id1439557158"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-finance",
+      "name": "서민금융진흥원",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [],
+      "description": "서민금융통합지원센터, 금융·채무·일자리 연계 상담 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서민금융진흥원",
+      "web": {
+        "url": "https://www.kinfa.or.kr/counselingSupport/centerIntroduction.do",
+        "label": "공식 안내",
+        "state": "official_search_index_and_http_title"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 서비스; 서울의 이용 가능한 센터·지원요건을 별도 확인.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.kinfa.or.kr/counselingSupport/centerIntroduction.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_search_index_and_http_title"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-topis",
+      "name": "서울 TOPIS",
+      "type": "official",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [
+        "mobility:8de097f8491c"
+      ],
+      "description": "도로 소통·사고통제·버스·지하철·주차 교통정보 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://topis.seoul.go.kr/index.jsp",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 교통정보; 일부 노선은 서울 경계 밖으로 이어짐.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://topis.seoul.go.kr/index.jsp"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-library",
+      "name": "서울도서관",
+      "type": "official",
+      "categoryIds": [
+        "learning-space"
+      ],
+      "subtopicIds": [
+        "learning-space:9ee22c8536d3"
+      ],
+      "description": "서울의 도서관 찾기, 자료 통합검색, 대출·예약과 도서관 이용안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시 서울도서관",
+      "web": {
+        "url": "https://lib.seoul.go.kr/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울도서관 및 서울의 등록 도서관 검색.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://lib.seoul.go.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-culture",
+      "name": "서울문화포털",
+      "type": "official",
+      "categoryIds": [
+        "leisure"
+      ],
+      "subtopicIds": [
+        "leisure:e9c0cbcfd144",
+        "leisure:1c3a0a24ef01",
+        "leisure:9cd4d79d5c6e"
+      ],
+      "description": "공연·전시·축제·교육체험 검색, 문화달력 및 문화공간 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://culture.seoul.go.kr/culture/main/main.do?ready=Y",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 문화행사와 등록 문화공간.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://culture.seoul.go.kr/culture/main/main.do?ready=Y"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-welfare",
+      "name": "서울복지포털",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:f28442d2111f"
+      ],
+      "description": "생애주기·가구유형·분야별 복지서비스 검색 및 지원 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://wis.seoul.go.kr/sec/ctg/categorySearch.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시 복지정책 및 가구별 지원정보.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://wis.seoul.go.kr/sec/ctg/categorySearch.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-real-estate",
+      "name": "서울부동산정보광장",
+      "type": "official",
+      "categoryIds": [
+        "housing"
+      ],
+      "subtopicIds": [
+        "housing:e84da9db91e2"
+      ],
+      "description": "부동산 실거래가격, 중개보수, 중개사무소 영업이력, 전세가격 상담 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://land.seoul.go.kr/land/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 25개구 부동산 정보와 지도검색.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://land.seoul.go.kr/land/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-upcycling",
+      "name": "서울새활용플라자",
+      "type": "official",
+      "categoryIds": [
+        "waste",
+        "learning-space"
+      ],
+      "subtopicIds": [],
+      "description": "새활용 교육·체험·전시·소재은행·대관 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [],
+      "operator": "서울디자인재단",
+      "web": {
+        "url": "https://seoulup.or.kr/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "성동구 소재 서울새활용플라자 프로그램과 시설.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://seoulup.or.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-seoul-job",
+      "name": "서울시 일자리포털",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:b5f09931e50d"
+      ],
+      "description": "서울시일자리센터의 진로·취업상담과 일자리 사업 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://job.seoul.go.kr/hmpg/spct/sejs/contPageDetail.do?conts_no=A4E7D8EA18904FAAB59FD17A932A1DF5",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 시민 취업지원; 개별 채용의 근무지·지원요건 확인 필요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://job.seoul.go.kr/hmpg/spct/sejs/contPageDetail.do?conts_no=A4E7D8EA18904FAAB59FD17A932A1DF5"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-lifelong",
+      "name": "서울시 평생학습포털",
+      "type": "official",
+      "categoryIds": [
+        "learning-space"
+      ],
+      "subtopicIds": [
+        "learning-space:925b1718b5c9"
+      ],
+      "description": "온라인 강좌와 서울시민대학 등 평생학습 과정 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://sll.seoul.go.kr/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시 학습서비스; 오프라인 과정별 장소·신청요건 확인 필요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://sll.seoul.go.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-facilities-corp",
+      "name": "서울시설공단",
+      "type": "official",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [
+        "mobility:402473b26294"
+      ],
+      "description": "공영주차장·공공자전거·장애인콜택시·공단 체육문화시설 이용안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울시설공단",
+      "web": {
+        "url": "https://www.sisul.or.kr/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시설공단 담당 사업과 운영시설.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.sisul.or.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-women-family",
+      "name": "서울시여성가족재단",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:f28442d2111f"
+      ],
+      "description": "여성·가족 정책, 디지털성범죄·스토킹 피해지원, 공공공간 및 프로그램 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울시여성가족재단",
+      "web": {
+        "url": "https://www.seoulwomen.or.kr/sfwf/main/index.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 여성·가족 지원과 재단 운영공간.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.seoulwomen.or.kr/sfwf/main/index.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-water",
+      "name": "서울아리수본부",
+      "type": "official",
+      "categoryIds": [
+        "bills"
+      ],
+      "subtopicIds": [
+        "bills:b42d1b5bced0"
+      ],
+      "description": "수도요금 고객센터, 우리동네 수질과 아리수 이용정보 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시 서울아리수본부",
+      "web": {
+        "url": "https://arisu.seoul.go.kr/home/main",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 수돗물 서비스와 급수지역.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://arisu.seoul.go.kr/home/main"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "seoul-ansimi",
+      "name": "서울안심이",
+      "type": "service",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:d35dc68f3416"
+      ],
+      "description": "귀가 모니터링, 안심경로와 긴급신고 등 서울시 안심귀가 기능을 제공하는 앱입니다.",
+      "whenToUse": "늦은 귀가를 준비하고 지원 기능을 확인할 때",
+      "keywords": [
+        "안심 귀가",
+        "귀가 경로",
+        "서울안심이"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T1",
+        "H4"
+      ],
+      "operator": "서울특별시 (App Store 개발자 Seoul Metropolitan Government 표기)",
+      "web": {
+        "url": "https://culture.seoul.go.kr/night/sub/safety/view.do?pageIndex=1&safeId=28",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?id=kr.go.seoul.ansimi.woman",
+      "iosUrl": "https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EC%95%88%EC%8B%AC%EC%9D%B4/id1204100862",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "긴급신고·귀가 모니터링을 실제로 작동시키지 않았으며 안전·출동시간을 보장하지 않음",
+        "위치·통신·권한 설정이 필요합니다. 기능별 운영 조건을 확인하세요. 안전이나 출동 시간을 보장하지 않습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://culture.seoul.go.kr/night/sub/safety/view.do?pageIndex=1&safeId=28",
+        "https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EC%95%88%EC%8B%AC%EC%9D%B4/id1204100862"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; emergency_or_tracking_function_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "seoul-bike",
+      "name": "서울자전거 따릉이",
+      "type": "service",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [
+        "mobility:aecebdf56e44"
+      ],
+      "description": "서울 공공자전거 대여소를 찾고 이용권·대여·반납을 처리하는 앱입니다.",
+      "whenToUse": "서울 공공자전거 대여소와 이용 조건을 확인할 때",
+      "keywords": [
+        "따릉이",
+        "자전거 대여",
+        "대여소",
+        "자전거 반납"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T1"
+      ],
+      "operator": "서울특별시 (App Store 개발자 Seoul Metropolitan Government 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.dki.spb_android",
+      "iosUrl": "https://apps.apple.com/kr/app/id1037272004",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "민간 따릉이 지도·정보 앱과 구분",
+        "이용 자격과 이용권, 현장 자전거 상태, 정상 반납 확인"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.dki.spb_android",
+        "https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EC%9E%90%EC%A0%84%EA%B1%B0-%EB%94%B0%EB%A6%89%EC%9D%B4/id1037272004"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; rental_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-housing",
+      "name": "서울주거포털",
+      "type": "official",
+      "categoryIds": [
+        "housing"
+      ],
+      "subtopicIds": [
+        "housing:06774a1cee9a"
+      ],
+      "description": "주거정책, 임대·분양 공고, 청년월세·보증금 지원과 온라인 상담 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://housing.seoul.go.kr/site/main/content/sh01_060513?tr_code=short",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 주거지원; 사업별 서울 거주·무주택 등 자격 적용.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://housing.seoul.go.kr/site/main/content/sh01_060513?tr_code=short"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-public-booking",
+      "name": "서울특별시 공공서비스예약",
+      "type": "official",
+      "categoryIds": [
+        "exercise",
+        "learning-space",
+        "leisure"
+      ],
+      "subtopicIds": [
+        "exercise:927706959637",
+        "exercise:696ea44bd602",
+        "learning-space:12273a6a0f5b"
+      ],
+      "description": "체육시설·공간대관·문화체험·교육·진료 등 공공서비스 검색과 예약 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://yeyak.seoul.go.kr/web/main.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시·자치구·산하기관의 등록서비스; 실제 이용장소가 서울 밖일 수 있음.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://yeyak.seoul.go.kr/web/main.do",
+        "https://data.seoul.go.kr/dataList/OA-2271/A/1/datasetView.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-air",
+      "name": "서울특별시 대기환경정보",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [],
+      "description": "대기오염 측정값·예보·경보·행동요령·미세먼지 쉼터 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://cleanair.seoul.go.kr/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 도시·도로변 등 측정망; 관측지점 기준 정보.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://cleanair.seoul.go.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-environment",
+      "name": "서울특별시 환경 분야",
+      "type": "official",
+      "categoryIds": [
+        "waste"
+      ],
+      "subtopicIds": [],
+      "description": "재활용·음식폐기물·종량제물품 판매소 및 에너지절약·전기차 충전 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://news.seoul.go.kr/env/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 환경정책; 배출일·수수료는 자치구별 안내가 우선.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://news.seoul.go.kr/env/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "seoul-pay",
+      "name": "서울Pay+",
+      "type": "service",
+      "categoryIds": [
+        "bills",
+        "shopping"
+      ],
+      "subtopicIds": [
+        "bills:b080b9a48936"
+      ],
+      "description": "서울사랑상품권 구매·결제와 사용 가능한 가맹점 조회를 제공하는 앱입니다.",
+      "whenToUse": "동네에서 상품권을 쓸 수 있는 매장을 찾을 때",
+      "keywords": [
+        "서울사랑상품권",
+        "상품권 결제",
+        "가맹점",
+        "지역상품권"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "B3"
+      ],
+      "operator": "비즈플레이 주식회사 (App Store 개발자 표기; 지자체 정책 주체와 구분)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.bizplay.seoul.pay",
+      "iosUrl": "https://apps.apple.com/kr/app/id6479675842",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "발행 일정·잔여 물량·사용 가능한 상품권과 가맹점을 앱에서 확인하세요. 할인율이나 절감액을 고정하지 않습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.bizplay.seoul.pay",
+        "https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8pay-%EC%84%9C%EC%9A%B8%ED%8E%98%EC%9D%B4-%EC%84%9C%EC%9A%B8%ED%8E%98%EC%9D%B4%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%84%9C%EC%9A%B8%EC%82%AC%EB%9E%91%EC%83%81%ED%92%88%EA%B6%8C/id6479675842",
+        "https://apps.apple.com/kr/app/id6479675842"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; payment_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "washswat",
+      "name": "세탁특공대",
+      "type": "service",
+      "categoryIds": [
+        "laundry"
+      ],
+      "subtopicIds": [
+        "laundry:2f54356ddbc1"
+      ],
+      "description": "세탁물 수거·배송을 신청하고 제안된 추가 케어를 선택하는 앱입니다.",
+      "whenToUse": "세탁물을 맡기기 전에 품목 접수와 추가 관리 조건을 비교할 때",
+      "keywords": [
+        "세탁 수거",
+        "이불 맡기기",
+        "의류 관리",
+        "세탁 배송"
+      ],
+      "problemIds": [
+        "laundry"
+      ],
+      "topicIds": [
+        "L2",
+        "L3",
+        "R2"
+      ],
+      "operator": "주식회사 워시스왓 (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.washswat.android",
+      "iosUrl": "https://apps.apple.com/kr/app/id1049236217",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "요원 전용 앱 id1234854640과 고객용 앱을 구분",
+        "수거 가능 주소, 예상 견적과 확정 금액, 추가 작업 동의"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.washswat.android",
+        "https://apps.apple.com/kr/app/%EC%84%B8%ED%83%81%ED%8A%B9%EA%B3%B5%EB%8C%80/id1049236217"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "sssd",
+      "name": "솜씨당",
+      "type": "service",
+      "categoryIds": [
+        "learning-space",
+        "leisure"
+      ],
+      "subtopicIds": [
+        "learning-space:2b7729be2d22"
+      ],
+      "description": "지역·시간·금액별 취미 클래스와 전시·공연 등 티켓을 찾는 플랫폼입니다.",
+      "whenToUse": "가까운 공방의 수업이나 주말에 참여할 체험을 찾아볼 때",
+      "keywords": [
+        "공방",
+        "원데이클래스",
+        "취미 수업",
+        "베이킹",
+        "공예",
+        "전시 티켓"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "솜씨당컴퍼니 (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.sssd.co.kr/m/home",
+        "label": "공식 서비스",
+        "state": "official_domain_opened_no_readable_body_store_description_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.sssdc.app.sssd",
+      "iosUrl": "https://apps.apple.com/kr/app/id1436254520",
+      "regionCheck": "클래스별 지역·일정·정원·모집 대상을 확인; 서울 전체 주소 근처의 수업 제공을 보장하지 않음",
+      "costCheck": "클래스별 수강료·재료비·추가 비용·취소 시점별 환불 조건을 확인; 개별 금액 미검증",
+      "conditions": [
+        "지역·시간·가격 조건의 클래스 검색과 예약을 공식 스토어에서 안내",
+        "당일예약 가능 광고를 모든 수업의 즉시 예약 확정으로 해석하지 않음",
+        "클래스 참여와 DIY 키트 배송·티켓 구매는 서로 다른 이용 방식",
+        "작가용 로그인·공급자 등록과 고객용 앱을 구분",
+        "설치·예약·결제 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://apps.apple.com/kr/app/%EC%86%9C%EC%94%A8%EB%8B%B9-%EC%B7%A8%EB%AF%B8%EC%99%80-%EC%9B%90%EB%8D%B0%EC%9D%B4%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%AA%A8%EB%93%A0-%EA%B2%83/id1436254520",
+        "https://play.google.com/store/apps/details?hl=ko&id=com.sssdc.app.sssd",
+        "https://www.sssd.co.kr/m/home"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_domain_opened_no_readable_body_store_description_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_store_feature_operator_read; web_body_unavailable; class_level_conditions_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_consumer_store_feature_operator_read; web_body_unavailable; class_level_conditions_not_verified"
+        }
+      ],
+      "usageMode": "web_or_consumer_app_and_class_attendance"
+    },
+    {
+      "id": "soomgo",
+      "name": "숨고",
+      "type": "service",
+      "categoryIds": [
+        "repairs",
+        "cleaning",
+        "housing"
+      ],
+      "subtopicIds": [],
+      "description": "필요한 작업을 요청하고 전문가와 견적을 비교하는 플랫폼입니다.",
+      "whenToUse": "필요한 작업을 설명하고 전문가별 범위와 견적을 비교할 때",
+      "keywords": [
+        "전문가 찾기",
+        "수리 견적",
+        "청소 견적",
+        "작업 요청"
+      ],
+      "problemIds": [
+        "cleaning"
+      ],
+      "topicIds": [
+        "C5",
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "operator": "Brave Mobile Inc (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.soomgo",
+      "iosUrl": "https://apps.apple.com/kr/app/id1250771188",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "작업 범위, 자재 포함 여부, 출장비, 계약 상대"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.soomgo",
+        "https://apps.apple.com/kr/app/%EC%88%A8%EA%B3%A0-%EC%9D%B4%EC%82%AC-%EC%B2%AD%EC%86%8C-%EC%B7%A8%EB%AF%B8-%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4-%EC%A0%84%EB%AC%B8%EA%B0%80-%EC%B0%BE%EA%B8%B0/id1250771188"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_ios_listing_title_developer_read; account_roles_and_installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-smart-map",
+      "name": "스마트서울맵",
+      "type": "official",
+      "categoryIds": [
+        "mobility",
+        "support"
+      ],
+      "subtopicIds": [],
+      "description": "생활정책·공공시설 등 주제별 도시생활지도.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://map.seoul.go.kr/global/",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울의 주제별 생활지도; 주제마다 공간 범위가 다름.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://map.seoul.go.kr/global/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "smartchoice",
+      "name": "스마트초이스",
+      "type": "service",
+      "categoryIds": [
+        "bills"
+      ],
+      "subtopicIds": [
+        "bills:71b37827516f"
+      ],
+      "description": "통신요금 정보포털로 발견한 후보입니다. 이번 도구에서는 공식 본문을 읽지 못해 현행 기능 확인을 보류했습니다.",
+      "whenToUse": "통신요금과 환급 관련 공식 정보를 찾으려 할 때; 확인된 기능만 후속 안내에 사용",
+      "keywords": [
+        "통신비",
+        "휴대폰 요금",
+        "요금제 비교",
+        "통신 미환급액",
+        "스마트초이스"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": null,
+      "web": {
+        "url": "https://www.smartchoice.or.kr/smc/",
+        "label": "공식 서비스",
+        "state": "official_domain_open_attempt_failed"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "지역·사업자·가입 조건 및 기능별 조회 가능 범위 미확인",
+      "costCheck": "포털 이용 비용·통신요금 산정 기준·환급 가능 금액 미확인; 실제 절약액이나 환급액을 추정하지 않음",
+      "conditions": [
+        "스마트초이스 소개·요금제 비교·간소화 페이지와 KTOA 공식 사업 소개를 실제로 열었으나 도구 오류·시간 초과 발생",
+        "공식 검색 색인은 KTOA와 통신사업자 공동 서비스·요금제 비교·미환급액 조회를 설명하지만 이번 본문 검증 사실로 기록하지 않음",
+        "간소화 페이지 검색 색인에 혼잡 안내가 있으나 현재 장애라고 단정하지 않음",
+        "이름이 유사한 민간 요금제 비교 제품으로 대체하지 않음",
+        "인증정보·주민번호·전화번호 입력이나 환급 조회를 실행하지 않음",
+        "본문 접근 및 현행 기능 확인 전 공개 이용 안내는 보류"
+      ],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.smartchoice.or.kr/smc/",
+        "https://www.smartchoice.or.kr/smc/etc/introduce.do",
+        "https://www.smartchoice.or.kr/smc/plan/planCompare.do",
+        "https://www.smartchoice.or.kr/smc/simple/indexSimple.do",
+        "https://www.ktoa.or.kr/ko/business/smartchoice/contents"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_domain_open_attempt_failed"
+        }
+      ],
+      "usageMode": "official_web_candidate_fetch_unavailable"
+    },
+    {
+      "id": "spacecloud",
+      "name": "스페이스클라우드",
+      "type": "service",
+      "categoryIds": [
+        "learning-space"
+      ],
+      "subtopicIds": [
+        "learning-space:12273a6a0f5b"
+      ],
+      "description": "지역·날짜·시간·인원에 맞춰 빌릴 공간을 찾는 서비스입니다.",
+      "whenToUse": "지역·일정·인원에 맞는 공간 대여 조건을 확인할 때",
+      "keywords": [
+        "공간 대여",
+        "모임 공간",
+        "날짜",
+        "인원"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T3"
+      ],
+      "operator": "NSPACE Inc. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.spacecloud.kr/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1025620281",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "호스트센터 전용 앱 id1526709791과 고객용 앱을 구분",
+        "대관 목적, 이용 시간, 인원 제한, 추가 요금"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.spacecloud.kr/",
+        "https://apps.apple.com/kr/app/%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%8C%8C%ED%8B%B0%EB%A3%B8-%EC%97%B0%EC%8A%B5%EC%8B%A4-%EA%B3%B5%EA%B0%84%EB%8C%80%EA%B4%80%EC%9D%98-%EB%AA%A8%EB%93%A0%EA%B2%83/id1025620281?platform=ipad"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-single-household",
+      "name": "씽글벙글 서울",
+      "type": "official",
+      "categoryIds": [
+        "support",
+        "housing"
+      ],
+      "subtopicIds": [
+        "housing:6b06e53d6949",
+        "support:b4732aa80413"
+      ],
+      "description": "1인가구 지원정책, 건강동행, 전월세 안심계약 도움, 이사동행 및 지역 프로그램 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://1in.seoul.go.kr/front/user/main.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 거주 1인가구; 서비스별 대상과 자치구 운영조건 확인 필요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://1in.seoul.go.kr/front/user/main.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "yeogiro",
+      "name": "여기로",
+      "type": "service",
+      "categoryIds": [
+        "waste"
+      ],
+      "subtopicIds": [
+        "waste:e97b98e3a2a2"
+      ],
+      "description": "제휴 지자체의 대형폐기물 배출 신고와 수수료 결제를 안내하는 앱입니다.",
+      "whenToUse": "가구 등을 버리기 전에 거주 자치구의 접수 지원 여부와 배출 방법을 확인할 때",
+      "keywords": [
+        "대형폐기물",
+        "폐기물 스티커",
+        "가구 버리기",
+        "배출번호"
+      ],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [],
+      "operator": "주식회사 지금여기 (Google Play 개발자 및 App Store 저작권 표기)",
+      "web": {
+        "url": "https://www.yeogiro24.co.kr/",
+        "label": "공식 서비스",
+        "state": "official_store_link_found_opened_no_readable_body"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=kr.co.yeogiro",
+      "iosUrl": "https://apps.apple.com/kr/app/id1274381128",
+      "regionCheck": "대형폐기물은 지자체 협의 지역만 지원; 개별 서울 자치구·주소별 제휴 미확인",
+      "costCheck": "품목별 배출 수수료를 접수 시 확인; 스토어는 지자체 스티커 금액과 동일하다고 설명하나 실제 품목 금액 미검증",
+      "conditions": [
+        "결제 후 배출번호를 물품에 표시하고 외부 지정 장소로 배출하는 절차를 안내함",
+        "실내에서 가구를 내려주는 운반 서비스로 해석하지 않음",
+        "앱의 폐가전 무료배출 소개와 대형폐기물 유료 신고를 구분",
+        "스토어의 폐가전 전국 가능 문구를 이 앱의 모든 품목·주소 지원으로 확대하지 않음",
+        "설치·신고·결제 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=kr.co.yeogiro",
+        "https://apps.apple.com/kr/app/%EC%97%AC%EA%B8%B0%EB%A1%9C-%EB%8C%80%ED%98%95%ED%8F%90%EA%B8%B0%EB%AC%BC-%EA%B0%84%ED%8E%B8-%EB%B0%B0%EC%B6%9C%EC%9D%80-%EC%97%AC%EA%B8%B0%EB%A1%9C/id1274381128",
+        "https://www.yeogiro24.co.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_store_link_found_opened_no_readable_body"
+        },
+        {
+          "platform": "ios",
+          "state": "official_store_feature_and_corporate_operator_read; municipal_address_support_not_verified; web_body_unavailable"
+        },
+        {
+          "platform": "android",
+          "state": "official_store_feature_and_corporate_operator_read; municipal_address_support_not_verified; web_body_unavailable"
+        }
+      ],
+      "usageMode": "consumer_app_and_designated_disposal"
+    },
+    {
+      "id": "oneul-sugeo",
+      "name": "오늘수거",
+      "type": "service",
+      "categoryIds": [
+        "waste"
+      ],
+      "subtopicIds": [
+        "waste:07e830712231",
+        "waste:5c80c00a717e"
+      ],
+      "description": "음식물·재활용품 등 생활쓰레기의 비대면 문앞 수거를 안내하는 서비스입니다.",
+      "whenToUse": "직접 배출이 어려워 수거 가능 품목과 비용을 확인하고 싶을 때",
+      "keywords": [
+        "쓰레기",
+        "음식물",
+        "분리수거",
+        "문앞 수거",
+        "냉장고 정리"
+      ],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [
+        "C4"
+      ],
+      "operator": "어글리랩 (App Store developer label)",
+      "web": {
+        "url": "https://www.sugeo.onl/",
+        "label": "공식 서비스",
+        "state": "linked_from_official_store_home_body_not_read_this_pass"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/%EC%98%A4%EB%8A%98%EC%88%98%EA%B1%B0-%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%97%86%EB%8A%94-%EB%B9%84%EB%8C%80%EB%A9%B4-%EC%93%B0%EB%A0%88%EA%B8%B0-%EC%88%98%EA%B1%B0-%EC%84%9C%EB%B9%84%EC%8A%A4/id1606684132",
+      "regionCheck": "공식 앱 설명은 서울을 포함한 지역을 안내하지만 개별 주소와 접수 품목은 신청 화면에서 확인",
+      "costCheck": "수거 방식·무게·봉투와 주문별 추가 비용을 공식 접수 화면에서 확인",
+      "conditions": [
+        "모든 폐기물을 무조건 접수하는 것으로 표현하지 않음",
+        "대형폐기물과 일반 봉투 수거는 별도 조건 확인",
+        "방문 무료 혜택과 처리 비용을 구분"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://apps.apple.com/kr/app/%EC%98%A4%EB%8A%98%EC%88%98%EA%B1%B0-%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0-%EC%97%86%EB%8A%94-%EB%B9%84%EB%8C%80%EB%A9%B4-%EC%93%B0%EB%A0%88%EA%B8%B0-%EC%88%98%EA%B1%B0-%EC%84%9C%EB%B9%84%EC%8A%A4/id1606684132"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "linked_from_official_store_home_body_not_read_this_pass"
+        },
+        {
+          "platform": "ios",
+          "state": "official_source_body_read"
+        }
+      ],
+      "usageMode": "consumer_app_and_visit_collection"
+    },
+    {
+      "id": "ohou",
+      "name": "오늘의집",
+      "type": "service",
+      "categoryIds": [
+        "shopping",
+        "housing"
+      ],
+      "subtopicIds": [],
+      "description": "집 관련 상품과 생활·인테리어 정보를 함께 찾는 서비스입니다.",
+      "whenToUse": "집 관련 제품과 공간 활용 정보를 함께 찾아볼 때",
+      "keywords": [
+        "가구",
+        "침구",
+        "수납",
+        "인테리어"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "operator": "Bucketplace Inc. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://ohou.se/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1008236892",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "상품 구매와 이사·청소 상담의 제공자·계약 구분"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://ohou.se/",
+        "https://apps.apple.com/kr/app/%EC%98%A4%EB%8A%98%EC%9D%98%EC%A7%91-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%8A%88%ED%8D%BC%EC%95%B1/id1008236892?platform=ipad"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-opinet",
+      "name": "오피넷",
+      "type": "official",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [
+        "mobility:c515d114eba1"
+      ],
+      "description": "주유소·자동차충전소 유가 검색과 유가정보 API 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "한국석유공사",
+      "web": {
+        "url": "https://www.opinet.co.kr/user/custapi/openApiIntro.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 서비스에서 서울 지역·좌표·주유소 ID를 지정해야 함.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.opinet.co.kr/user/custapi/openApiIntro.do",
+        "https://www.opinet.co.kr/user/custapi/openApiInfo.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "wayo",
+      "name": "와요",
+      "type": "service",
+      "categoryIds": [
+        "pets"
+      ],
+      "subtopicIds": [
+        "pets:f28442d2111f"
+      ],
+      "description": "방문 펫시터의 돌봄·산책과 반려견 훈련을 예약하는 서비스입니다.",
+      "whenToUse": "외출·여행 등으로 집에 남는 반려동물의 돌봄이나 산책이 필요할 때",
+      "keywords": [
+        "펫시터",
+        "방문 돌봄",
+        "강아지 산책",
+        "고양이 돌봄",
+        "반려견 훈련"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "주식회사 펫피플 (공식 웹 하단 및 스토어 표기)",
+      "web": {
+        "url": "https://wayopet.com/",
+        "label": "공식 서비스",
+        "state": "official_provider_feature_and_operator_body_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=co.petpeople.wayo",
+      "iosUrl": "https://apps.apple.com/kr/app/id1454485087",
+      "regionCheck": "공식 스토어는 서울·경기·인천 등을 안내; 개별 주소·날짜·시간과 시터 매칭 가능 여부는 예약 시 확인",
+      "costCheck": "돌봄 종류·시간·마릿수·추가 요청과 취소 시점별 비용은 예약 화면에서 확인; 광고의 월 최저금액을 단건 요금으로 사용하지 않음",
+      "conditions": [
+        "소비자 예약 앱 co.petpeople.wayo와 시터 촬영 전용 co.petpeople.wayolive를 구분",
+        "방문 돌봄과 다른 서비스인 펫플래닛의 가정집 위탁 돌봄을 동일 상품으로 대체하지 않음",
+        "출입·촬영 동의, 반려동물 성향과 건강 상태, 긴급 상황 대응 및 보상 범위를 이용 전에 확인",
+        "웹은 통신판매중개자와 개별 파트너의 거래 책임을 구분함",
+        "즉시 방문·안전·매칭 성공·보상 지급을 보장하지 않음",
+        "개인정보 입력·예약·결제·방문 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://wayopet.com/",
+        "https://play.google.com/store/apps/details?hl=ko&id=co.petpeople.wayo",
+        "https://apps.apple.com/kr/app/%EC%99%80%EC%9A%94-%ED%8E%AB%EC%8B%9C%ED%84%B0-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-1%EB%93%B1-%EB%8F%8C%EB%B4%84-%EC%84%9C%EB%B9%84%EC%8A%A4/id1454485087"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_provider_feature_and_operator_body_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_provider_and_consumer_store_feature_operator_read; booking_matching_and_final_fee_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_provider_and_consumer_store_feature_operator_read; booking_matching_and_final_fee_not_verified"
+        }
+      ],
+      "usageMode": "consumer_app_and_visit_service"
+    },
+    {
+      "id": "yogiyo",
+      "name": "요기요",
+      "type": "service",
+      "categoryIds": [
+        "meals"
+      ],
+      "subtopicIds": [
+        "meals:1ee00bbaa9ef"
+      ],
+      "description": "음식 배달 주문을 위한 고객용 앱입니다.",
+      "whenToUse": "식사를 주문하기 전에 매장과 주문 조건을 비교할 때",
+      "keywords": [
+        "음식 배달",
+        "식사 주문",
+        "혼밥"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1"
+      ],
+      "operator": null,
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?gl=KR&hl=ko&id=com.fineapp.yogiyo",
+      "iosUrl": null,
+      "regionCheck": "주문 주소별 매장과 이용 가능 여부를 앱에서 확인",
+      "costCheck": "배달비·메뉴 금액·할인 적용 조건을 주문 화면에서 확인",
+      "conditions": [
+        "포인트·할인 문구를 실제 최저가나 모든 주문의 혜택으로 해석하지 않음"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?gl=KR&hl=ko&id=com.fineapp.yogiyo"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "official_source_body_read"
+        }
+      ],
+      "usageMode": "consumer_app"
+    },
+    {
+      "id": "woodongs",
+      "name": "우리동네GS",
+      "type": "service",
+      "categoryIds": [
+        "shopping",
+        "parcel"
+      ],
+      "subtopicIds": [
+        "shopping:590f2a3e6ebd",
+        "shopping:8490d437357b",
+        "parcel:0cf1ae8f05a0"
+      ],
+      "description": "GS25·GS더프레시의 상품 재고를 조회하고 픽업·배달 등을 이용하는 앱입니다.",
+      "whenToUse": "GS 계열 매장의 상품 재고와 주문·택배 조건을 확인할 때",
+      "keywords": [
+        "GS 재고",
+        "편의점 픽업",
+        "마트",
+        "편의점 택배"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F2",
+        "F3",
+        "T2"
+      ],
+      "operator": "GS Retail Co., Ltd. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.gsr.gs25",
+      "iosUrl": "https://apps.apple.com/kr/app/id426644449",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "GS Postbox의 GS네트웍스와 운영자·앱을 구분",
+        "스토어는 택배를 소개하지만 세부 예약 조건과 외부 연결 방식은 미검증",
+        "매장·상품별 지원 여부, 주문·보관·수령 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.gsr.gs25",
+        "https://apps.apple.com/kr/app/%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4gs-gs25-gs%EB%8D%94%ED%94%84%EB%A0%88%EC%8B%9C-%EC%99%80%EC%9D%B825%ED%94%8C%EB%9F%AC%EC%8A%A4/id426644449?platform=ipad"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "e-gen",
+      "name": "응급의료정보제공",
+      "type": "service",
+      "categoryIds": [
+        "health"
+      ],
+      "subtopicIds": [
+        "health:1bd3847e37f6",
+        "health:15f1e20a3b64",
+        "health:e15f9c95be7a"
+      ],
+      "description": "주변 병원·약국과 야간·휴일 진료 정보를 찾아보는 공공 서비스입니다.",
+      "whenToUse": "문 여는 병원이나 약국 정보를 확인할 때",
+      "keywords": [
+        "야간 병원",
+        "휴일 약국",
+        "병원 찾기",
+        "E-Gen",
+        "응급의료포털 E-Gen"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "W1"
+      ],
+      "operator": "보건복지부 (양대 스토어 개발자 표기; 의료정보 관리는 앱 설명상 중앙응급의료센터)",
+      "web": {
+        "url": "https://www.e-gen.or.kr/",
+        "label": "공식 서비스",
+        "state": "linked_from_official_ios_listing_open_failed_body_not_verified"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=kr.go.mw",
+      "iosUrl": "https://apps.apple.com/kr/app/id385668523",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "E-Gen 포털과 기존 응급의료정보제공 앱의 공식 연결을 App Store 개발자 웹사이트에서 확인; 별도 앱으로 중복 생성하지 않음",
+        "Google Play 설명에서 병의원·약국, 야간/주말, 명절 기관 조회를 확인; iOS와 기능의 완전 동일성은 미검증",
+        "포털 본문·주소별 실제 영업·병상·진료 가능 여부는 미확인; 방문 전 전화 확인 필요",
+        "진단·치료 조언이 아닌 기관 탐색 정보; 응급 상황에서 검색 결과만으로 판단하지 않음",
+        "실제 진료·운영 여부는 방문 전 해당 기관에 확인하세요. 앱 정보는 긴급 신고나 진료 판단을 대신하지 않습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=kr.go.mw",
+        "https://apps.apple.com/kr/app/%EC%9D%91%EA%B8%89%EC%9D%98%EB%A3%8C%EC%A0%95%EB%B3%B4%EC%A0%9C%EA%B3%B5/id385668523",
+        "https://apps.apple.com/kr/app/id385668523",
+        "https://www.e-gen.or.kr/egen/main.do"
+      ],
+      "linkNotes": "공식 등록의 웹 연결 주소를 확인했습니다. 조사 도구로 목적지 본문까지 열지는 못했습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "web",
+          "state": "linked_from_official_ios_listing_open_failed_body_not_verified"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_consumer_store_pages_reopened_feature_operator_and_egen_web_link_read; portal_body_fetch_failed"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-civil-complaint",
+      "name": "응답소",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [],
+      "description": "서울시 온라인 민원 창구.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://eungdapso.seoul.go.kr/",
+        "label": "공식 안내",
+        "state": "official_reference_read_target_body_unavailable"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시 민원·행정 안내; 소관에 따라 처리기관이 달라짐.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://eungdapso.seoul.go.kr/",
+        "https://www.seoul.go.kr/seoul/autonomy.do",
+        "https://news.seoul.go.kr/env/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_reference_read_target_body_unavailable"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "epost",
+      "name": "인터넷우체국",
+      "type": "service",
+      "categoryIds": [
+        "parcel"
+      ],
+      "subtopicIds": [
+        "parcel:849e8b72fa03"
+      ],
+      "description": "우편·소포 접수와 배송 조회, 우체국 찾기를 제공하는 우편 서비스입니다.",
+      "whenToUse": "소포를 보내거나 집에서 방문접수를 신청할 방법을 확인할 때",
+      "keywords": [
+        "우체국택배",
+        "방문접수소포",
+        "배송 조회",
+        "간편사전접수",
+        "EMS"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "우정사업본부 (공식 우체국 앱 설명 및 Google Play 개발자 표기)",
+      "web": {
+        "url": "https://www.epost.go.kr/",
+        "label": "공식 서비스",
+        "state": "official_domain_opened_no_readable_body_store_description_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=kr.go.epost.app.findZip",
+      "iosUrl": "https://apps.apple.com/kr/app/id435940000",
+      "regionCheck": "방문접수 주소·희망일과 국제우편의 국가별 발송 조건은 접수 시 확인; 주소별 방문 가능 여부 미검증",
+      "costCheck": "중량·규격·접수 방식·목적지별 요금표와 접수 화면 확인; 창구 접수와 방문접수 요금을 동일시하지 않음",
+      "conditions": [
+        "공식 우체국 고객용 앱에서 방문접수소포·반품접수·요금조회·우체국 찾기를 안내",
+        "우체국쇼핑·전자문서 전용 앱·금융 앱을 우편 접수 앱으로 대체하지 않음",
+        "웹 메인 본문은 도구에서 읽히지 않았으며 스토어 기능 설명을 근거로 사용",
+        "접수·결제·발송 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.epost.go.kr/",
+        "https://play.google.com/store/apps/details?hl=ko&id=kr.go.epost.app.findZip",
+        "https://apps.apple.com/kr/app/%EC%9A%B0%EC%B2%B4%EA%B5%AD/id435940000"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_domain_opened_no_readable_body_store_description_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_postal_consumer_store_feature_operator_read; web_body_unavailable; tariff_and_booking_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_postal_consumer_store_feature_operator_read; web_body_unavailable; tariff_and_booking_not_verified"
+        }
+      ],
+      "usageMode": "official_web_or_consumer_app_and_postal_service"
+    },
+    {
+      "id": "official-parks",
+      "name": "정원도시 서울(서울의 공원)",
+      "type": "official",
+      "categoryIds": [
+        "leisure"
+      ],
+      "subtopicIds": [
+        "leisure:1af88d86437a"
+      ],
+      "description": "서울 공원 이용정보를 제공하는 공식 원본 사이트.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://parks.seoul.go.kr/",
+        "label": "공식 안내",
+        "state": "official_reference_read_target_body_unavailable"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 공원; 소규모 녹지까지 전부 포함하는지는 미확인.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://parks.seoul.go.kr/",
+        "https://data.seoul.go.kr/dataList/OA-394/S/1/datasetView.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_reference_read_target_body_unavailable"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "zigbang",
+      "name": "직방",
+      "type": "service",
+      "categoryIds": [
+        "housing"
+      ],
+      "subtopicIds": [
+        "housing:e84da9db91e2"
+      ],
+      "description": "지역과 주거 조건에 맞는 매물을 찾아 문의하는 앱입니다.",
+      "whenToUse": "거주 지역과 예산 조건에 맞는 매물을 찾아 문의할 때",
+      "keywords": [
+        "집 찾기",
+        "원룸",
+        "매물",
+        "주거 조건"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "H1"
+      ],
+      "operator": "ZIGBANG Co., Ltd. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.chbreeze.jikbang4a",
+      "iosUrl": "https://apps.apple.com/kr/app/id503098735",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "직방CEO·스마트홈 앱과 매물 탐색 고객용 앱을 구분",
+        "매물 정보와 실제 계약 조건, 중개 주체, 방문 확인"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.chbreeze.jikbang4a",
+        "https://apps.apple.com/kr/app/no-1-%EB%B6%80%EB%8F%99%EC%82%B0-%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%A7%81%EB%B0%A9/id503098735"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "zimssa",
+      "name": "짐싸",
+      "type": "service",
+      "categoryIds": [
+        "housing"
+      ],
+      "subtopicIds": [
+        "housing:6d24fa9c274e"
+      ],
+      "description": "이사·운반과 입주청소 등의 견적을 받아 비교하는 앱입니다.",
+      "whenToUse": "이사·운반이나 입주청소의 작업 조건을 맞춰 견적을 받을 때",
+      "keywords": [
+        "이사 견적",
+        "짐 운반",
+        "용달",
+        "입주청소 견적"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "M1",
+        "C5"
+      ],
+      "operator": "ZIMSSA Inc. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.wenext.zimssa",
+      "iosUrl": "https://apps.apple.com/kr/app/id1203174270",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "파트너 전용 앱·여행 짐목록 앱과 구분",
+        "짐과 이동 거리, 계단·사다리차, 추가 비용, 취소·보상 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.wenext.zimssa",
+        "https://apps.apple.com/kr/app/%EC%A7%90%EC%8B%B8-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-%EB%8C%80%ED%91%9C-%EC%9D%B4%EC%82%AC-%EC%96%B4%ED%94%8C-%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC-%EC%9E%85%EC%A3%BC%EC%B2%AD%EC%86%8C/id1203174270"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-youth",
+      "name": "청년몽땅정보통",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [
+        "support:dab62e66ed80"
+      ],
+      "description": "청년 일자리·주거·금융·건강 정책 검색과 정책 통합신청 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://youth.seoul.go.kr/mainA.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울시·자치구 정책 포함. 중앙정부·타지역 정책은 구분 필수.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://youth.seoul.go.kr/mainA.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "chyeon",
+      "name": "청연(청소연구소)",
+      "type": "service",
+      "categoryIds": [
+        "cleaning"
+      ],
+      "subtopicIds": [
+        "cleaning:62433145c9ac",
+        "cleaning:3ba11fbd87b5",
+        "cleaning:52dfb01923ed",
+        "cleaning:997a6f117f98"
+      ],
+      "description": "집 청소와 입주·가전 청소 등을 신청하는 서비스입니다.",
+      "whenToUse": "가사·입주·가전 청소의 작업 범위와 예약 조건을 확인할 때",
+      "keywords": [
+        "청소 맡기기",
+        "가사 청소",
+        "입주 청소",
+        "가전 청소"
+      ],
+      "problemIds": [
+        "cleaning"
+      ],
+      "topicIds": [
+        "C5",
+        "C1"
+      ],
+      "operator": "Life lab Inc. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.chyeon.com/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1215174815",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "청연 고객용 id1215174815와 청연 매니저용 id1514730986를 구분",
+        "돌봄의 대상·제공 범위는 청소와 별도로 확인",
+        "주소별 제공 범위, 작업 시간, 준비물, 취소 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.chyeon.com/",
+        "https://apps.apple.com/kr/app/%EC%B2%AD%EC%97%B0-%EC%B2%AD%EC%86%8C%EC%97%B0%EA%B5%AC%EC%86%8C-%EC%B2%AD%EC%97%B0%EC%BC%80%EC%96%B4/id1215174815"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "kakao-t",
+      "name": "카카오 T",
+      "type": "service",
+      "categoryIds": [
+        "mobility",
+        "parcel"
+      ],
+      "subtopicIds": [
+        "parcel:b9b021578b51",
+        "mobility:94be61a73763",
+        "mobility:402473b26294"
+      ],
+      "description": "택시 등 이동 수단과 주차장 검색·결제, 퀵·배송 등을 연결하는 통합 앱입니다.",
+      "whenToUse": "택시를 호출하거나 목적지 주차장과 물건 배송 수단을 찾아볼 때",
+      "keywords": [
+        "택시",
+        "주차",
+        "주차장",
+        "카카오 T 주차",
+        "퀵",
+        "배송",
+        "기차"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "카카오모빌리티 (공식 제공자 웹 및 양대 스토어 표기)",
+      "web": {
+        "url": "https://www.kakaomobility.com/service-kakaot",
+        "label": "공식 서비스",
+        "state": "official_service_introduction_and_store_links_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.kakao.taxi",
+      "iosUrl": "https://apps.apple.com/kr/app/id981110422",
+      "regionCheck": "교통수단·주차장·배송 종류별 제공 지역과 출발/도착지를 앱에서 확인; 모든 기능의 서울 전 주소 지원 미검증",
+      "costCheck": "이용 전 앱의 운임·이용료·취소료 확인; 주차 예약은 제휴 주차장 기준에 따라 예약 화면에, 자동정산은 출차 시 안내되는 별도 이용료가 있음",
+      "conditions": [
+        "카카오 T 주차는 같은 카카오 T 앱의 기능이며 별도 앱·별도 서비스 레코드로 증식하지 않음",
+        "위치기반서비스 약관의 무료 표기를 실제 주차비 무료로 해석하지 않음",
+        "유료서비스 약관의 과거 경로를 현행 택시·바이크 금액표로 전재하지 않음; 최종 비용은 앱에서 재확인",
+        "웹은 서비스 소개이며 웹에서 택시 호출·주차 결제를 실행했다는 뜻이 아님",
+        "기사용·비즈니스 전용 앱과 고객용 앱을 구분",
+        "설치·호출·예약·결제 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.kakaomobility.com/service-kakaot",
+        "https://play.google.com/store/apps/details?id=com.kakao.taxi",
+        "https://apps.apple.com/kr/app/id981110422",
+        "https://policy.kakaomobility.com/ko/terms_200903/paid_service.html"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_service_introduction_and_store_links_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_provider_and_consumer_store_feature_links_read; parking_same_app_confirmed; actual_availability_and_current_final_prices_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_provider_and_consumer_store_feature_links_read; parking_same_app_confirmed; actual_availability_and_current_final_prices_not_verified"
+        }
+      ],
+      "usageMode": "consumer_app"
+    },
+    {
+      "id": "kakao-map",
+      "name": "카카오맵",
+      "type": "service",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [],
+      "description": "장소를 검색하고 대중교통·도보·자동차·자전거 길찾기를 확인합니다.",
+      "whenToUse": "목적지까지 가는 길이나 주변 장소를 찾을 때",
+      "keywords": [
+        "길찾기",
+        "주변 장소",
+        "도보",
+        "버스"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T1",
+        "T2"
+      ],
+      "operator": "Kakao Corp. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://map.kakao.com/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=net.daum.android.map",
+      "iosUrl": "https://apps.apple.com/kr/app/id304608425",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "운영시간과 실제 이용 가능 여부는 해당 장소에서 다시 확인하세요. 우리 사이트의 선택 주소는 자동 전송하지 않습니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.kakaocorp.com/page/service/service/KakaoMap",
+        "https://play.google.com/store/apps/details?hl=ko&id=net.daum.android.map",
+        "https://apps.apple.com/kr/app/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%A7%B5-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-no-1-%EC%A7%80%EB%8F%84%EC%95%B1/id304608425?at=304608425",
+        "https://apps.apple.com/kr/app/id304608425"
+      ],
+      "linkNotes": "공식 등록의 웹 연결 주소를 확인했습니다. 조사 도구로 목적지 본문까지 열지는 못했습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "catchtable",
+      "name": "캐치테이블",
+      "type": "service",
+      "categoryIds": [
+        "meals"
+      ],
+      "subtopicIds": [
+        "meals:717393eaedb5",
+        "meals:3c615f0664ab"
+      ],
+      "description": "식당을 찾고 예약이나 대기 접수를 하는 앱입니다.",
+      "whenToUse": "식당 방문 전에 예약이나 대기 접수 지원을 확인할 때",
+      "keywords": [
+        "식당 예약",
+        "식당 대기",
+        "맛집 찾기",
+        "외식"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F6"
+      ],
+      "operator": "WADcorp (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=co.kr.catchtable.android.catchtable_app",
+      "iosUrl": "https://apps.apple.com/kr/app/id1485193566",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "포스·웨이팅 매장관리 앱과 고객용 캐치테이블을 구분",
+        "해당 식당의 지원 여부, 날짜·인원, 예약금·취소 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=co.kr.catchtable.android.catchtable_app",
+        "https://apps.apple.com/kr/app/%EC%BA%90%EC%B9%98%ED%85%8C%EC%9D%B4%EB%B8%94/id1485193566"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "kurly",
+      "name": "컬리",
+      "type": "service",
+      "categoryIds": [
+        "shopping"
+      ],
+      "subtopicIds": [
+        "shopping:0592f0ca31fb"
+      ],
+      "description": "식재료와 간편식 등을 온라인에서 구매하는 서비스입니다.",
+      "whenToUse": "식재료·간편식을 살 때 포장량과 배송 조건을 비교할 때",
+      "keywords": [
+        "온라인 장보기",
+        "간편식",
+        "식재료",
+        "혼밥"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F2",
+        "F3",
+        "F7"
+      ],
+      "operator": "Kurly Corp. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.kurly.com/main",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id1080244833",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "물류 작업자용 컬리로·별도 식단 앱과 구분",
+        "배송 주소·시간, 최소 주문·배송비, 보관 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.kurly.com/main",
+        "https://apps.apple.com/kr/app/%EC%BB%AC%EB%A6%AC-%EB%A7%88%EC%BC%93%EC%BB%AC%EB%A6%AC-%EB%B7%B0%ED%8B%B0%EC%BB%AC%EB%A6%AC/id1080244833?platform=ipad"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "coupang-eats",
+      "name": "쿠팡이츠",
+      "type": "service",
+      "categoryIds": [
+        "meals",
+        "shopping"
+      ],
+      "subtopicIds": [
+        "shopping:0592f0ca31fb",
+        "meals:1ee00bbaa9ef"
+      ],
+      "description": "음식 주문과 마트·편의점 등 장보기 주문을 제공하는 고객용 앱입니다.",
+      "whenToUse": "음식이나 식료품을 주문하기 전에 주소별 매장과 주문 조건을 확인할 때",
+      "keywords": [
+        "배달",
+        "혼밥",
+        "마트 배달",
+        "편의점 배달",
+        "장보기"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "operator": "Coupang Corp. (Google Play developer label)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.coupang.mobile.eats",
+      "iosUrl": null,
+      "regionCheck": "주소별 노출 매장과 주문 가능 여부는 앱에서 확인",
+      "costCheck": "주문 시점의 와우 혜택 적용 여부와 매장·메뉴별 조건 확인",
+      "conditions": [
+        "고객용 앱과 배달 파트너·사장님 앱을 구분",
+        "배달비 0원 문구는 대상 주문 조건에 한정"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.coupang.mobile.eats"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "official_source_body_read"
+        }
+      ],
+      "usageMode": "consumer_app"
+    },
+    {
+      "id": "taling",
+      "name": "탈잉",
+      "type": "service",
+      "categoryIds": [
+        "learning-space",
+        "leisure"
+      ],
+      "subtopicIds": [
+        "learning-space:2b7729be2d22"
+      ],
+      "description": "취미·직무 등 여러 분야의 클래스와 학습 콘텐츠를 찾는 플랫폼입니다.",
+      "whenToUse": "새로운 취미나 실무 수업의 방식·시간·수강 조건을 비교할 때",
+      "keywords": [
+        "수업",
+        "클래스",
+        "취미 배우기",
+        "온라인 강의",
+        "직무 교육"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "주식회사 탈잉 (공식 웹 하단 표기)",
+      "web": {
+        "url": "https://www.taling.me/",
+        "label": "공식 서비스",
+        "state": "official_consumer_web_body_and_operator_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.taling",
+      "iosUrl": "https://apps.apple.com/kr/app/id1153218962",
+      "regionCheck": "수업별 온라인/대면 방식과 실제 장소·일정 확인; 모든 강좌를 서울 대면 원데이클래스로 간주하지 않음",
+      "costCheck": "수강권·회차·시청 기간·재료 포함 여부와 해당 상품의 환불 규정 확인; 강좌별 최종 금액 미검증",
+      "conditions": [
+        "공식 웹은 강사 상품의 거래 당사자가 아닌 통신판매중개자임을 안내",
+        "고객용 탈잉과 별도 기업교육 앱·튜터 지원 경로를 구분",
+        "대관 공간 찾기와 수업 수강을 구분",
+        "장학금·챌린지 혜택은 개별 조건을 확인하며 수익이나 효과를 보장하지 않음",
+        "가입·수강 신청·결제 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.taling.me/",
+        "https://apps.apple.com/kr/app/%ED%83%88%EC%9E%89-%EC%98%AC%ED%95%B4%EB%8A%94-%EB%8B%AC%EB%9D%BC%EC%A7%88%EA%B1%B0%EC%95%BC/id1153218962",
+        "https://play.google.com/store/apps/details?hl=ko&id=com.taling"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_consumer_web_body_and_operator_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_web_operator_and_store_description_read; individual_class_terms_and_transactions_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_consumer_web_operator_and_store_description_read; individual_class_terms_and_transactions_not_verified"
+        }
+      ],
+      "usageMode": "web_or_consumer_app_for_classes"
+    },
+    {
+      "id": "tabling",
+      "name": "테이블링",
+      "type": "service",
+      "categoryIds": [
+        "meals"
+      ],
+      "subtopicIds": [
+        "meals:717393eaedb5",
+        "meals:3c615f0664ab"
+      ],
+      "description": "식당의 원격 대기·예약·빈자리 확인 기능을 안내하는 고객용 앱입니다.",
+      "whenToUse": "식당 방문 전에 날짜·인원과 대기·예약 조건을 확인할 때",
+      "keywords": [
+        "식당 대기",
+        "원격 줄서기",
+        "식당 예약",
+        "빈자리"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F6"
+      ],
+      "operator": null,
+      "web": {
+        "url": "https://www.tabling.co.kr/",
+        "label": "공식 서비스",
+        "state": "linked_from_official_store_home_body_not_read_this_pass"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.mealant.tabling",
+      "iosUrl": null,
+      "regionCheck": "앱에 등록된 개별 식당과 기능 지원 여부를 확인",
+      "costCheck": "예약보증금·취소 및 위약금은 해당 매장 정책을 확인",
+      "conditions": [
+        "원격 대기와 즉시 예약은 별도 기능",
+        "예약 가능 시간·인원·매장별 취소 조건 확인"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.mealant.tabling"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "linked_from_official_store_home_body_not_read_this_pass"
+        },
+        {
+          "platform": "android",
+          "state": "official_source_body_read"
+        }
+      ],
+      "usageMode": "consumer_app"
+    },
+    {
+      "id": "tmoney-go",
+      "name": "티머니GO",
+      "type": "service",
+      "categoryIds": [
+        "mobility"
+      ],
+      "subtopicIds": [
+        "mobility:8de097f8491c",
+        "mobility:aecebdf56e44",
+        "mobility:94be61a73763"
+      ],
+      "description": "버스·택시·자전거 등 이동 수단을 조회하거나 이용하는 앱입니다.",
+      "whenToUse": "이동 수단을 조회하고 이용 경로를 확인할 때",
+      "keywords": [
+        "버스",
+        "택시",
+        "자전거",
+        "이동 수단"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "T1"
+      ],
+      "operator": "Tmoney Co., Ltd (열어본 App Store 개발자 표기; 최신 법인명 재확인 필요)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=kr.co.tmoney.tia",
+      "iosUrl": "https://apps.apple.com/kr/app/id1483433931",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "같은 URL 검색 색인은 주식회사 티머니모빌리티, 열린 본문은 Tmoney Co., Ltd로 달라 현재 법적 운영주체 확정 보류",
+        "스토어 소개에서 택배/퀵을 확인했으나 개별 배송 기능의 주소·조건은 미검증; parcel 목적의 세부 적합성은 별도 확인",
+        "선택한 교통수단의 지역, 이용권, 예약·취소 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=kr.co.tmoney.tia",
+        "https://apps.apple.com/kr/app/%ED%8B%B0%EB%A8%B8%EB%8B%88go-%ED%83%9D%EC%8B%9C-%EA%B3%A0%EC%86%8D%EC%8B%9C%EC%99%B8-%EB%94%B0%EB%A6%89%EC%9D%B4-%ED%82%A5%EB%B3%B4%EB%93%9C/id1483433931?platform=ipad"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_ios_listing_read; operator_label_conflict_retained; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "peopet",
+      "name": "페오펫",
+      "type": "service",
+      "categoryIds": [
+        "pets"
+      ],
+      "subtopicIds": [
+        "pets:5866dce0d071"
+      ],
+      "description": "공식 정책에서 동물등록 업무 대행을 확인한 서비스입니다. 현재 동물등록 신청 화면은 확인하지 못했습니다.",
+      "whenToUse": "반려견 동물등록 대행의 현행 접수 조건과 비용을 확인하려 할 때",
+      "keywords": [
+        "동물등록",
+        "반려견 등록",
+        "외장칩",
+        "페오펫"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "주식회사 코스모스이펙트 (공식 몰의 2020-07-20 개인정보처리방침 표기; 현행 법인명 재확인 필요)",
+      "web": {
+        "url": "https://www.peopet.co.kr/",
+        "label": "공식 서비스",
+        "state": "official_main_opened_no_readable_body_older_official_policy_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "등록 대상·관할 지자체·주소별 접수 가능 여부는 미확인",
+      "costCheck": "등록 대행료·칩·배송비·멤버십 요금을 각각 확인해야 함; 현행 금액·자동결제 조건 미확인",
+      "conditions": [
+        "공식 몰 정책은 동물등록 대행을 명시하지만 시행일이 2020년으로 현행 접수 가능성까지 입증하지 않음",
+        "공식 몰의 상품 목록이 열리는 것과 동물등록 서비스가 현행 작동하는 것은 별개",
+        "동물등록을 펫시터나 보험 상품으로 대체하지 않음",
+        "의료비 페이백 광고를 보험 또는 무조건 지급으로 해석하지 않음",
+        "개인정보·반려동물 정보 입력, 등록·결제·구독 미실행",
+        "현행 등록 기능 확인 전 이용 가능 서비스로 공개하지 않음"
+      ],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.peopet.co.kr/",
+        "https://shop.peopet.co.kr/service/privacy",
+        "https://shop.peopet.co.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_main_opened_no_readable_body_older_official_policy_read"
+        }
+      ],
+      "usageMode": "web_service_current_registration_flow_unverified"
+    },
+    {
+      "id": "pet-friends",
+      "name": "펫프렌즈",
+      "type": "service",
+      "categoryIds": [
+        "pets",
+        "shopping"
+      ],
+      "subtopicIds": [
+        "pets:8ea2f987ec3d"
+      ],
+      "description": "강아지·고양이 사료·간식·용품을 주문하는 반려동물 쇼핑 서비스입니다.",
+      "whenToUse": "사료나 소모품을 구입하면서 주소별 배송 방식과 비용을 비교할 때",
+      "keywords": [
+        "사료",
+        "고양이 모래",
+        "반려동물 용품",
+        "펫용품 배송",
+        "간식"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [],
+      "operator": "주식회사 펫프렌즈 (양대 스토어 개발자 표기)",
+      "web": {
+        "url": "https://m.pet-friends.co.kr/main/tab/2",
+        "label": "공식 서비스",
+        "state": "official_home_redirect_observed_no_substantive_body_store_description_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.fineappstudio.android.petfriends",
+      "iosUrl": "https://apps.apple.com/kr/app/id1086466469",
+      "regionCheck": "스토어는 서울 심쿵배송·서울/경기 일부 새벽배송·전국 택배를 구분해 안내; 실제 주소·마감 시간·품목별 가능 여부 미검증",
+      "costCheck": "상품 금액·배송비·무료배송 기준·쿠폰 조건은 주문 화면에서 확인; 실제 주문 비용 미검증",
+      "conditions": [
+        "쇼핑 기능이며 방문 펫시터·진료 서비스를 제공한다고 해석하지 않음",
+        "빠른 배송 안내는 주소·주문 시각·품목 조건을 확인",
+        "상담 안내를 수의사의 진단·처방으로 간주하지 않음",
+        "페스룸 프렌즈 등 유사한 이름의 다른 제품을 대신 등록하지 않음",
+        "설치·구매·배송 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.fineappstudio.android.petfriends",
+        "https://apps.apple.com/kr/app/%ED%8E%AB%ED%94%84%EB%A0%8C%EC%A6%88-%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC-1%EB%93%B1-%EC%87%BC%ED%95%91%EB%AA%B0/id1086466469",
+        "https://www.pet-friends.co.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_home_redirect_observed_no_substantive_body_store_description_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_store_feature_operator_and_broad_delivery_area_read; address_price_order_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_consumer_store_feature_operator_and_broad_delivery_area_read; address_price_order_not_verified"
+        }
+      ],
+      "usageMode": "consumer_app_or_mobile_web_shopping"
+    },
+    {
+      "id": "e-waste-visit",
+      "name": "폐가전 무상방문수거",
+      "type": "service",
+      "categoryIds": [
+        "waste"
+      ],
+      "subtopicIds": [
+        "waste:2efe109a2670"
+      ],
+      "description": "수거 대상 폐가전을 예약한 뒤 방문 수거받는 서비스입니다.",
+      "whenToUse": "냉장고·세탁기 등 폐가전을 버리기 전에 대상 품목과 수량 기준을 확인할 때",
+      "keywords": [
+        "폐가전",
+        "냉장고 버리기",
+        "세탁기 버리기",
+        "소형가전",
+        "무상 수거"
+      ],
+      "problemIds": [
+        "waste"
+      ],
+      "topicIds": [],
+      "operator": "e순환거버넌스 (공식 이용안내 하단 표기)",
+      "web": {
+        "url": "https://www.15990903.or.kr/portal/cnts/userGuide.do",
+        "label": "공식 서비스",
+        "state": "official_guide_body_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "공식 안내는 전국 예약을 설명하며 수거 가능 요일은 지역별로 다름; 주소별 실제 예약 슬롯 미검증",
+      "costCheck": "대상 폐가전 수거는 무상으로 안내됨; 고정 제품 철거·사다리차 등 사전 조치까지 무상이라는 뜻은 아님",
+      "conditions": [
+        "단일 수거 대상과 다량 수거 대상은 다름; 다량 품목은 5개 이상 기준을 안내",
+        "초소형 추가 품목은 단일·다량 대상과 함께 수거하는 기준을 안내",
+        "설치·고정된 제품은 수거 가능한 상태로 철거 필요",
+        "인력 운반이 어려운 제품은 사전 배출 등 수거 가능한 상태로 조치 필요",
+        "가구·원형 훼손 제품 등 수거 제외 대상이 있음",
+        "실내 수거는 신청자 동행이 필요하며 빈집 수거는 불가하다고 안내",
+        "예약·방문은 실행하지 않음; 별도 공식 소비자 앱은 미확인"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.15990903.or.kr/portal/cnts/userGuide.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_guide_body_read"
+        }
+      ],
+      "usageMode": "web_or_phone_reservation_and_visit_collection"
+    },
+    {
+      "id": "pocket-cu",
+      "name": "포켓CU",
+      "type": "service",
+      "categoryIds": [
+        "shopping"
+      ],
+      "subtopicIds": [
+        "shopping:590f2a3e6ebd",
+        "shopping:8490d437357b"
+      ],
+      "description": "CU 상품 재고를 조회하고 픽업·배달을 주문하는 앱입니다.",
+      "whenToUse": "CU 상품과 지원 매장의 재고·픽업·배달 경로를 확인할 때",
+      "keywords": [
+        "편의점",
+        "CU 재고",
+        "편의점 픽업",
+        "편의점 배달"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F2",
+        "F3",
+        "T2"
+      ],
+      "operator": "BGFretail Co., Ltd. (App Store 개발자 표기)",
+      "web": null,
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.bgfcu.membership",
+      "iosUrl": "https://apps.apple.com/kr/app/id573144133",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "CU POST의 비지에프네트웍스와 포켓CU의 BGF리테일을 같은 운영자라고 기록하지 않음",
+        "해당 매장·상품의 지원 여부, 주문 확정과 수령 시간"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.bgfcu.membership",
+        "https://apps.apple.com/kr/app/id573144133"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "frip",
+      "name": "프립",
+      "type": "service",
+      "categoryIds": [
+        "learning-space",
+        "leisure",
+        "exercise"
+      ],
+      "subtopicIds": [
+        "exercise:8842b67c7941",
+        "learning-space:2b7729be2d22"
+      ],
+      "description": "취미 클래스·액티비티·여행·모임을 찾아 신청하는 플랫폼입니다.",
+      "whenToUse": "퇴근 후나 주말에 참여할 수업·체험·운동 모임을 찾을 때",
+      "keywords": [
+        "원데이클래스",
+        "취미",
+        "액티비티",
+        "모임",
+        "운동 모임"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "Frientrip Inc. (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.frip.co.kr/",
+        "label": "공식 서비스",
+        "state": "official_domain_opened_js_message_only_store_description_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=en&id=com.frientrip.frip",
+      "iosUrl": "https://apps.apple.com/kr/app/id1066782203",
+      "regionCheck": "활동별 장소·시간·모집 대상 확인; 검색 결과에 서울 활동이 있다는 것과 거주지 근처 이용 가능 여부는 다름",
+      "costCheck": "활동별 참가비·재료·장비·교통 포함 여부와 취소/환불 기준 확인; 개별 금액 미검증",
+      "conditions": [
+        "공간만 빌리는 대관 서비스로 분류하지 않고 수업·활동 참여로 구분",
+        "참가 인원·대상·확정 여부와 준비물 확인",
+        "호스트용 앱이 아닌 고객용 프립 앱 링크를 사용",
+        "웹 상품 목록·실제 예약·결제·참가는 미검증"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://apps.apple.com/kr/app/%ED%94%84%EB%A6%BD-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-1%EB%93%B1-%EC%B7%A8%EB%AF%B8%EC%97%AC%EA%B0%80-%ED%83%90%EC%83%89-%ED%94%8C%EB%9E%AB%ED%8F%BC/id1066782203",
+        "https://play.google.com/store/apps/details?hl=en&id=com.frientrip.frip",
+        "https://www.frip.co.kr/"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_domain_opened_js_message_only_store_description_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_store_feature_operator_read; web_body_js_limited; activity_level_eligibility_price_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_consumer_store_feature_operator_read; web_body_js_limited; activity_level_eligibility_price_not_verified"
+        }
+      ],
+      "usageMode": "web_or_consumer_app_and_activity_attendance"
+    },
+    {
+      "id": "plabfootball",
+      "name": "플랩풋볼",
+      "type": "service",
+      "categoryIds": [
+        "exercise",
+        "leisure"
+      ],
+      "subtopicIds": [
+        "exercise:696ea44bd602"
+      ],
+      "description": "개인 참가 풋살·축구 매치를 찾거나 팀 활동과 구장 예약을 연결하는 서비스입니다.",
+      "whenToUse": "함께 운동할 팀이 없거나 구장을 찾을 때",
+      "keywords": [
+        "풋살",
+        "축구",
+        "운동 모임",
+        "구장"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "W2",
+        "T3"
+      ],
+      "operator": "주식회사 마이플레이 컴퍼니 (App Store 개발자 표기)",
+      "web": {
+        "url": "https://www.plabfootball.com/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.myplaycompany.plab",
+      "iosUrl": "https://apps.apple.com/kr/app/%ED%94%8C%EB%9E%A9%ED%92%8B%EB%B3%BC/id6608972481",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "구장·시간·참가 대상·확정 여부와 취소 규정을 확인하세요. 참가비와 모집 인원은 매치마다 다릅니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.myplaycompany.plab",
+        "https://apps.apple.com/kr/app/%ED%94%8C%EB%9E%A9%ED%92%8B%EB%B3%BC/id6608972481"
+      ],
+      "linkNotes": "공식 등록의 웹 연결 주소를 확인했습니다. 조사 도구로 목적지 본문까지 열지는 못했습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; match_booking_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-consumer",
+      "name": "한국소비자원 소비자상담",
+      "type": "official",
+      "categoryIds": [
+        "support"
+      ],
+      "subtopicIds": [],
+      "description": "1372 소비자상담 및 상담 후 피해구제 절차 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "한국소비자원",
+      "web": {
+        "url": "https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do",
+        "label": "공식 안내",
+        "state": "official_search_index_only"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 소비자상담·피해구제 서비스; 서울 시민 포함.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_search_index_only"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-true-price",
+      "name": "한국소비자원 참가격",
+      "type": "official",
+      "categoryIds": [
+        "shopping",
+        "bills"
+      ],
+      "subtopicIds": [],
+      "description": "생필품·식품 가격과 장바구니 비교, 외식비·공공요금 안내.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [],
+      "operator": "한국소비자원",
+      "web": {
+        "url": "https://price.go.kr/tprice/portal/pricenewsandtpriceintro/tpriceintro/getPriceIntro.do",
+        "label": "공식 안내",
+        "state": "official_page_read_with_access_warnings"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 조사자료 중 서울 판매점·지역정보를 구분해서 활용.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://price.go.kr/tprice/portal/pricenewsandtpriceintro/tpriceintro/getPriceIntro.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read_with_access_warnings"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "kepco-on",
+      "name": "한전ON",
+      "type": "service",
+      "categoryIds": [
+        "bills"
+      ],
+      "subtopicIds": [
+        "bills:8cd58eab1de8"
+      ],
+      "description": "전기요금 조회·납부와 청구서 변경, 전기사용 관련 신청을 처리하는 서비스입니다.",
+      "whenToUse": "전기요금이나 청구 정보를 확인할 때",
+      "keywords": [
+        "전기요금",
+        "납부",
+        "청구서",
+        "전기사용"
+      ],
+      "problemIds": [],
+      "topicIds": [
+        "B1"
+      ],
+      "operator": "한국전력공사 (App Store 개발자 표기)",
+      "web": {
+        "url": "https://online.kepco.co.kr/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.xenixstudio.kepco",
+      "iosUrl": "https://apps.apple.com/kr/app/id410187082",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "계약 명의·고객번호와 청구 방식을 확인하세요. 개별 세대의 이용 가능 기능과 로그인·본인인증은 별도입니다."
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=com.xenixstudio.kepco",
+        "https://apps.apple.com/kr/app/%ED%95%9C%EC%A0%84on/id410187082",
+        "https://apps.apple.com/kr/app/id410187082"
+      ],
+      "linkNotes": "공식 등록의 웹 연결 주소를 확인했습니다. 조사 도구로 목적지 본문까지 열지는 못했습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "android",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "prior_ios_source_reopened_title_developer_read; account_access_not_tested"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "official-sports",
+      "name": "핫둘핫둘 서울 생활체육포털",
+      "type": "official",
+      "categoryIds": [
+        "exercise"
+      ],
+      "subtopicIds": [
+        "exercise:927706959637"
+      ],
+      "description": "우리동네 체육시설·운동장소·생활체육 프로그램 검색.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "서울특별시",
+      "web": {
+        "url": "https://sports.seoul.go.kr/main/indexSearch.do",
+        "label": "공식 안내",
+        "state": "official_page_read"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "서울 자치구별 생활체육 정보.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://sports.seoul.go.kr/main/indexSearch.do",
+        "https://data.seoul.go.kr/dataList/OA-21779/S/1/datasetView.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_page_read"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "holiday-pharmacy",
+      "name": "휴일지킴이약국",
+      "type": "service",
+      "categoryIds": [
+        "health"
+      ],
+      "subtopicIds": [
+        "health:15f1e20a3b64",
+        "health:e15f9c95be7a"
+      ],
+      "description": "휴일 약국 검색 서비스로 발견한 후보입니다. 별도 공식 사이트의 현행 검색 기능은 확인하지 못했습니다.",
+      "whenToUse": "휴일에 방문할 약국을 찾으려 할 때; 이 후보의 검색 기능 확인 전 직접 이용 안내는 보류",
+      "keywords": [
+        "휴일 약국",
+        "일요일 약국",
+        "공휴일 약국",
+        "휴일지킴이약국"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": null,
+      "web": {
+        "url": "https://www.pharm114.or.kr/",
+        "label": "공식 서비스",
+        "state": "opened_no_readable_body_browser_attempt_timed_out"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "현행 지역·날짜·시간 검색 지원과 약국별 영업 여부 미확인",
+      "costCheck": "사이트 이용 비용 원문 미확인; 약값·조제비·휴일 가산 여부도 이 조사에서 검증하지 않음",
+      "conditions": [
+        "공식 도메인과 이용약관 경로를 열었으나 본문이 비어 있어 현행 기능·운영자 검증으로 승격하지 않음",
+        "이용약관 검색 색인은 대한약사회를 운영자로 설명하지만 본문 확인 전 operator를 확정하지 않음",
+        "기존 pharm114 레코드는 대한약사회 일반 약국 찾기이며 휴일 검색 검증의 대체 근거가 아님",
+        "E-Gen 앱의 명절 약국 검색은 관련 대안이지 휴일지킴이약국 제품 자체의 검증이 아님",
+        "방문 전 해당 약국에 직접 영업 여부를 확인해야 함",
+        "현재 영업 중인 약국 또는 응급 진료 가능성을 보장하지 않음"
+      ],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.pharm114.or.kr/",
+        "https://www.pharm114.or.kr/UsetermsView",
+        "https://www.kpanet.or.kr/pharmFindPage.cm?menuCd=1002070000"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "opened_no_readable_body_browser_attempt_timed_out"
+        }
+      ],
+      "usageMode": "web_candidate_feature_unverified"
+    },
+    {
+      "id": "cu-post",
+      "name": "CU POST",
+      "type": "service",
+      "categoryIds": [
+        "parcel"
+      ],
+      "subtopicIds": [
+        "parcel:0cf1ae8f05a0"
+      ],
+      "description": "CU 편의점 택배 예약과 배송 조회를 제공하는 서비스입니다.",
+      "whenToUse": "가까운 CU 점포에서 물건을 보내기 전에 예약과 접수 조건을 확인할 때",
+      "keywords": [
+        "CU택배",
+        "편의점택배",
+        "택배 예약",
+        "배송 조회",
+        "반값택배"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "주식회사 비지에프네트웍스 (양대 스토어 개발자 표기)",
+      "web": {
+        "url": "https://www.cupost.co.kr/index.jsp",
+        "label": "공식 서비스",
+        "state": "official_domain_identified_open_failed_store_description_read_instead"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=kr.ac.fspmobile.cu",
+      "iosUrl": "https://apps.apple.com/kr/app/id1435587399",
+      "regionCheck": "개별 점포의 택배 접수 가능 여부와 선택 서비스의 발송·도착 지역을 확인; 모든 CU 점포 지원 미검증",
+      "costCheck": "서비스 종류·실측 중량·발송/도착 지역별 운임 확인; 스토어 최저 운임 광고는 모든 택배의 요금이 아님",
+      "conditions": [
+        "CU편의점택배 앱과 포켓CU 앱은 별도 앱이며 운영 법인도 구분",
+        "앱 예약 뒤 점포에서 접수하는 절차를 안내함",
+        "24시간 또는 연중 접수 안내와 실제 수거·배송 소요일은 구분",
+        "공식 웹 메인과 이용안내를 열었으나 도구 오류로 본문을 확인하지 못함",
+        "개인 발송정보 입력·예약·결제 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://play.google.com/store/apps/details?hl=ko&id=kr.ac.fspmobile.cu",
+        "https://apps.apple.com/kr/app/cu%ED%8E%B8%EC%9D%98%EC%A0%90%ED%83%9D%EB%B0%B0/id1435587399",
+        "https://www.cupost.co.kr/index.jsp",
+        "https://www.cupost.co.kr/postbox/common/postboxGuide.cupost"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_domain_identified_open_failed_store_description_read_instead"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_store_feature_operator_read; web_fetch_failed; detailed_tariff_and_store_eligibility_not_verified"
+        },
+        {
+          "platform": "android",
+          "state": "official_consumer_store_feature_operator_read; web_fetch_failed; detailed_tariff_and_store_eligibility_not_verified"
+        }
+      ],
+      "usageMode": "web_or_consumer_app_and_store_dropoff"
+    },
+    {
+      "id": "gs-postbox",
+      "name": "GS Postbox",
+      "type": "service",
+      "categoryIds": [
+        "parcel"
+      ],
+      "subtopicIds": [
+        "parcel:0cf1ae8f05a0"
+      ],
+      "description": "GS 편의점 택배의 예약·배송 조회와 접수처 찾기를 제공하는 서비스입니다.",
+      "whenToUse": "일반 택배와 점포 수령형 반값택배의 비용·수령 방식을 비교할 때",
+      "keywords": [
+        "GS25택배",
+        "반값택배",
+        "GS더프레시",
+        "편의점택배",
+        "포스트박스"
+      ],
+      "problemIds": [],
+      "topicIds": [],
+      "operator": "주식회사 GS네트웍스 (공식 웹 하단 및 Google Play 표기)",
+      "web": {
+        "url": "https://www.cvsnet.co.kr/service/slow-delivery/use/contentsid/274/index.do",
+        "label": "공식 서비스",
+        "state": "official_service_guide_body_read"
+      },
+      "androidUrl": "https://play.google.com/store/apps/details?hl=ko&id=com.cvsnet.app.mobile.android.postbox",
+      "iosUrl": "https://apps.apple.com/kr/app/id1483564045",
+      "regionCheck": "선택 점포의 서비스 지원과 목적지를 확인; 반값택배는 안내된 GS25 점포 간 경로이며 일반 주소 배송과 다름",
+      "costCheck": "열어본 반값택배 안내상 내륙 간·제주 내 500g 이하 1,900원/1kg 이하 2,300원/5kg 이하 2,700원; 제주-내륙·내륙-도서는 별도 운임. 발송 시점 요금표 재확인; 일반택배에 이 운임을 적용하지 않음",
+      "conditions": [
+        "반값택배는 도착 GS25를 선택하고 도착 QR로 수령하는 절차를 안내",
+        "반값택배는 선불 접수로 안내",
+        "반송지는 GS25 편의점이 아닌 자택·직장 등 주소를 입력하도록 안내",
+        "배송 기간은 경로·접수 시간·기상·점포 사정 등에 따라 달라짐",
+        "GS25편의점택배 앱과 우리동네GS는 별도 앱; 같은 택배 접수 기능이 있다는 이유만으로 앱 수를 합산하지 않음",
+        "iOS 개발자명 CVS Net 표기와 현 웹/Android의 GS네트웍스 표기를 함께 대조함",
+        "예약·결제·점포 방문 미실행"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.cvsnet.co.kr/service/slow-delivery/use/contentsid/274/index.do",
+        "https://www.cvsnet.co.kr/service/national-delivery/use/contentsid/205/index.do",
+        "https://www.cvsnet.co.kr/member/find/id/index.do",
+        "https://play.google.com/store/apps/details?hl=ko&id=com.cvsnet.app.mobile.android.postbox",
+        "https://apps.apple.com/kr/app/gs25%ED%8E%B8%EC%9D%98%EC%A0%90%ED%83%9D%EB%B0%B0/id1483564045"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_service_guide_body_read"
+        },
+        {
+          "platform": "ios",
+          "state": "official_service_guides_tariff_operator_and_consumer_store_pages_read; shipment_not_tested"
+        },
+        {
+          "platform": "android",
+          "state": "official_service_guides_tariff_operator_and_consumer_store_pages_read; shipment_not_tested"
+        }
+      ],
+      "usageMode": "web_or_consumer_app_and_store_dropoff"
+    },
+    {
+      "id": "official-kamis",
+      "name": "KAMIS 농산물유통정보",
+      "type": "official",
+      "categoryIds": [
+        "shopping"
+      ],
+      "subtopicIds": [],
+      "description": "농수축산물 소매가격과 품목·시장별 가격정보.",
+      "whenToUse": "관련 제도·시설의 공식 안내를 확인할 때",
+      "keywords": [],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [],
+      "operator": "한국농수산식품유통공사(aT)",
+      "web": {
+        "url": "https://www.kamis.or.kr/customer/price/agricultureRetail/catalogue.do",
+        "label": "공식 안내",
+        "state": "official_reference_read_target_406"
+      },
+      "androidUrl": null,
+      "iosUrl": null,
+      "regionCheck": "전국 조사 중 서울 조사시장·지역을 구분해야 함.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [],
+      "reviewRequired": true,
+      "reviewReason": "현재 운영·연결 조건을 확인 중입니다.",
+      "verification": "현재 운영·연결 조건을 확인 중입니다.",
+      "checkedOn": "2026-10-14",
+      "sources": [
+        "https://www.kamis.or.kr/customer/price/agricultureRetail/catalogue.do",
+        "https://price.go.kr/tprice/portal/pricenewsandtpriceintro/tpriceintro/getPriceIntro.do"
+      ],
+      "linkNotes": "표시되지 않은 플랫폼 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "official_reference_read_target_406"
+        }
+      ],
+      "usageMode": null
+    },
+    {
+      "id": "ssg",
+      "name": "SSG.COM",
+      "type": "service",
+      "categoryIds": [
+        "shopping"
+      ],
+      "subtopicIds": [
+        "shopping:0592f0ca31fb"
+      ],
+      "description": "식품과 생활용품 등을 온라인에서 찾아 구매하는 서비스입니다.",
+      "whenToUse": "식품이나 생활용품을 찾아 주문 조건을 확인할 때",
+      "keywords": [
+        "장보기",
+        "생활용품",
+        "식품 배송",
+        "마트 주문"
+      ],
+      "problemIds": [
+        "meals"
+      ],
+      "topicIds": [
+        "F1",
+        "F2",
+        "F3",
+        "P1"
+      ],
+      "operator": "ShinsegaeMall (App Store 개발자 표기; 현 법인명 별도 미확인)",
+      "web": {
+        "url": "https://www.ssg.com/",
+        "label": "공식 서비스",
+        "state": "imported_link_individual_verification_pending"
+      },
+      "androidUrl": null,
+      "iosUrl": "https://apps.apple.com/kr/app/id786135420",
+      "regionCheck": "서비스에서 주소·매장·자격별 이용 조건을 확인해 주세요.",
+      "costCheck": "공식 안내 또는 신청 화면에서 요금·최소 이용 조건·추가 비용을 확인하세요.",
+      "conditions": [
+        "판매처별 배송 방식, 배송 주소, 수량과 비용 조건"
+      ],
+      "reviewRequired": false,
+      "reviewReason": null,
+      "verification": "공식 소개 확인 · 주소별 이용 가능 여부는 별도 확인",
+      "checkedOn": "2026-10-17",
+      "sources": [
+        "https://www.ssg.com/",
+        "https://apps.apple.com/kr/app/ssg-com-%EC%93%B1%EB%8B%B7%EC%BB%B4/id786135420"
+      ],
+      "linkNotes": "등록되지 않은 OS 링크는 미확인입니다. 앱 미제공을 뜻하지 않습니다.",
+      "linkEvidence": [
+        {
+          "platform": "web",
+          "state": "imported_link_individual_verification_pending"
+        },
+        {
+          "platform": "ios",
+          "state": "official_consumer_ios_listing_title_developer_read; legal_operator_and_installation_not_tested"
+        }
+      ],
+      "usageMode": null
+    }
+  ]
+}

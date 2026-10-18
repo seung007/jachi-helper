@@ -53,6 +53,19 @@ test("local preview never serves private chat exports", async () => {
     assert.equal(home.status, 200);
     assert.equal(privateFile.status, 404);
     assert.equal(encodedPath.status, 404);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/data/exports/life-place-runtime/manifest.json`)).status, 404);
+    const api = `http://127.0.0.1:${port}/api/life/places`;
+    for (const query of ['?district=unknown', '?dong=unknown', '?page=0', '?q=a&q=b', '?unknown=1']) {
+      assert.equal((await fetch(api + query)).status, 400, query);
+    }
+    assert.equal((await fetch(api, { method: 'POST' })).status, 405);
+    const response = await fetch(api + '?pageSize=2');
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('cache-control'), 'no-store');
+    const places = await response.json();
+    assert.equal(places.results.length, 2);
+    assert(places.total > 500000);
+    assert(!JSON.stringify(places).includes('.sqlite'));
   } finally {
     child.kill();
     if (child.exitCode === null) await once(child, "exit");

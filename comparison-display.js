@@ -84,8 +84,8 @@
     return result;
   }
 
-  function coupangLink(product) {
-    if (product?.kind === 'guidance') return null;
+  function coupangLink(product, item, group) {
+    if (product?.kind === 'guidance' || item?.kind === 'guidance') return null;
     const source = C.safeUrl(product?.url);
     if (source) {
       const url = new URL(source);
@@ -94,7 +94,9 @@
       }
     }
     const name = typeof product?.name === 'string' ? product.name.trim() : '';
-    return name ? { url: 'https://www.coupang.com/np/search?q=' + encodeURIComponent(name), label: '쿠팡에서 찾기', kind: 'search' } : null;
+    const title = typeof item?.title === 'string' ? item.title.trim() : '';
+    const query = typeof group?.label === 'string' && group.label.trim() ? group.label.trim() : title;
+    return name && title && query ? { url: 'https://www.coupang.com/np/search?q=' + encodeURIComponent(query), label: '쿠팡 유사상품 검색', kind: 'search' } : null;
   }
 
   const heatStatements = {
@@ -209,7 +211,7 @@
     'P210-alarm': 'use certification power installation cautions expiry type',
   };
   const labels = {
-    type: '제품 유형', amount: '내용량', amountPerUnit: '개당 내용량', totalAmount: '총내용량',
+    type: '제품 유형', foodType: '식품 유형', grain: '곡물 종류', amount: '내용량', amountPerUnit: '개당 내용량', totalAmount: '총내용량',
     count: '수량', ingredients: '원재료·성분', nutrition: '영양 표시', allergens: '알레르기 표시',
     storage: '보관 방법', preparation: '조리 방법', expiry: '사용·소비기한', material: '소재',
     size: '규격', dimensions: '치수', capacity: '용량', compatibility: '호환 조건', care: '관리 방법',
@@ -262,7 +264,7 @@
     return [...new Set([...profile.split(' '), ...suppliedDefinitions(group).map(d => d.key)])]
       .filter(key => displayable(item, key))
       .map(key => ({ key, label: item?.id === 'P188' && Object.hasOwn(labels, key) ? labels[key] :
-        suppliedDefinitions(group).find(d => d.key === key)?.label || (item?.id === 'P053' && key === 'length' ? '날 길이' : lookup(labels, key) || key) }));
+        (suppliedDefinitions(group).find(d => d.key === key)?.label !== key ? suppliedDefinitions(group).find(d => d.key === key)?.label : null) || (item?.id === 'P053' && key === 'length' ? '날 길이' : lookup(labels, key) || key) }));
   }
   function observation(product, definition) {
     const unknown = { status: 'unknown', value: null };

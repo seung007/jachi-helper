@@ -9,6 +9,7 @@
 | 방향·확장·책임 | [제품 방향](docs/product-vision.md) |
 | 현재 개선 제안 | [후속 작업](docs/next-actions.md) |
 | 수집·비교·UI·저장 | [비교 계약](docs/comparison.md) |
+| 서울 생활 업소·도움 사이트 수집 | [서울 수집](docs/seoul-life-data.md) |
 | 지정 참고 사이트·역할 | [벤치마크](docs/benchmark-register.md) |
 | Git 도구 승인 | docs/jachi-git.rules (기계별 설치 원본; 설치 여부는 별도 확인) |
 
@@ -19,6 +20,8 @@ $env:PORT='4175'
 npm run serve
 ```
 범위별 검사 명령은 AGENTS의 표를 따른다. UI 작업만으로 전체 자료를 재생성/수집하지 않는다.
+
+생활 서비스는 `npm run check:life`와 서버 실행 후 `npm run verify:life`로 검사한다. `npm run life:build`는 기존 비공개 조사 원장을 공개용 목록으로 변환하며 재수집하지 않는다. `npm run life:prepare-runtime`은 검색에 필요한 10개 필드만 별도 DB로 추출하고 전체 필드 해시·건수·무결성을 검증한다. 실행 DB가 있으면 API가 우선 사용하고 없으면 기존 인덱스를 읽는다. 둘 다 Git/배포 제외이므로 운영 연결은 별도 API·데이터 배포 설계와 승인 후 진행해야 한다.
 
 배포는 명시적 승인 후 npm run check 및 관련 화면 검사를 거쳐 npx vercel --prod로 한다. 알려진 [운영 주소](https://jachi-helper.vercel.app), [GitHub](https://github.com/seung007/jachi-helper)의 배포 일치·로그인 계정·Git 연동은 실행 시 확인한다.
 

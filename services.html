@@ -13,7 +13,7 @@
     <meta property="og:description" content="이사부터 폐기까지, 필요한 시점과 비교 기준을 먼저 확인하세요." />
     <meta property="og:image" content="https://jachi-helper.vercel.app/assets/og-image.svg" />
     <link rel="stylesheet" href="/styles.css?v=20261006-2" />
-    <link rel="stylesheet" href="/decision.css?v=20260928-3" />
+    <link rel="stylesheet" href="/services.css?v=20261019-1" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N6W41XSD2"></script>
     <script>
@@ -29,48 +29,81 @@
       <nav aria-label="주요 메뉴"><a href="/">준비물 찾기</a><a href="/checklist" data-plan-result-route>내 준비표</a><a href="/services" aria-current="page">생활 서비스</a></nav>
     </header>
 
-    <main class="services-main">
+    <main class="services-main" id="servicesDirectory">
       <section class="services-intro">
-        <p class="eyebrow">자취 생활 서비스</p>
-        <h1>필요할 때 찾는 생활 서비스</h1>
-        <p>현재 제공하는 연결처 4개입니다. 전체 업체 목록이나 추천 순위는 아닙니다.</p>
+        <p class="eyebrow">장보기 · 세탁 · 청소 · 우리동네</p>
+        <h1>생활 서비스</h1>
+        <p>생활에 필요한 앱과 공식 안내, 서울의 동네 정보를 모았습니다.</p>
+      </section>
+      <div class="service-view-bar">
+        <div class="service-view-tabs" role="group" aria-label="탐색 종류">
+          <button type="button" data-service-view="services" aria-pressed="true"><i data-service-icon="ListFilter"></i>앱·사이트</button>
+          <button type="button" data-service-view="places" aria-pressed="false"><i data-service-icon="MapPin"></i>우리동네</button>
+          <button type="button" data-service-view="saved" aria-pressed="false"><i data-service-icon="Bookmark"></i>저장 <span id="lifeSavedCount">0</span></button>
+        </div>
+        <button type="button" class="service-region-button" id="serviceRegionOpen" aria-haspopup="dialog"><i data-service-icon="MapPin"></i><span id="serviceRegionLabel">서울 전체</span><i data-service-icon="ChevronDown"></i></button>
+      </div>
+      <nav class="service-problems" id="serviceProblems" aria-label="생활 문제"></nav>
+      <form class="service-filters" id="serviceSearch" role="search">
+        <div class="service-search-field">
+          <label for="serviceQuery" id="serviceQueryLabel">앱·생활 문제 검색</label>
+          <div class="service-search-control">
+            <input id="serviceQuery" type="search" maxlength="80" placeholder="이불 세탁, 음식물, 편의점..." autocomplete="off" />
+            <button type="submit" aria-label="검색" title="검색"><i data-service-icon="Search"></i></button>
+          </div>
+        </div>
+        <div class="service-filter-fields">
+          <label><span id="serviceCategoryLabel">생활 목적</span><select id="serviceCategory"><option value="">전체 목적</option></select></label>
+          <label id="serviceSubtopicField">세부 목적<select id="serviceSubtopic"><option value="">전체 세부 목적</option></select></label>
+        </div>
+      </form>
+      <div class="service-filter-summary">
+        <p id="serviceAppliedFilters"></p>
+        <label id="serviceReviewLabel"><input type="checkbox" id="serviceReview" /> 확인 중인 정보 포함</label>
+        <button type="button" class="service-text-button" id="serviceReset">조건 초기화</button>
+      </div>
+      <section id="serviceProblemContext" class="service-context" hidden></section>
+      <section class="service-directory-results" aria-labelledby="serviceListTitle">
+        <header class="service-results-head">
+          <h2 id="serviceListTitle" tabindex="-1">앱·공식 사이트</h2>
+          <span id="serviceResultCount" role="status" aria-live="polite">목록을 불러오는 중입니다.</span>
+        </header>
+        <p class="service-scope" id="serviceScope">실제 이용 가능 주소·요금·예약 조건은 연결된 서비스에서 확인해 주세요.</p>
+        <div id="serviceFeedback" role="status"></div>
+        <p id="serviceStorageStatus" role="status"></p>
+        <div id="serviceGrid" class="service-grid" aria-busy="true"></div>
+        <nav class="service-pagination" id="servicePagination" aria-label="서비스 목록 페이지" hidden>
+          <button type="button" id="servicePrevious" aria-label="이전 페이지" title="이전 페이지"><i class="service-icon-back" data-service-icon="ArrowRight"></i></button>
+          <span id="servicePageLabel"></span>
+          <button type="button" id="serviceNext" aria-label="다음 페이지" title="다음 페이지"><i data-service-icon="ArrowRight"></i></button>
+        </nav>
       </section>
 
-      <nav class="service-stage-tabs" aria-label="생활 서비스 시점">
-        <a href="#before">입주 전</a><a href="#moving">이사 당일</a><a href="#after">입주 후</a><a href="#leave">퇴거 준비</a>
-      </nav>
+      <noscript><p>목록 검색에는 JavaScript가 필요합니다.</p><ul><li><a href="https://miso.kr/">미소</a></li><li><a href="https://www.laundrygo.com/">런드리고</a></li><li><a href="https://www.ddocdoc.com/">똑닥</a></li></ul></noscript>
 
-      <section class="service-list" aria-labelledby="serviceListTitle">
-        <header><p class="eyebrow">한 번에 이어서 보기</p><h2 id="serviceListTitle">지금 필요한 단계부터 고르세요.</h2></header>
-
-        <article class="service-row" id="before">
-          <div class="service-number">01</div><div class="service-copy"><span>입주 1~2주 전</span><h3>입주청소</h3><p>전용면적, 오염 상태, 창틀·가전 내부 포함 여부를 같은 조건으로 비교하세요.</p><ul><li>추가요금 발생 조건</li><li>파손 보상과 재방문 기준</li><li>취소 가능 시점</li></ul></div>
-          <a class="service-outbound" href="https://www.miso.kr/" target="_blank" rel="noreferrer" data-service-link="move_in_cleaning">미소에서 확인 <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="service-row" id="moving">
-          <div class="service-number">02</div><div class="service-copy"><span>이사 1~3주 전</span><h3>원룸 이사</h3><p>출발·도착지 층수, 엘리베이터, 주차, 큰 짐 목록을 동일하게 전달해야 견적을 비교할 수 있습니다.</p><ul><li>사다리차·계단 추가비</li><li>짐 추가 시 단가</li><li>파손 보상 범위</li></ul></div>
-          <a class="service-outbound" href="https://www.zimssa.com/" target="_blank" rel="noreferrer" data-service-link="moving">짐싸에서 확인 <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="service-row" id="after">
-          <div class="service-number">03</div><div class="service-copy"><span>입주일 확정 후</span><h3>인터넷 설치</h3><p>주소별 설치 가능 통신사, 약정기간, 월 납부액, 설치비와 결합 조건을 함께 확인하세요.</p><ul><li>주소지 설치 가능 여부</li><li>약정 중 해지 비용</li><li>현금성 혜택보다 총 납부액</li></ul></div>
-          <a class="service-outbound" href="https://www.miso.kr/" target="_blank" rel="noreferrer" data-service-link="internet">인터넷 서비스 확인 <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="service-row" id="leave">
-          <div class="service-number">04</div><div class="service-copy"><span>교체·퇴거할 때</span><h3>대형폐기물</h3><p>지역별 신고 방법과 수수료를 먼저 확인하고, 직접 운반이 어려울 때만 내려드림 서비스를 비교하세요.</p><ul><li>지자체 신고 필요 여부</li><li>수거 가능 품목</li><li>운반비와 신고비 구분</li></ul></div>
-          <a class="service-outbound" href="https://bbegi.com/orders" target="_blank" rel="noreferrer" data-service-link="disposal">빼기에서 확인 <span aria-hidden="true">→</span></a>
-        </article>
-      </section>
-
-      <aside class="service-notice"><strong>연결 기준</strong><p>자취도우미는 현재 예약·계약의 당사자가 아닙니다. 실제 가격, 가능 일정, 취소 및 보상 조건은 이동한 서비스에서 최종 확인하세요.</p></aside>
+      <aside class="service-directory-note"><strong>정보 확인 기준</strong><p id="serviceDataNote">이름 가나다순입니다. 공식 소개 확인은 실제 설치·예약이나 주소별 제공 확인과 다릅니다. 자취도우미는 예약·계약의 당사자가 아닙니다.</p></aside>
+      <dialog class="service-region-dialog" id="serviceRegionDialog" aria-labelledby="serviceRegionTitle">
+        <header><h2 id="serviceRegionTitle">서울 지역 선택</h2><button type="button" class="service-icon-button" id="serviceRegionClose" aria-label="지역 선택 닫기" title="닫기"><i data-service-icon="X"></i></button></header>
+        <form id="serviceRegionForm">
+          <label>구<select id="serviceRegionDistrict"><option value="">서울 전체</option></select></label>
+          <label>동 기준<select id="serviceDongType"><option value="legal">법정동 · 주소의 동 이름</option><option value="administrative">행정동 · 주민센터 관할</option></select></label>
+          <label>동 이름 검색<input type="search" id="serviceDongSearch" maxlength="30" autocomplete="off" placeholder="동 이름" /></label>
+          <label>동<select id="serviceRegionDong"><option value="">구 전체</option></select></label>
+          <p class="service-field-note" id="serviceRegionSource"></p>
+          <label class="service-remember"><input type="checkbox" id="serviceRememberRegion" /> 이 기기에 지역 저장 · 30일</label>
+          <button type="submit" class="service-primary-button">지역 적용</button>
+        </form>
+      </dialog>
+      <dialog class="service-detail-dialog" id="serviceDetail" aria-labelledby="serviceDetailTitle">
+        <header><p id="serviceDetailKind"></p><button type="button" class="service-icon-button" id="serviceDetailClose" aria-label="이용 조건 닫기" title="닫기"><i data-service-icon="X"></i></button></header>
+        <div id="serviceDetailBody"></div>
+      </dialog>
     </main>
 
     <nav class="mobile-dock" aria-label="모바일 주요 메뉴">
       <a href="/"><span>홈</span><small>준비물 찾기</small></a>
-      <a href="/#quick-preview"><span>품목</span><small data-catalog-count data-catalog-count-suffix="개 탐색">66개 탐색</small></a>
-      <a class="is-current" href="/services" aria-current="page"><span>서비스</span><small>이사·청소</small></a>
+      <a href="/#catalog"><span>품목</span><small>생활용품·먹거리</small></a>
+      <a class="is-current" href="/services" aria-current="page"><span>서비스</span><small>생활 앱·사이트</small></a>
       <a href="/checklist" data-plan-result-route><span>내 준비표</span><small>결정 모아보기</small></a>
     </nav>
 
@@ -78,7 +111,8 @@
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script src="/app.js?v=20261006-2" defer></script>
-    <script src="/decision-core.js?v=20260928-3" defer></script>
-    <script src="/decision-flow.js?v=20260928-4" defer></script>
+    <script src="/assets/vendor/catalog-icons.js?v=20261017-2" defer></script>
+    <script src="/life-services-core.js?v=20261019-1" defer></script>
+    <script src="/services.js?v=20261019-1" defer></script>
   </body>
 </html>

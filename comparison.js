@@ -81,7 +81,7 @@
     return `<div class="comparison-photo">${url ? `<img src="${esc(url)}" alt="${esc(p.name)}" loading="lazy" referrerpolicy="no-referrer" />` : "<span>사진 미제공</span>"}</div>`;
   }
   function buy(p) {
-    const coupang = D.coupangLink(p);
+    const coupang = D.coupangLink(p,currentItem,currentGroup);
     const primary = coupang ? `<a class="comparison-buy comparison-coupang" data-coupang="${esc(p.id)}" data-link-kind="${coupang.kind}" href="${esc(coupang.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} ${coupang.label}">${coupang.label} ${icon("ExternalLink")}</a>` : '';
     return primary;
   }

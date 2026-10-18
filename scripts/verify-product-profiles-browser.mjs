@@ -44,9 +44,22 @@ try {
         }
         assert.equal(await row.getAttribute('data-state'),field.state);
       }
-      const link = D.coupangLink(product);
+      const link = D.coupangLink(product,item,group);
       assert.equal(await cards.first().locator('[data-coupang]').getAttribute('href'),link.url);
       assert.equal(await cards.first().locator('[data-coupang]').getAttribute('data-link-kind'),link.kind);
+      const source = new URL(product.url);
+      const exact = ['coupang.com','www.coupang.com','m.coupang.com'].includes(source.hostname) && /^\/vp\/products\/\d+(?:\/|$)/.test(source.pathname);
+      const renderedLink = cards.first().locator('[data-coupang]');
+      assert.equal(await renderedLink.getAttribute('data-link-kind'),exact ? 'product' : 'search');
+      if (exact) assert.equal(await renderedLink.getAttribute('href'),product.url,'Original SKU/options are preserved');
+      else {
+        const search = new URL(await renderedLink.getAttribute('href'));
+        assert.equal(search.hostname,'www.coupang.com');
+        assert.equal(search.pathname,'/np/search');
+        assert.equal(search.searchParams.get('q'),group.label || item.title,'Search uses the real purpose, independently of D');
+        assert.notEqual(search.searchParams.get('q'),product.name);
+        assert.match(await renderedLink.innerText(),/쿠팡 유사상품 검색/);
+      }
       await cards.first().locator('[data-toggle-product]').click();
       const filter = page.locator('[data-feature-filter]').first();
       if (await filter.count()) {
