@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>자취도우미 · 상품 흐름 시안 v2</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css">
+  <link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+  <div class="review-bar"><span>상품 흐름 시안 v2 · 운영 미적용</span><a href="../wireframe-v1.md">설계 기록</a></div>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-row"><a href="#browse" class="brand" aria-label="자취도우미 홈"><span data-icon="ShoppingBasket"></span>자취도우미</a><button class="icon-button" id="categoriesButton" title="전체 분류" aria-label="전체 분류"><span data-icon="LayoutGrid"></span></button></div>
+      <form class="search" id="searchForm" role="search"><input id="query" type="search" placeholder="수건, 세제, 오트밀" aria-label="전체 품목과 상품 검색" autocomplete="off"><button class="icon-button" type="submit" aria-label="검색" title="검색"><span data-icon="Search"></span></button></form>
+    </div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <dialog id="panel" class="sheet" aria-labelledby="panelTitle"></dialog>
+  <script src="../wireframe-v1/data.js"></script>
+  <script src="icons.js"></script>
+  <script src="prototype.js"></script>
+</body>
+</html>
